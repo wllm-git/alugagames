@@ -9,13 +9,22 @@
 
 	<ui:define name="conteudo">
 		<div id="conteudo-home" style="margin-left: auto; margin-right: auto;">
-			<h1>Dashboard</h1>
-
+			
+			<div class="titulo-cadastros">
+				<p:graphicImage library="imagens" name="graficos64.png"/>
+				
+				<h1>Dashboard</h1>
+			
+			</div>
+			
 			<h:panelGrid columns="2" columnClasses="left,right"
 				style="width:100%">
 				
 				<p:chart type="bar" model="#{chartView.animatedModel2}"
-					style="width:1000px; margin-left: auto; margin-right: auto;" />
+					style="width:800px; margin-left:40px;" />
+					
+					<p:chart type="pie" model="#{chartView.pieModel1}" style="width:400px;height:300px" />
+					
 			
 			</h:panelGrid>
 		</div>

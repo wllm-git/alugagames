@@ -9,25 +9,52 @@ import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartModel;
 import org.primefaces.model.chart.ChartSeries;
+import org.primefaces.model.chart.PieChartModel;
  
 @SuppressWarnings("serial")
 @ManagedBean
 public class ChartView implements Serializable {
  
+	private PieChartModel pieModel1;
     private BarChartModel animatedModel2;
+    
  
     @PostConstruct
     public void init() {
         createAnimatedModels();
+        createPieModels();
     }
  
     public BarChartModel getAnimatedModel2() {
         return animatedModel2;
     }
+    
+    public PieChartModel getPieModel1() {
+        return pieModel1;
+    }
+     
+    
+    private void createPieModels() {
+        createPieModel1();
+    }
+    
+    private void createPieModel1() {
+        pieModel1 = new PieChartModel();
+         
+        pieModel1.set("Aventura", 540);
+        pieModel1.set("Ação", 325);
+        pieModel1.set("Futebol", 702);
+        pieModel1.set("Acarde", 421);
+         
+        pieModel1.setTitle("Gêneros mais alugados");
+        pieModel1.setLegendPosition("w");
+    }
+    
  
     private void createAnimatedModels() {
      
-        Axis yAxis;
+        Axis yAxis;;
+     
          
         animatedModel2 = initBarModel();
         animatedModel2.setTitle("Aluguel de Consoles por mês");
@@ -69,6 +96,8 @@ public class ChartView implements Serializable {
          
         return model;
     }
+    
+    
      
    
     

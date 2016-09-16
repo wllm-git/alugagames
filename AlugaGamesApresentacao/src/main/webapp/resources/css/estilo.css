@@ -78,10 +78,26 @@ footer {
 	height: 35px;
 }
 
+.titulo-cadastros{
+	clear: both;
+	margin-left: 10px;
+	
+}
+
+.titulo-cadastros img{
+	float: left;
+	margin-bottom: 10px;
+	padding-right: 10px;
+}
+
+.titulo-cadastros > h1{
+	padding-top: 20px;
+}
+
 .barra-menu {
-	margin-top: 10px;
 	padding: 6px !important;
 	height: 30px;
+		clear: both;
 }
 
 .grid-cadastros {
