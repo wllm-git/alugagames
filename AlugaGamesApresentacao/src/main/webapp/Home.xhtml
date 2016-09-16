@@ -4,12 +4,25 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-	
+
 	<ui:define name="titulo">Página Inicial</ui:define>
 
 	<ui:define name="conteudo">
-		<div id="conteudo-home"><h1>Sistema Comercial de Pedido de Venda.</h1></div>
-	</ui:define>	
+		<div id="conteudo-home" style="margin-left: auto; margin-right: auto;">
+			<h1>Dashboard</h1>
+
+			<h:panelGrid columns="2" columnClasses="left,right"
+				style="width:100%">
+				
+				<p:chart type="bar" model="#{chartView.animatedModel2}"
+					style="width:1000px; margin-left: auto; margin-right: auto;" />
+			
+			</h:panelGrid>
+		</div>
+
+
+
+	</ui:define>
 
 
 </ui:composition>
