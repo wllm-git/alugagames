@@ -1,0 +1,151 @@
+/*======  Layout   ===========*/
+body {
+	font-size: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 0;
+}
+
+header {
+	padding: 5px 0;
+	margin-bottom: 20px;
+	height: 60px;
+	background-color: #29446d;;
+	color: #FFF;
+}
+
+
+#logo {
+	margin-left: 20px;
+	margin-bottom: 10px;
+}
+
+#logo a:visited{
+	color: #FFF;
+}
+
+
+
+
+footer {
+	padding-left: 5px;
+}
+
+/*======  Home   ===========*/
+#conteudo-home {
+	margin-left: 10px;
+	margin-bottom: 10px;
+}
+
+/*======  Tela de Login   ===========*/
+#login-dialog {
+	width: 300px;
+	margin: auto;
+}
+
+#conteudo {
+	margin-left: 10px !important;
+	margin-right: 10px !important;
+}
+
+.grid-login {
+	background-color: #f7f7f7;
+	padding: 12px;
+	border-radius: 2px;
+	clear: both;
+}
+
+#login-logo {
+	margin-left: auto;
+	margin-right: 35px;
+	margin-top: 180px;
+	text-align: center;
+}
+
+/*==========Componentes================*/
+.rotulo {
+	width: 150px;
+}
+
+.ui-panelgrid td {
+	height: 35px;
+}
+
+.ajax-status {
+	position: fixed;
+	top: 80px;
+	right: 10px;
+	width: 35px;
+	height: 35px;
+}
+
+.barra-menu {
+	margin-top: 10px;
+	padding: 6px !important;
+	height: 30px;
+}
+
+.grid-cadastros {
+	margin-top: 10px;
+	margin-left: 5px;
+	width: 99%;
+}
+
+.sem-bordas td {
+	border: none !important;
+	padding: 5px !important;
+}
+
+.ui-selectmanycheckbox td label {
+	padding-right: 10px !important;
+}
+
+.tabelas-pesquisa {
+	margin-top: 20px;
+}
+
+/* Customiza TabView - início */
+.ui-tabs .ui-tabs-panel {
+	padding: 0.5em 0.2em !important;
+}
+
+.ui-tabs {
+	padding: 0px !important;
+}
+
+.ui-tabs .ui-tabs-nav {
+	margin: -1px !important;
+}
+
+.ui-tabs.ui-tabs-top>.ui-tabs-nav {
+	padding: 0px !important;
+}
+/* Customiza TabView - fim */
+
+/* Menu sistema inicio */
+.menu-sistema {
+    border: 0px !important;
+    padding: 0px !important;
+    background: none !important;
+    margin-top: 2px;
+}
+
+.menu-sistema .ui-menu-parent > a .ui-menuitem-text, .menu-sistema > .ui-menu-list > .ui-menuitem > a > .ui-menuitem-text {
+    color: #ffffff !important;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.menu-sistema .ui-icon-triangle-1-s {
+    background: url(#{resource['imagens:seta-para-baixo.png']}) no-repeat;
+}
+
+
+/* Menu sistema fim */
+
+.produto-tabela input {
+	width: 99% !important;
+}
+
+.ui-state-disabled{
+	opacity: 0.70 !important;
+}

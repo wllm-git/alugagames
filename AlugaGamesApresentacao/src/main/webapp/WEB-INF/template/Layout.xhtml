@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+	<h:outputStylesheet library="css" name="estilo.css" />
+
+	<h:outputScript library="js" name="jquery.maskMoney.js" />
+	<h:outputScript library="js" name="locale-primefaces.js" />
+
+
+	<title><ui:insert name="titulo">Aluga Games</ui:insert></title>
+</h:head>
+<h:body>
+
+	<p:ajaxStatus styleClass="ajax-status" onsuccess="configurarMoeda()"
+		onerror="configurarMoeda()">
+		<f:facet name="start">
+			<p:graphicImage library="imagens" name="loading.gif" />
+		</f:facet>
+		<f:facet name="complete">
+			<h:outputText value="" />
+		</f:facet>
+	</p:ajaxStatus>
+
+	<header>
+	<div style="float: left;">
+		<div id="logo">
+			<h:link outcome="/Home.xhtml">
+				<p:graphicImage library="imagens" name="game-controller32.png"
+					style="float: left; margin-top: 14px" />
+
+				<h1 style="float: left; margin-left: 10px">
+					<strong>Aluga Games</strong> | Consoles, Games, Acessórios...
+				</h1>
+			</h:link>
+		</div>
+	</div>
+
+	<div style="float: right; margin-right: 110px; margin-top: 12px;">
+		<span
+			style="float: left; height: 30px; line-height: 30px; margin-right: 60px; margin-top: 2px;">
+
+		</span>
+
+		<h:form style="display: inline-block">
+			<p:menubar styleClass="menu-sistema">
+				<p:submenu label="Cadastros">
+					<p:menuitem value="Clientes"
+						outcome="/clientes/CadastroCliente.xhtml" />
+					<p:menuitem value="Usuários" />
+				</p:submenu>
+
+			</p:menubar>
+		</h:form>
+	</div>
+
+	<div style="clear: both"></div>
+
+	</header>
+
+	<div id="conteudo">
+		<ui:insert name="conteudo"></ui:insert>
+	</div>
+
+	<p:separator style="margin-bottom: 10px; margin-top:10px" />
+
+	<footer style="margin-bottom: 5px; text-align:center;"> Aluga Games,
+	Consoles, Games e Acessórios <br />
+	<br />
+	</footer>
+
+	<script>
+		function configurarMoeda() {
+			$(".moeda").maskMoney({
+				decimal : ",",
+				thousands : ".",
+				allowZero : true
+			});
+		}
+
+		$(document).ready(function() {
+			configurarMoeda();
+		});
+	</script>
+
+</h:body>
+</html>
