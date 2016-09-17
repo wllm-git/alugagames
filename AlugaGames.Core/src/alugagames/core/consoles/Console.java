@@ -6,9 +6,10 @@ import java.util.List;
 import java.util.UUID;
 
 import alugagames.core.jogos.Jogo;
+import alugagames.core.shared.Equipamento;
 import alugagames.core.tiposconsole.TipoConsole;
 
-public class Console {
+public class Console extends Equipamento {
 	
 	private UUID id;
 	private String numeroSerie;

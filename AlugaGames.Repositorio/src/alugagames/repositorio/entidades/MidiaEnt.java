@@ -19,13 +19,11 @@ public class MidiaEnt extends Midia{
 	@Column(length=16)
 	@Override
 	public UUID getId() {
-		// TODO Auto-generated method stub
 		return super.getId();
 	}
 
 	@Override
 	public String getNumeroSerie() {
-		// TODO Auto-generated method stub
 		return super.getNumeroSerie();
 	}
 
@@ -33,21 +31,13 @@ public class MidiaEnt extends Midia{
 	@ManyToOne(fetch = FetchType.EAGER)
 	@Override
 	public JogoEnt getJogo() {
-		// TODO Auto-generated method stub
 		return (JogoEnt)super.getJogo();
-	}
-
-	@Override
-	public boolean isDisponivel() {
-		// TODO Auto-generated method stub
-		return super.isDisponivel();
 	}
 
 	@OneToOne
 	@JoinColumn(name = "tipoconsole_id")
 	@Override
 	public TipoConsoleEnt getTipoConsole() {
-		// TODO Auto-generated method stub
 		return (TipoConsoleEnt)super.getTipoConsole();
 	}
 

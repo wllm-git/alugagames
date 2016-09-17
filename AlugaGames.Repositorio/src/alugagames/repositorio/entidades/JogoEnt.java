@@ -22,19 +22,16 @@ public class JogoEnt extends Jogo{
 	@Column(length=16)
 	@Override
 	public UUID getId() {
-		// TODO Auto-generated method stub
 		return super.getId();
 	}
 
 	@Override
 	public String getNome() {
-		// TODO Auto-generated method stub
 		return super.getNome();
 	}
 
 	@Override
 	public Date getAnoLancamento() {
-		// TODO Auto-generated method stub
 		return super.getAnoLancamento();
 	}
 
@@ -42,13 +39,11 @@ public class JogoEnt extends Jogo{
 	@Cascade(CascadeType.ALL)
 	@Override
 	public List<MidiaEnt> getMidias() {
-		// TODO Auto-generated method stub
 		return (List<MidiaEnt>) super.getMidias();
 	}
 
 	@Override
 	public float getPreco() {
-		// TODO Auto-generated method stub
 		return super.getPreco();
 	}
 

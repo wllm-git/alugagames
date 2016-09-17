@@ -22,19 +22,16 @@ public class ConsoleEnt extends Console{
 	@Column(length=16)
 	@Override
 	public UUID getId() {
-		// TODO Auto-generated method stub
 		return super.getId();
 	}
 
 	@Override
 	public String getNumeroSerie() {
-		// TODO Auto-generated method stub
 		return super.getNumeroSerie();
 	}
 
 	@Override
 	public Date getAno() {
-		// TODO Auto-generated method stub
 		return super.getAno();
 	}
 
@@ -42,7 +39,6 @@ public class ConsoleEnt extends Console{
 	@JoinColumn(name = "tipoconsole_id")
 	@Override
 	public TipoConsoleEnt getTipoConsole() {
-		// TODO Auto-generated method stub
 		return (TipoConsoleEnt)super.getTipoConsole();
 	}
 	
@@ -52,19 +48,16 @@ public class ConsoleEnt extends Console{
 				inverseJoinColumns = @JoinColumn(name = "JogoId"))
 	@Override
 	public List<JogoEnt> getJogos() {
-		// TODO Auto-generated method stub
 		return (List<JogoEnt>) super.getJogos();
 	}
 
 	@Override
 	public int getVoltagem() {
-		// TODO Auto-generated method stub
 		return super.getVoltagem();
 	}
 
 	@Override
 	public float getPreco() {
-		// TODO Auto-generated method stub
 		return super.getPreco();
 	}
 	

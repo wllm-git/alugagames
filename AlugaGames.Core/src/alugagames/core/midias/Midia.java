@@ -3,14 +3,14 @@ package alugagames.core.midias;
 import java.util.UUID;
 
 import alugagames.core.jogos.Jogo;
+import alugagames.core.shared.Equipamento;
 import alugagames.core.tiposconsole.TipoConsole;
 
-public class Midia {
+public class Midia extends Equipamento {
 	
 	private UUID id;
 	private String numeroSerie;
 	private Jogo jogo;
-	private boolean disponivel;
 	private TipoConsole tipoConsole;
 	
 	
@@ -40,14 +40,6 @@ public class Midia {
 
 	public void setJogo(Jogo jogo) {
 		this.jogo = jogo;
-	}
-
-	public boolean isDisponivel() {
-		return disponivel;
-	}
-
-	public void setDisponivel(boolean disponivel) {
-		this.disponivel = disponivel;
 	}
 
 	public TipoConsole getTipoConsole() {

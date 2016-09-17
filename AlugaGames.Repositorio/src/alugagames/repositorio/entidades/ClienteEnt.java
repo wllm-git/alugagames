@@ -6,10 +6,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-import alugagames.core.tiposconsole.TipoConsole;
+import alugagames.core.clientes.Cliente;
 
-@Entity(name="TipoConsole")
-public class TipoConsoleEnt extends TipoConsole{
+@Entity(name="Cliente")
+public class ClienteEnt extends Cliente {
 
 	@Id
 	@Column(length=16)
@@ -18,9 +18,4 @@ public class TipoConsoleEnt extends TipoConsole{
 		return super.getId();
 	}
 
-	@Override
-	public String getNome() {
-		return super.getNome();
-	}
-	
 }
