@@ -12,7 +12,7 @@ import alugagames.core.tiposconsole.TipoConsole;
 public class Console extends Equipamento {
 	
 	private UUID id;
-	private String numeroSerie;
+	
 	private Date ano;
 	private List<Jogo> jogos;
 	private TipoConsole tipoConsole;
@@ -32,13 +32,7 @@ public class Console extends Equipamento {
 		this.id = id;
 	}
 	
-	public String getNumeroSerie() {
-		return numeroSerie;
-	}
 	
-	public void setNumeroSerie(String numeroSerie) {
-		this.numeroSerie = numeroSerie;
-	}
 
 	public Date getAno() {
 		return ano;

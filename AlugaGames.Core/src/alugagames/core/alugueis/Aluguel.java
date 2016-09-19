@@ -6,15 +6,16 @@ import java.util.List;
 import java.util.UUID;
 
 import alugagames.core.acessorios.Acessorio;
+import alugagames.core.atendentes.Atendente;
 import alugagames.core.clientes.Cliente;
 import alugagames.core.consoles.Console;
-import alugagames.core.jogos.Jogo;
 import alugagames.core.midias.Midia;
 
 public class Aluguel {
 	private UUID id;
 	private int codigo;
 	private Cliente cliente;
+	private Atendente atendente;
 	
 	private StatusAluguel status;
 	
@@ -48,6 +49,14 @@ public class Aluguel {
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
+	}
+
+	public Atendente getAtendente() {
+		return atendente;
+	}
+
+	public void setAtendente(Atendente atendente) {
+		this.atendente = atendente;
 	}
 
 	public List<? extends Console> getConsoles() {

@@ -9,7 +9,6 @@ import alugagames.core.tiposconsole.TipoConsole;
 public class Midia extends Equipamento {
 	
 	private UUID id;
-	private String numeroSerie;
 	private Jogo jogo;
 	private TipoConsole tipoConsole;
 	
@@ -24,14 +23,6 @@ public class Midia extends Equipamento {
 
 	public void setId(UUID id) {
 		this.id = id;
-	}
-
-	public String getNumeroSerie() {
-		return numeroSerie;
-	}
-
-	public void setNumeroSerie(String numeroSerie) {
-		this.numeroSerie = numeroSerie;
 	}
 
 	public Jogo getJogo() {

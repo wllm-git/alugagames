@@ -28,4 +28,10 @@ public class AcessorioEnt extends Acessorio{
 	public boolean isAtivo() {
 		return super.isAtivo();
 	}
+
+	@Override
+	public String getNumeroSerie() {
+		return super.getNumeroSerie();
+	}
+	
 }

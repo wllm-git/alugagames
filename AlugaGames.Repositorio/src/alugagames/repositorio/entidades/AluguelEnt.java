@@ -31,6 +31,13 @@ public class AluguelEnt extends Aluguel {
 	public ClienteEnt getCliente() {
 		return (ClienteEnt) super.getCliente();
 	}
+	
+	@ManyToOne
+	@JoinColumn(name = "atendente_id")
+	@Override
+	public AtendenteEnt getAtendente() {
+		return (AtendenteEnt)super.getAtendente();
+	}
 
 	@ManyToMany
 	@JoinTable(name = "AluguelConsole", 

@@ -13,7 +13,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
 import alugagames.core.consoles.Console;
-import alugagames.core.jogos.Jogo;
 
 @Entity(name="Console")
 public class ConsoleEnt extends Console{
