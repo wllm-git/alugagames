@@ -2,14 +2,23 @@ package alugagames.core.os;
 
 import java.util.UUID;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class OrdemServicoItem {
-	
+	@Id
+	@Column(length=16)
 	private UUID id;
 	private String descricao;
 	private String numeroSerie;
 	private double valor;
 	private TipoItemOS tipo;
 	private StatusOSItem statusOSItem;
+	@ManyToOne(fetch = FetchType.EAGER)
 	private OrdemServico ordemServico;
 
 	public OrdemServicoItem(){

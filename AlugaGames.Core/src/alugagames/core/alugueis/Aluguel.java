@@ -5,16 +5,33 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
 import alugagames.core.acessorios.Acessorio;
 import alugagames.core.atendentes.Atendente;
 import alugagames.core.clientes.Cliente;
 import alugagames.core.consoles.Console;
 import alugagames.core.midias.Midia;
 
+@Entity
 public class Aluguel {
+	@Id
+	@Column(length=16)
 	private UUID id;
 	private int codigo;
+	
+	@ManyToOne
+	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
+	
+	@ManyToOne
+	@JoinColumn(name = "atendente_id")
 	private Atendente atendente;
 	
 	private StatusAluguel status;
@@ -23,8 +40,22 @@ public class Aluguel {
 	private Date dataConfirmacao;
 	private Date dataFechamento;
 	
+	@ManyToMany
+	@JoinTable(name = "AluguelConsole", 
+				joinColumns = @JoinColumn(name = "AluguelId"), 
+				inverseJoinColumns = @JoinColumn(name = "ConsoleId"))
 	private List<Console> consoles;
+	
+	@ManyToMany
+	@JoinTable(name = "AluguelMidia", 
+				joinColumns = @JoinColumn(name = "AluguelId"), 
+				inverseJoinColumns = @JoinColumn(name = "MidiaId"))
 	private List<Midia> midias;
+	
+	@ManyToMany
+	@JoinTable(name = "AluguelAcessorio", 
+				joinColumns = @JoinColumn(name = "AluguelId"), 
+				inverseJoinColumns = @JoinColumn(name = "AcessorioId"))
 	private List<Acessorio> acessorios;
 	
 	public Aluguel(){
@@ -59,7 +90,7 @@ public class Aluguel {
 		this.atendente = atendente;
 	}
 
-	public List<? extends Console> getConsoles() {
+	public List<Console> getConsoles() {
 		return consoles;
 	}
 
@@ -67,7 +98,7 @@ public class Aluguel {
 		this.consoles = consoles;
 	}
 
-	public List<? extends Midia> getMidias() {
+	public List<Midia> getMidias() {
 		return midias;
 	}
 
@@ -75,7 +106,7 @@ public class Aluguel {
 		this.midias = midias;
 	}
 
-	public List<? extends Acessorio> getAcessorios() {
+	public List<Acessorio> getAcessorios() {
 		return acessorios;
 	}
 

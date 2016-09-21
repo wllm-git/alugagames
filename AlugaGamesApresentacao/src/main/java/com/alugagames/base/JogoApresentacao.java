@@ -25,7 +25,7 @@ public class JogoApresentacao extends Jogo{
 	}
 
 	@Override
-	public List<? extends Midia> getMidias() {
+	public List<Midia> getMidias() {
 		return super.getMidias();
 	}
 

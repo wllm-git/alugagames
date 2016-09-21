@@ -5,12 +5,22 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
 import alugagames.core.midias.Midia;
 
+@Entity
 public class Jogo {
+	@Id
+	@Column(length=16)
 	private UUID id;
 	private String nome;
 	private Date anoLancamento;
+	@OneToMany(mappedBy="jogo", fetch = FetchType.LAZY)
 	private List<Midia> midias;
 	private float preco;
 	
@@ -43,7 +53,7 @@ public class Jogo {
 		this.anoLancamento = anoLancamento;
 	}
 
-	public List<? extends Midia> getMidias() {
+	public List<Midia> getMidias() {
 		return midias;
 	}
 

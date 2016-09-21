@@ -2,8 +2,14 @@ package alugagames.core.tiposconsole;
 
 import java.util.UUID;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class TipoConsole {
-	
+	@Id
+	@Column(length=16)
 	private UUID id;
 	private String nome;
 	

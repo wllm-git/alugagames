@@ -5,16 +5,34 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
+
 import alugagames.core.jogos.Jogo;
 import alugagames.core.shared.Equipamento;
+import alugagames.core.shared.StatusEquipamento;
 import alugagames.core.tiposconsole.TipoConsole;
 
+@Entity
 public class Console extends Equipamento {
 	
+	@Id
+	@Column(length=16)
 	private UUID id;
 	
 	private Date ano;
+	@ManyToMany
+	@JoinTable(name = "ConsoleJogo", 
+				joinColumns = @JoinColumn(name = "ConsoleId"), 
+				inverseJoinColumns = @JoinColumn(name = "JogoId"))
 	private List<Jogo> jogos;
+	@OneToOne
+	@JoinColumn(name = "tipoconsole_id")
 	private TipoConsole tipoConsole;
 	private int voltagem;
 	private float preco;
@@ -31,8 +49,6 @@ public class Console extends Equipamento {
 	public void setId(UUID id) {
 		this.id = id;
 	}
-	
-	
 
 	public Date getAno() {
 		return ano;
@@ -50,7 +66,7 @@ public class Console extends Equipamento {
 		this.tipoConsole = tipoConsole;
 	}
 
-	public List<? extends Jogo> getJogos() {
+	public List<Jogo> getJogos() {
 		return jogos;
 	}
 
@@ -73,4 +89,21 @@ public class Console extends Equipamento {
 	public void setPreco(float preco) {
 		this.preco = preco;
 	}
+
+	@Override
+	public String getNumeroSerie() {
+		return super.getNumeroSerie();
+	}
+
+	@Override
+	public StatusEquipamento getStatus() {
+		return super.getStatus();
+	}
+
+	@Override
+	public boolean isAtivo() {
+		return super.isAtivo();
+	}
+	
+	
 }

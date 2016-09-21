@@ -4,6 +4,21 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 	<persistence-unit name="hibernateconnection" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		
+		<class>alugagames.core.acessorios.Acessorio</class>
+		<class>alugagames.core.alugueis.Aluguel</class>
+		<class>alugagames.core.atendentes.Atendente</class>
+		<class>alugagames.core.clientes.Cliente</class>
+		<class>alugagames.core.consoles.Console</class>
+		<class>alugagames.core.jogos.Jogo</class>
+		<class>alugagames.core.midias.Midia</class>
+		<class>alugagames.core.orcamentos.Orcamento</class>
+		<class>alugagames.core.orcamentos.OrcamentoItem</class>
+		<class>alugagames.core.os.OrdemServico</class>
+		<class>alugagames.core.os.OrdemServicoItem</class>
+		<class>alugagames.core.tecnicos.Tecnico</class>
+		<class>alugagames.core.tiposconsole.TipoConsole</class>
+		
 		<properties>
 			<property name="hibernate.dialect"
 				value="org.hibernate.dialect.MySQL5InnoDBDialect"/>

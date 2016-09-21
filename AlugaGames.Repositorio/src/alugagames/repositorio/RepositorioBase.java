@@ -38,5 +38,4 @@ public class RepositorioBase<T> implements IRepositorioBase<T>{
 		EntityManager em = ConnectionManager.getEntityManager();
 		return em.createQuery("Select a from " + typeClass.getName() + " a", typeClass).getResultList();
 	}
-
 }

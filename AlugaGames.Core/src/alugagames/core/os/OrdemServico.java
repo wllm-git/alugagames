@@ -4,16 +4,35 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import alugagames.core.atendentes.Atendente;
 import alugagames.core.clientes.Cliente;
 import alugagames.core.tecnicos.Tecnico;
 
+@Entity
 public class OrdemServico {
-	
+	@Id
+	@Column(length=16)
 	private UUID id;
 	private int codigo;
+	@ManyToOne
+	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
+	@ManyToOne
+	@JoinColumn(name = "atendente_id")
 	private Atendente atendente;
+	@ManyToOne
+	@JoinColumn(name = "tecnico_id")
 	private Tecnico tecnico;
 	private Date dataAbertura;
 	private Date dataFechamento;
@@ -21,6 +40,8 @@ public class OrdemServico {
 	private String descricao;
 	private StatusOS status;
 	private boolean interna;
+	@OneToMany(mappedBy="ordemServico", fetch = FetchType.LAZY)
+	@Cascade(CascadeType.ALL)
 	private List<OrdemServicoItem> ordemServicoItens;
 	
 	public OrdemServico(){
@@ -115,7 +136,7 @@ public class OrdemServico {
 		this.interna = interna;
 	}
 
-	public List<? extends OrdemServicoItem> getOrdemServicoItens() {
+	public List<OrdemServicoItem> getOrdemServicoItens() {
 		return ordemServicoItens;
 	}
 

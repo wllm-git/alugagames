@@ -2,16 +2,25 @@ package alugagames.core.orcamentos;
 
 import java.util.UUID;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
 import alugagames.core.os.TipoItemOS;
 
+@Entity
 public class OrcamentoItem {
-	
+	@Id
+	@Column(length=16)
 	private UUID id;
 	private String descricao;
 	private String numeroSerie;
 	private double valor;
 	private TipoItemOS tipo;
 	private boolean temConserto;
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Orcamento orcamento;
 	
 	public OrcamentoItem(){
