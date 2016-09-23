@@ -15,10 +15,10 @@ public class OrcamentoItem {
 	@Id
 	@Column(length=16)
 	private UUID id;
-	private String descricao;
 	private String numeroSerie;
+	private String descricao;
 	private double valor;
-	private TipoItemOS tipo;
+	//private TipoItemOS tipo;
 	private boolean temConserto;
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Orcamento orcamento;
@@ -35,14 +35,6 @@ public class OrcamentoItem {
 		this.id = id;
 	}
 
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
 	public String getNumeroSerie() {
 		return numeroSerie;
 	}
@@ -51,6 +43,14 @@ public class OrcamentoItem {
 		this.numeroSerie = numeroSerie;
 	}
 
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+	
 	public double getValor() {
 		return valor;
 	}
@@ -59,13 +59,13 @@ public class OrcamentoItem {
 		this.valor = valor;
 	}
 
-	public TipoItemOS getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(TipoItemOS tipo) {
-		this.tipo = tipo;
-	}
+//	public TipoItemOS getTipo() {
+//		return tipo;
+//	}
+//
+//	public void setTipo(TipoItemOS tipo) {
+//		this.tipo = tipo;
+//	}
 
 	public boolean isTemConserto() {
 		return temConserto;

@@ -16,7 +16,7 @@ public class OrdemServicoItem {
 	private String descricao;
 	private String numeroSerie;
 	private double valor;
-	private TipoItemOS tipo;
+	//private TipoItemOS tipo;
 	private StatusOSItem statusOSItem;
 	@ManyToOne(fetch = FetchType.EAGER)
 	private OrdemServico ordemServico;
@@ -57,13 +57,13 @@ public class OrdemServicoItem {
 		this.valor = valor;
 	}
 
-	public TipoItemOS getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(TipoItemOS tipo) {
-		this.tipo = tipo;
-	}
+//	public TipoItemOS getTipo() {
+//		return tipo;
+//	}
+//
+//	public void setTipo(TipoItemOS tipo) {
+//		this.tipo = tipo;
+//	}
 	
 	public StatusOSItem getStatusOSItem() {
 		return statusOSItem;

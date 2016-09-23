@@ -11,12 +11,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import alugagames.core.jogos.Jogo;
-import alugagames.core.shared.Equipamento;
-import alugagames.core.shared.StatusEquipamento;
+import alugagames.core.shared.Produto;
+import alugagames.core.shared.StatusProduto;
 import alugagames.core.tiposconsole.TipoConsole;
 
 @Entity
-public class Midia extends Equipamento {
+public class Midia extends Produto {
 	
 	@Id
 	@Column(length=16)
@@ -62,7 +62,7 @@ public class Midia extends Equipamento {
 	}
 
 	@Override
-	public StatusEquipamento getStatus() {
+	public StatusProduto getStatus() {
 		return super.getStatus();
 	}
 

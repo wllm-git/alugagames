@@ -2,6 +2,7 @@ package alugagames.core.os;
 
 import java.util.List;
 
+import alugagames.core.clientes.Cliente;
 import alugagames.core.orcamentos.Orcamento;
 import alugagames.core.os.repositorio.IOrdemServicoRepositorio;
 
@@ -12,7 +13,11 @@ public class OrdemServicoServico {
 		_repositorio = repositorio;
 	}
 	
-	public List<String> abrirOSInterna(){
+	public List<String> abrirOSInterna(List<OrdemServicoItem> itens){
+		return null;
+	}
+	
+	public List<String> abrirOS(Cliente cliente, List<OrdemServicoItem> itens){
 		return null;
 	}
 	

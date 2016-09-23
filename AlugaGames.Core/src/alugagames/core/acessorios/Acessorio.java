@@ -6,11 +6,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-import alugagames.core.shared.Equipamento;
-import alugagames.core.shared.StatusEquipamento;
+import alugagames.core.shared.Produto;
+import alugagames.core.shared.StatusProduto;
 
 @Entity
-public class Acessorio extends Equipamento {
+public class Acessorio extends Produto {
 	
 	@Id
 	@Column(length=16)
@@ -34,7 +34,7 @@ public class Acessorio extends Equipamento {
 	}
 
 	@Override
-	public StatusEquipamento getStatus() {
+	public StatusProduto getStatus() {
 		return super.getStatus();
 	}
 

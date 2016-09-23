@@ -1,9 +1,9 @@
 package alugagames.core.shared;
 
-public abstract class Equipamento {
+public abstract class Produto {
 	
 	private String numeroSerie;
-	private StatusEquipamento status;
+	private StatusProduto status;
 	private boolean ativo;
 	
 	public String getNumeroSerie() {
@@ -14,10 +14,10 @@ public abstract class Equipamento {
 		this.numeroSerie = numeroSerie;
 	}
 	
-	public StatusEquipamento getStatus() {
+	public StatusProduto getStatus() {
 		return status;
 	}
-	public void setStatus(StatusEquipamento status) {
+	public void setStatus(StatusProduto status) {
 		this.status = status;
 	}
 	public boolean isAtivo() {

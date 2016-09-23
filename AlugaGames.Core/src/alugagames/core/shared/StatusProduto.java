@@ -1,6 +1,6 @@
 package alugagames.core.shared;
 
-public enum StatusEquipamento {
+public enum StatusProduto {
 	Disponivel,
 	Reservado,
 	Alugado,

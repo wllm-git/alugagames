@@ -5,7 +5,7 @@ import java.util.List;
 import alugagames.core.acessorios.Acessorio;
 import alugagames.core.alugueis.repositorio.IAluguelRepositorio;
 import alugagames.core.consoles.Console;
-import alugagames.core.jogos.Jogo;
+import alugagames.core.midias.Midia;
 
 public class AluguelServico {
 	private IAluguelRepositorio _repositorio;
@@ -46,7 +46,7 @@ public class AluguelServico {
 		return null;
 	}
 	
-	public List<String> adicionarJogos(Aluguel aluguel, List<Jogo> jogos){
+	public List<String> adicionarMidias(Aluguel aluguel, List<Midia> midias){
 		return null;
 	}
 	
@@ -58,7 +58,7 @@ public class AluguelServico {
 		return null;
 	}
 	
-	public List<String> removerJogos(Aluguel aluguel, List<Jogo> jogos){
+	public List<String> removerMidias(Aluguel aluguel, List<Midia> midias){
 		return null;
 	}
 	
