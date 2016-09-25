@@ -4,6 +4,7 @@ import java.util.List;
 
 import alugagames.core.acessorios.Acessorio;
 import alugagames.core.alugueis.repositorio.IAluguelRepositorio;
+import alugagames.core.clientes.Cliente;
 import alugagames.core.consoles.Console;
 import alugagames.core.midias.Midia;
 
@@ -14,7 +15,7 @@ public class AluguelServico {
 		_repositorio = repositorio;
 	}
 	
-	public Aluguel abrirReserva(){
+	public Aluguel abrirReserva(Cliente cliente){
 		return null;
 	}
 	

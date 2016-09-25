@@ -29,11 +29,20 @@ public class OrdemServicoServico {
 		return null;
 	}
 	
+	public List<String> finalizarServico(OrdemServico ordemServico){
+		return null;
+	}
+	
+	
 	public List<String> fecharOS(OrdemServico ordemServico){
 		return null;
 	}
 	
 	public OrdemServico buscarPorCodigo(int codigo){
+		return null;
+	}
+	
+	public OrdemServico buscarPorCPFCliente(String cpf){
 		return null;
 	}
 }
