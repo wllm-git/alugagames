@@ -88,22 +88,5 @@ public class Console extends Produto {
 
 	public void setPreco(float preco) {
 		this.preco = preco;
-	}
-
-	@Override
-	public String getNumeroSerie() {
-		return super.getNumeroSerie();
-	}
-
-	@Override
-	public StatusProduto getStatus() {
-		return super.getStatus();
-	}
-
-	@Override
-	public boolean isAtivo() {
-		return super.isAtivo();
-	}
-	
-	
+	}	
 }

@@ -1,5 +1,12 @@
 package alugagames.core.alugueis.regras;
 
-public class AluguelPrecisaTerItemNaReserva {
+import alugagames.core.alugueis.Aluguel;
+import alugagames.core.shared.validacoesregras.IRegra;
 
+public class AluguelPrecisaTerItemNaReserva implements IRegra<Aluguel> {
+
+	@Override
+	public String validar(Aluguel obj) {
+		return null;
+	}
 }

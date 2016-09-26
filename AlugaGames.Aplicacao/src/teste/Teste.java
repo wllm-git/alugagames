@@ -1,3 +1,4 @@
+package teste;
 import java.util.Date;
 
 import alugagames.core.atendentes.Atendente;

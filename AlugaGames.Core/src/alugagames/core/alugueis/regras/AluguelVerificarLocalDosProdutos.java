@@ -1,5 +1,12 @@
 package alugagames.core.alugueis.regras;
 
-public class AluguelVerificarLocalDosProdutos {
+import alugagames.core.alugueis.Aluguel;
+import alugagames.core.shared.validacoesregras.IRegra;
 
+public class AluguelVerificarLocalDosProdutos implements IRegra<Aluguel> {
+
+	@Override
+	public String validar(Aluguel obj) {
+		return null;
+	}
 }

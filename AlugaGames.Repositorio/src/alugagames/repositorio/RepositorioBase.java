@@ -1,6 +1,7 @@
 package alugagames.repositorio;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.EntityManager;
 
@@ -34,8 +35,15 @@ public class RepositorioBase<T> implements IRepositorioBase<T>{
 	}
 
 	@Override
+	public T buscarPorID(UUID id) {
+		EntityManager em = ConnectionManager.getEntityManager();
+		return em.find(typeClass, id);
+	}
+	
+	@Override
 	public List<T> buscarTodos() {
 		EntityManager em = ConnectionManager.getEntityManager();
 		return em.createQuery("Select a from " + typeClass.getName() + " a", typeClass).getResultList();
 	}
+	
 }
