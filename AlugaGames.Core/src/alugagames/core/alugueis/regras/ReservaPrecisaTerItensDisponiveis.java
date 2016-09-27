@@ -7,7 +7,7 @@ public class ReservaPrecisaTerItensDisponiveis implements IRegra<Aluguel> {
 
 	@Override
 	public String validar(Aluguel obj) {
-		if(obj.getConsoles().isEmpty() && obj.getMidias().isEmpty() && obj.getAcessorios().isEmpty())
+		if(obj.getConsoles().isEmpty() && obj.getMidias().isEmpty() && obj.getEquipamentos().isEmpty())
 			return "Reserva não possui itens selecionados.";
 		return null;
 	}

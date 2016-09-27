@@ -1,4 +1,4 @@
-package alugagames.core.acessorios;
+package alugagames.core.equipamentos;
 
 import java.util.UUID;
 
@@ -10,13 +10,13 @@ import alugagames.core.shared.Produto;
 import alugagames.core.shared.StatusProduto;
 
 @Entity
-public class Acessorio extends Produto {
+public class Equipamento extends Produto {
 	
 	@Id
 	@Column(length=16)
 	private UUID id;
 	
-	public Acessorio(){
+	public Equipamento(){
 		id = UUID.randomUUID();
 	}
 

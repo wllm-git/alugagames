@@ -14,7 +14,7 @@ public class ConsoleRepositorio extends RepositorioBase<Console> implements ICon
 	}
 
 	@Override
-	public void AtualizarStatusConsole(Console console) {
+	public void atualizarStatusConsole(Console console) {
 		EntityManager em = ConnectionManager.getEntityManager();
 		Query q = em.createQuery("update Console c set c.status = :status where c.id = :id");
 		q.setParameter("id", console.getId());

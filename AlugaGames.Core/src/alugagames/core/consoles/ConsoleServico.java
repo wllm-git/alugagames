@@ -39,7 +39,7 @@ public class ConsoleServico extends ServicoBase<Console> {
 		List<String> erros = new ConsoleAptoParaReserva(_repositorio).validar(console);
 		if(erros.isEmpty()){
 			console.setStatus(StatusProduto.Reservado);
-			_repositorio.AtualizarStatusConsole(console);
+			_repositorio.atualizarStatusConsole(console);
 		}
 		
 		return erros;

@@ -3,7 +3,6 @@ package alugagames.core.alugueis;
 import java.util.Date;
 import java.util.List;
 
-import alugagames.core.acessorios.Acessorio;
 import alugagames.core.alugueis.repositorio.IAluguelRepositorio;
 import alugagames.core.alugueis.validacoes.AluguelAptoParaSerCancelado;
 import alugagames.core.alugueis.validacoes.AluguelAptoParaSerConfirmado;
@@ -14,18 +13,25 @@ import alugagames.core.clientes.Cliente;
 import alugagames.core.clientes.ClienteServico;
 import alugagames.core.consoles.Console;
 import alugagames.core.consoles.ConsoleServico;
+import alugagames.core.equipamentos.Equipamento;
+import alugagames.core.equipamentos.EquipamentoServico;
 import alugagames.core.midias.Midia;
-import alugagames.core.shared.StatusProduto;
+import alugagames.core.midias.MidiaServico;
 
 public class AluguelServico {
 	private IAluguelRepositorio _repositorio;
 	private ClienteServico _clienteServico;
 	private ConsoleServico _consoleServico;
+	private MidiaServico _midiaServico;
+	private EquipamentoServico _equipamentoServico;
 	
-	public AluguelServico(IAluguelRepositorio repositorio, ClienteServico clienteServico, ConsoleServico consoleServico){
+	public AluguelServico(IAluguelRepositorio repositorio, ClienteServico clienteServico, 
+			ConsoleServico consoleServico, MidiaServico midiaServico, EquipamentoServico acessorioServico){
 		_repositorio = repositorio;
 		_clienteServico = clienteServico;
 		_consoleServico = consoleServico;
+		_midiaServico = midiaServico;
+		_equipamentoServico = acessorioServico;
 	}
 	
 	public Aluguel abrirReserva(Cliente cliente){
@@ -60,20 +66,19 @@ public class AluguelServico {
 		aluguel.setDataConfirmacao(new Date());
 		
 		for(Console c : aluguel.getConsoles()){
-			_consoleServico.reservar(c);
+			erros.addAll(_consoleServico.reservar(c));
 		}
 		
 		for(Midia m : aluguel.getMidias()){
-			m.setStatus(StatusProduto.Reservado);
-			_repositorio.AtualizarStatusProduto(m);
+			erros.addAll(_midiaServico.reservar(m));
 		}
 				
-		for(Acessorio a : aluguel.getAcessorios()){
-			a.setStatus(StatusProduto.Reservado);
-			_repositorio.AtualizarStatusProduto(a);
+		for(Equipamento e : aluguel.getEquipamentos()){
+			erros.addAll(_equipamentoServico.reservar(e));
 		}
 		
-		_repositorio.alterar(aluguel);
+		if(erros.isEmpty())
+			_repositorio.alterar(aluguel);
 		
 		return erros;
 	}
@@ -113,7 +118,7 @@ public class AluguelServico {
 		return null;
 	}
 	
-	public List<String> adicionarAcessorios(Aluguel aluguel, List<Acessorio> acessorios){
+	public List<String> adicionarAcessorios(Aluguel aluguel, List<Equipamento> acessorios){
 		return null;
 	}
 	
@@ -125,7 +130,7 @@ public class AluguelServico {
 		return null;
 	}
 	
-	public List<String> removerAcessorios(Aluguel aluguel, List<Acessorio> acessorios){
+	public List<String> removerAcessorios(Aluguel aluguel, List<Equipamento> acessorios){
 		return null;
 	}
 }

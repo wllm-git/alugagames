@@ -7,9 +7,13 @@ import alugagames.core.alugueis.AluguelServico;
 import alugagames.core.clientes.Cliente;
 import alugagames.core.clientes.ClienteServico;
 import alugagames.core.consoles.ConsoleServico;
+import alugagames.core.equipamentos.EquipamentoServico;
+import alugagames.core.midias.MidiaServico;
 import alugagames.repositorio.AluguelRepositorio;
 import alugagames.repositorio.ClienteRepositorio;
 import alugagames.repositorio.ConsoleRepositorio;
+import alugagames.repositorio.EquipamentoRepositorio;
+import alugagames.repositorio.MidiaRepositorio;
 
 public class AluguelAplicacao extends AplicacaoBase{
 	private AluguelServico _aluguelServico;
@@ -17,7 +21,9 @@ public class AluguelAplicacao extends AplicacaoBase{
 	public AluguelAplicacao(){
 		ClienteServico clienteServico = new ClienteServico(new ClienteRepositorio());
 		ConsoleServico consoleServico = new ConsoleServico(new ConsoleRepositorio());
-		_aluguelServico = new AluguelServico(new AluguelRepositorio(), clienteServico, consoleServico);
+		MidiaServico midiaServico = new MidiaServico(new MidiaRepositorio());
+		EquipamentoServico equipamentoServico = new EquipamentoServico(new EquipamentoRepositorio());
+		_aluguelServico = new AluguelServico(new AluguelRepositorio(), clienteServico, consoleServico, midiaServico, equipamentoServico);
 	}
 	
 	public Aluguel abrirReserva(Cliente cliente){

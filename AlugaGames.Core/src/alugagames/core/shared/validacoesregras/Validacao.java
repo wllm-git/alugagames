@@ -19,7 +19,7 @@ public class Validacao<T> {
 		
 		for(IRegra<T> regra : regras){
 			String ret = regra.validar(obj);
-			if(ret != null && ret.isEmpty())
+			if(ret != null && !ret.isEmpty())
 				erros.add(ret);
 		}
 		

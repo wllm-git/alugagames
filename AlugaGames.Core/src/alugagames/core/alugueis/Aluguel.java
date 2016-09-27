@@ -13,10 +13,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
-import alugagames.core.acessorios.Acessorio;
 import alugagames.core.atendentes.Atendente;
 import alugagames.core.clientes.Cliente;
 import alugagames.core.consoles.Console;
+import alugagames.core.equipamentos.Equipamento;
 import alugagames.core.midias.Midia;
 
 @Entity
@@ -56,14 +56,14 @@ public class Aluguel {
 	@JoinTable(name = "AluguelAcessorio", 
 				joinColumns = @JoinColumn(name = "AluguelId"), 
 				inverseJoinColumns = @JoinColumn(name = "AcessorioId"))
-	private List<Acessorio> acessorios;
+	private List<Equipamento> equipamentos;
 	
 	public Aluguel(){
 		id = UUID.randomUUID();
 		status = StatusAluguel.Aberto;
 		consoles = new ArrayList<>();
 		midias = new ArrayList<>();
-		acessorios = new ArrayList<>();
+		equipamentos = new ArrayList<>();
 	}
 
 	public UUID getId() {
@@ -106,12 +106,12 @@ public class Aluguel {
 		this.midias = midias;
 	}
 
-	public List<Acessorio> getAcessorios() {
-		return acessorios;
+	public List<Equipamento> getEquipamentos() {
+		return equipamentos;
 	}
 
-	public void setAcessorios(List<Acessorio> acessorios) {
-		this.acessorios = acessorios;
+	public void setEquipamentos(List<Equipamento> equipamentos) {
+		this.equipamentos = equipamentos;
 	}
 
 	public Date getDataAbertura() {

@@ -7,15 +7,15 @@ import alugagames.core.shared.validacoesregras.IRegra;
 
 public class ConsolePrecisaEstarDisponivel implements IRegra<Console>{
 
-	private IConsoleRepositorio _consoleRepositorio;
+	private IConsoleRepositorio _repositorio;
 	
-	public ConsolePrecisaEstarDisponivel(IConsoleRepositorio consoleRepositorio){
-		_consoleRepositorio = consoleRepositorio;
+	public ConsolePrecisaEstarDisponivel(IConsoleRepositorio repositorio){
+		_repositorio = repositorio;
 	}
 	
 	@Override
 	public String validar(Console obj) {
-		Console c = _consoleRepositorio.buscarPorID(obj.getId());
+		Console c = _repositorio.buscarPorID(obj.getId());
 		if(c == null)
 			return "console "+ obj.getNumeroSerie() +" não está cadastrado no sistema.";
 		else if(!c.getStatus().equals(StatusProduto.Disponivel))

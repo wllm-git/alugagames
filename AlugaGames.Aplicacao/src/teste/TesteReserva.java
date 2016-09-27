@@ -7,11 +7,13 @@ import alugagames.core.alugueis.Aluguel;
 import alugagames.core.clientes.Cliente;
 import alugagames.core.consoles.Console;
 import alugagames.core.jogos.Jogo;
+import alugagames.core.midias.Midia;
 import alugagames.core.shared.StatusProduto;
 import alugagames.core.tiposconsole.TipoConsole;
 import alugagames.repositorio.ClienteRepositorio;
 import alugagames.repositorio.ConsoleRepositorio;
 import alugagames.repositorio.JogoRepositorio;
+import alugagames.repositorio.MidiaRepositorio;
 import alugagames.repositorio.TipoConsoleRepositorio;
 import alugagames.repositorio.config.ConnectionManager;
 
@@ -33,6 +35,20 @@ public class TesteReserva {
 		j2.setNome("TH2");
 		j2.setPreco(10.0f);
 		
+		Midia m1 = new Midia();
+		m1.setAtivo(true);
+		m1.setStatus(StatusProduto.Disponivel);
+		m1.setNumeroSerie("54588");
+		m1.setTipoConsole(tc1);
+		m1.setJogo(j1);
+		
+		Midia m2 = new Midia();
+		m2.setAtivo(true);
+		m2.setStatus(StatusProduto.Disponivel);
+		m2.setNumeroSerie("34377");
+		m2.setTipoConsole(tc1);
+		m2.setJogo(j2);
+		
 		Console con1 = new Console();
 		con1.setAno(new Date());
 		con1.setAtivo(true);
@@ -40,10 +56,9 @@ public class TesteReserva {
 		con1.setPreco(25.0f);
 		con1.setTipoConsole(tc1);
 		con1.setVoltagem(110);
-		con1.setStatus(StatusProduto.Disponivel);
+		con1.setStatus(StatusProduto.Reservado);
 		con1.getJogos().add(j1);
 		con1.getJogos().add(j2);
-		
 		
 		ConnectionManager.beginTransaction();
 		new TipoConsoleRepositorio().adicionar(tc1);
@@ -51,6 +66,8 @@ public class TesteReserva {
 		new JogoRepositorio().adicionar(j2);
 		new ConsoleRepositorio().adicionar(con1);
 		new ClienteRepositorio().adicionar(c1);
+		new MidiaRepositorio().adicionar(m1);
+		new MidiaRepositorio().adicionar(m2);
 		ConnectionManager.commit();
 		ConnectionManager.dispose();
 		
@@ -58,6 +75,8 @@ public class TesteReserva {
 			
 			Aluguel a = new AluguelAplicacao().abrirReserva(c1);
 			a.getConsoles().add(con1);
+			a.getMidias().add(m1);
+			a.getMidias().add(m2);
 			List<String> erros = new AluguelAplicacao().confirmarReserva(a);
 			
 			for(String err : erros)
