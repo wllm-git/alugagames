@@ -53,4 +53,12 @@ public class AluguelAplicacao extends AplicacaoBase{
 		
 		return erros;
 	}
+	
+	public Aluguel buscarReservaPorCodigo(int codigo){
+		return _aluguelServico.buscarReservaPorCodigo(codigo);
+	}
+	
+	public Aluguel buscarAluguelPorCodigo(int codigo){
+		return _aluguelServico.buscarAluguelPorCodigo(codigo);
+	}
 }

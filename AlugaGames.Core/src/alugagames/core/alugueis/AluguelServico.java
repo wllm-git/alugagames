@@ -103,11 +103,11 @@ public class AluguelServico {
 	}
 	
 	public Aluguel buscarReservaPorCodigo(int codigo){
-		return null;
+		return _repositorio.buscarReservaPorCodigo(codigo);
 	}
 	
 	public Aluguel buscarAluguelPorCodigo(int codigo){
-		return null;
+		return _repositorio.buscarAluguelPorCodigo(codigo);
 	}
 	
 	public List<String> adicionarConsoles(Aluguel aluguel, List<Console> consoles){

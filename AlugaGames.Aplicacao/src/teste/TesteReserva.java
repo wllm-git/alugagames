@@ -28,19 +28,18 @@ public class TesteReserva {
 		Jogo j1 = new Jogo();
 		j1.setAnoLancamento(new Date());
 		j1.setNome("TM4");
-		j1.setPreco(15.0f);
-		
+				
 		Jogo j2 = new Jogo();
 		j2.setAnoLancamento(new Date());
 		j2.setNome("TH2");
-		j2.setPreco(10.0f);
-		
+				
 		Midia m1 = new Midia();
 		m1.setAtivo(true);
 		m1.setStatus(StatusProduto.Disponivel);
 		m1.setNumeroSerie("54588");
 		m1.setTipoConsole(tc1);
 		m1.setJogo(j1);
+		m1.setPreco(15.0f);
 		
 		Midia m2 = new Midia();
 		m2.setAtivo(true);
@@ -48,6 +47,7 @@ public class TesteReserva {
 		m2.setNumeroSerie("34377");
 		m2.setTipoConsole(tc1);
 		m2.setJogo(j2);
+		m2.setPreco(10.0f);
 		
 		Console con1 = new Console();
 		con1.setAno(new Date());
@@ -56,7 +56,7 @@ public class TesteReserva {
 		con1.setPreco(25.0f);
 		con1.setTipoConsole(tc1);
 		con1.setVoltagem(110);
-		con1.setStatus(StatusProduto.Reservado);
+		con1.setStatus(StatusProduto.Disponivel);
 		con1.getJogos().add(j1);
 		con1.getJogos().add(j2);
 		
@@ -77,10 +77,16 @@ public class TesteReserva {
 			a.getConsoles().add(con1);
 			a.getMidias().add(m1);
 			a.getMidias().add(m2);
-			List<String> erros = new AluguelAplicacao().confirmarReserva(a);
+			
+			AluguelAplicacao ap = new AluguelAplicacao();
+			
+			List<String> erros = ap.confirmarReserva(a);
 			
 			for(String err : erros)
 				System.out.println(err);
+			
+			
+			
 		}catch(Exception ex){
 			System.out.println(ex.getMessage());
 		}

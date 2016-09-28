@@ -24,12 +24,10 @@ public class Teste {
 		Jogo j1 = new Jogo();
 		j1.setAnoLancamento(new Date());
 		j1.setNome("TM4");
-		j1.setPreco(15.0f);
 		
 		Jogo j2 = new Jogo();
 		j2.setAnoLancamento(new Date());
 		j2.setNome("TH2");
-		j2.setPreco(10.0f);
 		
 		Console con1 = new Console();
 		con1.setAno(new Date());

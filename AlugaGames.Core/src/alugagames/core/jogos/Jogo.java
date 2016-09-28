@@ -22,7 +22,6 @@ public class Jogo {
 	private Date anoLancamento;
 	@OneToMany(mappedBy="jogo", fetch = FetchType.LAZY)
 	private List<Midia> midias;
-	private float preco;
 	
 	public Jogo(){
 		id = UUID.randomUUID();
@@ -61,11 +60,4 @@ public class Jogo {
 		this.midias = midias;
 	}
 
-	public float getPreco() {
-		return preco;
-	}
-
-	public void setPreco(float preco) {
-		this.preco = preco;
-	}
 }

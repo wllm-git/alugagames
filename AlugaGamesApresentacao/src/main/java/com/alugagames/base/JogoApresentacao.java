@@ -28,12 +28,4 @@ public class JogoApresentacao extends Jogo{
 	public List<Midia> getMidias() {
 		return super.getMidias();
 	}
-
-	@Override
-	public float getPreco() {
-		return super.getPreco();
-	}
-	
-	
-
 }

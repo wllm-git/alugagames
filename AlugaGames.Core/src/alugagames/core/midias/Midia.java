@@ -26,7 +26,7 @@ public class Midia extends Produto {
 	@OneToOne
 	@JoinColumn(name = "tipoconsole_id")
 	private TipoConsole tipoConsole;
-	
+	private float preco;
 	
 	public Midia(){
 		id = UUID.randomUUID();
@@ -71,5 +71,11 @@ public class Midia extends Produto {
 		return super.isAtivo();
 	}
 
-	
+	public float getPreco() {
+		return preco;
+	}
+
+	public void setPreco(float preco) {
+		this.preco = preco;
+	}
 }
