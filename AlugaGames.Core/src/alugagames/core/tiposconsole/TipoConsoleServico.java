@@ -21,7 +21,7 @@ public class TipoConsoleServico extends ServicoBase<TipoConsole> {
 		
 		List<String> erros = new TipoConsoleAptoParaCadastro().validar(tipoConsole);
 		if(erros.isEmpty())
-			super.adicionar(tipoConsole);
+			_repositorio.adicionar(tipoConsole);
 		
 		return erros;
 	}
@@ -30,7 +30,7 @@ public class TipoConsoleServico extends ServicoBase<TipoConsole> {
 
 		List<String> erros = new TipoConsoleAptoParaCadastro().validar(tipoConsole);
 		if(erros.isEmpty())
-			super.adicionar(tipoConsole);
+			_repositorio.adicionar(tipoConsole);
 		
 		return erros;
 	}

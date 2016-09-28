@@ -8,8 +8,6 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import alugagames.core.os.TipoItemOS;
-
 @Entity
 public class OrcamentoItem {
 	@Id

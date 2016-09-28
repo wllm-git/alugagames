@@ -7,7 +7,5 @@ public interface IAluguelRepositorio extends IRepositorioBase<Aluguel>{
 
 	public int getNextCodigo();
 	
-	public Aluguel buscarReservaPorCodigo(int codigo);
-
-	public Aluguel buscarAluguelPorCodigo(int codigo);
+	public Aluguel buscarPorCodigo(int codigo);
 }

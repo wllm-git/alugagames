@@ -61,10 +61,7 @@ public class AluguelServico {
 		List<String> erros = new ReservaAptaParaSerConfirmada().validar(aluguel);
 		if(!erros.isEmpty())
 			return erros;
-		
-		aluguel.setStatus(StatusAluguel.Confirmado);
-		aluguel.setDataConfirmacao(new Date());
-		
+				
 		for(Console c : aluguel.getConsoles()){
 			erros.addAll(_consoleServico.reservar(c));
 		}
@@ -77,15 +74,40 @@ public class AluguelServico {
 			erros.addAll(_equipamentoServico.reservar(e));
 		}
 		
-		if(erros.isEmpty())
+		
+		if(erros.isEmpty()){
+			aluguel.setStatus(StatusAluguel.Confirmado);
+			aluguel.setDataAbertura(new Date());
+			
 			_repositorio.alterar(aluguel);
+		}
 		
 		return erros;
 	}
 	
 	public List<String> confirmarAluguel(Aluguel aluguel){
-		List<String> erros = new AluguelAptoParaSerConfirmado().validar(aluguel);
-		erros = new AluguelAptoParaSerConfirmado().validar(aluguel);
+		List<String> erros = new AluguelAptoParaSerConfirmado(_repositorio).validar(aluguel);
+		
+		if(!erros.isEmpty())
+			return erros;
+		
+		for(Console c : aluguel.getConsoles()){
+			erros.addAll(_consoleServico.alugar(c));
+		}
+		
+		for(Midia m : aluguel.getMidias()){
+			erros.addAll(_midiaServico.alugar(m));
+		}
+				
+		for(Equipamento e : aluguel.getEquipamentos()){
+			erros.addAll(_equipamentoServico.alugar(e));
+		}
+		
+		aluguel.setStatus(StatusAluguel.Confirmado);
+		aluguel.setDataConfirmacao(new Date());
+		
+		if(erros.isEmpty())
+			_repositorio.alterar(aluguel);
 		
 		return erros;
 	}
@@ -97,17 +119,55 @@ public class AluguelServico {
 	}
 	
 	public List<String> cancelar(Aluguel aluguel){
-		List<String> erros = new AluguelAptoParaSerCancelado().validar(aluguel);
+		List<String> erros = new AluguelAptoParaSerCancelado(_repositorio).validar(aluguel);
+		
+		if(!erros.isEmpty())
+			return erros;
+		
+		for(Console c : aluguel.getConsoles()){
+			_consoleServico.liberar(c);
+		}
+		
+		for(Midia m : aluguel.getMidias()){
+			_midiaServico.liberar(m);
+		}
+				
+		for(Equipamento e : aluguel.getEquipamentos()){
+			_equipamentoServico.liberar(e);
+		}
+		
+		aluguel.setStatus(StatusAluguel.Cancelado);
+		aluguel.setDataFechamento(new Date());
+		
+		_repositorio.alterar(aluguel);
 		
 		return erros;
 	}
 	
 	public Aluguel buscarReservaPorCodigo(int codigo){
-		return _repositorio.buscarReservaPorCodigo(codigo);
+		Aluguel aluguel = _repositorio.buscarPorCodigo(codigo); 
+		
+		if(aluguel != null){
+			if(!aluguel.isAluguel())
+				return aluguel;
+			
+			aluguel = null;
+		}
+		
+		return aluguel;
 	}
 	
 	public Aluguel buscarAluguelPorCodigo(int codigo){
-		return _repositorio.buscarAluguelPorCodigo(codigo);
+		Aluguel aluguel = _repositorio.buscarPorCodigo(codigo); 
+		
+		if(aluguel != null){
+			if(aluguel.isAluguel())
+				return aluguel;
+			
+			aluguel = null;
+		}
+		
+		return aluguel;
 	}
 	
 	public List<String> adicionarConsoles(Aluguel aluguel, List<Console> consoles){

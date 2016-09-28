@@ -15,7 +15,6 @@ import javax.persistence.OneToOne;
 
 import alugagames.core.jogos.Jogo;
 import alugagames.core.shared.Produto;
-import alugagames.core.shared.StatusProduto;
 import alugagames.core.tiposconsole.TipoConsole;
 
 @Entity

@@ -153,5 +153,10 @@ public class Aluguel {
 	public void setStatus(StatusAluguel status) {
 		this.status = status;
 	}
+
+	public boolean isAluguel() {
+		return (status != StatusAluguel.Aberto && status != StatusAluguel.Reservado && status != StatusAluguel.Cancelado)
+				|| (status == StatusAluguel.Cancelado && dataConfirmacao != null);
+	}
 	
 }

@@ -1,8 +1,10 @@
 package alugagames.core.midias;
 
+import java.util.Collection;
 import java.util.List;
 
 import alugagames.core.midias.repositorio.IMidiaRepositorio;
+import alugagames.core.midias.validacoes.MidiaAptaParaAlugar;
 import alugagames.core.midias.validacoes.MidiaAptaParaCadastro;
 import alugagames.core.midias.validacoes.MidiaAptaParaReserva;
 import alugagames.core.shared.ServicoBase;
@@ -38,6 +40,21 @@ public class MidiaServico extends ServicoBase<Midia> {
 
 	public List<String> reservar(Midia midia) {
 		List<String> erros = new MidiaAptaParaReserva(_repositorio).validar(midia);
+		if(erros.isEmpty()){
+			midia.setStatus(StatusProduto.Reservado);
+			_repositorio.atualizarStatusMidia(midia);
+		}
+		
+		return erros;
+	}
+
+	public void liberar(Midia midia) {
+		midia.setStatus(StatusProduto.Disponivel);
+		_repositorio.atualizarStatusMidia(midia);
+	}
+
+	public Collection<String> alugar(Midia midia) {
+		List<String> erros = new MidiaAptaParaAlugar(_repositorio).validar(midia);
 		if(erros.isEmpty()){
 			midia.setStatus(StatusProduto.Reservado);
 			_repositorio.atualizarStatusMidia(midia);

@@ -20,7 +20,7 @@ public class JogoServico extends ServicoBase<Jogo> {
 		
 		List<String> erros = new JogoAptoParaCadastro().validar(jogo);
 		if(erros.isEmpty())
-			super.adicionar(jogo);
+			_repositorio.adicionar(jogo);
 		
 		return erros;
 	}
@@ -29,7 +29,7 @@ public class JogoServico extends ServicoBase<Jogo> {
 		
 		List<String> erros = new JogoAptoParaCadastro().validar(jogo);
 		if(erros.isEmpty())
-			super.adicionar(jogo);
+			_repositorio.adicionar(jogo);
 		
 		return erros;
 	}

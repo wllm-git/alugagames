@@ -2,14 +2,12 @@ package alugagames.core.consoles.regras;
 
 import alugagames.core.consoles.Console;
 import alugagames.core.consoles.repositorio.IConsoleRepositorio;
-import alugagames.core.shared.StatusProduto;
 import alugagames.core.shared.validacoesregras.IRegra;
 
-public class ConsolePrecisaEstarDisponivel implements IRegra<Console>{
-
+public class ConsolePrecisaExistir implements IRegra<Console>{
 	private IConsoleRepositorio _repositorio;
 	
-	public ConsolePrecisaEstarDisponivel(IConsoleRepositorio repositorio){
+	public ConsolePrecisaExistir(IConsoleRepositorio repositorio){
 		_repositorio = repositorio;
 	}
 	
@@ -17,11 +15,8 @@ public class ConsolePrecisaEstarDisponivel implements IRegra<Console>{
 	public String validar(Console obj) {
 		Console c = _repositorio.buscarPorID(obj.getId());
 		if(c == null)
-			return "não foi possível verificar a disponibilidade do console "+ obj.getNumeroSerie() +".";
-		else if(!c.getStatus().equals(StatusProduto.Disponivel))
-			return "console "+ c.getNumeroSerie() +" não está disponível.";
+			return "console "+ obj.getNumeroSerie() +" não está cadastrado no sistema.";
 		
 		return null;
 	}
-
 }
