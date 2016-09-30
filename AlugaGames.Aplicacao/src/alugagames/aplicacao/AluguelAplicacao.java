@@ -4,16 +4,20 @@ import java.util.List;
 
 import alugagames.core.alugueis.Aluguel;
 import alugagames.core.alugueis.AluguelServico;
+import alugagames.core.atendentes.AtendenteServico;
 import alugagames.core.clientes.Cliente;
 import alugagames.core.clientes.ClienteServico;
 import alugagames.core.consoles.ConsoleServico;
 import alugagames.core.equipamentos.EquipamentoServico;
 import alugagames.core.midias.MidiaServico;
+import alugagames.core.os.OrdemServicoServico;
 import alugagames.repositorio.AluguelRepositorio;
+import alugagames.repositorio.AtendenteRepositorio;
 import alugagames.repositorio.ClienteRepositorio;
 import alugagames.repositorio.ConsoleRepositorio;
 import alugagames.repositorio.EquipamentoRepositorio;
 import alugagames.repositorio.MidiaRepositorio;
+import alugagames.repositorio.OrdemServicoRepositorio;
 
 public class AluguelAplicacao extends AplicacaoBase{
 	private AluguelServico _aluguelServico;
@@ -23,7 +27,12 @@ public class AluguelAplicacao extends AplicacaoBase{
 		ConsoleServico consoleServico = new ConsoleServico(new ConsoleRepositorio());
 		MidiaServico midiaServico = new MidiaServico(new MidiaRepositorio());
 		EquipamentoServico equipamentoServico = new EquipamentoServico(new EquipamentoRepositorio());
-		_aluguelServico = new AluguelServico(new AluguelRepositorio(), clienteServico, consoleServico, midiaServico, equipamentoServico);
+		AtendenteServico atendenteServico = new AtendenteServico(new AtendenteRepositorio());
+		OrdemServicoServico ordemServicoServico = new OrdemServicoServico(new OrdemServicoRepositorio()); 
+		
+		_aluguelServico = new AluguelServico(new AluguelRepositorio(), 
+													clienteServico, atendenteServico, consoleServico, 
+													midiaServico, equipamentoServico, ordemServicoServico);
 	}
 	
 	public Aluguel abrirReserva(Cliente cliente){
@@ -44,6 +53,34 @@ public class AluguelAplicacao extends AplicacaoBase{
 		beginTransaction();
 		
 		List<String> erros = _aluguelServico.confirmarReserva(reserva);
+		if(!erros.isEmpty()){
+			rollback();
+			return erros;
+		}
+		
+		commit();
+		
+		return erros;
+	}
+	
+	public List<String> confirmarAluguel(Aluguel aluguel){
+		beginTransaction();
+		
+		List<String> erros = _aluguelServico.confirmarAluguel(aluguel);
+		if(!erros.isEmpty()){
+			rollback();
+			return erros;
+		}
+		
+		commit();
+		
+		return erros;
+	}
+	
+	public List<String> finalizarAluguel(Aluguel aluguel){
+		beginTransaction();
+		
+		List<String> erros = _aluguelServico.finalizarAluguel(aluguel);
 		if(!erros.isEmpty()){
 			rollback();
 			return erros;

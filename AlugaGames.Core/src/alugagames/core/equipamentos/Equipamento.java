@@ -15,6 +15,7 @@ public class Equipamento extends Produto {
 	@Id
 	@Column(length=16)
 	private UUID id;
+	private TipoEquipamento tipoEquipamento;
 	
 	public Equipamento(){
 		id = UUID.randomUUID();
@@ -26,6 +27,14 @@ public class Equipamento extends Produto {
 
 	public void setId(UUID id) {
 		this.id = id;
+	}
+
+	public TipoEquipamento getTipoEquipamento() {
+		return tipoEquipamento;
+	}
+
+	public void setTipoEquipamento(TipoEquipamento tipoEquipamento) {
+		this.tipoEquipamento = tipoEquipamento;
 	}
 
 	@Override

@@ -36,7 +36,7 @@ public class Aluguel {
 	
 	private StatusAluguel status;
 	
-	private Date dataAbertura;
+	private Date dataReserva;
 	private Date dataConfirmacao;
 	private Date dataFechamento;
 	
@@ -114,12 +114,12 @@ public class Aluguel {
 		this.equipamentos = equipamentos;
 	}
 
-	public Date getDataAbertura() {
-		return dataAbertura;
+	public Date getDataReserva() {
+		return dataReserva;
 	}
 
-	public void setDataAbertura(Date dataAbertura) {
-		this.dataAbertura = dataAbertura;
+	public void setDataReserva(Date dataReserva) {
+		this.dataReserva = dataReserva;
 	}
 
 	public Date getDataConfirmacao() {

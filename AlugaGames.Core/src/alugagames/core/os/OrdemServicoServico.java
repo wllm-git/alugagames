@@ -2,6 +2,7 @@ package alugagames.core.os;
 
 import java.util.List;
 
+import alugagames.core.atendentes.Atendente;
 import alugagames.core.clientes.Cliente;
 import alugagames.core.orcamentos.Orcamento;
 import alugagames.core.os.repositorio.IOrdemServicoRepositorio;
@@ -13,11 +14,12 @@ public class OrdemServicoServico {
 		_repositorio = repositorio;
 	}
 	
-	public List<String> abrirOSInterna(List<OrdemServicoItem> itens){
+	public List<String> abrirOSInterna(Atendente atendente, List<OrdemServicoItem> itens){
 		return null;
 	}
 	
-	public List<String> abrirOS(Cliente cliente, List<OrdemServicoItem> itens){
+	public List<String> abrirOS(Atendente atendente, Cliente cliente, List<OrdemServicoItem> itens){
+		//TODO implementar abrir os automática
 		return null;
 	}
 	

@@ -1,5 +1,6 @@
 package alugagames.core.alugueis;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import alugagames.core.alugueis.validacoes.AluguelAptoParaSerConfirmado;
 import alugagames.core.alugueis.validacoes.AluguelAptoParaSerFinalizado;
 import alugagames.core.alugueis.validacoes.ReservaAptaParaSerConfirmada;
 import alugagames.core.alugueis.validacoes.ReservaAptaParaSerIniciada;
+import alugagames.core.atendentes.AtendenteServico;
 import alugagames.core.clientes.Cliente;
 import alugagames.core.clientes.ClienteServico;
 import alugagames.core.consoles.Console;
@@ -17,6 +19,9 @@ import alugagames.core.equipamentos.Equipamento;
 import alugagames.core.equipamentos.EquipamentoServico;
 import alugagames.core.midias.Midia;
 import alugagames.core.midias.MidiaServico;
+import alugagames.core.os.OrdemServicoItem;
+import alugagames.core.os.OrdemServicoServico;
+import alugagames.core.shared.StatusProduto;
 
 public class AluguelServico {
 	private IAluguelRepositorio _repositorio;
@@ -24,14 +29,20 @@ public class AluguelServico {
 	private ConsoleServico _consoleServico;
 	private MidiaServico _midiaServico;
 	private EquipamentoServico _equipamentoServico;
+	private AtendenteServico _atendenteServico;
+	private OrdemServicoServico _ordemServicoServico;
 	
 	public AluguelServico(IAluguelRepositorio repositorio, ClienteServico clienteServico, 
-			ConsoleServico consoleServico, MidiaServico midiaServico, EquipamentoServico acessorioServico){
+							AtendenteServico atendenteServico, ConsoleServico consoleServico, 
+							MidiaServico midiaServico, EquipamentoServico acessorioServico,
+							OrdemServicoServico ordemServicoServico){
 		_repositorio = repositorio;
 		_clienteServico = clienteServico;
 		_consoleServico = consoleServico;
 		_midiaServico = midiaServico;
 		_equipamentoServico = acessorioServico;
+		_atendenteServico = atendenteServico;
+		_ordemServicoServico = ordemServicoServico;
 	}
 	
 	public Aluguel abrirReserva(Cliente cliente){
@@ -39,7 +50,7 @@ public class AluguelServico {
 		Aluguel aluguel = new Aluguel();
 		aluguel.setCodigo(_repositorio.getNextCodigo());
 		aluguel.setCliente(cliente);
-		aluguel.setDataAbertura(new Date());
+		
 		
 		List<String> erros = new ReservaAptaParaSerIniciada(_clienteServico).validar(aluguel); 
 		
@@ -76,8 +87,8 @@ public class AluguelServico {
 		
 		
 		if(erros.isEmpty()){
-			aluguel.setStatus(StatusAluguel.Confirmado);
-			aluguel.setDataAbertura(new Date());
+			aluguel.setStatus(StatusAluguel.Reservado);
+			aluguel.setDataReserva(new Date());
 			
 			_repositorio.alterar(aluguel);
 		}
@@ -86,7 +97,7 @@ public class AluguelServico {
 	}
 	
 	public List<String> confirmarAluguel(Aluguel aluguel){
-		List<String> erros = new AluguelAptoParaSerConfirmado(_repositorio).validar(aluguel);
+		List<String> erros = new AluguelAptoParaSerConfirmado(_repositorio, _atendenteServico).validar(aluguel);
 		
 		if(!erros.isEmpty())
 			return erros;
@@ -113,7 +124,59 @@ public class AluguelServico {
 	}
 	
 	public List<String> finalizarAluguel(Aluguel aluguel){
-		List<String> erros = new AluguelAptoParaSerFinalizado().validar(aluguel);
+		List<String> erros = new AluguelAptoParaSerFinalizado(_repositorio).validar(aluguel);
+		
+		if(!erros.isEmpty())
+			return erros;
+		
+		List<OrdemServicoItem> osItens = new ArrayList<OrdemServicoItem>();
+		OrdemServicoItem item;
+		
+		for(Console c : aluguel.getConsoles()){
+			if(!c.getStatus().equals(StatusProduto.Avariado))
+				_consoleServico.liberar(c);
+			else{
+				item = new OrdemServicoItem();
+				item.setDescricao(c.getTipoConsole().getNome());
+				item.setNumeroSerie(c.getNumeroSerie());
+				osItens.add(item);
+			}
+		}
+		
+		for(Midia m : aluguel.getMidias()){
+			if(!m.getStatus().equals(StatusProduto.Avariado))
+				_midiaServico.liberar(m);
+			else{
+				item = new OrdemServicoItem();
+				item.setDescricao(m.getTipoConsole().getNome());
+				item.setNumeroSerie(m.getNumeroSerie());
+				osItens.add(item);
+			}
+		}
+				
+		for(Equipamento e : aluguel.getEquipamentos()){
+			if(!e.getStatus().equals(StatusProduto.Avariado))
+				_equipamentoServico.liberar(e);
+			else{
+				item = new OrdemServicoItem();
+				item.setDescricao(e.getTipoEquipamento().toString());
+				item.setNumeroSerie(e.getNumeroSerie());
+				osItens.add(item);
+			}
+		}
+		
+		if(osItens.isEmpty()){
+			erros = _ordemServicoServico.abrirOS(aluguel.getAtendente(), aluguel.getCliente(), osItens);
+			
+			if(!erros.isEmpty())
+				return erros;
+		}
+		
+		
+		aluguel.setStatus(StatusAluguel.Fechado);
+		aluguel.setDataFechamento(new Date());
+		
+		_repositorio.alterar(aluguel);
 		
 		return erros;
 	}

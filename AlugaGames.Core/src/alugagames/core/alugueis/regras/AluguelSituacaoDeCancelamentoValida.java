@@ -16,11 +16,13 @@ public class AluguelSituacaoDeCancelamentoValida implements IRegra<Aluguel> {
 	public String validar(Aluguel obj) {
 		Aluguel a = _repositorio.buscarPorID(obj.getId());
 		if(a == null)
-			return "não foi possível verificar a situação do alguel " + obj.getCodigo() + ".";
+			return "não foi possível verificar a situação do aluguel " + obj.getCodigo() + ".";
 		else if(!a.isAluguel())
 			return null;
 		else if(a.getStatus().equals(StatusAluguel.Cancelado))
 			return "aluguel " + a.getCodigo() + " já está cancelado.";
+		else if(a.getStatus().equals(StatusAluguel.Confirmado))
+			return "aluguel " + a.getCodigo() + " está Confirmado e não pode ser cancelado.";
 		else if(a.getStatus().equals(StatusAluguel.Fechado))
 			return "aluguel " + a.getCodigo() + " está Fechado e não pode ser mais cancelado.";
 		
