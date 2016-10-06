@@ -165,8 +165,8 @@ public class AluguelServico {
 			}
 		}
 		
-		if(osItens.isEmpty()){
-			erros = _ordemServicoServico.abrirOS(aluguel.getAtendente(), aluguel.getCliente(), osItens);
+		if(!osItens.isEmpty()){
+			erros = _ordemServicoServico.abrirOS(aluguel, osItens);
 			
 			if(!erros.isEmpty())
 				return erros;

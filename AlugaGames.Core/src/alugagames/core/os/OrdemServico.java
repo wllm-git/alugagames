@@ -1,5 +1,6 @@
 package alugagames.core.os;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -46,6 +47,7 @@ public class OrdemServico {
 	
 	public OrdemServico(){
 		id = UUID.randomUUID();
+		ordemServicoItens = new ArrayList<>();
 	}
 
 	public UUID getId() {

@@ -1,9 +1,11 @@
 package alugagames.core.os;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import alugagames.core.alugueis.Aluguel;
 import alugagames.core.atendentes.Atendente;
-import alugagames.core.clientes.Cliente;
 import alugagames.core.orcamentos.Orcamento;
 import alugagames.core.os.repositorio.IOrdemServicoRepositorio;
 
@@ -18,8 +20,34 @@ public class OrdemServicoServico {
 		return null;
 	}
 	
-	public List<String> abrirOS(Atendente atendente, Cliente cliente, List<OrdemServicoItem> itens){
-		//TODO implementar abrir os automática
+	public List<String> abrirOS(Aluguel aluguel, List<OrdemServicoItem> itens){
+		
+		OrdemServico os = new OrdemServico();
+		os.setAtendente(aluguel.getAtendente());
+		os.setCliente(aluguel.getCliente());
+		os.setDataAbertura(new Date());
+		os.setInterna(true);
+		os.setStatus(StatusOS.Aberta);
+		os.setDescricao("Aluguel " + aluguel.getCodigo());
+		os.setValor(0);
+		os.setCodigo(_repositorio.getNextCodigo());
+		
+		for (OrdemServicoItem item : itens) {
+			item.setStatusOSItem(StatusOSItem.Recebido);
+			item.setOrdemServico(os);
+			item.setValor(0);
+		}
+		
+		os.setOrdemServicoItens(itens);
+		try {
+			_repositorio.adicionar(os);
+		} catch (Exception e) {
+			List<String> erro = new ArrayList<>();
+			erro.add("Erro ao gerar OS: " + e.getMessage());
+			return erro;
+		}
+		
+		
 		return null;
 	}
 	
