@@ -6,6 +6,7 @@ import java.util.UUID;
 import alugagames.core.funcionarios.repositorio.IFuncionarioRepositorio;
 import alugagames.core.funcionarios.validacoes.FuncionarioAptoParaAlteracao;
 import alugagames.core.funcionarios.validacoes.FuncionarioAptoParaCadastro;
+import alugagames.core.funcionarios.validacoes.FuncionarioAptoParaSerInativado;
 
 public class FuncionarioServico {
 	private IFuncionarioRepositorio _repositorio;
@@ -20,7 +21,7 @@ public class FuncionarioServico {
 	
 	public List<String> adicionarFuncionario(Funcionario funcionario) {
 		
-		List<String> erros = new FuncionarioAptoParaCadastro().validar(funcionario);
+		List<String> erros = new FuncionarioAptoParaCadastro(_repositorio).validar(funcionario);
 		if(erros.isEmpty())
 			_repositorio.adicionar(funcionario);
 		
@@ -29,9 +30,21 @@ public class FuncionarioServico {
 
 	public List<String> atualizarFuncionario(Funcionario funcionario) {
 
-		List<String> erros = new FuncionarioAptoParaAlteracao().validar(funcionario);
+		List<String> erros = new FuncionarioAptoParaAlteracao(_repositorio).validar(funcionario);
 		if(erros.isEmpty())
-			_repositorio.adicionar(funcionario);
+			_repositorio.alterar(funcionario);
+		
+		return erros;
+	}
+	
+	public List<String> inativarFuncionario(Funcionario funcionario, UUID idFuncionarioLogado){
+		
+		List<String> erros = new FuncionarioAptoParaSerInativado(_repositorio, idFuncionarioLogado).validar(funcionario);
+		if(!erros.isEmpty())
+			return erros;
+		
+		funcionario.setAtivo(false);
+		_repositorio.alterar(funcionario);
 		
 		return erros;
 	}

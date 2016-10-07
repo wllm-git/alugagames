@@ -4,8 +4,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
+import alugagames.core.alugueis.StatusAluguel;
 import alugagames.core.funcionarios.Funcionario;
 import alugagames.core.funcionarios.repositorio.IFuncionarioRepositorio;
+import alugagames.core.orcamentos.StatusOrcamento;
+import alugagames.core.os.StatusOS;
 import alugagames.repositorio.config.ConnectionManager;
 
 public class FuncionarioRepositorio extends RepositorioBase<Funcionario> implements IFuncionarioRepositorio {
@@ -28,5 +31,43 @@ public class FuncionarioRepositorio extends RepositorioBase<Funcionario> impleme
 		}
 	}
 
-	
+	@Override
+	public int getQtdDeAlugueisEmAndamento(Funcionario funcionario) {
+		EntityManager em = ConnectionManager.getEntityManager();
+		Query q = em.createQuery("Select COUNT(*) From Aluguel a where a.status = :status and a.atendente.id = :id");
+		
+		q.setParameter("status", StatusAluguel.Confirmado);
+		q.setParameter("id", funcionario.getId());
+		
+		return Math.toIntExact((long)q.getSingleResult());
+	}
+
+	@Override
+	public int getQtdDeOrcamentosEmAndamento(Funcionario funcionario) {
+		EntityManager em = ConnectionManager.getEntityManager();
+		Query q = em.createQuery("Select COUNT(*) From Orcamento o where o.status in (:recebido, :avaliando) and "
+				+ " (o.atendente.id = :id_atedente or o.tecnico.id = :id_tecnico)");
+		
+		q.setParameter("recebido", StatusOrcamento.Recebido);
+		q.setParameter("avaliando", StatusOrcamento.Avaliando);
+		q.setParameter("id_atedente", funcionario.getId());
+		q.setParameter("id_tecnico", funcionario.getId());
+		
+		return Math.toIntExact((long)q.getSingleResult());
+	}
+
+	@Override
+	public int getQtdDeOrdemServicoEmAndamento(Funcionario funcionario) {
+		EntityManager em = ConnectionManager.getEntityManager();
+		Query q = em.createQuery("Select COUNT(*) From OrdemServico os where os.status != :fechada) and "
+				+ " (os.atendente.id = :id_atedente or os.tecnico.id = :id_tecnico)");
+		
+		q.setParameter("fechada", StatusOS.Fechada);
+		q.setParameter("id_atedente", funcionario.getId());
+		q.setParameter("id_tecnico", funcionario.getId());
+		
+		return Math.toIntExact((long)q.getSingleResult());
+	}
+
 }
+

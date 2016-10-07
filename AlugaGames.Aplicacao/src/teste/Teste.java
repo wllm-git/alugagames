@@ -1,8 +1,8 @@
 package teste;
 import java.util.UUID;
 
-import alugagames.core.clientes.Cliente;
-import alugagames.repositorio.ClienteRepositorio;
+import alugagames.core.funcionarios.Funcionario;
+import alugagames.repositorio.FuncionarioRepositorio;
 
 public class Teste {
 
@@ -10,25 +10,14 @@ public class Teste {
 		
 		try {
 
+			UUID id = UUID.fromString("42aeaf89-44ba-44fc-a778-f2f97f474485");
+			Funcionario f = new Funcionario();
+			f.setId(id);
+			int qtdAluguelEmAndamento = new FuncionarioRepositorio().getQtdDeAlugueisEmAndamento(f);
 			
-			
-			if(true){
-				int i = 9;
-			}
-			
-			String teste = UUID.randomUUID().toString();
-			
-			UUID id = UUID.fromString("08771cfb-7921-4005-9b81-3fbb92224210");
-			
-			Cliente c = new  ClienteRepositorio().buscarPorID(id);
-			
-			if(true){
-				int i = 9;
-			}
+			System.out.println(qtdAluguelEmAndamento);
 		} catch (Exception e) {
-			if(true){
-				int ip = 9;
-			}
+			System.out.println(e.getMessage());
 		}
 		
 		

@@ -1,6 +1,7 @@
 package alugagames.aplicacao;
 
 import java.util.List;
+import java.util.UUID;
 
 import alugagames.core.funcionarios.Funcionario;
 import alugagames.core.funcionarios.FuncionarioServico;
@@ -33,6 +34,25 @@ private FuncionarioServico _funcionarioServico;
 		beginTransaction();
 		
 		List<String> erros = _funcionarioServico.atualizarFuncionario(funcionario);
+		if(!erros.isEmpty()){
+			rollback();
+			return erros;
+		}
+		
+		commit();
+		
+		return erros;
+	}
+	
+	public List<String> inativar(Funcionario funcionario){
+		
+		beginTransaction();
+		
+		UUID id = null;
+		if(this.getFuncionarioLogado() != null)
+			id = this.getFuncionarioLogado().getId();
+		
+		List<String> erros = _funcionarioServico.inativarFuncionario(funcionario, id);
 		if(!erros.isEmpty()){
 			rollback();
 			return erros;
