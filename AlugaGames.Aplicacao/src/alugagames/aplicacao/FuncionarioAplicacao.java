@@ -63,6 +63,21 @@ private FuncionarioServico _funcionarioServico;
 		return erros;
 	}
 	
+	public List<String> ativar(Funcionario funcionario){
+		
+		beginTransaction();
+		
+		List<String> erros = _funcionarioServico.ativarFuncionario(funcionario);
+		if(!erros.isEmpty()){
+			rollback();
+			return erros;
+		}
+		
+		commit();
+		
+		return erros;
+	}
+	
 	public Funcionario logar(String email, String senha) throws Exception{
 		if(this.getFuncionarioLogado() != null)
 			throw new Exception("O funcionário " + this.getFuncionarioLogado().getNome() + " já está logado.");

@@ -6,7 +6,9 @@ import java.util.UUID;
 import alugagames.core.funcionarios.repositorio.IFuncionarioRepositorio;
 import alugagames.core.funcionarios.validacoes.FuncionarioAptoParaAlteracao;
 import alugagames.core.funcionarios.validacoes.FuncionarioAptoParaCadastro;
+import alugagames.core.funcionarios.validacoes.FuncionarioAptoParaSerAtivado;
 import alugagames.core.funcionarios.validacoes.FuncionarioAptoParaSerInativado;
+import alugagames.core.shared.CriptografiaDES;
 
 public class FuncionarioServico {
 	private IFuncionarioRepositorio _repositorio;
@@ -22,8 +24,11 @@ public class FuncionarioServico {
 	public List<String> adicionarFuncionario(Funcionario funcionario) {
 		
 		List<String> erros = new FuncionarioAptoParaCadastro(_repositorio).validar(funcionario);
-		if(erros.isEmpty())
+		if(erros.isEmpty()){
+			funcionario.setSenha(CriptografiaDES.encriptar(funcionario.getSenha()));
 			_repositorio.adicionar(funcionario);
+		}
+			
 		
 		return erros;
 	}
@@ -49,13 +54,32 @@ public class FuncionarioServico {
 		return erros;
 	}
 	
+	public List<String> ativarFuncionario(Funcionario funcionario){
+		
+		List<String> erros = new FuncionarioAptoParaSerAtivado(_repositorio).validar(funcionario);
+		if(!erros.isEmpty())
+			return erros;
+		
+		funcionario.setAtivo(true);
+		_repositorio.alterar(funcionario);
+		
+		return erros;
+	}
+	
 	public Funcionario logar(String email, String senha) throws Exception {
 		Funcionario funcionario = _repositorio.buscarPorEmail(email);
 		
-		if(funcionario == null || !funcionario.getSenha().equals(senha))
+		if(funcionario == null)
 			throw new Exception("e-mail e/ou senha inválidos.");
-		else if(!funcionario.isAtivo())
-			throw new Exception("funcionário " + funcionario.getNome() + " está inativo.");
+		else{
+			String senhaD = CriptografiaDES.decriptar(funcionario.getSenha());
+			
+			if(!senhaD.equals(senha))
+				throw new Exception("e-mail e/ou senha inválidos.");
+			else if(!funcionario.isAtivo())
+				throw new Exception("funcionário " + funcionario.getNome() + " está inativo.");
+		}
+		
 		
 		return funcionario;
 	}

@@ -32,6 +32,20 @@ public class FuncionarioRepositorio extends RepositorioBase<Funcionario> impleme
 	}
 
 	@Override
+	public Funcionario buscarPorCpf(String cpf) {
+		EntityManager em = ConnectionManager.getEntityManager();
+		
+		Query q = em.createQuery("Select f from Funcionario f where f.cpf = :cpf", Funcionario.class);
+		q.setParameter("cpf", cpf);
+		
+		try{
+			return (Funcionario)q.getSingleResult();
+		}catch (NoResultException e) {
+			return null;
+		}
+	}
+	
+	@Override
 	public int getQtdDeAlugueisEmAndamento(Funcionario funcionario) {
 		EntityManager em = ConnectionManager.getEntityManager();
 		Query q = em.createQuery("Select COUNT(*) From Aluguel a where a.status = :status and a.atendente.id = :id");
