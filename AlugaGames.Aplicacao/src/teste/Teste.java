@@ -1,66 +1,38 @@
 package teste;
-import java.util.Date;
+import java.util.UUID;
 
-import alugagames.core.atendentes.Atendente;
 import alugagames.core.clientes.Cliente;
-import alugagames.core.consoles.Console;
-import alugagames.core.jogos.Jogo;
-import alugagames.core.tiposconsole.TipoConsole;
-import alugagames.repositorio.ConsoleRepositorio;
-import alugagames.repositorio.JogoRepositorio;
-import alugagames.repositorio.TipoConsoleRepositorio;
-import alugagames.repositorio.config.ConnectionManager;
+import alugagames.repositorio.ClienteRepositorio;
 
 public class Teste {
 
 	public static void main(String[] args) {
 		
-		Cliente c1 = new Cliente();
-		Atendente a1 = new Atendente();
+		try {
+
+			
+			
+			if(true){
+				int i = 9;
+			}
+			
+			String teste = UUID.randomUUID().toString();
+			
+			UUID id = UUID.fromString("08771cfb-7921-4005-9b81-3fbb92224210");
+			
+			Cliente c = new  ClienteRepositorio().buscarPorID(id);
+			
+			if(true){
+				int i = 9;
+			}
+		} catch (Exception e) {
+			if(true){
+				int ip = 9;
+			}
+		}
 		
-		TipoConsole tc1 = new TipoConsole();
-		tc1.setNome("ps4");
-		
-		Jogo j1 = new Jogo();
-		j1.setAnoLancamento(new Date());
-		j1.setNome("TM4");
-		
-		Jogo j2 = new Jogo();
-		j2.setAnoLancamento(new Date());
-		j2.setNome("TH2");
-		
-		Console con1 = new Console();
-		con1.setAno(new Date());
-		con1.setAtivo(true);
-		con1.setNumeroSerie("321321456");
-		con1.setPreco(25.0f);
-		con1.setTipoConsole(tc1);
-		con1.setVoltagem(110);
-		con1.getJogos().add(j1);
-		con1.getJogos().add(j2);
 		
 		
-		ConnectionManager.beginTransaction();
-		
-		//EntityManager em = ConnectionManager.getEntityManager();
-		
-		new TipoConsoleRepositorio().adicionar(tc1);
-		new JogoRepositorio().adicionar(j1);
-		new JogoRepositorio().adicionar(j2);
-		new ConsoleRepositorio().adicionar(con1);
-				
-		//em.persist(tc1);
-		//em.persist(j1);
-		//em.persist(j2);
-		//em.persist(con1);
-		
-		ConnectionManager.commit();
-		ConnectionManager.dispose();
-		
-		//List<Jogo> jogos = new JogoRepositorio().buscarTodos();
-		
-		//if(jogos.isEmpty())
-		//	return;
 	}
 
 }

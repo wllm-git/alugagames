@@ -16,9 +16,8 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
-import alugagames.core.atendentes.Atendente;
 import alugagames.core.clientes.Cliente;
-import alugagames.core.tecnicos.Tecnico;
+import alugagames.core.funcionarios.Funcionario;
 
 @Entity
 public class Orcamento {
@@ -31,10 +30,10 @@ public class Orcamento {
 	private Cliente cliente;
 	@ManyToOne
 	@JoinColumn(name = "atendente_id")
-	private Atendente atendente;
+	private Funcionario atendente;
 	@ManyToOne
 	@JoinColumn(name = "tecnico_id")
-	private Tecnico tecnico;
+	private Funcionario tecnico;
 	private Date dataAbertura;
 	private Date dataFechamento;
 	private double valor;
@@ -75,19 +74,19 @@ public class Orcamento {
 		this.cliente = cliente;
 	}
 
-	public Atendente getAtendente() {
+	public Funcionario getAtendente() {
 		return atendente;
 	}
 
-	public void setAtendente(Atendente atendente) {
+	public void setAtendente(Funcionario atendente) {
 		this.atendente = atendente;
 	}
 
-	public Tecnico getTecnico() {
+	public Funcionario getTecnico() {
 		return tecnico;
 	}
 
-	public void setTecnico(Tecnico tecnico) {
+	public void setTecnico(Funcionario tecnico) {
 		this.tecnico = tecnico;
 	}
 

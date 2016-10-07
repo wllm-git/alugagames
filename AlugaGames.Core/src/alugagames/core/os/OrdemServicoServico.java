@@ -5,9 +5,10 @@ import java.util.Date;
 import java.util.List;
 
 import alugagames.core.alugueis.Aluguel;
-import alugagames.core.atendentes.Atendente;
+import alugagames.core.funcionarios.Funcionario;
 import alugagames.core.orcamentos.Orcamento;
 import alugagames.core.os.repositorio.IOrdemServicoRepositorio;
+import alugagames.core.os.validacoes.OrdemServicoAptaParaProcessamento;
 
 public class OrdemServicoServico {
 	private IOrdemServicoRepositorio _repositorio;
@@ -16,11 +17,12 @@ public class OrdemServicoServico {
 		_repositorio = repositorio;
 	}
 	
-	public List<String> abrirOSInterna(Atendente atendente, List<OrdemServicoItem> itens){
+	public List<String> abrirOSInterna(Funcionario atendente, List<OrdemServicoItem> itens){
 		return null;
 	}
 	
 	public List<String> abrirOS(Aluguel aluguel, List<OrdemServicoItem> itens){
+		List<String> erros = new ArrayList<>();
 		
 		OrdemServico os = new OrdemServico();
 		os.setAtendente(aluguel.getAtendente());
@@ -42,13 +44,10 @@ public class OrdemServicoServico {
 		try {
 			_repositorio.adicionar(os);
 		} catch (Exception e) {
-			List<String> erro = new ArrayList<>();
-			erro.add("Erro ao gerar OS: " + e.getMessage());
-			return erro;
+			erros.add("Erro ao gerar OS: " + e.getMessage());
 		}
 		
-		
-		return null;
+		return erros;
 	}
 	
 	public List<String> abrirOS(Orcamento orcamento){
@@ -56,7 +55,16 @@ public class OrdemServicoServico {
 	}
 	
 	public List<String> processarOS(OrdemServico ordemServico){
-		return null;
+		List<String> erros = new OrdemServicoAptaParaProcessamento().validar(ordemServico);
+		
+		if(!erros.isEmpty())
+			return erros;
+		
+		ordemServico.setStatus(StatusOS.Processamento);
+		
+		_repositorio.alterar(ordemServico);
+		
+		return erros;
 	}
 	
 	public List<String> finalizarServico(OrdemServico ordemServico){

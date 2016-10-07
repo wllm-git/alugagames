@@ -13,10 +13,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
-import alugagames.core.atendentes.Atendente;
 import alugagames.core.clientes.Cliente;
 import alugagames.core.consoles.Console;
 import alugagames.core.equipamentos.Equipamento;
+import alugagames.core.funcionarios.Funcionario;
 import alugagames.core.midias.Midia;
 
 @Entity
@@ -32,7 +32,7 @@ public class Aluguel {
 	
 	@ManyToOne
 	@JoinColumn(name = "atendente_id")
-	private Atendente atendente;
+	private Funcionario atendente;
 	
 	private StatusAluguel status;
 	
@@ -82,11 +82,11 @@ public class Aluguel {
 		this.cliente = cliente;
 	}
 
-	public Atendente getAtendente() {
+	public Funcionario getAtendente() {
 		return atendente;
 	}
 
-	public void setAtendente(Atendente atendente) {
+	public void setAtendente(Funcionario atendente) {
 		this.atendente = atendente;
 	}
 

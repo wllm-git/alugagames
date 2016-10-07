@@ -4,15 +4,15 @@ import java.util.List;
 
 import alugagames.core.alugueis.Aluguel;
 import alugagames.core.alugueis.AluguelServico;
-import alugagames.core.atendentes.AtendenteServico;
 import alugagames.core.clientes.Cliente;
 import alugagames.core.clientes.ClienteServico;
 import alugagames.core.consoles.ConsoleServico;
 import alugagames.core.equipamentos.EquipamentoServico;
+import alugagames.core.funcionarios.FuncionarioServico;
 import alugagames.core.midias.MidiaServico;
 import alugagames.core.os.OrdemServicoServico;
 import alugagames.repositorio.AluguelRepositorio;
-import alugagames.repositorio.AtendenteRepositorio;
+import alugagames.repositorio.FuncionarioRepositorio;
 import alugagames.repositorio.ClienteRepositorio;
 import alugagames.repositorio.ConsoleRepositorio;
 import alugagames.repositorio.EquipamentoRepositorio;
@@ -27,7 +27,7 @@ public class AluguelAplicacao extends AplicacaoBase{
 		ConsoleServico consoleServico = new ConsoleServico(new ConsoleRepositorio());
 		MidiaServico midiaServico = new MidiaServico(new MidiaRepositorio());
 		EquipamentoServico equipamentoServico = new EquipamentoServico(new EquipamentoRepositorio());
-		AtendenteServico atendenteServico = new AtendenteServico(new AtendenteRepositorio());
+		FuncionarioServico atendenteServico = new FuncionarioServico(new FuncionarioRepositorio());
 		OrdemServicoServico ordemServicoServico = new OrdemServicoServico(new OrdemServicoRepositorio()); 
 		
 		_aluguelServico = new AluguelServico(new AluguelRepositorio(), 

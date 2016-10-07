@@ -10,13 +10,13 @@ import alugagames.core.alugueis.validacoes.AluguelAptoParaSerConfirmado;
 import alugagames.core.alugueis.validacoes.AluguelAptoParaSerFinalizado;
 import alugagames.core.alugueis.validacoes.ReservaAptaParaSerConfirmada;
 import alugagames.core.alugueis.validacoes.ReservaAptaParaSerIniciada;
-import alugagames.core.atendentes.AtendenteServico;
 import alugagames.core.clientes.Cliente;
 import alugagames.core.clientes.ClienteServico;
 import alugagames.core.consoles.Console;
 import alugagames.core.consoles.ConsoleServico;
 import alugagames.core.equipamentos.Equipamento;
 import alugagames.core.equipamentos.EquipamentoServico;
+import alugagames.core.funcionarios.FuncionarioServico;
 import alugagames.core.midias.Midia;
 import alugagames.core.midias.MidiaServico;
 import alugagames.core.os.OrdemServicoItem;
@@ -29,11 +29,11 @@ public class AluguelServico {
 	private ConsoleServico _consoleServico;
 	private MidiaServico _midiaServico;
 	private EquipamentoServico _equipamentoServico;
-	private AtendenteServico _atendenteServico;
+	private FuncionarioServico _atendenteServico;
 	private OrdemServicoServico _ordemServicoServico;
 	
 	public AluguelServico(IAluguelRepositorio repositorio, ClienteServico clienteServico, 
-							AtendenteServico atendenteServico, ConsoleServico consoleServico, 
+							FuncionarioServico atendenteServico, ConsoleServico consoleServico, 
 							MidiaServico midiaServico, EquipamentoServico acessorioServico,
 							OrdemServicoServico ordemServicoServico){
 		_repositorio = repositorio;
