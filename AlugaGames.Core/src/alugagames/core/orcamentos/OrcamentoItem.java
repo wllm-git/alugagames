@@ -16,7 +16,6 @@ public class OrcamentoItem {
 	private String numeroSerie;
 	private String descricao;
 	private double valor;
-	//private TipoItemOS tipo;
 	private boolean temConserto;
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Orcamento orcamento;
@@ -56,14 +55,6 @@ public class OrcamentoItem {
 	public void setValor(double valor) {
 		this.valor = valor;
 	}
-
-//	public TipoItemOS getTipo() {
-//		return tipo;
-//	}
-//
-//	public void setTipo(TipoItemOS tipo) {
-//		this.tipo = tipo;
-//	}
 
 	public boolean isTemConserto() {
 		return temConserto;

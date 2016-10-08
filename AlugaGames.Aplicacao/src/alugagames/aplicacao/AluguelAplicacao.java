@@ -53,12 +53,10 @@ public class AluguelAplicacao extends AplicacaoBase{
 		beginTransaction();
 		
 		List<String> erros = _aluguelServico.confirmarReserva(reserva);
-		if(!erros.isEmpty()){
+		if(!erros.isEmpty())
 			rollback();
-			return erros;
-		}
-		
-		commit();
+		else
+			commit();
 		
 		return erros;
 	}
@@ -67,12 +65,10 @@ public class AluguelAplicacao extends AplicacaoBase{
 		beginTransaction();
 		
 		List<String> erros = _aluguelServico.confirmarAluguel(aluguel);
-		if(!erros.isEmpty()){
+		if(!erros.isEmpty())
 			rollback();
-			return erros;
-		}
-		
-		commit();
+		else
+			commit();
 		
 		return erros;
 	}
@@ -81,12 +77,10 @@ public class AluguelAplicacao extends AplicacaoBase{
 		beginTransaction();
 		
 		List<String> erros = _aluguelServico.finalizarAluguel(aluguel);
-		if(!erros.isEmpty()){
+		if(!erros.isEmpty())
 			rollback();
-			return erros;
-		}
-		
-		commit();
+		else
+			commit();
 		
 		return erros;
 	}
