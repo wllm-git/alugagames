@@ -1,6 +1,7 @@
 package alugagames.aplicacao;
 
 import java.util.List;
+import java.util.UUID;
 
 import alugagames.core.tiposconsole.TipoConsole;
 import alugagames.core.tiposconsole.TipoConsoleServico;
@@ -42,7 +43,11 @@ public class TipoConsoleAplicacao extends AplicacaoBase{
 		
 		return erros;
 	}
-		
+	
+	public TipoConsole buscarPorID(UUID id){
+		return _tipoConsoleServico.buscarPorID(id);
+	}
+	
 	public List<TipoConsole> buscarTodos(){
 		return _tipoConsoleServico.buscarTodos();
 	}

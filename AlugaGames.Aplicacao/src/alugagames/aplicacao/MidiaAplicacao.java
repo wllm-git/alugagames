@@ -1,6 +1,7 @@
 package alugagames.aplicacao;
 
 import java.util.List;
+import java.util.UUID;
 
 import alugagames.core.midias.Midia;
 import alugagames.core.midias.MidiaServico;
@@ -42,7 +43,11 @@ private MidiaServico _midiaServico;
 		
 		return erros;
 	}
-		
+	
+	public Midia buscarPorID(UUID id){
+		return _midiaServico.buscarPorID(id);
+	}
+	
 	public List<Midia> buscarTodos(){
 		return _midiaServico.buscarTodos();
 	}

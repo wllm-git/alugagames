@@ -1,9 +1,11 @@
 package alugagames.aplicacao;
 
 import java.util.List;
+import java.util.UUID;
 
 import alugagames.core.consoles.Console;
 import alugagames.core.consoles.ConsoleServico;
+import alugagames.core.jogos.Jogo;
 import alugagames.repositorio.ConsoleRepositorio;
 
 public class ConsoleAplicacao extends AplicacaoBase {
@@ -42,7 +44,11 @@ public class ConsoleAplicacao extends AplicacaoBase {
 		
 		return erros;
 	}
-		
+	
+	public Console buscarPorID(UUID id){
+		return _consoleServico.buscarPorID(id);
+	}
+	
 	public List<Console> buscarTodos(){
 		return _consoleServico.buscarTodos();
 	}

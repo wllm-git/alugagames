@@ -26,4 +26,12 @@ public class OrdemServicoAplicacao extends AplicacaoBase{
 		
 		return erros;
 	}
+	
+	public OrdemServico buscarPorCodigo(int codigo){
+		return _ordemServicoServico.buscarPorCodigo(codigo);
+	}
+	
+	public OrdemServico buscarPorCPFCliente(String cpf){
+		return _ordemServicoServico.buscarPorCPFCliente(cpf);
+	}
 }

@@ -21,11 +21,40 @@ public class OrdemServicoRepositorio extends RepositorioBase<OrdemServico> imple
 		return Math.toIntExact((long)q.getSingleResult()) + 1;
 	}
 
+	@Override
 	public OrdemServico buscarPorAluguel(Aluguel aluguel) {
 		EntityManager em = ConnectionManager.getEntityManager();
 		
 		Query q = em.createQuery("Select os from OrdemServico os where os.descricao = :descricao", OrdemServico.class);
 		q.setParameter("descricao", "Aluguel " + aluguel.getCodigo());
+		
+		try{
+			return (OrdemServico)q.getSingleResult();
+		}catch (NoResultException e) {
+			return null;
+		}
+	}
+
+	@Override
+	public OrdemServico buscarPorCodigo(int codigo) {
+		EntityManager em = ConnectionManager.getEntityManager();
+		
+		Query q = em.createQuery("Select os from OrdemServico os where os.codigo = :codigo", OrdemServico.class);
+		q.setParameter("codigo", codigo);
+		
+		try{
+			return (OrdemServico)q.getSingleResult();
+		}catch (NoResultException e) {
+			return null;
+		}
+	}
+
+	@Override
+	public OrdemServico buscarPorCPFCliente(String cpf) {
+		EntityManager em = ConnectionManager.getEntityManager();
+		
+		Query q = em.createQuery("Select os from OrdemServico os where os.cliente.cpf = :cpf", OrdemServico.class);
+		q.setParameter("cpf", cpf);
 		
 		try{
 			return (OrdemServico)q.getSingleResult();

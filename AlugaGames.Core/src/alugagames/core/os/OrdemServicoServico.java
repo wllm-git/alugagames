@@ -8,7 +8,9 @@ import alugagames.core.alugueis.Aluguel;
 import alugagames.core.funcionarios.Funcionario;
 import alugagames.core.orcamentos.Orcamento;
 import alugagames.core.os.repositorio.IOrdemServicoRepositorio;
+import alugagames.core.os.validacoes.OrdemServicoAptaParaFinalizarServico;
 import alugagames.core.os.validacoes.OrdemServicoAptaParaProcessamento;
+import alugagames.core.os.validacoes.OrdemServicoItemAptoParafinalizarServico;
 import alugagames.core.shared.ServicoBase;
 
 public class OrdemServicoServico extends ServicoBase<OrdemServico>{
@@ -63,14 +65,28 @@ public class OrdemServicoServico extends ServicoBase<OrdemServico>{
 			return erros;
 		
 		ordemServico.setStatus(StatusOS.Processamento);
-		
 		_repositorio.alterar(ordemServico);
 		
 		return erros;
 	}
 	
 	public List<String> finalizarServico(OrdemServico ordemServico){
-		return null;
+		List<String> erros = new OrdemServicoAptaParaFinalizarServico().validar(ordemServico);
+		
+		if(!erros.isEmpty())
+			return erros;
+		
+		for (OrdemServicoItem item : ordemServico.getOrdemServicoItens()) {
+			erros.addAll(new OrdemServicoItemAptoParafinalizarServico().validar(item));
+		}
+		
+		if(!erros.isEmpty())
+			return erros;
+		
+		ordemServico.setStatus(StatusOS.Aguardando);
+		_repositorio.alterar(ordemServico);
+		
+		return erros;
 	}
 	
 	
@@ -79,10 +95,10 @@ public class OrdemServicoServico extends ServicoBase<OrdemServico>{
 	}
 	
 	public OrdemServico buscarPorCodigo(int codigo){
-		return null;
+		return _repositorio.buscarPorCodigo(codigo);
 	}
 	
 	public OrdemServico buscarPorCPFCliente(String cpf){
-		return null;
+		return _repositorio.buscarPorCPFCliente(cpf);
 	}
 }
