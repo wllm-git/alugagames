@@ -6,9 +6,9 @@ import alugagames.core.orcamentos.regras.OrcamentoItemPrecisaTerNumeroSerie;
 import alugagames.core.shared.validacoesregras.Validacao;
 import alugagames.core.tiposconsole.TipoConsoleServico;
 
-public class OrcamentoItemApto extends Validacao<OrcamentoItem>{
+public class OrcamentoItemAptoParaOrcamento extends Validacao<OrcamentoItem>{
 	
-	public OrcamentoItemApto(TipoConsoleServico tipoConsoleServico){
+	public OrcamentoItemAptoParaOrcamento(TipoConsoleServico tipoConsoleServico){
 		adicionarRegra(new OrcamentoItemPrecisaTerNumeroSerie());
 		adicionarRegra(new OrcamentoItemPrecisaTerDescricaoValida(tipoConsoleServico));
 	}

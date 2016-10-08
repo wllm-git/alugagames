@@ -7,10 +7,17 @@ import alugagames.core.clientes.Cliente;
 import alugagames.core.clientes.ClienteServico;
 import alugagames.core.funcionarios.FuncionarioServico;
 import alugagames.core.orcamentos.repositorio.IOrcamentoRepositorio;
+import alugagames.core.orcamentos.validacoes.OrcamentoAptoParaAdicionarItens;
 import alugagames.core.orcamentos.validacoes.OrcamentoAptoParaIniciar;
+import alugagames.core.orcamentos.validacoes.OrcamentoAptoParaRemoverItens;
 import alugagames.core.orcamentos.validacoes.OrcamentoAptoParaSerAberto;
+import alugagames.core.orcamentos.validacoes.OrcamentoAptoParaSerAceito;
+import alugagames.core.orcamentos.validacoes.OrcamentoAptoParaSerAvaliado;
+import alugagames.core.orcamentos.validacoes.OrcamentoAptoParaSerCancelado;
+import alugagames.core.orcamentos.validacoes.OrcamentoAptoParaSerConfirmado;
 import alugagames.core.orcamentos.validacoes.OrcamentoAptoParaSerRecebido;
-import alugagames.core.orcamentos.validacoes.OrcamentoItemApto;
+import alugagames.core.orcamentos.validacoes.OrcamentoItemAptoParaOrcamento;
+import alugagames.core.orcamentos.validacoes.OrcamentoItemAptoParaSerConfirmado;
 import alugagames.core.tiposconsole.TipoConsoleServico;
 
 public class OrcamentoServico {
@@ -51,7 +58,7 @@ public class OrcamentoServico {
 		List<String> erros = new OrcamentoAptoParaSerAberto().validar(orcamento);
 		
 		for (OrcamentoItem item : orcamento.getOrcamentoItens()) {
-			erros.addAll(new OrcamentoItemApto(_tipoConsoleServico).validar(item));
+			erros.addAll(new OrcamentoItemAptoParaOrcamento(_tipoConsoleServico).validar(item));
 			item.setOrcamento(orcamento);
 		}
 		
@@ -82,19 +89,60 @@ public class OrcamentoServico {
 	}
 	
 	public List<String> avaliarOrcamento(Orcamento orcamento){
-		return null;
+		List<String> erros = new OrcamentoAptoParaSerAvaliado(_funcionarioServico).validar(orcamento);
+		if(!erros.isEmpty())
+			return erros;
+		
+		orcamento.setStatus(StatusOrcamento.Avaliando);
+		
+		_repositorio.alterar(orcamento);
+		
+		return erros;
 	}
 	
 	public List<String> confirmarOrcamento(Orcamento orcamento){
-		return null;
+		List<String> erros = new OrcamentoAptoParaSerConfirmado().validar(orcamento);
+		
+		for (OrcamentoItem item : orcamento.getOrcamentoItens()) {
+			erros.addAll(new OrcamentoItemAptoParaSerConfirmado().validar(item));
+		}
+		
+		if(!erros.isEmpty())
+			return erros;
+		
+		orcamento.setStatus(StatusOrcamento.Confirmado);
+		orcamento.setValor(0);
+		for (OrcamentoItem item : orcamento.getOrcamentoItens()) {
+			orcamento.setValor(orcamento.getValor() + item.getValor());
+		}
+		
+		_repositorio.alterar(orcamento);
+		
+		return erros;
 	}
 	
 	public List<String> aceitarOrcamento(Orcamento orcamento){
-		return null;
+		List<String> erros = new OrcamentoAptoParaSerAceito().validar(orcamento);
+		if(!erros.isEmpty())
+			return erros;
+		
+		orcamento.setStatus(StatusOrcamento.Aceito);
+		
+		_repositorio.alterar(orcamento);
+		
+		return erros;
 	}
 	
 	public List<String> cancelar(Orcamento orcamento){
-		return null;
+		List<String> erros = new OrcamentoAptoParaSerCancelado().validar(orcamento);
+		if(!erros.isEmpty())
+			return erros;
+		
+		orcamento.setStatus(StatusOrcamento.Cancelado);
+		
+		_repositorio.alterar(orcamento);
+		
+		return erros;
 	}
 	
 	public Orcamento buscarOrcamentoPorCodigo(int codigo){
@@ -102,11 +150,40 @@ public class OrcamentoServico {
 	}
 	
 	public List<String> adicionarItens(Orcamento orcamento, OrcamentoItem item){
-		return null;
+		List<String> erros = new OrcamentoAptoParaAdicionarItens().validar(orcamento);
+		if(!erros.isEmpty())
+			return erros;
+		
+		erros = new OrcamentoItemAptoParaOrcamento(_tipoConsoleServico).validar(item);
+		if(!erros.isEmpty())
+			return erros;
+		
+		orcamento.getOrcamentoItens().add(item);
+		item.setOrcamento(orcamento);
+		
+		_repositorio.alterar(orcamento);
+		
+		return erros;
 	}
 	
 	public List<String> removerItens(Orcamento orcamento, OrcamentoItem item){
-		return null;
+		List<String> erros = new OrcamentoAptoParaRemoverItens().validar(orcamento);
+		if(!erros.isEmpty())
+			return erros;
+		
+		boolean removido = false;
+		for(OrcamentoItem it : orcamento.getOrcamentoItens()){
+			if(it.getId().equals(item.getId())){
+				orcamento.getOrcamentoItens().remove(it);
+				removido = true;
+				break;
+			}
+		}
+		
+		if(removido)
+			_repositorio.alterar(orcamento);
+		
+		return erros;
 	}
 	
 }

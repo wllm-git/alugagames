@@ -17,7 +17,7 @@ public class OrcamentoPrecisaEstaNoPrazoDe48Horas implements IRegra<Orcamento> {
 		Calendar hoje = Calendar.getInstance();
 		
 		if(hoje.after(dataLimite))
-			return "Orcamento "+ obj.getCodigo()+ " fora do prazo de 48 horas.";
+			return "Orçamento "+ obj.getCodigo()+ " fora do prazo de 48 horas.";
 		
 		return null;
 	}

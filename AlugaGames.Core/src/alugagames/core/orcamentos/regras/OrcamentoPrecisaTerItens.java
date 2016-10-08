@@ -8,7 +8,7 @@ public class OrcamentoPrecisaTerItens implements IRegra<Orcamento> {
 	@Override
 	public String validar(Orcamento obj) {
 		if(obj.getOrcamentoItens().isEmpty())
-			return "Orcamento precisa ter itens.";
+			return "Orçamento precisa ter itens.";
 		
 		return null;
 	}
