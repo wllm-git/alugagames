@@ -34,8 +34,4 @@ public class TipoConsoleServico extends ServicoBase<TipoConsole> {
 		
 		return erros;
 	}
-	
-	public List<TipoConsole> buscarTodos(){
-		return _repositorio.buscarTodos();
-	}
 }

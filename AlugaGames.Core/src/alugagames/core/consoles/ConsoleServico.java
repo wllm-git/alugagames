@@ -1,6 +1,5 @@
 package alugagames.core.consoles;
 
-import java.util.Collection;
 import java.util.List;
 
 import alugagames.core.consoles.repositorio.IConsoleRepositorio;
@@ -23,7 +22,7 @@ public class ConsoleServico extends ServicoBase<Console> {
 		
 		List<String> erros = new ConsoleAptoParaCadastro().validar(console);
 		if(erros.isEmpty())
-			super.adicionar(console);
+			_repositorio.adicionar(console);
 		
 		return erros;
 	}
@@ -32,7 +31,7 @@ public class ConsoleServico extends ServicoBase<Console> {
 		
 		List<String> erros = new ConsoleAptoParaAlteracao().validar(console);
 		if(erros.isEmpty())
-			super.atualizar(console);
+			_repositorio.alterar(console);
 		
 		return erros;
 	}
@@ -52,7 +51,7 @@ public class ConsoleServico extends ServicoBase<Console> {
 		_repositorio.atualizarStatusConsole(console);
 	}
 
-	public Collection<String> alugar(Console console) {
+	public List<String> alugar(Console console) {
 		List<String> erros = new ConsoleAptoParaAlugar(_repositorio).validar(console);
 		if(erros.isEmpty()){
 			console.setStatus(StatusProduto.Alugado);
@@ -60,5 +59,13 @@ public class ConsoleServico extends ServicoBase<Console> {
 		}
 		
 		return erros;
+	}
+	
+	public List<String> consoleAptoParaReserva(Console console){
+		return new ConsoleAptoParaReserva(_repositorio).validar(console);
+	}
+
+	public void atualizarStatus(Console console) {
+		_repositorio.atualizarStatusConsole(console);
 	}
 }

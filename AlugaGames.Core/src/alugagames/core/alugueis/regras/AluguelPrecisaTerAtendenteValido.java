@@ -18,7 +18,7 @@ public class AluguelPrecisaTerAtendenteValido implements IRegra<Aluguel> {
 		if(obj.getAtendente() == null)
 			return "atendente não informado.";
 		
-		Funcionario a = _atendenteServico.buscarPorId(obj.getAtendente().getId());
+		Funcionario a = _atendenteServico.buscarPorID(obj.getAtendente().getId());
 		
 		if(a == null)
 			return "atendente não existe no sistema.";

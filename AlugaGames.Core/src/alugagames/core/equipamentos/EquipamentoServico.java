@@ -1,17 +1,18 @@
 package alugagames.core.equipamentos;
 
-import java.util.Collection;
 import java.util.List;
 
 import alugagames.core.equipamentos.repositorio.IEquipamentoRepositorio;
 import alugagames.core.equipamentos.validacoes.EquipamentoAptoParaAlugar;
 import alugagames.core.equipamentos.validacoes.EquipamentoAptoParaReserva;
+import alugagames.core.shared.ServicoBase;
 import alugagames.core.shared.StatusProduto;
 
-public class EquipamentoServico {
+public class EquipamentoServico extends ServicoBase<Equipamento>{
 	private IEquipamentoRepositorio _repositorio;
 	
 	public EquipamentoServico(IEquipamentoRepositorio repositorio){
+		super(repositorio);
 		_repositorio = repositorio;
 	}
 	
@@ -30,7 +31,7 @@ public class EquipamentoServico {
 		_repositorio.atualizarStatusEquipamento(equipamento);
 	}
 
-	public Collection<String> alugar(Equipamento equipamento) {
+	public List<String> alugar(Equipamento equipamento) {
 		List<String> erros = new EquipamentoAptoParaAlugar(_repositorio).validar(equipamento);
 		if(erros.isEmpty()){
 			equipamento.setStatus(StatusProduto.Alugado);
@@ -38,5 +39,13 @@ public class EquipamentoServico {
 		}
 		
 		return erros;
+	}
+
+	public List<String> equipamentoAptoParaReserva(Equipamento equipamento) {
+		return new EquipamentoAptoParaReserva(_repositorio).validar(equipamento);
+	}
+
+	public void atualizarStatus(Equipamento equipamento) {
+		_repositorio.atualizarStatusEquipamento(equipamento);
 	}
 }

@@ -1,17 +1,14 @@
 package alugagames.core.clientes;
 
-import java.util.UUID;
-
 import alugagames.core.clientes.repositorio.IClienteRepositorio;
+import alugagames.core.shared.ServicoBase;
 
-public class ClienteServico {
+public class ClienteServico extends ServicoBase<Cliente>{
 	private IClienteRepositorio _repositorio;
 	
 	public ClienteServico(IClienteRepositorio repositorio){
+		super(repositorio);
 		_repositorio = repositorio;
 	}
 	
-	public Cliente buscarPorId(UUID id){
-		return _repositorio.buscarPorID(id);
-	}
 }

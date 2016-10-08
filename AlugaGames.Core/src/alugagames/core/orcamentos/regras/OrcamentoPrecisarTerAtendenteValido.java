@@ -19,7 +19,7 @@ public class OrcamentoPrecisarTerAtendenteValido implements IRegra<Orcamento> {
 		if(obj.getAtendente() == null)
 			return "Atendente não informado.";
 		
-		Funcionario f = _funcionarioServico.buscarPorId(obj.getAtendente().getId());
+		Funcionario f = _funcionarioServico.buscarPorID(obj.getAtendente().getId());
 		if(f == null)
 			return "Atendente informado não cadastrado no sistema.";
 		else if(f.getFuncao() != Funcao.Atendente || !f.isAtivo())

@@ -18,7 +18,7 @@ public class ReservaPrecisaTerClienteValido implements IRegra<Aluguel> {
 		if(obj.getCliente() == null)
 			return "Cliente não informado.";
 		
-		Cliente c = _clienteServico.buscarPorId(obj.getCliente().getId());
+		Cliente c = _clienteServico.buscarPorID(obj.getCliente().getId());
 		if(c == null)
 			return "Cliente informado não existe.";
 		

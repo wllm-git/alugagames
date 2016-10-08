@@ -1,6 +1,7 @@
 package alugagames.core.shared;
 
 import java.util.List;
+import java.util.UUID;
 
 import alugagames.core.shared.repositorio.IRepositorioBase;
 
@@ -11,16 +12,8 @@ public class ServicoBase<T>{
 		_repositorio = repositorio;
 	}
 	
-	public void adicionar(T obj){
-		_repositorio.adicionar(obj);
-	}
-	
-	public void atualizar(T obj){
-		_repositorio.alterar(obj);
-	}
-	
-	public void excluir(T obj){
-		_repositorio.excluir(obj);
+	public T buscarPorID(UUID id){
+		return _repositorio.buscarPorID(id);
 	}
 	
 	public List<T> buscarTodos(){

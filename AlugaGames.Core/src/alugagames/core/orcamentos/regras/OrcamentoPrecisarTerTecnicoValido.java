@@ -19,7 +19,7 @@ public class OrcamentoPrecisarTerTecnicoValido implements IRegra<Orcamento> {
 		if(obj.getTecnico() == null)
 			return "Técnico não informado.";
 		
-		Funcionario f = _funcionarioServico.buscarPorId(obj.getTecnico().getId());
+		Funcionario f = _funcionarioServico.buscarPorID(obj.getTecnico().getId());
 		if(f == null)
 			return "Técnico informado não cadastrado no sistema.";
 		else if(f.getFuncao() != Funcao.Tecnico || !f.isAtivo())

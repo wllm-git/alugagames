@@ -18,9 +18,10 @@ import alugagames.core.orcamentos.validacoes.OrcamentoAptoParaSerConfirmado;
 import alugagames.core.orcamentos.validacoes.OrcamentoAptoParaSerRecebido;
 import alugagames.core.orcamentos.validacoes.OrcamentoItemAptoParaOrcamento;
 import alugagames.core.orcamentos.validacoes.OrcamentoItemAptoParaSerConfirmado;
+import alugagames.core.shared.ServicoBase;
 import alugagames.core.tiposconsole.TipoConsoleServico;
 
-public class OrcamentoServico {
+public class OrcamentoServico extends ServicoBase<Orcamento>{
 	private IOrcamentoRepositorio _repositorio;
 	private ClienteServico _clienteServico;
 	private TipoConsoleServico _tipoConsoleServico;
@@ -28,6 +29,7 @@ public class OrcamentoServico {
 	
 	public OrcamentoServico(IOrcamentoRepositorio repositorio, ClienteServico clienteServico, TipoConsoleServico tipoConsoleServico,
 						FuncionarioServico funcionarioServico){
+		super(repositorio);
 		_repositorio = repositorio;
 		_clienteServico = clienteServico;
 		_tipoConsoleServico = tipoConsoleServico;

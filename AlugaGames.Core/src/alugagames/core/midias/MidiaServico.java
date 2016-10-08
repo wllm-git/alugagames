@@ -24,7 +24,7 @@ public class MidiaServico extends ServicoBase<Midia> {
 		
 		List<String> erros = new MidiaAptaParaCadastro().validar(midia);
 		if(erros.isEmpty())
-			super.adicionar(midia);
+			_repositorio.adicionar(midia);
 		
 		return erros;
 	}
@@ -33,7 +33,7 @@ public class MidiaServico extends ServicoBase<Midia> {
 
 		List<String> erros = new MidiaAptaParaCadastro().validar(midia);
 		if(erros.isEmpty())
-			super.adicionar(midia);
+			_repositorio.alterar(midia);
 		
 		return erros;
 	}
@@ -63,4 +63,11 @@ public class MidiaServico extends ServicoBase<Midia> {
 		return erros;
 	}
 
+	public List<String> midiaAptaParaReserva(Midia midia) {
+		return new MidiaAptaParaReserva(_repositorio).validar(midia);
+	}
+
+	public void atualizarStatus(Midia midia) {
+		_repositorio.atualizarStatusMidia(midia);
+	}
 }

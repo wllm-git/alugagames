@@ -42,11 +42,7 @@ public class ConsoleAplicacao extends AplicacaoBase {
 		
 		return erros;
 	}
-	
-	public void excluir(Console console){
-		_consoleServico.excluir(console);
-	}
-	
+		
 	public List<Console> buscarTodos(){
 		return _consoleServico.buscarTodos();
 	}

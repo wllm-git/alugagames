@@ -8,6 +8,8 @@ import alugagames.core.alugueis.repositorio.IAluguelRepositorio;
 import alugagames.core.alugueis.validacoes.AluguelAptoParaSerCancelado;
 import alugagames.core.alugueis.validacoes.AluguelAptoParaSerConfirmado;
 import alugagames.core.alugueis.validacoes.AluguelAptoParaSerFinalizado;
+import alugagames.core.alugueis.validacoes.ReservaAptaParaAdicionarProdutos;
+import alugagames.core.alugueis.validacoes.ReservaAptaParaRemoverProdutos;
 import alugagames.core.alugueis.validacoes.ReservaAptaParaSerConfirmada;
 import alugagames.core.alugueis.validacoes.ReservaAptaParaSerIniciada;
 import alugagames.core.clientes.Cliente;
@@ -21,9 +23,10 @@ import alugagames.core.midias.Midia;
 import alugagames.core.midias.MidiaServico;
 import alugagames.core.os.OrdemServicoItem;
 import alugagames.core.os.OrdemServicoServico;
+import alugagames.core.shared.ServicoBase;
 import alugagames.core.shared.StatusProduto;
 
-public class AluguelServico {
+public class AluguelServico extends ServicoBase<Aluguel>{
 	private IAluguelRepositorio _repositorio;
 	private ClienteServico _clienteServico;
 	private ConsoleServico _consoleServico;
@@ -36,6 +39,8 @@ public class AluguelServico {
 							FuncionarioServico atendenteServico, ConsoleServico consoleServico, 
 							MidiaServico midiaServico, EquipamentoServico acessorioServico,
 							OrdemServicoServico ordemServicoServico){
+		super(repositorio);
+		
 		_repositorio = repositorio;
 		_clienteServico = clienteServico;
 		_consoleServico = consoleServico;
@@ -233,27 +238,168 @@ public class AluguelServico {
 		return aluguel;
 	}
 	
-	public List<String> adicionarConsoles(Aluguel aluguel, List<Console> consoles){
-		return null;
+	public List<String> adicionarConsoles(Aluguel reserva, List<Console> consoles){
+		List<String> erros = new ReservaAptaParaAdicionarProdutos().validar(reserva);
+		
+		if(!erros.isEmpty())
+			return erros;
+		
+		boolean reservado = reserva.getStatus() == StatusAluguel.Reservado;
+		
+		for (Console console : consoles) {
+			if(reservado)
+				erros.addAll(_consoleServico.reservar(console));
+			else
+				erros.addAll(_consoleServico.consoleAptoParaReserva(console));
+		}
+
+		if(!erros.isEmpty())
+			return erros;
+		
+		reserva.getConsoles().addAll(consoles);
+		_repositorio.alterar(reserva);
+		
+		return erros;
 	}
 	
-	public List<String> adicionarMidias(Aluguel aluguel, List<Midia> midias){
-		return null;
+	public List<String> adicionarMidias(Aluguel reserva, List<Midia> midias){
+		List<String> erros = new ReservaAptaParaAdicionarProdutos().validar(reserva);
+		
+		if(!erros.isEmpty())
+			return erros;
+		
+		boolean reservado = reserva.getStatus() == StatusAluguel.Reservado;
+		
+		for (Midia midia : midias) {
+			if(reservado)
+				erros.addAll(_midiaServico.reservar(midia));
+			else
+				erros.addAll(_midiaServico.midiaAptaParaReserva(midia));
+		}
+
+		if(!erros.isEmpty())
+			return erros;
+		
+		reserva.getMidias().addAll(midias);
+		_repositorio.alterar(reserva);
+		
+		return erros;
 	}
 	
-	public List<String> adicionarAcessorios(Aluguel aluguel, List<Equipamento> acessorios){
-		return null;
+	public List<String> adicionarEquipamentos(Aluguel reserva, List<Equipamento> equipamentos){
+		List<String> erros = new ReservaAptaParaAdicionarProdutos().validar(reserva);
+		
+		if(!erros.isEmpty())
+			return erros;
+		
+		boolean reservado = reserva.getStatus() == StatusAluguel.Reservado;
+		
+		for (Equipamento equipamento : equipamentos) {
+			if(reservado)
+				erros.addAll(_equipamentoServico.reservar(equipamento));
+			else
+				erros.addAll(_equipamentoServico.equipamentoAptoParaReserva(equipamento));
+		}
+
+		if(!erros.isEmpty())
+			return erros;
+		
+		reserva.getEquipamentos().addAll(equipamentos);
+		_repositorio.alterar(reserva);
+		
+		return erros;
 	}
 	
-	public List<String> removerConsoles(Aluguel aluguel, List<Console> consoles){
-		return null;
+	public List<String> removerConsoles(Aluguel reserva, List<Console> consoles){
+		List<String> erros = new ReservaAptaParaRemoverProdutos().validar(reserva);
+		
+		if(!erros.isEmpty())
+			return erros;
+		
+		boolean reservado = reserva.getStatus() == StatusAluguel.Reservado;
+		
+		for (Console console : consoles) {
+			
+			for (Console c : reserva.getConsoles()) {
+				if(c.getId().equals(console.getId())){
+					reserva.getConsoles().remove(c);
+					
+					if(reservado){
+						if(console.getStatus() == StatusProduto.Reservado)
+							_consoleServico.liberar(console);
+						else if(console.getStatus() == StatusProduto.Avariado)
+							_consoleServico.atualizarStatus(console);
+					}
+					
+					break;
+				}
+			}
+		}
+		
+		_repositorio.alterar(reserva);
+		
+		return erros;
 	}
 	
-	public List<String> removerMidias(Aluguel aluguel, List<Midia> midias){
-		return null;
+	public List<String> removerMidias(Aluguel reserva, List<Midia> midias){
+		List<String> erros = new ReservaAptaParaRemoverProdutos().validar(reserva);
+		
+		if(!erros.isEmpty())
+			return erros;
+		
+		boolean reservado = reserva.getStatus() == StatusAluguel.Reservado;
+		
+		for (Midia midia : midias) {
+			
+			for (Midia m : reserva.getMidias()) {
+				if(m.getId().equals(midia.getId())){
+					reserva.getConsoles().remove(m);
+					
+					if(reservado){
+						if(midia.getStatus() == StatusProduto.Reservado)
+							_midiaServico.liberar(midia);
+						else if(midia.getStatus() == StatusProduto.Avariado)
+							_midiaServico.atualizarStatus(midia);
+					}
+					
+					break;
+				}
+			}
+		}
+		
+		_repositorio.alterar(reserva);
+		
+		return erros;
 	}
 	
-	public List<String> removerAcessorios(Aluguel aluguel, List<Equipamento> acessorios){
-		return null;
+	public List<String> removerEquipamentos(Aluguel reserva, List<Equipamento> equipamentos){
+		List<String> erros = new ReservaAptaParaRemoverProdutos().validar(reserva);
+		
+		if(!erros.isEmpty())
+			return erros;
+		
+		boolean reservado = reserva.getStatus() == StatusAluguel.Reservado;
+		
+		for (Equipamento equipamento : equipamentos) {
+			
+			for (Equipamento e : reserva.getEquipamentos()) {
+				if(e.getId().equals(equipamento.getId())){
+					reserva.getConsoles().remove(e);
+					
+					if(reservado){
+						if(equipamento.getStatus() == StatusProduto.Reservado)
+							_equipamentoServico.liberar(equipamento);
+						else if(equipamento.getStatus() == StatusProduto.Avariado)
+							_equipamentoServico.atualizarStatus(equipamento);
+					}
+					
+					break;
+				}
+			}
+		}
+		
+		_repositorio.alterar(reserva);
+		
+		return erros;
 	}
 }

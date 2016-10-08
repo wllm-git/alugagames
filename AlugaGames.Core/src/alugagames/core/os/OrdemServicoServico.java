@@ -9,11 +9,13 @@ import alugagames.core.funcionarios.Funcionario;
 import alugagames.core.orcamentos.Orcamento;
 import alugagames.core.os.repositorio.IOrdemServicoRepositorio;
 import alugagames.core.os.validacoes.OrdemServicoAptaParaProcessamento;
+import alugagames.core.shared.ServicoBase;
 
-public class OrdemServicoServico {
+public class OrdemServicoServico extends ServicoBase<OrdemServico>{
 	private IOrdemServicoRepositorio _repositorio;
 	
 	public OrdemServicoServico(IOrdemServicoRepositorio repositorio){
+		super(repositorio);
 		_repositorio = repositorio;
 	}
 	

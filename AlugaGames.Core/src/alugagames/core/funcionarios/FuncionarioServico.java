@@ -9,18 +9,16 @@ import alugagames.core.funcionarios.validacoes.FuncionarioAptoParaCadastro;
 import alugagames.core.funcionarios.validacoes.FuncionarioAptoParaSerAtivado;
 import alugagames.core.funcionarios.validacoes.FuncionarioAptoParaSerInativado;
 import alugagames.core.shared.CriptografiaDES;
+import alugagames.core.shared.ServicoBase;
 
-public class FuncionarioServico {
+public class FuncionarioServico extends ServicoBase<Funcionario>{
 	private IFuncionarioRepositorio _repositorio;
 	
 	public FuncionarioServico(IFuncionarioRepositorio repositorio){
+		super(repositorio);
 		_repositorio = repositorio;
 	}
-	
-	public Funcionario buscarPorId(UUID id){
-		return _repositorio.buscarPorID(id);
-	}
-	
+		
 	public List<String> adicionarFuncionario(Funcionario funcionario) {
 		
 		List<String> erros = new FuncionarioAptoParaCadastro(_repositorio).validar(funcionario);
@@ -79,7 +77,6 @@ public class FuncionarioServico {
 			else if(!funcionario.isAtivo())
 				throw new Exception("funcionário " + funcionario.getNome() + " está inativo.");
 		}
-		
 		
 		return funcionario;
 	}

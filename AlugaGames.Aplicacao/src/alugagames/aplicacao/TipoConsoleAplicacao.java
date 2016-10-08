@@ -42,11 +42,7 @@ public class TipoConsoleAplicacao extends AplicacaoBase{
 		
 		return erros;
 	}
-	
-	public void excluir(TipoConsole tipoConsole){
-		_tipoConsoleServico.excluir(tipoConsole);
-	}
-	
+		
 	public List<TipoConsole> buscarTodos(){
 		return _tipoConsoleServico.buscarTodos();
 	}

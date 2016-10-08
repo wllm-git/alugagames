@@ -42,11 +42,7 @@ private MidiaServico _midiaServico;
 		
 		return erros;
 	}
-	
-	public void excluir(Midia midia){
-		_midiaServico.excluir(midia);
-	}
-	
+		
 	public List<Midia> buscarTodos(){
 		return _midiaServico.buscarTodos();
 	}

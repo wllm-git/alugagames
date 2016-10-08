@@ -43,10 +43,6 @@ public class JogoAplicacao extends AplicacaoBase{
 		return erros;
 	}
 	
-	public void excluir(Jogo jogo){
-		_jogoServico.excluir(jogo);
-	}
-	
 	public List<Jogo> buscarTodos(){
 		return _jogoServico.buscarTodos();
 	}
