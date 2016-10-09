@@ -27,6 +27,34 @@ public class OrdemServicoAplicacao extends AplicacaoBase{
 		return erros;
 	}
 	
+	public List<String> finalizarServico(OrdemServico ordemServico){
+		beginTransaction();
+		
+		List<String> erros = _ordemServicoServico.finalizarServico(ordemServico);
+		if(!erros.isEmpty()){
+			rollback();
+			return erros;
+		}
+		
+		commit();
+		
+		return erros;
+	}
+	
+	public List<String> fecharOS(OrdemServico ordemServico){
+		beginTransaction();
+		
+		List<String> erros = _ordemServicoServico.fecharOS(ordemServico);
+		if(!erros.isEmpty()){
+			rollback();
+			return erros;
+		}
+		
+		commit();
+		
+		return erros;
+	}
+	
 	public OrdemServico buscarPorCodigo(int codigo){
 		return _ordemServicoServico.buscarPorCodigo(codigo);
 	}

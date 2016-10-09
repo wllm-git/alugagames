@@ -6,6 +6,7 @@ import javax.persistence.Query;
 import alugagames.core.alugueis.Aluguel;
 import alugagames.core.os.OrdemServico;
 import alugagames.core.os.repositorio.IOrdemServicoRepositorio;
+import alugagames.core.shared.StatusProduto;
 import alugagames.repositorio.config.ConnectionManager;
 
 public class OrdemServicoRepositorio extends RepositorioBase<OrdemServico> implements IOrdemServicoRepositorio{
@@ -61,5 +62,23 @@ public class OrdemServicoRepositorio extends RepositorioBase<OrdemServico> imple
 		}catch (NoResultException e) {
 			return null;
 		}
+	}
+
+	@Override
+	public void atualizarStatusEquipamento(String numeroSerie, StatusProduto status) {
+		EntityManager em = ConnectionManager.getEntityManager();
+		Query q = em.createQuery("update Equipamento e set e.status = :status where e.numeroSerie = :numeroSerie");
+		q.setParameter("numeroSerie", numeroSerie);
+		q.setParameter("status", status);
+		q.executeUpdate();
+	}
+
+	@Override
+	public void atualizarStatusConsole(String numeroSerie, StatusProduto status) {
+		EntityManager em = ConnectionManager.getEntityManager();
+		Query q = em.createQuery("update Console c set c.status = :status where c.numeroSerie = :numeroSerie");
+		q.setParameter("numeroSerie", numeroSerie);
+		q.setParameter("status", status);
+		q.executeUpdate();
 	}
 }

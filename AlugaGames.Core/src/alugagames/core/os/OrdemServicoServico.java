@@ -10,8 +10,10 @@ import alugagames.core.orcamentos.Orcamento;
 import alugagames.core.os.repositorio.IOrdemServicoRepositorio;
 import alugagames.core.os.validacoes.OrdemServicoAptaParaFinalizarServico;
 import alugagames.core.os.validacoes.OrdemServicoAptaParaProcessamento;
+import alugagames.core.os.validacoes.OrdemServicoAptaParaSerFechada;
 import alugagames.core.os.validacoes.OrdemServicoItemAptoParafinalizarServico;
 import alugagames.core.shared.ServicoBase;
+import alugagames.core.shared.StatusProduto;
 
 public class OrdemServicoServico extends ServicoBase<OrdemServico>{
 	private IOrdemServicoRepositorio _repositorio;
@@ -91,6 +93,51 @@ public class OrdemServicoServico extends ServicoBase<OrdemServico>{
 	
 	
 	public List<String> fecharOS(OrdemServico ordemServico){
+		List<String> erros = new OrdemServicoAptaParaSerFechada().validar(ordemServico);
+		
+		if(!erros.isEmpty())
+			return erros;
+		
+		if(ordemServico.isInterna())
+			erros = fecharOSInterna(ordemServico);
+		
+		if(!erros.isEmpty())
+			return erros;
+		
+		for (OrdemServicoItem item : ordemServico.getOrdemServicoItens()) {
+			item.setStatusOSItem(StatusOSItem.Entregue);
+		}
+		
+		ordemServico.setStatus(StatusOS.Fechada);
+		ordemServico.setDataFechamento(new Date());
+		
+		_repositorio.alterar(ordemServico);
+		
+		return erros;
+	}
+	
+	private List<String> fecharOSInterna(OrdemServico ordemServico){
+		
+		for (OrdemServicoItem item : ordemServico.getOrdemServicoItens()) {
+			
+			if(item.getStatusOSItem() == StatusOSItem.SemConserto)
+				continue;
+			
+			boolean equipamento = false;
+			for (StatusOSItem status : StatusOSItem.values()) {
+				if(status.toString().equals(item.getDescricao())){
+					equipamento = true;
+					break;
+				}
+			}
+			
+			if(equipamento){
+				_repositorio.atualizarStatusEquipamento(item.getNumeroSerie(), StatusProduto.Disponivel);
+			}else{
+				_repositorio.atualizarStatusConsole(item.getNumeroSerie(), StatusProduto.Disponivel);
+			}
+		}
+		
 		return null;
 	}
 	
