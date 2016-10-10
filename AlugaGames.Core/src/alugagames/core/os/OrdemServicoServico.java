@@ -7,6 +7,7 @@ import java.util.List;
 import alugagames.core.alugueis.Aluguel;
 import alugagames.core.funcionarios.Funcionario;
 import alugagames.core.orcamentos.Orcamento;
+import alugagames.core.orcamentos.OrcamentoItem;
 import alugagames.core.os.repositorio.IOrdemServicoRepositorio;
 import alugagames.core.os.validacoes.OrdemServicoAptaParaFinalizarServico;
 import alugagames.core.os.validacoes.OrdemServicoAptaParaProcessamento;
@@ -24,10 +25,14 @@ public class OrdemServicoServico extends ServicoBase<OrdemServico>{
 	}
 	
 	public List<String> abrirOSInterna(Funcionario atendente, List<OrdemServicoItem> itens){
-		return null;
+		List<String> erros = new ArrayList<>();
+		
+		// TODO implementar OS interna.
+		
+		return erros;
 	}
 	
-	public List<String> abrirOS(Aluguel aluguel, List<OrdemServicoItem> itens){
+	public List<String> abrirOSAutomatica(Aluguel aluguel, List<OrdemServicoItem> itens){
 		List<String> erros = new ArrayList<>();
 		
 		OrdemServico os = new OrdemServico();
@@ -56,8 +61,42 @@ public class OrdemServicoServico extends ServicoBase<OrdemServico>{
 		return erros;
 	}
 	
-	public List<String> abrirOS(Orcamento orcamento){
-		return null;
+	public List<String> abrirOSAutomatica(Orcamento orcamento){
+		List<String> erros = new ArrayList<>();
+		
+		OrdemServico os = new OrdemServico();
+		os.setAtendente(orcamento.getAtendente());
+		os.setCliente(orcamento.getCliente());
+		os.setDataAbertura(new Date());
+		os.setInterna(false);
+		os.setStatus(StatusOS.Aberta);
+		os.setDescricao(orcamento.getDescricao());
+		os.setValor(orcamento.getValor());
+		os.setCodigo(_repositorio.getNextCodigo());
+		
+		List<OrdemServicoItem> itens = new ArrayList<>();
+		
+		for (OrcamentoItem itemOrcamento : orcamento.getOrcamentoItens()) {
+			
+			OrdemServicoItem itemOS = new OrdemServicoItem();
+			
+			itemOS.setNumeroSerie(itemOrcamento.getNumeroSerie());
+			itemOS.setDescricao(itemOrcamento.getDescricao());
+			itemOS.setStatusOSItem(StatusOSItem.Recebido);
+			itemOS.setOrdemServico(os);
+			itemOS.setValor(itemOrcamento.getValor());
+			
+			itens.add(itemOS);
+		}
+		
+		os.setOrdemServicoItens(itens);
+		try {
+			_repositorio.adicionar(os);
+		} catch (Exception e) {
+			erros.add("Erro ao gerar OS: " + e.getMessage());
+		}
+		
+		return erros;
 	}
 	
 	public List<String> processarOS(OrdemServico ordemServico){

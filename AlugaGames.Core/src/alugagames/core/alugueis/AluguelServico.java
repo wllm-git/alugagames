@@ -171,7 +171,7 @@ public class AluguelServico extends ServicoBase<Aluguel>{
 		}
 		
 		if(!osItens.isEmpty()){
-			erros = _ordemServicoServico.abrirOS(aluguel, osItens);
+			erros = _ordemServicoServico.abrirOSAutomatica(aluguel, osItens);
 			
 			if(!erros.isEmpty())
 				return erros;

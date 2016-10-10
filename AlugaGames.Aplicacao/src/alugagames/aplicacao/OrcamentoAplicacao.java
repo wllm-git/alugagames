@@ -96,7 +96,7 @@ public class OrcamentoAplicacao extends AplicacaoBase{
 		
 		if(erros.isEmpty()){
 			OrdemServicoServico _osServico = new OrdemServicoServico(new OrdemServicoRepositorio());
-			erros = _osServico.abrirOS(orcamento);
+			erros = _osServico.abrirOSAutomatica(orcamento);
 		}
 		
 		if(!erros.isEmpty())

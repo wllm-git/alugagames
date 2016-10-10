@@ -2,7 +2,9 @@ package alugagames.aplicacao;
 
 import java.util.List;
 
+import alugagames.core.funcionarios.Funcionario;
 import alugagames.core.os.OrdemServico;
+import alugagames.core.os.OrdemServicoItem;
 import alugagames.core.os.OrdemServicoServico;
 import alugagames.repositorio.OrdemServicoRepositorio;
 
@@ -11,6 +13,20 @@ public class OrdemServicoAplicacao extends AplicacaoBase{
 	
 	public OrdemServicoAplicacao(){
 		_ordemServicoServico = new OrdemServicoServico(new OrdemServicoRepositorio());
+	}
+	
+	public List<String> abrirOSInterna(Funcionario atendente, List<OrdemServicoItem> itens){
+		beginTransaction();
+		
+		List<String> erros = _ordemServicoServico.abrirOSInterna(atendente, itens);
+		if(!erros.isEmpty()){
+			rollback();
+			return erros;
+		}
+		
+		commit();
+		
+		return erros;
 	}
 	
 	public List<String> processarOS(OrdemServico ordemServico){
