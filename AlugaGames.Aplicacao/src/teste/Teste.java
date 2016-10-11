@@ -1,12 +1,9 @@
 package teste;
-import java.util.Date;
 import java.util.UUID;
 
 import alugagames.core.equipamentos.TipoEquipamento;
 import alugagames.core.funcionarios.Funcionario;
-import alugagames.core.funcionarios.regras.FuncionarioPrecisaSerMaiorDe18Anos;
-import alugagames.core.shared.CriptografiaDES;
-import alugagames.repositorio.FuncionarioRepositorio;
+import alugagames.core.shared.Produto;
 
 public class Teste {
 
@@ -34,7 +31,7 @@ public class Teste {
 //			System.out.println(decriptado);
 			//===========================================================================================================			
 			System.out.println(TipoEquipamento.Controle.toString() == "Controle");
-			
+			Produto p = (Produto) null;
 			
 			
 		} catch (Exception e) {

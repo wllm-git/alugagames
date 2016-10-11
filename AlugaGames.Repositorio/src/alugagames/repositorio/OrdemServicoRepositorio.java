@@ -6,6 +6,7 @@ import javax.persistence.Query;
 import alugagames.core.alugueis.Aluguel;
 import alugagames.core.os.OrdemServico;
 import alugagames.core.os.repositorio.IOrdemServicoRepositorio;
+import alugagames.core.shared.Produto;
 import alugagames.core.shared.StatusProduto;
 import alugagames.repositorio.config.ConnectionManager;
 
@@ -80,5 +81,19 @@ public class OrdemServicoRepositorio extends RepositorioBase<OrdemServico> imple
 		q.setParameter("numeroSerie", numeroSerie);
 		q.setParameter("status", status);
 		q.executeUpdate();
+	}
+
+	@Override
+	public Produto buscarProdutoPorNumeroSerie(Class classe, String numeroSerie) {
+		EntityManager em = ConnectionManager.getEntityManager();
+		
+		Query q = em.createQuery("Select p from "+ classe.getName() +" p where p.numeroSerie = :numeroSerie", OrdemServico.class);
+		q.setParameter("numeroSerie", numeroSerie);
+		
+		try{
+			return (Produto)q.getSingleResult();
+		}catch (NoResultException e) {
+			return null;
+		}
 	}
 }

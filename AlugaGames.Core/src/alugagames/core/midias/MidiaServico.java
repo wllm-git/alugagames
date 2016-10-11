@@ -3,16 +3,23 @@ package alugagames.core.midias;
 import java.util.Collection;
 import java.util.List;
 
+import alugagames.core.jogos.JogoServico;
 import alugagames.core.midias.repositorio.IMidiaRepositorio;
+import alugagames.core.midias.validacoes.MidiaAptaParaAlteracao;
 import alugagames.core.midias.validacoes.MidiaAptaParaAlugar;
 import alugagames.core.midias.validacoes.MidiaAptaParaCadastro;
 import alugagames.core.midias.validacoes.MidiaAptaParaReserva;
+import alugagames.core.midias.validacoes.MidiaAptaParaSerAtivada;
+import alugagames.core.midias.validacoes.MidiaAptaParaSerInativada;
 import alugagames.core.shared.ServicoBase;
 import alugagames.core.shared.StatusProduto;
+import alugagames.core.tiposconsole.TipoConsoleServico;
 
 public class MidiaServico extends ServicoBase<Midia> {
 
 	private IMidiaRepositorio _repositorio;
+	private JogoServico _jogoServico;
+	private TipoConsoleServico _tipoConsoleServico;
 	
 	public MidiaServico(IMidiaRepositorio repositorio) {
 		super(repositorio);
@@ -20,9 +27,17 @@ public class MidiaServico extends ServicoBase<Midia> {
 		_repositorio = repositorio;
 	}
 
-	public List<String> adicionarMidia(Midia midia) {
+	public MidiaServico(IMidiaRepositorio repositorio, JogoServico jogoServico,
+				TipoConsoleServico tipoConsoleServico) {
+		super(repositorio);
 		
-		List<String> erros = new MidiaAptaParaCadastro().validar(midia);
+		_repositorio = repositorio;
+		_jogoServico = jogoServico;
+		_tipoConsoleServico = tipoConsoleServico;
+	}
+	
+	public List<String> adicionarMidia(Midia midia) {
+		List<String> erros = new MidiaAptaParaCadastro(_repositorio, _jogoServico, _tipoConsoleServico).validar(midia);
 		if(erros.isEmpty())
 			_repositorio.adicionar(midia);
 		
@@ -30,10 +45,33 @@ public class MidiaServico extends ServicoBase<Midia> {
 	}
 
 	public List<String> atualizarMidia(Midia midia) {
-
-		List<String> erros = new MidiaAptaParaCadastro().validar(midia);
+		List<String> erros = new MidiaAptaParaAlteracao(_repositorio, _jogoServico, _tipoConsoleServico).validar(midia);
 		if(erros.isEmpty())
 			_repositorio.alterar(midia);
+		
+		return erros;
+	}
+	
+	public List<String> inativarMidia(Midia midia){
+		
+		List<String> erros = new MidiaAptaParaSerInativada(_repositorio).validar(midia);
+		if(!erros.isEmpty())
+			return erros;
+		
+		midia.setAtivo(false);
+		_repositorio.alterar(midia);
+		
+		return erros;
+	}
+	
+	public List<String> ativarMidia(Midia midia){
+		
+		List<String> erros = new MidiaAptaParaSerAtivada(_repositorio).validar(midia);
+		if(!erros.isEmpty())
+			return erros;
+		
+		midia.setAtivo(true);
+		_repositorio.alterar(midia);
 		
 		return erros;
 	}

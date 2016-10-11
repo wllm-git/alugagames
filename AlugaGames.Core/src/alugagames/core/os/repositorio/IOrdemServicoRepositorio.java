@@ -2,6 +2,7 @@ package alugagames.core.os.repositorio;
 
 import alugagames.core.alugueis.Aluguel;
 import alugagames.core.os.OrdemServico;
+import alugagames.core.shared.Produto;
 import alugagames.core.shared.StatusProduto;
 import alugagames.core.shared.repositorio.IRepositorioBase;
 
@@ -17,4 +18,6 @@ public interface IOrdemServicoRepositorio extends IRepositorioBase<OrdemServico>
 	public void atualizarStatusEquipamento(String numeroSerie, StatusProduto status);
 
 	public void atualizarStatusConsole(String numeroSerie, StatusProduto status);
+
+	public Produto buscarProdutoPorNumeroSerie(Class classe, String numeroSerie);
 }

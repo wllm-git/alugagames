@@ -12,6 +12,7 @@ import alugagames.core.os.repositorio.IOrdemServicoRepositorio;
 import alugagames.core.os.validacoes.OrdemServicoAptaParaFinalizarServico;
 import alugagames.core.os.validacoes.OrdemServicoAptaParaProcessamento;
 import alugagames.core.os.validacoes.OrdemServicoAptaParaSerFechada;
+import alugagames.core.os.validacoes.OrdemServicoItemAptoParaOSInterna;
 import alugagames.core.os.validacoes.OrdemServicoItemAptoParafinalizarServico;
 import alugagames.core.shared.ServicoBase;
 import alugagames.core.shared.StatusProduto;
@@ -27,7 +28,28 @@ public class OrdemServicoServico extends ServicoBase<OrdemServico>{
 	public List<String> abrirOSInterna(Funcionario atendente, List<OrdemServicoItem> itens){
 		List<String> erros = new ArrayList<>();
 		
-		// TODO implementar OS interna.
+		OrdemServico os = new OrdemServico();
+		os.setAtendente(atendente);
+		os.setDataAbertura(new Date());
+		os.setInterna(true);
+		os.setStatus(StatusOS.Aberta);
+		os.setDescricao("OS interna");
+		os.setValor(0);
+		os.setCodigo(_repositorio.getNextCodigo());
+		
+		for (OrdemServicoItem item : itens) {
+			erros.addAll(new OrdemServicoItemAptoParaOSInterna(_repositorio).validar(item));
+			
+			item.setStatusOSItem(StatusOSItem.Recebido);
+			item.setOrdemServico(os);
+			item.setValor(0);
+		}
+		
+		if(!erros.isEmpty())
+			return erros;
+		
+		os.setOrdemServicoItens(itens);
+		_repositorio.adicionar(os);
 		
 		return erros;
 	}
