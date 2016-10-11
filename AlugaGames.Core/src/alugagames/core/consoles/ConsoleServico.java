@@ -9,29 +9,48 @@ import alugagames.core.consoles.validacoes.ConsoleAptoParaCadastro;
 import alugagames.core.consoles.validacoes.ConsoleAptoParaReserva;
 import alugagames.core.shared.ServicoBase;
 import alugagames.core.shared.StatusProduto;
+import alugagames.core.shared.Voltagem;
+import alugagames.core.tiposconsole.TipoConsoleServico;
 
 public class ConsoleServico extends ServicoBase<Console> {
 	private IConsoleRepositorio _repositorio;
+	private TipoConsoleServico _tipoConsoleServico;
 	
 	public ConsoleServico(IConsoleRepositorio repositorio) {
 		super(repositorio);
 		_repositorio = repositorio;
 	}
 
+	public ConsoleServico(IConsoleRepositorio repositorio, TipoConsoleServico tipoConsoleServico) {
+		super(repositorio);
+		_repositorio = repositorio;
+		_tipoConsoleServico = tipoConsoleServico;
+	}
+	
 	public List<String> adicionarConsole(Console console){
 		
-		List<String> erros = new ConsoleAptoParaCadastro().validar(console);
-		if(erros.isEmpty())
-			_repositorio.adicionar(console);
+		List<String> erros = new ConsoleAptoParaCadastro(_repositorio, _tipoConsoleServico).validar(console);
+		if(!erros.isEmpty())
+			return erros;
+		
+		if(console.getVoltagem() == null)
+			console.setVoltagem(Voltagem.V_UNI);
+		
+		_repositorio.adicionar(console);
 		
 		return erros;
 	}
 	
 	public List<String> atualizarConsole(Console console){
 		
-		List<String> erros = new ConsoleAptoParaAlteracao().validar(console);
-		if(erros.isEmpty())
-			_repositorio.alterar(console);
+		List<String> erros = new ConsoleAptoParaAlteracao(_repositorio, _tipoConsoleServico).validar(console);
+		if(!erros.isEmpty())
+			return erros;
+		
+		if(console.getVoltagem() == null)
+			console.setVoltagem(Voltagem.V_UNI);
+		
+		_repositorio.alterar(console);
 		
 		return erros;
 	}

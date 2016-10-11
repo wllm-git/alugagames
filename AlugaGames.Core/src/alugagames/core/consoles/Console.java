@@ -15,6 +15,7 @@ import javax.persistence.OneToOne;
 
 import alugagames.core.jogos.Jogo;
 import alugagames.core.shared.Produto;
+import alugagames.core.shared.Voltagem;
 import alugagames.core.tiposconsole.TipoConsole;
 
 @Entity
@@ -33,7 +34,7 @@ public class Console extends Produto {
 	@OneToOne
 	@JoinColumn(name = "tipoconsole_id")
 	private TipoConsole tipoConsole;
-	private int voltagem;
+	private Voltagem voltagem;
 	private float preco;
 	
 	public Console(){
@@ -73,11 +74,11 @@ public class Console extends Produto {
 		this.jogos = jogos;
 	}
 
-	public int getVoltagem() {
+	public Voltagem getVoltagem() {
 		return voltagem;
 	}
 
-	public void setVoltagem(int voltagem) {
+	public void setVoltagem(Voltagem voltagem) {
 		this.voltagem = voltagem;
 	}
 

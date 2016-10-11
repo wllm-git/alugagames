@@ -21,6 +21,7 @@ import alugagames.core.os.OrdemServico;
 import alugagames.core.os.OrdemServicoServico;
 import alugagames.core.os.StatusOS;
 import alugagames.core.shared.StatusProduto;
+import alugagames.core.shared.Voltagem;
 import alugagames.core.tiposconsole.TipoConsole;
 import alugagames.repositorio.AluguelRepositorio;
 import alugagames.repositorio.ClienteRepositorio;
@@ -92,7 +93,7 @@ public class AluguelAplicacaoTest {
 		con1.setNumeroSerie("321321456");
 		con1.setPreco(25.0f);
 		con1.setTipoConsole(tc1);
-		con1.setVoltagem(110);
+		con1.setVoltagem(Voltagem.V_110);
 		con1.setStatus(StatusProduto.Disponivel);
 		con1.getJogos().add(j1);
 		con1.getJogos().add(j2);

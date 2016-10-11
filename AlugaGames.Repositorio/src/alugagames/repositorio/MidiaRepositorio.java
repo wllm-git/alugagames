@@ -4,7 +4,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
-import alugagames.core.alugueis.Aluguel;
 import alugagames.core.midias.Midia;
 import alugagames.core.midias.repositorio.IMidiaRepositorio;
 import alugagames.repositorio.config.ConnectionManager;

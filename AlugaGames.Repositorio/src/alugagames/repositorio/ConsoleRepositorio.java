@@ -1,6 +1,7 @@
 package alugagames.repositorio;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import alugagames.core.consoles.Console;
@@ -22,4 +23,16 @@ public class ConsoleRepositorio extends RepositorioBase<Console> implements ICon
 		q.executeUpdate();
 	}
 	
+	public Console buscarPorNumeroSerie(String numeroSerie) {
+		EntityManager em = ConnectionManager.getEntityManager();
+		
+		Query q = em.createQuery("Select c from Console c where c.numeroSerie = :numeroSerie", Console.class);
+		q.setParameter("numeroSerie", numeroSerie);
+		
+		try{
+			return (Console)q.getSingleResult();
+		}catch (NoResultException e) {
+			return null;
+		}
+	}
 }

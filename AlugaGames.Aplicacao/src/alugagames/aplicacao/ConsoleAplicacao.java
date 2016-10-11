@@ -5,13 +5,17 @@ import java.util.UUID;
 
 import alugagames.core.consoles.Console;
 import alugagames.core.consoles.ConsoleServico;
+import alugagames.core.tiposconsole.TipoConsoleServico;
 import alugagames.repositorio.ConsoleRepositorio;
+import alugagames.repositorio.TipoConsoleRepositorio;
 
 public class ConsoleAplicacao extends AplicacaoBase {
 	private ConsoleServico _consoleServico;
 	
 	public ConsoleAplicacao(){
-		_consoleServico = new ConsoleServico(new ConsoleRepositorio());
+		TipoConsoleServico tipoConsoleServico = new TipoConsoleServico(new TipoConsoleRepositorio());
+		
+		_consoleServico = new ConsoleServico(new ConsoleRepositorio(), tipoConsoleServico);
 	}
 	
 	public List<String> cadastrar(Console console){

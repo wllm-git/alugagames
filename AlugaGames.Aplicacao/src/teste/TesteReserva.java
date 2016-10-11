@@ -9,6 +9,7 @@ import alugagames.core.consoles.Console;
 import alugagames.core.jogos.Jogo;
 import alugagames.core.midias.Midia;
 import alugagames.core.shared.StatusProduto;
+import alugagames.core.shared.Voltagem;
 import alugagames.core.tiposconsole.TipoConsole;
 import alugagames.repositorio.ClienteRepositorio;
 import alugagames.repositorio.ConsoleRepositorio;
@@ -55,7 +56,7 @@ public class TesteReserva {
 		con1.setNumeroSerie("321321456");
 		con1.setPreco(25.0f);
 		con1.setTipoConsole(tc1);
-		con1.setVoltagem(110);
+		con1.setVoltagem(Voltagem.V_110);
 		con1.setStatus(StatusProduto.Disponivel);
 		con1.getJogos().add(j1);
 		con1.getJogos().add(j2);
