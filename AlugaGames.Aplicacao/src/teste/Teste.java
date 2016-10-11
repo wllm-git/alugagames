@@ -4,6 +4,7 @@ import java.util.UUID;
 import alugagames.core.equipamentos.TipoEquipamento;
 import alugagames.core.funcionarios.Funcionario;
 import alugagames.core.shared.Produto;
+import alugagames.repositorio.FuncionarioRepositorio;
 
 public class Teste {
 
@@ -15,8 +16,8 @@ public class Teste {
 			Funcionario f = new Funcionario();
 			f.setId(id);
 			//===========================================================================================================			
-//			int qtdAluguelEmAndamento = new FuncionarioRepositorio().getQtdDeAlugueisEmAndamento(f);
-//			System.out.println(qtdAluguelEmAndamento);
+			int qtdAluguelEmAndamento = new FuncionarioRepositorio().getQtdDeAlugueisEmAndamento(f);
+			System.out.println(qtdAluguelEmAndamento);
 //			
 //			f.setDataNascimento(new Date(99,9, 1));
 //			String s = new FuncionarioPrecisaSerMaiorDe18Anos().validar(f);
@@ -31,7 +32,6 @@ public class Teste {
 //			System.out.println(decriptado);
 			//===========================================================================================================			
 			System.out.println(TipoEquipamento.Controle.toString() == "Controle");
-			Produto p = (Produto) null;
 			
 			
 		} catch (Exception e) {

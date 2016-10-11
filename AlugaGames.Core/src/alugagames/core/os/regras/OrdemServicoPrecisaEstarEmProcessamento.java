@@ -4,7 +4,7 @@ import alugagames.core.os.OrdemServico;
 import alugagames.core.os.StatusOS;
 import alugagames.core.shared.validacoesregras.IRegra;
 
-public class OrdemServicoPrecisaEstaEmProcessamento implements IRegra<OrdemServico> {
+public class OrdemServicoPrecisaEstarEmProcessamento implements IRegra<OrdemServico> {
 
 	@Override
 	public String validar(OrdemServico obj) {

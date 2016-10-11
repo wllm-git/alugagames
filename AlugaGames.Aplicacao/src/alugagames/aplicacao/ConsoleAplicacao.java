@@ -5,7 +5,6 @@ import java.util.UUID;
 
 import alugagames.core.consoles.Console;
 import alugagames.core.consoles.ConsoleServico;
-import alugagames.core.jogos.Jogo;
 import alugagames.repositorio.ConsoleRepositorio;
 
 public class ConsoleAplicacao extends AplicacaoBase {

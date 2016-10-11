@@ -4,7 +4,7 @@ import alugagames.core.midias.Midia;
 import alugagames.core.shared.StatusProduto;
 import alugagames.core.shared.validacoesregras.IRegra;
 
-public class MidiaNaoPodeEstaAlugada implements IRegra<Midia> {
+public class MidiaNaoPodeEstarAlugada implements IRegra<Midia> {
 
 	@Override
 	public String validar(Midia obj) {

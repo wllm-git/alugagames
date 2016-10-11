@@ -3,7 +3,7 @@ package alugagames.core.funcionarios.regras;
 import alugagames.core.funcionarios.Funcionario;
 import alugagames.core.shared.validacoesregras.IRegra;
 
-public class FuncionarioPrecisaEstaAtivo implements IRegra<Funcionario> {
+public class FuncionarioPrecisaEstarAtivo implements IRegra<Funcionario> {
 
 	@Override
 	public String validar(Funcionario obj) {

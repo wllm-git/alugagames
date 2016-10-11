@@ -4,7 +4,7 @@ import alugagames.core.orcamentos.Orcamento;
 import alugagames.core.orcamentos.StatusOrcamento;
 import alugagames.core.shared.validacoesregras.IRegra;
 
-public class OrcamentoPrecisaEstaConfirmado implements IRegra<Orcamento> {
+public class OrcamentoPrecisaEstarConfirmado implements IRegra<Orcamento> {
 
 	@Override
 	public String validar(Orcamento obj) {

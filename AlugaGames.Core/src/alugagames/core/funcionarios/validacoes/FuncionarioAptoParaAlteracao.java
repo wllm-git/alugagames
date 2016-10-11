@@ -1,7 +1,7 @@
 package alugagames.core.funcionarios.validacoes;
 
 import alugagames.core.funcionarios.Funcionario;
-import alugagames.core.funcionarios.regras.FuncionarioPrecisaEstaAtivo;
+import alugagames.core.funcionarios.regras.FuncionarioPrecisaEstarAtivo;
 import alugagames.core.funcionarios.regras.FuncionarioPrecisaExistirNoSistema;
 import alugagames.core.funcionarios.regras.FuncionarioPrecisaSerMaiorDe18Anos;
 import alugagames.core.funcionarios.regras.FuncionarioPrecisaTerCpfUnicoAlt;
@@ -21,7 +21,7 @@ public class FuncionarioAptoParaAlteracao extends Validacao<Funcionario>{
 	
 	public FuncionarioAptoParaAlteracao(IFuncionarioRepositorio repositorio){
 		adicionarRegra(new FuncionarioPrecisaExistirNoSistema(repositorio));
-		adicionarRegra(new FuncionarioPrecisaEstaAtivo());		
+		adicionarRegra(new FuncionarioPrecisaEstarAtivo());		
 		adicionarRegra(new FuncionarioPrecisaTerNomeValido());
 		adicionarRegra(new FuncionarioPrecisaTerSenhaValida());
 		adicionarRegra(new FuncionarioPrecisaTerSenhaEncriptada(repositorio));

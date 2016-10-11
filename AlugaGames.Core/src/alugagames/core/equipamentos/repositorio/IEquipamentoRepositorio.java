@@ -7,4 +7,6 @@ public interface IEquipamentoRepositorio extends IRepositorioBase<Equipamento>{
 
 	public void atualizarStatusEquipamento(Equipamento equipamento);
 
+	public Equipamento buscarPorNumeroSerie(String numeroSerie);
+
 }
