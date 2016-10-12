@@ -44,6 +44,34 @@ public class TipoConsoleAplicacao extends AplicacaoBase{
 		return erros;
 	}
 	
+	public List<String> inativarTipoConsole(TipoConsole tipoConsole){
+		beginTransaction();
+		
+		List<String> erros = _tipoConsoleServico.inativarTipoConsole(tipoConsole);
+		if(!erros.isEmpty()){
+			rollback();
+			return erros;
+		}
+		
+		commit();
+		
+		return erros;
+	}
+	
+	public List<String> ativarTipoConsole(TipoConsole tipoConsole){
+		beginTransaction();
+		
+		List<String> erros = _tipoConsoleServico.ativarTipoConsole(tipoConsole);
+		if(!erros.isEmpty()){
+			rollback();
+			return erros;
+		}
+		
+		commit();
+		
+		return erros;
+	}
+	
 	public TipoConsole buscarPorID(UUID id){
 		return _tipoConsoleServico.buscarPorID(id);
 	}

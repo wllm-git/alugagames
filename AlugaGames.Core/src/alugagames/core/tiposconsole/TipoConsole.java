@@ -12,6 +12,7 @@ public class TipoConsole {
 	@Column(length=16)
 	private UUID id;
 	private String nome;
+	private boolean ativo;
 	
 	public TipoConsole(){
 		id = UUID.randomUUID();
@@ -29,5 +30,12 @@ public class TipoConsole {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+
+	public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
+	}
 }
