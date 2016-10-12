@@ -4,6 +4,6 @@ import alugagames.core.tiposconsole.TipoConsole;;
 
 public interface ITipoConsoleRepositorio extends IRepositorioBase<TipoConsole> {
 
-	TipoConsole buscarPorNome(String nome);
+	public TipoConsole buscarPorNome(String nome);
 	
 }

@@ -3,6 +3,7 @@ package alugagames.core.jogos;
 import java.util.List;
 
 import alugagames.core.jogos.repositorio.IJogoRepositorio;
+import alugagames.core.jogos.validacoes.JogoAptoParaAlteracao;
 import alugagames.core.jogos.validacoes.JogoAptoParaCadastro;
 import alugagames.core.shared.ServicoBase;
 
@@ -18,7 +19,7 @@ public class JogoServico extends ServicoBase<Jogo> {
 
 	public List<String> adicionarJogo(Jogo jogo) {
 		
-		List<String> erros = new JogoAptoParaCadastro().validar(jogo);
+		List<String> erros = new JogoAptoParaCadastro(_repositorio).validar(jogo);
 		if(erros.isEmpty())
 			_repositorio.adicionar(jogo);
 		
@@ -27,7 +28,7 @@ public class JogoServico extends ServicoBase<Jogo> {
 
 	public List<String> atualizarJogo(Jogo jogo) {
 		
-		List<String> erros = new JogoAptoParaCadastro().validar(jogo);
+		List<String> erros = new JogoAptoParaAlteracao(_repositorio).validar(jogo);
 		if(erros.isEmpty())
 			_repositorio.adicionar(jogo);
 		
