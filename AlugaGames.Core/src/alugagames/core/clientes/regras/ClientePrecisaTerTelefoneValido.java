@@ -1,14 +1,14 @@
-package alugagames.core.funcionarios.regras;
+package alugagames.core.clientes.regras;
 
-import alugagames.core.funcionarios.Funcionario;
+import alugagames.core.clientes.Cliente;
 import alugagames.core.shared.validacoesregras.IRegra;
 
-public class FuncionarioPrecisaTerTelefoneValido implements IRegra<Funcionario> {
+public class ClientePrecisaTerTelefoneValido implements IRegra<Cliente> {
 
 	@Override
-	public String validar(Funcionario obj) {
+	public String validar(Cliente obj) {
 		if(obj.getTelefone() == null || obj.getTelefone().isEmpty())
-			return "Telefone não informado.";
+			return null;
 		
 		try {
 			Long.parseLong(obj.getTelefone());

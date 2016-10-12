@@ -2,7 +2,6 @@ package alugagames.core.consoles.validacoes;
 
 import alugagames.core.consoles.Console;
 import alugagames.core.consoles.regras.ConsolePrecisaEstarAtivo;
-import alugagames.core.consoles.regras.ConsolePrecisaTerNumeroSerieUnico;
 import alugagames.core.consoles.regras.ConsolePrecisaTerNumeroSerieUnicoAtl;
 import alugagames.core.consoles.regras.ConsolePrecisaTerNumeroSerieValido;
 import alugagames.core.consoles.regras.ConsolePrecisaTerPrecoMaiorQueZero;
