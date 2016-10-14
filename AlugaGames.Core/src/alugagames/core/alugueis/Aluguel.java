@@ -36,6 +36,9 @@ public class Aluguel {
 	
 	private StatusAluguel status;
 	
+	private Date dataAluguelInicio;
+	private Date dataAluguelFim;
+	
 	private Date dataReserva;
 	private Date dataConfirmacao;
 	private Date dataFechamento;
@@ -152,6 +155,22 @@ public class Aluguel {
 
 	public void setStatus(StatusAluguel status) {
 		this.status = status;
+	}
+
+	public Date getDataAluguelInicio() {
+		return dataAluguelInicio;
+	}
+
+	public void setDataAluguelInicio(Date dataAluguelInicio) {
+		this.dataAluguelInicio = dataAluguelInicio;
+	}
+
+	public Date getDataAluguelFim() {
+		return dataAluguelFim;
+	}
+
+	public void setDataAluguelFim(Date dataAluguelFim) {
+		this.dataAluguelFim = dataAluguelFim;
 	}
 
 	public boolean isAluguel() {
