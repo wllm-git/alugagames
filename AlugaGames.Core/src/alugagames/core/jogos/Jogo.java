@@ -19,6 +19,7 @@ public class Jogo {
 	@Column(length=16)
 	private UUID id;
 	private String nome;
+	private Categoria categoria;
 	private Date anoLancamento;
 	@OneToMany(mappedBy="jogo", fetch = FetchType.LAZY)
 	private List<Midia> midias;
@@ -42,6 +43,14 @@ public class Jogo {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 
 	public Date getAnoLancamento() {
