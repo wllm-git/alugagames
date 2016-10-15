@@ -31,8 +31,12 @@ public class Aluguel {
 	private Cliente cliente;
 	
 	@ManyToOne
-	@JoinColumn(name = "atendente_id")
-	private Funcionario atendente;
+	@JoinColumn(name = "atendenteConfirmacao_id")
+	private Funcionario atendenteConfirmacao;
+	
+	@ManyToOne
+	@JoinColumn(name = "atendenteFechamento_id")
+	private Funcionario atendenteFechamento;
 	
 	private StatusAluguel status;
 	
@@ -85,12 +89,20 @@ public class Aluguel {
 		this.cliente = cliente;
 	}
 
-	public Funcionario getAtendente() {
-		return atendente;
+	public Funcionario getAtendenteConfirmacao() {
+		return atendenteConfirmacao;
 	}
 
-	public void setAtendente(Funcionario atendente) {
-		this.atendente = atendente;
+	public void setAtendenteConfirmacao(Funcionario atendenteConfirmacao) {
+		this.atendenteConfirmacao = atendenteConfirmacao;
+	}
+	
+	public Funcionario getAtendenteFechamento() {
+		return atendenteFechamento;
+	}
+
+	public void setAtendenteFechamento(Funcionario atendenteFechamento) {
+		this.atendenteFechamento = atendenteFechamento;
 	}
 
 	public List<Console> getConsoles() {
