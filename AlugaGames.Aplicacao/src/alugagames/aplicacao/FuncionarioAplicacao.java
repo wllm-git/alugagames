@@ -44,13 +44,13 @@ private FuncionarioServico _funcionarioServico;
 		return erros;
 	}
 	
-	public List<String> inativar(Funcionario funcionario){
+	public List<String> inativar(Funcionario funcionario, Funcionario funcionarioLogado){
 		
 		beginTransaction();
 		
 		UUID id = null;
-		if(this.getFuncionarioLogado() != null)
-			id = this.getFuncionarioLogado().getId();
+		if(funcionarioLogado != null)
+			id = funcionarioLogado.getId();
 		
 		List<String> erros = _funcionarioServico.inativarFuncionario(funcionario, id);
 		if(!erros.isEmpty()){
@@ -79,11 +79,8 @@ private FuncionarioServico _funcionarioServico;
 	}
 	
 	public Funcionario logar(String email, String senha) throws Exception{
-		if(this.getFuncionarioLogado() != null)
-			throw new Exception("O funcionário " + this.getFuncionarioLogado().getNome() + " já está logado.");
 		
 		Funcionario funcionario = _funcionarioServico.logar(email, senha);
-		this.setFuncionarioLogado(funcionario);
 		
 		return funcionario;
 	}

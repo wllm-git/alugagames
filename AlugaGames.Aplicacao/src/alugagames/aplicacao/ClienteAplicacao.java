@@ -55,7 +55,6 @@ public class ClienteAplicacao  extends AplicacaoBase{
 	public Cliente logar(String email, String senha) throws Exception{
 		
 		Cliente cliente = _clienteServico.logar(email, senha);
-		this.setClienteLogado(cliente);
 		
 		return cliente;
 	}
