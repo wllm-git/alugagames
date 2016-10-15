@@ -8,7 +8,7 @@
 
 
 	<ui:define name="titulo">
-		Fazer Orçamento
+		Processar Orçamento
 		<h:outputStylesheet name="orcamento.css" library="css" />
 	</ui:define>
 	<!--  #{cadastroClienteBean.editando ? 'Editando Cliente' : 'Novo Cliente'} -->
@@ -29,7 +29,7 @@
 			<div>
 				<h1>
 
-					Fazer Orçamento
+					Processar Orçamento
 					<!--  #{cadastroClienteBean.editando ? 'Editando Cliente' : 'Novo Cliente'} -->
 				</h1>
 
@@ -54,10 +54,8 @@
 
 			<div class="telaOrcamentoCliente">
 
-				<!--Informações Orçamento -->
-				<h2>Informações do Orçamento</h2>
 
-				<div>
+			<div>
 					<div class="informacoesOrcamento">
 						<h:outputText value="Cliente:" styleClass="label" />
 						<p:outputLabel value="Roldão Wilker Bélo de Araújo"
@@ -71,37 +69,22 @@
 
 					<div class="informacoesOrcamento">
 						<h:outputText value="Status:" styleClass="label" />
-						<p:outputLabel value="Aberto" styleClass="informacao" />
+						<p:outputLabel value="Recebido" styleClass="informacao" />
 					</div>
 				</div>
 				<!-- Fim Informações Orçamento -->
 
 				<!-- Inicio Informações Produtos -->
-				<h2>Produtos</h2>
-				<div>
-
-					<div class="informacoesProduto">
-						<h:outputText value="Número de Série:" styleClass="label" />
-						<p:inputText styleClass="informacao" />
-					</div>
-					
-					<div class="informacoesProduto">
-						<p:selectOneMenu styleClass="comboProdutos">
-
-							<f:selectItem itemLabel="Console" itemValue="Console" />
-							<f:selectItem itemLabel="Controle" itemValue="Controle" />
-							<f:selectItem itemLabel="Acessório" itemValue="Acessório" />
-
-						</p:selectOneMenu>
-					
-					</div>
-					
-					
-					<p:commandButton value="Incluir" style="clear:both" />
-
+			
 					<p:dataTable style=" margin:10px 0 5px 0;" emptyMessage="Nenhum Produto Adicionado">
+						
+						<p:column headerText="Equipamento Entregue?">
+							<h:selectManyCheckbox />
+						</p:column>
+						
 						<p:column headerText="Descrição">
 							<h:outputText value="Alguma descrição Maluca" />
+							Valor
 						</p:column>
 
 						<p:column headerText="Nº Série">
@@ -119,22 +102,16 @@
 					
 					<div class="informacoesProduto">
 						<h:outputText value="Descrição dos problemas:" styleClass="label"/><br/>
-						<p:inputTextarea rows="10" cols="65" style="margin: 3px 0 3px 0;"  />
+						<p:inputTextarea rows="10" cols="65" style="margin: 3px 0 4px 0;"  />
 					</div><br />
 					
-					<p:commandButton value="Enviar Orçamento" style="clear:both" />
+					<p:commandButton value="Receber Orçamento" style="clear:both" />
 
 				</div>
 
 				<!-- Fim Informações Produtos -->
 
-			</div>
 			<!-- Fim Tela -->
-
-
-
-
-
 
 
 		</h:form>
