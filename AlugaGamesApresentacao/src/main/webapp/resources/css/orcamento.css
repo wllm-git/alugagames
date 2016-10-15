@@ -1,0 +1,27 @@
+
+.informacoesOrcamento, .informacoesProduto {
+	border-radius: 5%;
+	padding: 2px;
+	display: inline-block;
+	margin-right: 15px;
+	
+}
+
+
+.comboProdutos{
+	position: relative !important;
+	top: 7px !important;
+	background-color: blue !important;
+	
+}
+
+
+
+.label {
+	
+	font-weight: bold;
+	margin-right: 5px;
+	font-size: 1.4em;
+	margin-top: 4px;
+	
+}
