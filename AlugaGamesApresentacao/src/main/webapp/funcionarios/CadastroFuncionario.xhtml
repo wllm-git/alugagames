@@ -8,10 +8,10 @@
 
 
 	<ui:define name="titulo">
-		Cadastro de Cliente
+		Cadastro de Funcionário
 		
 	</ui:define>
-	<!--  #{cadastroClienteBean.editando ? 'Editando Cliente' : 'Novo Cliente'} -->
+	
 
 	<ui:define name="conteudo">
 
@@ -26,20 +26,22 @@
 
 			<p:messages id="messagePrincipal" closable="true" />
 
-				<div class="titulo-cadastros">
-				<p:graphicImage library="imagens" name="cliente64.png"/>
+			<div class="titulo-cadastros">
+				
+				<p:graphicImage library="imagens" name="funcionario64.png"/>
+				
 				<h1>
 
-					Cadastro de Cliente
+					Cadastro de Funcionário
 					<!--  #{cadastroClienteBean.editando ? 'Editando Cliente' : 'Novo Cliente'} -->
 				</h1>
 				
-			
+				
 			</div>
-
+			
 			<p:toolbar styleClass="barra-menu">
 				<p:toolbarGroup>
-					<p:button value="Novo" outcome="/clientes/CadastroCliente" />
+					<p:button value="Novo" outcome="/funcionarios/CadastroFuncionario" />
 
 					<p:commandButton value="Salvar" update="@form, messagePrincipal " />
 					<!--  action="#{cadastroClienteBean.salvar}" process="frm"
@@ -48,7 +50,8 @@
 				</p:toolbarGroup>
 
 				<p:toolbarGroup align="right">
-					<p:button value="Pesquisar" outcome="/clientes/PesquisaClientes" />
+					<p:button value="Pesquisar"
+						outcome="/funcionarios/PesquisaFuncionarios" />
 				</p:toolbarGroup>
 
 			</p:toolbar>
@@ -61,14 +64,15 @@
 				<p:inputText id="nomeCompleto" size="50" required="true" />
 
 				<p:outputLabel value="RG" for="rg" />
-				<p:inputText id="rg" size="12"  required="true"/>
+				<p:inputText id="rg" size="12" required="true" />
 
 				<p:outputLabel value="CPF" for="cpf" />
-				<p:inputMask id="cpf" mask="999.999.999-99" size="12"  required="true"/>
+				<p:inputMask id="cpf" mask="999.999.999-99" size="12"
+					required="true" />
 
 				<p:outputLabel value="Data de Nascimento" for="dataNascimento" />
-				<p:calendar id="dataNascimento" pattern="dd/MM/yyyy" locale="pt" required="true"
-					size="12" />
+				<p:calendar id="dataNascimento" pattern="dd/MM/yyyy" locale="pt"
+					required="true" size="12" />
 
 				<p:outputLabel value="Sexo" for="sexo" />
 				<p:selectOneRadio id="sexo" styleClass="sem-bordas" required="true">
@@ -77,35 +81,27 @@
 				</p:selectOneRadio>
 
 				<p:outputLabel value="Telefone" for="telefone" />
-				<p:inputMask id="telefone" mask="(99)9-9999-9999" required="true" size="13" />
+				<p:inputMask id="telefone" mask="(99)9-9999-9999" required="true"
+					size="13" />
 
 
 				<p:outputLabel value="E-mail" for="email" />
 				<p:inputText id="email" size="40" required="true" />
 
-				<p:outputLabel value="Estado" for="estado" />
-				<p:selectOneMenu id="estado" required="true">
-					<f:selectItem itemLabel="Selecione" itemValue="" />
-					<f:selectItem itemLabel="Pernambuco" itemValue="PE" />
-					<f:selectItem itemLabel="Paraíba" itemValue="PB" />
-					<f:selectItem itemLabel="Rio de Janeiro" itemValue="RJ" />
+				<p:outputLabel value="Função" for="funcao" />
+				<p:selectOneMenu id="funcao" required="true">
+					<f:selectItem itemLabel="Atendente" itemValue="Atendente" />
+					<f:selectItem itemLabel="Gerente" itemValue="Gerente" />
+					<f:selectItem itemLabel="Técnico" itemValue="Tecnico" />
 
 				</p:selectOneMenu>
 
-				<p:outputLabel value="Cidade" for="cidade" />
-				<p:selectOneMenu id="cidade" required="true">
-					<f:selectItem itemLabel="Selecione" itemValue="" />
-					<f:selectItem itemLabel="Recife" itemValue="Recife" />
-					<f:selectItem itemLabel="João Pessoa" itemValue="João Pessoa" />
-					<f:selectItem itemLabel="Rio de Janeiro" itemValue="Rio de Janeiro" />
-
-				</p:selectOneMenu>
 
 				<p:outputLabel value="Senha" for="password" />
 				<p:password size="20" id="password" goodLabel="Boa"
 					weakLabel="Fraca" strongLabel="Forte"
 					promptLabel="Digite uma senha" feedback="true"
-					match="confirmarSenha" required="true"/>
+					match="confirmarSenha" required="true" />
 
 				<p:outputLabel value="Confirmar Senha" for="confirmarSenha" />
 				<p:password size="20" id="confirmarSenha" required="true" />
