@@ -89,6 +89,7 @@ public class OrdemServicoServico extends ServicoBase<OrdemServico>{
 		os.setCliente(orcamento.getCliente());
 		os.setDataAbertura(new Date());
 		os.setInterna(false);
+		os.setOrcamento(orcamento);
 		os.setStatus(StatusOS.Aberta);
 		os.setDescricao(orcamento.getDescricao());
 		os.setValor(orcamento.getValor());
