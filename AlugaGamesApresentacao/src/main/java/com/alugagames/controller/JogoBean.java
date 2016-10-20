@@ -9,8 +9,7 @@ import com.alugagames.base.JogoApresentacao;
 
 import alugagames.aplicacao.JogoAplicacao;
 
-@ManagedBean
-@ApplicationScoped
+
 public class JogoBean{
 
 	
