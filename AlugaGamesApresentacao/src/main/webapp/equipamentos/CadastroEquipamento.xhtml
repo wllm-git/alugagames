@@ -1,0 +1,95 @@
+<ui:composition template="/WEB-INF/template/Layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:o="http://omnifaces.org/ui">
+
+
+	<ui:define name="titulo">
+		Cadastro de Equipamento
+		
+	</ui:define>
+	
+
+	<ui:define name="conteudo">
+
+		<f:metadata>
+			<o:viewParam name="cliente" />
+			<!--value="#{cadastroClienteBean.cliente}"-->
+		</f:metadata>
+
+
+
+		<h:form id="frm">
+
+			<p:messages id="messagePrincipal" closable="true" />
+
+			<div class="titulo-cadastros">
+				
+				<h1>
+
+					Cadastro de Equipamento
+					<!--  #{cadastroClienteBean.editando ? 'Editando Cliente' : 'Novo Cliente'} -->
+				</h1>
+				
+				
+			</div>
+			
+			<p:toolbar styleClass="barra-menu">
+				<p:toolbarGroup>
+					<p:button value="Novo" outcome="/equipamentos/CadastroEquipamento" />
+
+					<p:commandButton value="Salvar" update="@form, messagePrincipal " />
+					<!--  action="#{cadastroClienteBean.salvar}" process="frm"
+						update="messagePrincipal @form" /> -->
+
+				</p:toolbarGroup>
+
+				<p:toolbarGroup align="right">
+					<p:button value="Pesquisar"
+						outcome="/funcionarios/PesquisaFuncionarios" />
+				</p:toolbarGroup>
+
+			</p:toolbar>
+
+			<p:panelGrid styleClass="grid-cadastros" columns="2" id="panel"
+				columnClasses="rotulo, campo">
+
+
+				<p:outputLabel value="Número de Série" for="numeroDeSerie" />
+				<p:inputText id="numeroDeSerie" size="20" required="true" />
+				
+				<p:outputLabel value="Tipo" for="tipo" />
+				<p:selectOneMenu id="tipo" required="true">
+					<f:selectItem itemLabel="Controle" itemValue="controle" />
+					<f:selectItem itemLabel="Fonte" itemValue="fonte" />
+					<f:selectItem itemLabel="Acessórios" itemValue="acessorios" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Valor" for="valor" />
+				<p:inputText id="valor" size="6" required="true" styleClass="moeda" />
+				
+				<p:outputLabel value="Voltagem" for="voltagem" />
+				<p:selectOneRadio id="voltagem" styleClass="sem-bordas" required="true">
+					<f:selectItem itemLabel="110" itemValue="110" />
+					<f:selectItem itemLabel="220" itemValue="220" />
+				</p:selectOneRadio>
+				
+				<p:outputLabel value="Modelo de Console" for="modeloConsole" />
+				<p:selectOneMenu id="modeloConsole" required="true">
+					<f:selectItem itemLabel="XBox One" itemValue="xboxone" />
+					<f:selectItem itemLabel="PS4" itemValue="ps4" />
+					<f:selectItem itemLabel="Nitendo WI" itemValue="nitendowi" />
+				</p:selectOneMenu>
+
+
+			</p:panelGrid>
+
+		</h:form>
+
+
+	</ui:define>
+
+</ui:composition>
