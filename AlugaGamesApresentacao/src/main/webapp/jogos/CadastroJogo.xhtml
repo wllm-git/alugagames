@@ -1,0 +1,60 @@
+<ui:composition template="/WEB-INF/template/Layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:define name="titulo">Cadastrar Jogo</ui:define>
+
+	<ui:define name="conteudo">
+
+		<h1>Cadastrar Jogo</h1>
+
+		<h:form id="frm">
+
+			<p:toolbar styleClass="barra-menu">
+				<p:toolbarGroup>
+					<p:commandButton value="Salvar" />
+				</p:toolbarGroup>
+				<p:toolbarGroup>
+					<p:commandButton value="Pesquisa" />
+				</p:toolbarGroup>
+
+
+				<p:toolbarGroup align="right">
+					<p:button value="Novo" outcome="/clientes/CadastroCliente" />
+				</p:toolbarGroup>
+
+			</p:toolbar>
+
+			<p:panelGrid columns="2" columnClasses="rotulo, campo"
+				styleClass="grid-cadastros">
+
+				<p:outputLabel value="Nome do Jogo" for="nomeDoJogo" />
+				<p:inputText id="nomeDoJogo" size="30" />
+
+				<p:outputLabel value="Categoria" for="categoria" />
+				<p:selectOneMenu id="categoria">
+					<f:selectItem itemLabel="Aventura" itemValue="aventura" />
+					<f:selectItem itemLabel="Ação" itemValue="acao" />
+					<f:selectItem itemLabel="Esporte" itemValue="esporte" />
+					<f:selectItem itemLabel="Corrida" itemValue="corrida" />
+					<f:selectItem itemLabel="Acarde" itemValue="acarde" />
+					<f:selectItem itemLabel="Estratégia" itemValue="estrategia" />
+					<f:selectItem itemLabel="Guerra" itemValue="guerra" />
+				</p:selectOneMenu>
+
+				<p:outputLabel value="Ano" for="ano" />
+				<p:calendar id="ano" size="8" locale="pt" pattern="yyyy" />
+
+			</p:panelGrid>
+
+
+
+
+		</h:form>
+	</ui:define>
+
+
+</ui:composition>
