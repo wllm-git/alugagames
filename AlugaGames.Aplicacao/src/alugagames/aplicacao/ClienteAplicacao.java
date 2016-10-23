@@ -7,7 +7,7 @@ import alugagames.core.clientes.Cliente;
 import alugagames.core.clientes.ClienteServico;
 import alugagames.repositorio.ClienteRepositorio;
 
-public class ClienteAplicacao  extends AplicacaoBase{
+public class ClienteAplicacao extends AplicacaoBase{
 	private ClienteServico _clienteServico;
 	
 	public ClienteAplicacao(){

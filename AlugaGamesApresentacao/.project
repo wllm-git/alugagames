@@ -3,6 +3,8 @@
 	<name>AlugaGamesApresentacao</name>
 	<comment></comment>
 	<projects>
+		<project>AlugaGames.Core</project>
+		<project>AlugaGames.Aplicacao</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
