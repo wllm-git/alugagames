@@ -58,33 +58,35 @@
 
 
 				<p:outputLabel value="Nome Completo" for="nomeCompleto" />
-				<p:inputText id="nomeCompleto" size="50" required="true" />
+				<p:inputText id="nomeCompleto" size="50" required="true" value="#{testeBean.clienteApresentacao.nome}"/>
 
 				<p:outputLabel value="RG" for="rg" />
-				<p:inputText id="rg" size="12"  required="true"/>
+				<p:inputText id="rg" size="12"  required="true" value="#{testeBean.clienteApresentacao.rg}"/>
 
 				<p:outputLabel value="CPF" for="cpf" />
-				<p:inputMask id="cpf" mask="999.999.999-99" size="12"  required="true"/>
+				<p:inputMask id="cpf" mask="999.999.999-99" size="12"  required="true"
+					value="#{testeBean.clienteApresentacao.cpf}" />
 
 				<p:outputLabel value="Data de Nascimento" for="dataNascimento" />
 				<p:calendar id="dataNascimento" pattern="dd/MM/yyyy" locale="pt" required="true"
-					size="12" />
+					size="12" value="#{testeBean.clienteApresentacao.dataNascimento}" />
 
 				<p:outputLabel value="Sexo" for="sexo" />
-				<p:selectOneRadio id="sexo" styleClass="sem-bordas" required="true">
-					<f:selectItem itemLabel="Masculino" itemValue="MASCULINO" />
-					<f:selectItem itemLabel="Feminino" itemValue="FEMININO" />
+				<p:selectOneRadio id="sexo" styleClass="sem-bordas" required="true" value="#{testeBean.clienteApresentacao.sexo}">
+					<f:selectItem itemLabel="Masculino" itemValue="M" />
+					<f:selectItem itemLabel="Feminino" itemValue="F" />
 				</p:selectOneRadio>
 
 				<p:outputLabel value="Telefone" for="telefone" />
-				<p:inputMask id="telefone" mask="(99)9-9999-9999" required="true" size="13" />
+				<p:inputMask id="telefone" mask="(99)9-9999-9999" required="true" size="13" 
+				value="#{testeBean.clienteApresentacao.telefone}"	/>
 
 
 				<p:outputLabel value="E-mail" for="email" />
-				<p:inputText id="email" size="40" required="true" />
+				<p:inputText id="email" size="40" required="true" value="#{testeBean.clienteApresentacao.email}"/>
 
 				<p:outputLabel value="Estado" for="estado" />
-				<p:selectOneMenu id="estado" required="true">
+				<p:selectOneMenu id="estado" required="true" value="#{testeBean.clienteApresentacao.uf}">
 					<f:selectItem itemLabel="Selecione" itemValue="" />
 					<f:selectItem itemLabel="Pernambuco" itemValue="PE" />
 					<f:selectItem itemLabel="Paraíba" itemValue="PB" />
@@ -93,7 +95,7 @@
 				</p:selectOneMenu>
 
 				<p:outputLabel value="Cidade" for="cidade" />
-				<p:selectOneMenu id="cidade" required="true">
+				<p:selectOneMenu id="cidade" required="true" value="#{testeBean.clienteApresentacao.cidade}">
 					<f:selectItem itemLabel="Selecione" itemValue="" />
 					<f:selectItem itemLabel="Recife" itemValue="Recife" />
 					<f:selectItem itemLabel="João Pessoa" itemValue="João Pessoa" />
@@ -105,15 +107,20 @@
 				<p:password size="20" id="password" goodLabel="Boa"
 					weakLabel="Fraca" strongLabel="Forte"
 					promptLabel="Digite uma senha" feedback="true"
-					match="confirmarSenha" required="true"/>
+					match="confirmarSenha" required="true" value="#{testeBean.clienteApresentacao.senha}" />
 
 				<p:outputLabel value="Confirmar Senha" for="confirmarSenha" />
 				<p:password size="20" id="confirmarSenha" required="true" />
 
 
 			</p:panelGrid>
-
+			
+			<p:commandButton value="Enviar" action="#{testeBean.testar}"  update="@form"/>			
 		</h:form>
+		
+		
+
+			
 
 
 	</ui:define>

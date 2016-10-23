@@ -3,7 +3,6 @@ import java.util.UUID;
 
 import alugagames.core.equipamentos.TipoEquipamento;
 import alugagames.core.funcionarios.Funcionario;
-import alugagames.core.shared.Produto;
 import alugagames.repositorio.FuncionarioRepositorio;
 
 public class Teste {
