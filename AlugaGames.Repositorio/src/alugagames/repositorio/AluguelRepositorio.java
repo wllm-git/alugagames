@@ -18,7 +18,7 @@ public class AluguelRepositorio extends RepositorioBase<Aluguel> implements IAlu
 	public int getNextCodigo() {
 		EntityManager em = ConnectionManager.getEntityManager();
 		Query q = em.createQuery("Select COUNT(*) From Aluguel");
-		return Math.toIntExact((long)q.getSingleResult()) + 1;
+		return Math.toIntExact((Long)q.getSingleResult()) + 1;
 	}
 
 	@Override

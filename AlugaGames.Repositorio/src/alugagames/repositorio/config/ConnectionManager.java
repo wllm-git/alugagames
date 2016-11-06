@@ -42,6 +42,12 @@ public class ConnectionManager {
 	private static void createEntityManager(){
 		if(em != null)
 			return;
+		
+		try {
+			Class.forName( "com.mysql.jdbc.Driver" );
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 		emf = Persistence.createEntityManagerFactory("hibernateconnection");
 		em = emf.createEntityManager();
 	}

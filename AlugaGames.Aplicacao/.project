@@ -4,6 +4,7 @@
 	<comment></comment>
 	<projects>
 		<project>AlugaGames.Core</project>
+		<project>AlugaGames.Repositorio</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

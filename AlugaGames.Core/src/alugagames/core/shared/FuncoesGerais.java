@@ -21,7 +21,7 @@ public class FuncoesGerais {
 
         boolean igual = true;
         for (int i = 1; i < 11 && igual; i++)
-            if (cpf.charAt(i) == cpf.charAt(0))
+            if (cpf.charAt(i) != cpf.charAt(0))
                 igual = false;
 
         if (igual || cpf == "12345678909")

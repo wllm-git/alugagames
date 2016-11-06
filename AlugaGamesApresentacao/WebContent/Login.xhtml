@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<h:outputStylesheet library="css" name="estilo.css"></h:outputStylesheet>
+</h:head>
+<h:body>
+
+		<f:metadata>
+			<f:viewParam name="dummy"/>
+			<!--  f:event listener="#{loginBean.preRender}" type="preRenderView"></f:event>-->
+		</f:metadata>
+
+			<div id="login-logo">
+				<h1 style="margin-left: 30px;">Login - AlugaGames</h1>
+			</div>
+			<h:form id="frm" prependId="false">
+			
+			<div id="login-dialog">
+			
+			<p:messages id="messages" autoUpdate="true" closable="true"/>
+			
+				<p:panelGrid columns="2" styleClass="grid-login">
+					<p:outputLabel value="E-mail" for="j_username" />
+					<p:inputText size="30" id="j_username" />
+
+					<p:outputLabel value="Senha" for="j_password" />
+					<p:password size="30" />
+
+				</p:panelGrid>
+				<p:commandButton value="Entrar" style="margin-top: 5px;" action="#{loginBean.login}" ajax="false" />
+			</div>
+	</h:form>
+
+
+
+
+</h:body>
+
+
+</html>

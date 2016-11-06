@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="AlugaGames">
-        <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
-        <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
-        <property name="java-output-path" value="/AlugaGamesApresentacao/target/classes"/>
-        <property name="context-root" value="AlugaGames"/>
+    <wb-module deploy-name="AlugaGamesApresentacao">
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <dependent-module archiveName="AlugaGames.Core.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/AlugaGames.Core/AlugaGames.Core">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="AlugaGames.Repositorio.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/AlugaGames.Repositorio/AlugaGames.Repositorio">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="AlugaGames.Aplicacao.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/AlugaGames.Aplicacao/AlugaGames.Aplicacao">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="java-output-path" value="/AlugaGamesApresentacao/build/classes"/>
+        <property name="context-root" value="AlugaGamesApresentacao"/>
     </wb-module>
 </project-modules>
