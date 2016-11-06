@@ -4,8 +4,10 @@ import java.util.UUID;
 
 import alugagames.core.alugueis.Aluguel;
 import alugagames.core.alugueis.regras.AluguelPrecisaTerDataInicioValida;
+import alugagames.core.consoles.Console;
 import alugagames.core.equipamentos.TipoEquipamento;
-import alugagames.core.funcionarios.Funcionario;
+import alugagames.core.shared.FuncoesGerais;
+import alugagames.repositorio.ConsoleRepositorio;
 
 public class Teste {
 
@@ -13,9 +15,11 @@ public class Teste {
 		
 		try {
 
-			UUID id = UUID.fromString("42aeaf89-44ba-44fc-a778-f2f97f474485");
-			Funcionario f = new Funcionario();
+			UUID id = UUID.fromString("b5f35643-1bdd-432d-8e47-3329935f428b");
+			Console f = new Console();
 			f.setId(id);
+			//Console c = new ConsoleRepositorio().buscarPorID(id);
+			
 			//===========================================================================================================			
 //			int qtdAluguelEmAndamento = new FuncionarioRepositorio().getQtdDeAlugueisEmAndamento(f);
 //			System.out.println(qtdAluguelEmAndamento);
@@ -34,10 +38,7 @@ public class Teste {
 			//===========================================================================================================			
 			System.out.println(TipoEquipamento.Controle.toString() == "Controle");
 			
-			Aluguel a = new Aluguel();
-			a.setDataAluguelInicio(new Date(116,10,15));
-			String ret = new AluguelPrecisaTerDataInicioValida().validar(a);
-			System.out.println(ret);
+			System.out.println(FuncoesGerais.emailValido("willia.m@gmail.vv"));
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

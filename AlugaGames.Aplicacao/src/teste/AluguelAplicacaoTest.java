@@ -127,31 +127,6 @@ public class AluguelAplicacaoTest {
 		ConnectionManager.commit();
 	}
 
-	
-
-	@Test
-	public void confirmarReserva() {
-		Aluguel a = aluguelAplicacao.abrirReserva(c1);
-		a.getConsoles().add(con1);
-		a.getMidias().add(m1);
-		a.getMidias().add(m2);
-
-		List<String> erros = aluguelAplicacao.confirmarReserva(a);
-
-		if (!erros.isEmpty())
-			Assert.fail();
-		else {
-			Aluguel a2 = aluguelAplicacao.buscarReservaPorCodigo(a.getCodigo());
-
-			if (a2 == null)
-				Assert.fail();
-			else {
-				Assert.assertEquals(a.getId(), a2.getId());
-				Assert.assertEquals(StatusAluguel.Reservado, a2.getStatus());
-			}
-		}
-	}
-
 	@Test
 	public void confirmarAluguel() {
 		Aluguel a = aluguelAplicacao.abrirReserva(c1);

@@ -1,7 +1,6 @@
 package alugagames.core.alugueis.regras;
 
 import java.util.Calendar;
-import java.util.Date;
 
 import alugagames.core.alugueis.Aluguel;
 import alugagames.core.shared.validacoesregras.IRegra;
@@ -19,7 +18,7 @@ public class AluguelPrecisaTerDataFimValida implements IRegra<Aluguel> {
 		inicio.setTime(obj.getDataAluguelInicio());
 		
 		Calendar fim = Calendar.getInstance();
-		fim.setTime(new Date());
+		fim.setTime(obj.getDataAluguelFim());
 		
 		if(!inicio.before(fim))
 			return "Data de devolução inválida.";
