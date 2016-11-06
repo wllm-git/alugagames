@@ -129,7 +129,7 @@ public class AluguelServico extends ServicoBase<Aluguel>{
 	}
 	
 	public List<String> finalizarAluguel(Aluguel aluguel){
-		List<String> erros = new AluguelAptoParaSerFinalizado(_repositorio).validar(aluguel);
+		List<String> erros = new AluguelAptoParaSerFinalizado(_repositorio, _atendenteServico).validar(aluguel);
 		
 		if(!erros.isEmpty())
 			return erros;

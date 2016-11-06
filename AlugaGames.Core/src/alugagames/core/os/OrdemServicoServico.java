@@ -58,7 +58,6 @@ public class OrdemServicoServico extends ServicoBase<OrdemServico>{
 		List<String> erros = new ArrayList<>();
 		
 		OrdemServico os = new OrdemServico();
-		os.setAtendente(aluguel.getAtendente());
 		os.setCliente(aluguel.getCliente());
 		os.setDataAbertura(new Date());
 		os.setInterna(true);
@@ -87,10 +86,10 @@ public class OrdemServicoServico extends ServicoBase<OrdemServico>{
 		List<String> erros = new ArrayList<>();
 		
 		OrdemServico os = new OrdemServico();
-		os.setAtendente(orcamento.getAtendente());
 		os.setCliente(orcamento.getCliente());
 		os.setDataAbertura(new Date());
 		os.setInterna(false);
+		os.setOrcamento(orcamento);
 		os.setStatus(StatusOS.Aberta);
 		os.setDescricao(orcamento.getDescricao());
 		os.setValor(orcamento.getValor());
@@ -160,11 +159,8 @@ public class OrdemServicoServico extends ServicoBase<OrdemServico>{
 			return erros;
 		
 		if(ordemServico.isInterna())
-			erros = fecharOSInterna(ordemServico);
-		
-		if(!erros.isEmpty())
-			return erros;
-		
+			fecharOSInterna(ordemServico);
+				
 		for (OrdemServicoItem item : ordemServico.getOrdemServicoItens()) {
 			item.setStatusOSItem(StatusOSItem.Entregue);
 		}
@@ -177,7 +173,7 @@ public class OrdemServicoServico extends ServicoBase<OrdemServico>{
 		return erros;
 	}
 	
-	private List<String> fecharOSInterna(OrdemServico ordemServico){
+	private void fecharOSInterna(OrdemServico ordemServico){
 		
 		for (OrdemServicoItem item : ordemServico.getOrdemServicoItens()) {
 			
@@ -198,8 +194,6 @@ public class OrdemServicoServico extends ServicoBase<OrdemServico>{
 				_repositorio.atualizarStatusConsole(item.getNumeroSerie(), StatusProduto.Disponivel);
 			}
 		}
-		
-		return null;
 	}
 	
 	public OrdemServico buscarPorCodigo(int codigo){

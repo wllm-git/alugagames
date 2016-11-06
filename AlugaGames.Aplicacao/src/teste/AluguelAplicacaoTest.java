@@ -23,7 +23,6 @@ import alugagames.core.os.StatusOS;
 import alugagames.core.shared.StatusProduto;
 import alugagames.core.shared.Voltagem;
 import alugagames.core.tiposconsole.TipoConsole;
-import alugagames.repositorio.AluguelRepositorio;
 import alugagames.repositorio.ClienteRepositorio;
 import alugagames.repositorio.ConsoleRepositorio;
 import alugagames.repositorio.FuncionarioRepositorio;
@@ -129,44 +128,6 @@ public class AluguelAplicacaoTest {
 	}
 
 	@Test
-	public void abrirReserva() {
-		try {
-			Aluguel a = aluguelAplicacao.abrirReserva(c1);
-
-			Aluguel a2 = new AluguelRepositorio().buscarPorID(a.getId());
-
-			Assert.assertEquals(a.getId(), a2.getId());
-
-		} catch (Exception e) {
-			Assert.fail();
-		}
-
-	}
-
-	@Test
-	public void confirmarReserva() {
-		Aluguel a = aluguelAplicacao.abrirReserva(c1);
-		a.getConsoles().add(con1);
-		a.getMidias().add(m1);
-		a.getMidias().add(m2);
-
-		List<String> erros = aluguelAplicacao.confirmarReserva(a);
-
-		if (!erros.isEmpty())
-			Assert.fail();
-		else {
-			Aluguel a2 = aluguelAplicacao.buscarReservaPorCodigo(a.getCodigo());
-
-			if (a2 == null)
-				Assert.fail();
-			else {
-				Assert.assertEquals(a.getId(), a2.getId());
-				Assert.assertEquals(StatusAluguel.Reservado, a2.getStatus());
-			}
-		}
-	}
-
-	@Test
 	public void confirmarAluguel() {
 		Aluguel a = aluguelAplicacao.abrirReserva(c1);
 		a.getConsoles().add(con1);
@@ -177,7 +138,7 @@ public class AluguelAplicacaoTest {
 
 		Aluguel a2 = aluguelAplicacao.buscarReservaPorCodigo(a.getCodigo());
 
-		a2.setAtendente(a1);
+		a2.setAtendenteConfirmacao(a1);
 		List<String> erros = aluguelAplicacao.confirmarAluguel(a2);
 
 		if (!erros.isEmpty())
@@ -205,7 +166,7 @@ public class AluguelAplicacaoTest {
 
 		Aluguel a2 = aluguelAplicacao.buscarReservaPorCodigo(a.getCodigo());
 
-		a2.setAtendente(a1);
+		a2.setAtendenteConfirmacao(a1);
 		aluguelAplicacao.confirmarAluguel(a2);
 
 		Aluguel a3 = aluguelAplicacao.buscarAluguelPorCodigo(a.getCodigo());
@@ -250,7 +211,7 @@ public class AluguelAplicacaoTest {
 
 		Aluguel a2 = aluguelAplicacao.buscarReservaPorCodigo(a.getCodigo());
 
-		a2.setAtendente(a1);
+		a2.setAtendenteConfirmacao(a1);
 		aluguelAplicacao.confirmarAluguel(a2);
 
 		Aluguel a3 = aluguelAplicacao.buscarAluguelPorCodigo(a.getCodigo());
