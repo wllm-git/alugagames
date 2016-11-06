@@ -1,6 +1,7 @@
 package alugagames.core.clientes.regras;
 
 import alugagames.core.clientes.Cliente;
+import alugagames.core.shared.FuncoesGerais;
 import alugagames.core.shared.validacoesregras.IRegra;
 
 public class ClientePrecisaTerEmailValido implements IRegra<Cliente> {

@@ -1,5 +1,6 @@
 package alugagames.core.funcionarios;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
@@ -8,8 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Funcionario {
+public class Funcionario implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
 	@Id
 	@Column(length=16)
 	private UUID id;

@@ -20,8 +20,6 @@
 			<!--value="#{cadastroClienteBean.cliente}"-->
 		</f:metadata>
 
-
-
 		<h:form id="frm">
 
 			<p:messages id="messagePrincipal" closable="true" />
@@ -43,9 +41,8 @@
 				<p:toolbarGroup>
 					<p:button value="Novo" outcome="/funcionarios/CadastroFuncionario" />
 
-					<p:commandButton value="Salvar" update="@form, messagePrincipal " />
-					<!--  action="#{cadastroClienteBean.salvar}" process="frm"
-						update="messagePrincipal @form" /> -->
+					<p:commandButton value="Salvar" update="@form, messagePrincipal"
+					 action="#{funcionarioBean.salvarFuncionario}" process="frm" />
 
 				</p:toolbarGroup>
 
@@ -61,38 +58,35 @@
 
 
 				<p:outputLabel value="Nome Completo" for="nomeCompleto" />
-				<p:inputText id="nomeCompleto" size="50" required="true" />
-
-				<p:outputLabel value="RG" for="rg" />
-				<p:inputText id="rg" size="12" required="true" />
+				<p:inputText id="nomeCompleto" size="50" required="true" value="#{funcionarioBean.funcionario.nome}"/>
 
 				<p:outputLabel value="CPF" for="cpf" />
 				<p:inputMask id="cpf" mask="999.999.999-99" size="12"
-					required="true" />
+					required="true" value="#{funcionarioBean.funcionario.cpf}" />
 
 				<p:outputLabel value="Data de Nascimento" for="dataNascimento" />
 				<p:calendar id="dataNascimento" pattern="dd/MM/yyyy" locale="pt"
-					required="true" size="12" />
+					required="true" size="12" value="#{funcionarioBean.funcionario.dataNascimento}" />
 
 				<p:outputLabel value="Sexo" for="sexo" />
-				<p:selectOneRadio id="sexo" styleClass="sem-bordas" required="true">
+				<p:selectOneRadio id="sexo" styleClass="sem-bordas" required="true" 
+					value="#{funcionarioBean.funcionario.sexo}">
 					<f:selectItem itemLabel="Masculino" itemValue="MASCULINO" />
 					<f:selectItem itemLabel="Feminino" itemValue="FEMININO" />
 				</p:selectOneRadio>
 
 				<p:outputLabel value="Telefone" for="telefone" />
 				<p:inputMask id="telefone" mask="(99)9-9999-9999" required="true"
-					size="13" />
+					size="13" value="#{funcionarioBean.funcionario.telefone}"/>
 
 
 				<p:outputLabel value="E-mail" for="email" />
-				<p:inputText id="email" size="40" required="true" />
+				<p:inputText id="email" size="40" required="true" value="#{funcionarioBean.funcionario.email}" />
 
 				<p:outputLabel value="Função" for="funcao" />
-				<p:selectOneMenu id="funcao" required="true">
-					<f:selectItem itemLabel="Atendente" itemValue="Atendente" />
-					<f:selectItem itemLabel="Gerente" itemValue="Gerente" />
-					<f:selectItem itemLabel="Técnico" itemValue="Tecnico" />
+				<p:selectOneMenu id="funcao" required="true" value="#{funcionarioBean.funcionario.funcao}">
+					<f:selectItems value="#{funcionarioBean.funcoes}" var="funcao" 
+						itemLabel="#{funcao}" itemValue="#{funcao}"/>
 
 				</p:selectOneMenu>
 
@@ -100,7 +94,7 @@
 				<p:outputLabel value="Senha" for="password" />
 				<p:password size="20" id="password" goodLabel="Boa"
 					weakLabel="Fraca" strongLabel="Forte"
-					promptLabel="Digite uma senha" feedback="true"
+					promptLabel="Digite uma senha" feedback="true" value="#{funcionarioBean.funcionario.senha}"
 					match="confirmarSenha" required="true" />
 
 				<p:outputLabel value="Confirmar Senha" for="confirmarSenha" />
