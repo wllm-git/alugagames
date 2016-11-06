@@ -12,12 +12,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
 import alugagames.core.clientes.Cliente;
 import alugagames.core.funcionarios.Funcionario;
+import alugagames.core.orcamentos.Orcamento;
 
 @Entity
 public class OrdemServico {
@@ -40,6 +42,10 @@ public class OrdemServico {
 	private String descricao;
 	private StatusOS status;
 	private boolean interna;
+	@OneToOne
+	@JoinColumn(name = "orcamento_id")
+	private Orcamento orcamento;
+	
 	@OneToMany(mappedBy="ordemServico", fetch = FetchType.LAZY)
 	@Cascade(CascadeType.ALL)
 	private List<OrdemServicoItem> ordemServicoItens;
@@ -135,6 +141,14 @@ public class OrdemServico {
 
 	public void setInterna(boolean interna) {
 		this.interna = interna;
+	}
+
+	public Orcamento getOrcamento() {
+		return orcamento;
+	}
+
+	public void setOrcamento(Orcamento orcamento) {
+		this.orcamento = orcamento;
 	}
 
 	public List<OrdemServicoItem> getOrdemServicoItens() {

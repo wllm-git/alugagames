@@ -9,10 +9,8 @@ public class ClientePrecisaTerEmailValido implements IRegra<Cliente> {
 	public String validar(Cliente obj) {
 		if(obj.getEmail() == null || obj.getEmail().isEmpty())
 			return "Email não informado.";
-		//TODO alterar expressão regular de validação de e-mail
-		
-		//else if(FuncoesGerais.emailValido(obj.getEmail()))
-			//return "Email inválido.";
+		else if(!FuncoesGerais.emailValido(obj.getEmail()))
+			return "Email inválido.";
 		
 		return null;
 	}
