@@ -1,0 +1,34 @@
+<persistence version="2.0" 
+	xmlns="http://java.sun.com/xml/ns/persistence" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	<persistence-unit name="hibernateconnection" transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		
+		<class>alugagames.core.equipamentos.Equipamento</class>
+		<class>alugagames.core.alugueis.Aluguel</class>
+		<class>alugagames.core.funcionarios.Funcionario</class>
+		<class>alugagames.core.clientes.Cliente</class>
+		<class>alugagames.core.consoles.Console</class>
+		<class>alugagames.core.jogos.Jogo</class>
+		<class>alugagames.core.midias.Midia</class>
+		<class>alugagames.core.orcamentos.Orcamento</class>
+		<class>alugagames.core.orcamentos.OrcamentoItem</class>
+		<class>alugagames.core.os.OrdemServico</class>
+		<class>alugagames.core.os.OrdemServicoItem</class>
+		<class>alugagames.core.tiposconsole.TipoConsole</class>
+		
+		<properties>
+			<property name="hibernate.dialect"
+				value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="javax.persistence.jdbc.driver"
+				value="com.mysql.jdbc.Driver" />
+			<property name = "javax.persistence.jdbc.user" value="root" />
+			<property name = "javax.persistence.jdbc.password" value="" />
+			<property name = "javax.persistence.jdbc.url"
+				value="jdbc:mysql://localhost:3306/alugagames" />
+		</properties>
+	</persistence-unit>
+</persistence>
