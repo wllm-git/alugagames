@@ -50,15 +50,16 @@
 
 		<h:form style="display: inline-block">
 			<p:menubar styleClass="menu-sistema">
-				<p:submenu label="Cadastros">
-					<p:menuitem value="Clientes" outcome="/clientes/CadastroCliente.xhtml" />
-					<p:menuitem value="Funcionários" outcome="/funcionarios/CadastroFuncionario.xhtml" />
-					<p:menuitem value="Jogos" outcome="/jogos/CadastroJogo.xhtml" />
-					<p:menuitem value="Equipamentos" outcome="/equipamentos/CadastroEquipamento.xhtml" />
-					<p:menuitem value="Console" outcome="/consoles/CadastroConsole.xhtml" />
+			
+			<p:submenu label="Serviços">
+			
+				
+				<p:submenu label="Aluguel">
+					<p:menuitem value="Reservar"
+						outcome="/aluguel/ReservarProduto.xhtml" />
 				</p:submenu>
 			
-			<p:submenu label="Orçamento">
+				<p:submenu label="Orçamento">
 					<p:menuitem value="Fazer"
 						outcome="/orcamentos/FazerOrcamento.xhtml" />
 						
@@ -70,13 +71,23 @@
 						
 							<p:menuitem value="Processar"
 						outcome="/orcamentos/ProcessarOrcamento.xhtml" />
-				</p:submenu>
+					</p:submenu>
 				
-				<p:submenu label="Aluguel">
-					<p:menuitem value="Reservar"
-						outcome="/aluguel/ReservarProduto.xhtml" />
+					
 					
 				</p:submenu>
+			
+				<p:submenu label="Cadastros">
+					<p:menuitem value="Clientes" outcome="/clientes/CadastroCliente.xhtml" />
+					<p:menuitem value="Funcionários" outcome="/funcionarios/CadastroFuncionario.xhtml" />
+					<p:menuitem value="Jogos" outcome="/jogos/CadastroJogo.xhtml" />
+					<p:menuitem value="Equipamentos" outcome="/equipamentos/CadastroEquipamento.xhtml" />
+					<p:menuitem value="Console" outcome="/consoles/CadastroConsole.xhtml" />
+				</p:submenu>
+			
+			
+				
+				
 				
 				<p:menuitem value="Sair" url="/j_spring_security_logout"/>
 

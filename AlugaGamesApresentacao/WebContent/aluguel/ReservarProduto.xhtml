@@ -9,6 +9,7 @@
 
 	<ui:define name="titulo">
 		Reservar Produto
+		<h:outputStylesheet name="reservar.css" library="css" />
 		
 	</ui:define>
 	<!--  #{cadastroClienteBean.editando ? 'Editando Cliente' : 'Novo Cliente'} -->
@@ -27,7 +28,7 @@
 			<p:messages id="messagePrincipal" closable="true" />
 
 				<div class="titulo-cadastros">
-				<p:graphicImage library="imagens" name="cliente64.png"/>
+			
 				<h1>
 
 					Reservar Produto
@@ -37,82 +38,112 @@
 			
 			</div>
 
-			<p:toolbar styleClass="barra-menu">
-				<p:toolbarGroup>
-					<p:button value="Novo" outcome="/aluguel/ReservarProduto" />
+	
 
-					<p:commandButton value="Salvar" update="@form, messagePrincipal " />
-					<!--  action="#{cadastroClienteBean.salvar}" process="frm"
-						update="messagePrincipal @form" /> -->
-
-				</p:toolbarGroup>
-
-				<p:toolbarGroup align="right">
-					<p:button value="Pesquisar" outcome="/clientes/PesquisaClientes" />
-				</p:toolbarGroup>
-
-			</p:toolbar>
-
-			<p:panelGrid styleClass="grid-cadastros" columns="2" id="panel"
-				columnClasses="rotulo, campo">
+			<h:panelGrid styleClass="grid-cadastros" columns="2" id="panel"
+				columnClasses="rotulo, campo" rowClasses="one">
 
 
-				<p:outputLabel value="Nome Completo" for="nomeCompleto" />
-				<p:inputText id="nomeCompleto" size="50" required="true" />
+				<p:outputLabel value="Data Inicial" for="dataInicial" />
+				<p:calendar id="dataInicial" pattern="dd/MM/yyyy" locale="pt" 
+					required="true" size="8"/>
+					
+				<p:outputLabel value="Data Final" for="dataFinal" />
+				<p:calendar id="dataFinal" pattern="dd/MM/yyyy" locale="pt" 
+					required="true" size="8" />
 
-				<p:outputLabel value="RG" for="rg" />
-				<p:inputText id="rg" size="12"  required="true"/>
+				
+			</h:panelGrid>
+		
+			<div class="botoesReservar">
+				<p:commandButton value="Confimar Reserva"/>
+				<p:commandButton value="Cancelar" disabled="true" />
+			</div>
+			
+			<h2>Seus Itens</h2>
+			
+			<p:dataTable styleClass="tabelas-pesquisa" rows="10"
+				paginator="true" paginatorAlwaysVisible="false"
+				paginatorPosition="bottom" emptyMessage="Nenhum Item Adicionado"
+				id="seuItensTable">
 
-				<p:outputLabel value="CPF" for="cpf" />
-				<p:inputMask id="cpf" mask="999.999.999-99" size="12"  required="true"/>
+				<p:column headerText="Produto">
+					<h:outputText value="Xbox One" />
+				</p:column>
 
-				<p:outputLabel value="Data de Nascimento" for="dataNascimento" />
-				<p:calendar id="dataNascimento" pattern="dd/MM/yyyy" locale="pt" required="true"
-					size="12" />
-
-				<p:outputLabel value="Sexo" for="sexo" />
-				<p:selectOneRadio id="sexo" styleClass="sem-bordas" required="true">
-					<f:selectItem itemLabel="Masculino" itemValue="MASCULINO" />
-					<f:selectItem itemLabel="Feminino" itemValue="FEMININO" />
-				</p:selectOneRadio>
-
-				<p:outputLabel value="Telefone" for="telefone" />
-				<p:inputMask id="telefone" mask="(99)9-9999-9999" required="true" size="13" />
-
-
-				<p:outputLabel value="E-mail" for="email" />
-				<p:inputText id="email" size="40" required="true" />
-
-				<p:outputLabel value="Estado" for="estado" />
-				<p:selectOneMenu id="estado" required="true">
-					<f:selectItem itemLabel="Selecione" itemValue="" />
-					<f:selectItem itemLabel="Pernambuco" itemValue="PE" />
-					<f:selectItem itemLabel="Paraíba" itemValue="PB" />
-					<f:selectItem itemLabel="Rio de Janeiro" itemValue="RJ" />
-
-				</p:selectOneMenu>
-
-				<p:outputLabel value="Cidade" for="cidade" />
-				<p:selectOneMenu id="cidade" required="true">
-					<f:selectItem itemLabel="Selecione" itemValue="" />
-					<f:selectItem itemLabel="Recife" itemValue="Recife" />
-					<f:selectItem itemLabel="João Pessoa" itemValue="João Pessoa" />
-					<f:selectItem itemLabel="Rio de Janeiro" itemValue="Rio de Janeiro" />
-
-				</p:selectOneMenu>
-
-				<p:outputLabel value="Senha" for="password" />
-				<p:password size="20" id="password" goodLabel="Boa"
-					weakLabel="Fraca" strongLabel="Forte"
-					promptLabel="Digite uma senha" feedback="true"
-					match="confirmarSenha" required="true"/>
-
-				<p:outputLabel value="Confirmar Senha" for="confirmarSenha" />
-				<p:password size="20" id="confirmarSenha" required="true" />
+				<p:column headerText="Tipo" style="width: 80px">
+					<h:outputText value="Console" />
+				</p:column>
 
 
-			</p:panelGrid>
+				<p:column headerText="Preço"
+					style="width: 150px; text-align:center">
+					<h:outputText value="R$ 50,00" />
+				</p:column>
 
+				<p:column width="80" style="text-align:center;">
+					<p:button outcome="/clientes/CadastroCliente" icon="ui-icon-pencil" >
+						<f:param name="cliente" value="#{cliente.id}"/>
+					</p:button>
+					<p:commandButton icon="ui-icon-trash" oncomplete="PF('confirmarExclusao').show()" 
+						update=":frm:dialogoConfirmacao" process="@this">
+						<f:setPropertyActionListener value="#{cliente}" target="#{pesquisaClientesBean.clienteSelecionado}" />
+					</p:commandButton>
+
+				</p:column>
+
+			</p:dataTable>
+			
+			<div class="itensDisponiveis">
+				<h2>Itens Disponiveis</h2>
+				
+				<div id="filtro">
+					<p:outputLabel value="Filtrar por:" style="font-weight: bold; margin-bottom: 5px;"/><br/>
+					<p:selectOneMenu>
+						<f:selectItem itemLabel="Consoles" itemValue="console" />
+						<f:selectItem itemLabel="Controles" itemValue="controle" />
+						<f:selectItem itemLabel="Acessórios" itemValue="acessorio" />
+						<f:selectItem itemLabel="Jogos" itemValue="jogos" />
+					</p:selectOneMenu>
+				</div>
+			</div>
+			
+			<div id="itensDisponiveis">
+			
+			<p:dataTable styleClass="tabelas-pesquisa" rows="10"
+					paginator="true" paginatorAlwaysVisible="false"
+					paginatorPosition="bottom" emptyMessage="Nenhum Item Encontrado"
+					id="itensDisponiveisTable">
+	
+					<p:column headerText="Produto">
+						<h:outputText value="Xbox One" />
+					</p:column>
+	
+					<p:column headerText="Tipo" style="width: 80px">
+						<h:outputText value="Console" />
+					</p:column>
+	
+	
+					<p:column headerText="Preço"
+						style="width: 150px; text-align:center">
+						<h:outputText value="R$ 50,00" />
+					</p:column>
+	
+					<p:column width="80" style="text-align:center;">
+						<p:button outcome="/clientes/CadastroCliente" icon="ui-icon-pencil" >
+							<f:param name="cliente" value="#{cliente.id}"/>
+						</p:button>
+						<p:commandButton icon="ui-icon-trash" oncomplete="PF('confirmarExclusao').show()" 
+							update=":frm:dialogoConfirmacao" process="@this">
+							<f:setPropertyActionListener value="#{cliente}" target="#{pesquisaClientesBean.clienteSelecionado}" />
+						</p:commandButton>
+	
+					</p:column>
+	
+				</p:dataTable>
+			
+			</div>
+			
 		</h:form>
 
 

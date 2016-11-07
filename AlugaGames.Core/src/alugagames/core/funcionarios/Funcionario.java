@@ -12,6 +12,7 @@ import javax.persistence.Id;
 public class Funcionario implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
+	
 	@Id
 	@Column(length=16)
 	private UUID id;

@@ -48,33 +48,29 @@
 				</p:toolbarGroup>
 
 				<p:toolbarGroup align="right">
-					<p:button value="Pesquisar"
-						outcome="/funcionarios/PesquisaFuncionarios" />
+					<p:button value="Pesquisar" />
 				</p:toolbarGroup>
 
 			</p:toolbar>
 
 			<p:panelGrid styleClass="grid-cadastros" columns="2" id="panel"
 				columnClasses="rotulo, campo">
-
-
-				<p:outputLabel value="Número de Série" for="numeroDeSerie" />
-				<p:inputText id="numeroDeSerie" size="20" required="true" />
 				
 				<p:outputLabel value="Tipo" for="tipo" />
-				<p:selectOneMenu id="tipo" required="true">
-					<f:selectItem itemLabel="Controle" itemValue="controle" />
-					<f:selectItem itemLabel="Fonte" itemValue="fonte" />
-					<f:selectItem itemLabel="Acessórios" itemValue="acessorios" />
+				<p:selectOneMenu id="tipo" required="true" value="#{equipamentoBean.equipamento.tipoEquipamento}">
+					<f:selectItems value="#{equipamentoBean.tiposEquipamento}" var="equipamento"
+						itemLabel="#{equipamento}" itemValue="#{equipamento}"/>
 				</p:selectOneMenu>
 
 				<p:outputLabel value="Valor" for="valor" />
-				<p:inputText id="valor" size="6" required="true" styleClass="moeda" />
+				<p:inputText id="valor" size="6" required="true" styleClass="moeda" 
+					value="#{equipamentoBean.equipamento.preco}" />
 				
 				<p:outputLabel value="Voltagem" for="voltagem" />
-				<p:selectOneRadio id="voltagem" styleClass="sem-bordas" required="true">
-					<f:selectItem itemLabel="110" itemValue="110" />
-					<f:selectItem itemLabel="220" itemValue="220" />
+				<p:selectOneRadio id="voltagem" styleClass="sem-bordas" required="true" 
+					value="#{equipamentoBean.equipamento.voltagem}">
+					<f:selectItems value="#{equipamentoBean.voltagens}" var="voltagem"
+						itemLabel="#{voltagem}" itemValue="#{voltagem}"/>
 				</p:selectOneRadio>
 				
 				<p:outputLabel value="Modelo de Console" for="modeloConsole" />
