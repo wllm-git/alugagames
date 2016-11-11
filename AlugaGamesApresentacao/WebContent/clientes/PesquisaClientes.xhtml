@@ -37,24 +37,35 @@
 
 			</p:panelGrid>
 
-			<p:dataTable value="#{pesquisaClientesBean.clientesFiltrados}"
-				var="cliente" styleClass="tabelas-pesquisa" rows="10"
+			<p:dataTable value="#{clienteBean.clientes}"
+				var="cliente" styleClass="tabelas-pesquisa" rows="5"
 				paginator="true" paginatorAlwaysVisible="false"
 				paginatorPosition="bottom" emptyMessage="Nenhum Cliente Encontrado"
 				id="clientesTable">
 
-				<p:column headerText="Nome">
+				<p:column headerText="Nome" style="width: 150px;">
 					<h:outputText value="#{cliente.nome}" />
 				</p:column>
 
-				<p:column headerText="Tipo" style="width: 80px">
-					<h:outputText value="#{cliente.tipo}" />
+				<p:column headerText="R.G" style="width: 80px">
+					<h:outputText value="#{cliente.rg}" />
+				</p:column>
+				
+				<p:column headerText="cpf"
+					style="width: 150px; text-align:center">
+					
+					<h:outputText value="#{cliente.cpf}" />
 				</p:column>
 
 
-				<p:column headerText="CPF/CNPJ"
+				<p:column headerText="email"
 					style="width: 150px; text-align:center">
-					<h:outputText value="#{cliente.documentoReceitaFederal}" />
+					<h:outputText value="#{cliente.email}" />
+				</p:column>
+				
+				<p:column headerText="telefone"
+					style="width: 150px; text-align:center">
+					<h:outputText value="#{cliente.telefone}" />
 				</p:column>
 
 				<p:column width="80" style="text-align:center;">
