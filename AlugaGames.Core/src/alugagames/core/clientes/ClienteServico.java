@@ -33,6 +33,11 @@ public class ClienteServico extends ServicoBase<Cliente>{
 		
 		return erros;
 	}
+	
+	public Cliente buscarPorEmail(String email){
+		Cliente cliente = _repositorio.buscarPorEmail(email);
+		return cliente;
+	}
 
 	public Cliente logar(String email, String senha)  throws Exception {
 		Cliente cliente = _repositorio.buscarPorEmail(email);

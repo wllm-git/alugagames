@@ -53,6 +53,10 @@ public class ClienteAplicacao extends AplicacaoBase{
 		return _clienteServico.buscarTodos();
 	}
 	
+	public Cliente buscarPorEmail(String email){
+		return _clienteServico.buscarPorEmail(email);
+	}
+	
 	public Cliente logar(String email, String senha) throws Exception{
 		
 		Cliente cliente = _clienteServico.logar(email, senha);
