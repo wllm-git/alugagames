@@ -30,7 +30,7 @@ public class FuncionarioBean implements Serializable {
 		funcionarioAplicacao = new FuncionarioAplicacao();
 		getTodasFuncoes();
 		
-		//funcionarios = new FuncionarioAplicacao();
+		funcionarios = new FuncionarioAplicacao().buscarTodos();
 	}
 
 	public void salvarFuncionario() {
@@ -48,7 +48,7 @@ public class FuncionarioBean implements Serializable {
 			return;
 		}
 
-		FacesUtil.addInfoMessage("Funcionario cadastrado com sucesso!");
+		FacesUtil.addInfoMessage("Funcionário cadastrado com sucesso!");
 		
 		funcionario = new Funcionario();
 

@@ -64,6 +64,10 @@ public class FuncionarioServico extends ServicoBase<Funcionario>{
 		return erros;
 	}
 	
+	public Funcionario buscarPorEmail(String email){
+		return _repositorio.buscarPorEmail(email);
+	}
+	
 	public Funcionario logar(String email, String senha) throws Exception {
 		Funcionario funcionario = _repositorio.buscarPorEmail(email);
 		

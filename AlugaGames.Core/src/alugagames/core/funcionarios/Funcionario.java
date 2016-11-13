@@ -6,6 +6,8 @@ import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 
 @Entity
@@ -23,6 +25,8 @@ public class Funcionario implements Serializable {
 	private String telefone;
 	private char sexo;
 	private Date dataNascimento;
+	
+	@Enumerated(EnumType.STRING)
 	private Funcao funcao;
 	private boolean ativo;
 	

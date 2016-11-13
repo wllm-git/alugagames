@@ -52,11 +52,14 @@ public class ClienteBean implements Serializable {
 
 	// Remove os caracteres especiais
 	private void formatarAtributosCliente() {
+		
 		cliente.setCpf(cliente.getCpf().replace(".", "").replace("-", ""));
 		cliente.setTelefone(cliente.getTelefone().replace("(", "").replace(")", "").replace("-", ""));
 	}
 
+
 	public Cliente getCliente() {
+
 		return cliente;
 	}
 

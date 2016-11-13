@@ -5,11 +5,11 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
-	<ui:define name="titulo">Pesquisa Clientes</ui:define>
+	<ui:define name="titulo">Pesquisa de Funcionários</ui:define>
 
 	<ui:define name="conteudo">
 
-		<h1>Pesquisa de clientes</h1>
+		<h1>Pesquisa de funcionários</h1>
 
 		<h:form id="frm">
 
@@ -29,7 +29,7 @@
 				styleClass="grid-cadastros">
 
 				<p:outputLabel value="CPF/CNPJ" for="cpfCnpj" />
-				<p:inputText id="cpfCnpj" size="30" value="#{pesquisaClientesBean.filtro.documentoReceitaFederal}" />
+				<p:inputText id="cpfCnpj" size="30" />
 
 				<p:outputLabel value="Nome" for="nome" />
 				<p:inputText id="nome" size="60" value="#{pesquisaClientesBean.filtro.nome}" />
@@ -37,25 +37,36 @@
 
 			</p:panelGrid>
 
-			<p:dataTable value="#{pesquisaClientesBean.clientesFiltrados}"
-				var="cliente" styleClass="tabelas-pesquisa" rows="10"
+			<p:dataTable value="#{funcionarioBean.funcionarios}"
+				var="funcionario" styleClass="tabelas-pesquisa" rows="10"
 				paginator="true" paginatorAlwaysVisible="false"
 				paginatorPosition="bottom" emptyMessage="Nenhum Cliente Encontrado"
 				id="clientesTable">
 
-				<p:column headerText="Nome">
-					<h:outputText value="#{cliente.nome}" />
+				<p:column headerText="Nome" style="text-align:center;">
+					<h:outputText value="#{funcionario.nome}" />
+				</p:column>
+				
+				<p:column headerText="CPF" style="text-align:center;">
+					<h:outputText value="#{funcionario.cpf}" >
+						<f:converter></f:converter>
+					</h:outputText>
+				</p:column>
+				
+				<p:column headerText="Email" style="text-align:center;">
+					<h:outputText value="#{funcionario.email}" />
+				</p:column>
+				
+				<p:column headerText="Telefone" style="text-align:center;">
+					<h:outputText value="#{funcionario.telefone}"  />
+				</p:column>
+				
+				<p:column headerText="Data Nascimento" style="text-align:center;">
+					<h:outputText value="#{funcionario.dataNascimento}" >
+						<f:convertDateTime pattern="dd/MM/yyyy" locale="pt" />
+					</h:outputText>
 				</p:column>
 
-				<p:column headerText="Tipo" style="width: 80px">
-					<h:outputText value="#{cliente.tipo}" />
-				</p:column>
-
-
-				<p:column headerText="CPF/CNPJ"
-					style="width: 150px; text-align:center">
-					<h:outputText value="#{cliente.documentoReceitaFederal}" />
-				</p:column>
 
 				<p:column width="80" style="text-align:center;">
 					<p:button outcome="/clientes/CadastroCliente" icon="ui-icon-pencil" >
