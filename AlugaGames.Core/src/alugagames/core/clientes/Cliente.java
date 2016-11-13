@@ -1,5 +1,6 @@
 package alugagames.core.clientes;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
@@ -8,7 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Cliente {
+public class Cliente implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	@Id
 	@Column(length=16)
 	private UUID id;
@@ -72,6 +75,7 @@ public class Cliente {
 	}
 
 	public void setCpf(String cpf) {
+		
 		this.cpf = cpf;
 	}
 
@@ -80,6 +84,7 @@ public class Cliente {
 	}
 
 	public void setTelefone(String telefone) {
+		telefone.replace("(", "").replace(")", "").replace("-", "");
 		this.telefone = telefone;
 	}
 

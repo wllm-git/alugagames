@@ -1,14 +1,19 @@
 package alugagames.core.funcionarios;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 
 @Entity
-public class Funcionario {
+public class Funcionario implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@Column(length=16)
@@ -20,6 +25,8 @@ public class Funcionario {
 	private String telefone;
 	private char sexo;
 	private Date dataNascimento;
+	
+	@Enumerated(EnumType.STRING)
 	private Funcao funcao;
 	private boolean ativo;
 	

@@ -1,0 +1,111 @@
+<ui:composition template="/WEB-INF/template/Layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:o="http://omnifaces.org/ui">
+
+
+	<ui:define name="titulo">
+		Cadastro de Funcionário
+		
+	</ui:define>
+	
+
+	<ui:define name="conteudo">
+
+		<f:metadata>
+			<o:viewParam name="cliente" />
+			<!--value="#{cadastroClienteBean.cliente}"-->
+		</f:metadata>
+
+		<h:form id="frm">
+
+			<p:messages id="messagePrincipal" closable="true" />
+
+			<div class="titulo-cadastros">
+				
+				<p:graphicImage library="imagens" name="funcionario64.png"/>
+				
+				<h1>
+
+					Cadastro de Funcionário
+					<!--  #{cadastroClienteBean.editando ? 'Editando Cliente' : 'Novo Cliente'} -->
+				</h1>
+				
+				
+			</div>
+			
+			<p:toolbar styleClass="barra-menu">
+				<p:toolbarGroup>
+					<p:button value="Novo" outcome="/funcionarios/CadastroFuncionario" />
+
+					<p:commandButton value="Salvar" update="@form, messagePrincipal"
+					 action="#{funcionarioBean.salvarFuncionario}" process="frm" />
+
+				</p:toolbarGroup>
+
+				<p:toolbarGroup align="right">
+					<p:button value="Pesquisar"
+						outcome="/funcionarios/PesquisaFuncionarios" />
+				</p:toolbarGroup>
+
+			</p:toolbar>
+
+			<p:panelGrid styleClass="grid-cadastros" columns="2" id="panel"
+				columnClasses="rotulo, campo">
+
+
+				<p:outputLabel value="Nome Completo" for="nomeCompleto" />
+				<p:inputText id="nomeCompleto" size="50" required="true" value="#{funcionarioBean.funcionario.nome}"/>
+
+				<p:outputLabel value="CPF" for="cpf" />
+				<p:inputMask id="cpf" mask="999.999.999-99" size="12"
+					required="true" value="#{funcionarioBean.funcionario.cpf}" />
+
+				<p:outputLabel value="Data de Nascimento" for="dataNascimento" />
+				<p:calendar id="dataNascimento" pattern="dd/MM/yyyy" locale="pt"
+					required="true" size="12" value="#{funcionarioBean.funcionario.dataNascimento}" />
+
+				<p:outputLabel value="Sexo" for="sexo" />
+				<p:selectOneRadio id="sexo" styleClass="sem-bordas" required="true" 
+					value="#{funcionarioBean.funcionario.sexo}">
+					<f:selectItem itemLabel="Masculino" itemValue="MASCULINO" />
+					<f:selectItem itemLabel="Feminino" itemValue="FEMININO" />
+				</p:selectOneRadio>
+
+				<p:outputLabel value="Telefone" for="telefone" />
+				<p:inputMask id="telefone" mask="(99)9-9999-9999" required="true"
+					size="13" value="#{funcionarioBean.funcionario.telefone}"/>
+
+
+				<p:outputLabel value="E-mail" for="email" />
+				<p:inputText id="email" size="40" required="true" value="#{funcionarioBean.funcionario.email}" />
+
+				<p:outputLabel value="Função" for="funcao" />
+				<p:selectOneMenu id="funcao" required="true" value="#{funcionarioBean.funcionario.funcao}">
+					<f:selectItems value="#{funcionarioBean.funcoes}" var="funcao" 
+						itemLabel="#{funcao}" itemValue="#{funcao}"/>
+
+				</p:selectOneMenu>
+
+
+				<p:outputLabel value="Senha" for="password" />
+				<p:password size="20" id="password" goodLabel="Boa"
+					weakLabel="Fraca" strongLabel="Forte"
+					promptLabel="Digite uma senha" feedback="true" value="#{funcionarioBean.funcionario.senha}"
+					match="confirmarSenha" required="true" />
+
+				<p:outputLabel value="Confirmar Senha" for="confirmarSenha" />
+				<p:password size="20" id="confirmarSenha" required="true" />
+
+
+			</p:panelGrid>
+
+		</h:form>
+
+
+	</ui:define>
+
+</ui:composition>

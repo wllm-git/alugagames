@@ -1,5 +1,6 @@
 package alugagames.core.equipamentos;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -14,7 +15,10 @@ import alugagames.core.shared.Voltagem;
 import alugagames.core.tiposconsole.TipoConsole;
 
 @Entity
-public class Equipamento extends Produto {
+public class Equipamento extends Produto implements Serializable{
+	
+
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@Column(length=16)

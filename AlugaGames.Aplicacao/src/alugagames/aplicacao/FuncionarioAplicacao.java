@@ -44,6 +44,10 @@ private FuncionarioServico _funcionarioServico;
 		return erros;
 	}
 	
+	public Funcionario buscarPorEmail(String email){
+		return _funcionarioServico.buscarPorEmail(email);
+	}
+	
 	public List<String> inativar(Funcionario funcionario, Funcionario funcionarioLogado){
 		
 		beginTransaction();
@@ -76,6 +80,10 @@ private FuncionarioServico _funcionarioServico;
 		commit();
 		
 		return erros;
+	}
+	
+	public List<Funcionario> buscarTodos(){
+		return _funcionarioServico.buscarTodos();
 	}
 	
 	public Funcionario logar(String email, String senha) throws Exception{

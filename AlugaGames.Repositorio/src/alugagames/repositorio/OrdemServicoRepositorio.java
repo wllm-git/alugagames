@@ -20,7 +20,7 @@ public class OrdemServicoRepositorio extends RepositorioBase<OrdemServico> imple
 	public int getNextCodigo() {
 		EntityManager em = ConnectionManager.getEntityManager();
 		Query q = em.createQuery("Select COUNT(*) From OrdemServico");
-		return Math.toIntExact((long)q.getSingleResult()) + 1;
+		return Math.toIntExact((Long)q.getSingleResult()) + 1;
 	}
 
 	@Override

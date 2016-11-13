@@ -1,0 +1,37 @@
+<ui:composition template="WEB-INF/template/Layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:define name="titulo">Página Inicial</ui:define>
+
+	<ui:define name="conteudo">
+		<div id="conteudo-home" style="margin-left: auto; margin-right: auto;">
+			
+			<div class="titulo-cadastros">
+				<p:graphicImage library="imagens" name="graficos64.png"/>
+				
+				<h1>Dashboard</h1>
+			
+			</div>
+			
+			<h:panelGrid columns="2" columnClasses="left,right"
+				style="width:100%">
+				
+				<p:chart type="bar" model="#{graficos.animatedModel2}"
+					style="width:800px; margin-left:40px;" />
+					
+					<p:chart type="pie" model="#{graficos.pieModel1}" style="width:400px;height:300px" />
+					
+			
+			</h:panelGrid>
+		</div>
+
+
+
+	</ui:define>
+
+
+</ui:composition>

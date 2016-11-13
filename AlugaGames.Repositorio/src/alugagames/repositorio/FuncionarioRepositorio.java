@@ -53,7 +53,7 @@ public class FuncionarioRepositorio extends RepositorioBase<Funcionario> impleme
 		q.setParameter("status", StatusAluguel.Confirmado);
 		q.setParameter("id", funcionario.getId());
 		
-		return Math.toIntExact((long)q.getSingleResult());
+		return Math.toIntExact((Long)q.getSingleResult());
 	}
 
 	@Override
@@ -67,7 +67,7 @@ public class FuncionarioRepositorio extends RepositorioBase<Funcionario> impleme
 		q.setParameter("id_atedente", funcionario.getId());
 		q.setParameter("id_tecnico", funcionario.getId());
 		
-		return Math.toIntExact((long)q.getSingleResult());
+		return Math.toIntExact((Long)q.getSingleResult());
 	}
 
 	@Override
@@ -80,7 +80,7 @@ public class FuncionarioRepositorio extends RepositorioBase<Funcionario> impleme
 		q.setParameter("id_atedente", funcionario.getId());
 		q.setParameter("id_tecnico", funcionario.getId());
 		
-		return Math.toIntExact((long)q.getSingleResult());
+		return Math.toIntExact((Long)q.getSingleResult());
 	}
 
 }

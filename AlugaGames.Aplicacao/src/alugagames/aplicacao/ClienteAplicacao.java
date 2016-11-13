@@ -8,6 +8,7 @@ import alugagames.core.clientes.ClienteServico;
 import alugagames.repositorio.ClienteRepositorio;
 
 public class ClienteAplicacao extends AplicacaoBase{
+	
 	private ClienteServico _clienteServico;
 	
 	public ClienteAplicacao(){
@@ -50,6 +51,10 @@ public class ClienteAplicacao extends AplicacaoBase{
 	
 	public List<Cliente> buscarTodos(){
 		return _clienteServico.buscarTodos();
+	}
+	
+	public Cliente buscarPorEmail(String email){
+		return _clienteServico.buscarPorEmail(email);
 	}
 	
 	public Cliente logar(String email, String senha) throws Exception{

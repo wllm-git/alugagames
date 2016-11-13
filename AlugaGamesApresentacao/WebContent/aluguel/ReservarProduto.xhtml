@@ -1,0 +1,152 @@
+<ui:composition template="/WEB-INF/template/Layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:o="http://omnifaces.org/ui">
+
+
+	<ui:define name="titulo">
+		Reservar Produto
+		<h:outputStylesheet name="reservar.css" library="css" />
+		
+	</ui:define>
+	<!--  #{cadastroClienteBean.editando ? 'Editando Cliente' : 'Novo Cliente'} -->
+
+	<ui:define name="conteudo">
+
+		<f:metadata>
+			<o:viewParam name="cliente" />
+			<!--value="#{cadastroClienteBean.cliente}"-->
+		</f:metadata>
+
+
+
+		<h:form id="frm">
+
+			<p:messages id="messagePrincipal" closable="true" />
+
+				<div class="titulo-cadastros">
+			
+				<h1>
+
+					Reservar Produto
+					<!--  #{cadastroClienteBean.editando ? 'Editando Cliente' : 'Novo Cliente'} -->
+				</h1>
+				
+			
+			</div>
+
+	
+
+			<h:panelGrid styleClass="grid-cadastros" columns="2" id="panel"
+				columnClasses="rotulo, campo" rowClasses="one">
+
+
+				<p:outputLabel value="Data Inicial" for="dataInicial" />
+				<p:calendar id="dataInicial" pattern="dd/MM/yyyy" locale="pt" 
+					required="true" size="8"/>
+					
+				<p:outputLabel value="Data Final" for="dataFinal" />
+				<p:calendar id="dataFinal" pattern="dd/MM/yyyy" locale="pt" 
+					required="true" size="8" />
+
+				
+			</h:panelGrid>
+		
+			<div class="botoesReservar">
+				<p:commandButton value="Confimar Reserva"/>
+				<p:commandButton value="Cancelar" disabled="true" />
+			</div>
+			
+			<h2>Seus Itens</h2>
+			
+			<p:dataTable styleClass="tabelas-pesquisa" rows="10"
+				paginator="true" paginatorAlwaysVisible="false"
+				paginatorPosition="bottom" emptyMessage="Nenhum Item Adicionado"
+				id="seuItensTable">
+
+				<p:column headerText="Produto">
+					<h:outputText value="Xbox One" />
+				</p:column>
+
+				<p:column headerText="Tipo" style="width: 80px">
+					<h:outputText value="Console" />
+				</p:column>
+
+
+				<p:column headerText="Preço"
+					style="width: 150px; text-align:center">
+					<h:outputText value="R$ 50,00" />
+				</p:column>
+
+				<p:column width="80" style="text-align:center;">
+					<p:button outcome="/clientes/CadastroCliente" icon="ui-icon-pencil" >
+						<f:param name="cliente" value="#{cliente.id}"/>
+					</p:button>
+					<p:commandButton icon="ui-icon-trash" oncomplete="PF('confirmarExclusao').show()" 
+						update=":frm:dialogoConfirmacao" process="@this">
+						<f:setPropertyActionListener value="#{cliente}" target="#{pesquisaClientesBean.clienteSelecionado}" />
+					</p:commandButton>
+
+				</p:column>
+
+			</p:dataTable>
+			
+			<div class="itensDisponiveis">
+				<h2>Itens Disponiveis</h2>
+				
+				<div id="filtro">
+					<p:outputLabel value="Filtrar por:" style="font-weight: bold; margin-bottom: 5px;"/><br/>
+					<p:selectOneMenu>
+						<f:selectItem itemLabel="Consoles" itemValue="console" />
+						<f:selectItem itemLabel="Controles" itemValue="controle" />
+						<f:selectItem itemLabel="Acessórios" itemValue="acessorio" />
+						<f:selectItem itemLabel="Jogos" itemValue="jogos" />
+					</p:selectOneMenu>
+				</div>
+			</div>
+			
+			<div id="itensDisponiveis">
+			
+			<p:dataTable styleClass="tabelas-pesquisa" rows="10"
+					paginator="true" paginatorAlwaysVisible="false"
+					paginatorPosition="bottom" emptyMessage="Nenhum Item Encontrado"
+					id="itensDisponiveisTable">
+	
+					<p:column headerText="Produto">
+						<h:outputText value="Xbox One" />
+					</p:column>
+	
+					<p:column headerText="Tipo" style="width: 80px">
+						<h:outputText value="Console" />
+					</p:column>
+	
+	
+					<p:column headerText="Preço"
+						style="width: 150px; text-align:center">
+						<h:outputText value="R$ 50,00" />
+					</p:column>
+	
+					<p:column width="80" style="text-align:center;">
+						<p:button outcome="/clientes/CadastroCliente" icon="ui-icon-pencil" >
+							<f:param name="cliente" value="#{cliente.id}"/>
+						</p:button>
+						<p:commandButton icon="ui-icon-trash" oncomplete="PF('confirmarExclusao').show()" 
+							update=":frm:dialogoConfirmacao" process="@this">
+							<f:setPropertyActionListener value="#{cliente}" target="#{pesquisaClientesBean.clienteSelecionado}" />
+						</p:commandButton>
+	
+					</p:column>
+	
+				</p:dataTable>
+			
+			</div>
+			
+		</h:form>
+
+
+	</ui:define>
+
+</ui:composition>
