@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -202,6 +203,11 @@ public class ConfirmarReservaTest {
 		new MidiaRepositorio().atualizarStatusMidia(m1);
 		new MidiaRepositorio().atualizarStatusMidia(m1);
 		ConnectionManager.commit();
+		ConnectionManager.dispose();
+	}
+
+	@AfterClass
+	public static void fecharConexao(){
 		ConnectionManager.dispose();
 	}
 }
