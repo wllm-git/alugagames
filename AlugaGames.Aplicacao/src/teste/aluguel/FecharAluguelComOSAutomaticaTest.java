@@ -1,9 +1,10 @@
-package teste;
+package teste.aluguel;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -19,8 +20,6 @@ import alugagames.core.funcionarios.Funcionario;
 import alugagames.core.jogos.Jogo;
 import alugagames.core.midias.Midia;
 import alugagames.core.os.OrdemServico;
-import alugagames.core.os.OrdemServicoServico;
-import alugagames.core.os.StatusOS;
 import alugagames.core.shared.StatusProduto;
 import alugagames.core.shared.Voltagem;
 import alugagames.core.tiposconsole.TipoConsole;
@@ -33,7 +32,7 @@ import alugagames.repositorio.OrdemServicoRepositorio;
 import alugagames.repositorio.TipoConsoleRepositorio;
 import alugagames.repositorio.config.ConnectionManager;
 
-public class AluguelAplicacaoTest {
+public class FecharAluguelComOSAutomaticaTest {
 	private static AluguelAplicacao aluguelAplicacao;
 	private static Cliente c1;
 	private static Funcionario a1;
@@ -141,7 +140,7 @@ public class AluguelAplicacaoTest {
 	}
 
 	@Test
-	public void processarOSAutomatica() {
+	public void fecharAluguelComOSAutomatica() {
 		Aluguel a = aluguelAplicacao.abrirReserva(c1);
 		a.getConsoles().add(con1);
 		a.getMidias().add(m1);
@@ -179,29 +178,15 @@ public class AluguelAplicacaoTest {
 				OrdemServico os = new OrdemServicoRepositorio()
 						.buscarPorAluguel(a4);
 
-				if (os == null)
-					Assert.fail();
-				else {
-					os.setTecnico(t1);
-
-					List<String> erros2 = new OrdemServicoServico(
-							new OrdemServicoRepositorio()).processarOS(os);
-
-					if (!erros2.isEmpty())
-						Assert.fail();
-					else {
-						OrdemServico os2 = new OrdemServicoRepositorio()
-								.buscarPorID(os.getId());
-
-						if (os2 == null)
-							Assert.fail();
-						else
-							Assert.assertEquals(StatusOS.Processamento,
-									os2.getStatus());
-					}
-				}
+				Assert.assertEquals(a.getId(), a4.getId());
+				Assert.assertEquals(StatusAluguel.Fechado, a4.getStatus());
+				Assert.assertNotEquals(null, os);
 			}
 		}
+	}
 
+	@AfterClass
+	public static void fecharConexao(){
+		ConnectionManager.dispose();
 	}
 }

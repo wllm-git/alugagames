@@ -1,9 +1,10 @@
-package teste;
+package teste.aluguel;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -18,9 +19,6 @@ import alugagames.core.funcionarios.Funcao;
 import alugagames.core.funcionarios.Funcionario;
 import alugagames.core.jogos.Jogo;
 import alugagames.core.midias.Midia;
-import alugagames.core.os.OrdemServico;
-import alugagames.core.os.OrdemServicoServico;
-import alugagames.core.os.StatusOS;
 import alugagames.core.shared.StatusProduto;
 import alugagames.core.shared.Voltagem;
 import alugagames.core.tiposconsole.TipoConsole;
@@ -29,11 +27,10 @@ import alugagames.repositorio.ConsoleRepositorio;
 import alugagames.repositorio.FuncionarioRepositorio;
 import alugagames.repositorio.JogoRepositorio;
 import alugagames.repositorio.MidiaRepositorio;
-import alugagames.repositorio.OrdemServicoRepositorio;
 import alugagames.repositorio.TipoConsoleRepositorio;
 import alugagames.repositorio.config.ConnectionManager;
 
-public class AluguelAplicacaoTest {
+public class ConfirmarAluguelTest {
 	private static AluguelAplicacao aluguelAplicacao;
 	private static Cliente c1;
 	private static Funcionario a1;
@@ -141,67 +138,37 @@ public class AluguelAplicacaoTest {
 	}
 
 	@Test
-	public void processarOSAutomatica() {
+	public void confirmarAluguel() {
 		Aluguel a = aluguelAplicacao.abrirReserva(c1);
 		a.getConsoles().add(con1);
 		a.getMidias().add(m1);
 		a.getMidias().add(m2);
 		a.setDataAluguelInicio(dtInicio);
 		a.setDataAluguelFim(dtFim);
-
+		
 		aluguelAplicacao.confirmarReserva(a);
 
 		Aluguel a2 = aluguelAplicacao.buscarReservaPorCodigo(a.getCodigo());
 
 		a2.setAtendenteConfirmacao(a1);
-		aluguelAplicacao.confirmarAluguel(a2);
-
-		Aluguel a3 = aluguelAplicacao.buscarAluguelPorCodigo(a.getCodigo());
-
-		ConnectionManager.beginTransaction();
-		Console c = a3.getConsoles().get(0);
-		c.setStatus(StatusProduto.Avariado);
-		new ConsoleRepositorio().atualizarStatusConsole(c);
-		ConnectionManager.commit();
-
-		List<String> erros = aluguelAplicacao.finalizarAluguel(a3);
+		List<String> erros = aluguelAplicacao.confirmarAluguel(a2);
 
 		if (!erros.isEmpty())
 			Assert.fail();
 		else {
-
-			Aluguel a4 = aluguelAplicacao.buscarAluguelPorCodigo(a.getCodigo());
-
-			if (a4 == null)
+			Aluguel a3 = aluguelAplicacao.buscarAluguelPorCodigo(a.getCodigo());
+			if (a3 == null)
 				Assert.fail();
 			else {
-
-				OrdemServico os = new OrdemServicoRepositorio()
-						.buscarPorAluguel(a4);
-
-				if (os == null)
-					Assert.fail();
-				else {
-					os.setTecnico(t1);
-
-					List<String> erros2 = new OrdemServicoServico(
-							new OrdemServicoRepositorio()).processarOS(os);
-
-					if (!erros2.isEmpty())
-						Assert.fail();
-					else {
-						OrdemServico os2 = new OrdemServicoRepositorio()
-								.buscarPorID(os.getId());
-
-						if (os2 == null)
-							Assert.fail();
-						else
-							Assert.assertEquals(StatusOS.Processamento,
-									os2.getStatus());
-					}
-				}
+				Assert.assertEquals(a.getId(), a3.getId());
+				Assert.assertEquals(StatusAluguel.Confirmado, a3.getStatus());
 			}
-		}
 
+		}
+	}
+	
+	@AfterClass
+	public static void fecharConexao(){
+		ConnectionManager.dispose();
 	}
 }

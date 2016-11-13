@@ -19,8 +19,10 @@ public class ClienteServico extends ServicoBase<Cliente>{
 	public List<String> adicionarCliente(Cliente cliente) {
 		
 		List<String> erros = new ClienteAptoParaCadastro(_repositorio).validar(cliente);
-		if(erros.isEmpty())
+		if(erros.isEmpty()){
+			cliente.setSenha(CriptografiaDES.encriptar(cliente.getSenha()));
 			_repositorio.adicionar(cliente);
+		}
 		
 		return erros;
 	}

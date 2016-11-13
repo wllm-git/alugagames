@@ -1,5 +1,6 @@
 package teste.aluguel;
 
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -64,5 +65,10 @@ public class AbrirReservaTest {
 			// OK
 		}
 
+	}
+	
+	@AfterClass
+	public static void fecharConexao(){
+		ConnectionManager.dispose();
 	}
 }
