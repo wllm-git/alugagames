@@ -9,7 +9,7 @@ public class TesteLogin {
 
 	public static void main(String[] args) throws Exception {
 
-		logar("roldao.wilker@gmail.com", "123123");
+		logar("roldao.wilker@gmail.com", "123120");
 
 	}
 

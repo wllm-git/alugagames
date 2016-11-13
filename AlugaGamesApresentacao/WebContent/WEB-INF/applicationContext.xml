@@ -15,11 +15,8 @@
 	</http>
 
 	<authentication-manager>
-		<authentication-provider>
-			<user-service>
-				<user name="joao" password="joao" authorities="FUNCIONARIO" />
-				<user name="manoel" password="manoel" authorities="ADMINISTRADORES" />
-			</user-service>
+		<authentication-provider user-service-ref="appUserDetailsService">
+			<!-- <password-encoder hash="md5" /> -->
 		</authentication-provider>
 	</authentication-manager>
 	

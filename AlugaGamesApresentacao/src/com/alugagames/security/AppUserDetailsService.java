@@ -17,19 +17,12 @@ import alugagames.core.funcionarios.Funcionario;
 
 public class AppUserDetailsService implements UserDetailsService {
 
-	
-	
 	@Override
-	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		UsuarioSistema user = null;
-	
-		return user;
-	}
-	
-	public UserDetails loadUser(String email,String senha) throws Exception,UsernameNotFoundException {
-		Cliente cliente = new ClienteAplicacao().logar(email, senha);
+	public UserDetails loadUserByUsername(String email)  {
 		
-		Funcionario funcionario = new FuncionarioAplicacao().logar(email, senha);
+		Cliente cliente = new ClienteAplicacao().buscarPorEmail(email);
+		
+		Funcionario funcionario = new FuncionarioAplicacao().buscarPorEmail(email);
 		
 		UsuarioSistema user = null;
 		
@@ -45,7 +38,6 @@ public class AppUserDetailsService implements UserDetailsService {
 		
 		return user;
 	}
-	
 	
 	
 
@@ -64,5 +56,7 @@ public class AppUserDetailsService implements UserDetailsService {
 		
 		return authorities;
 	}
+
+
 
 }
