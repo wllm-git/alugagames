@@ -36,6 +36,10 @@ public class ConsoleServico extends ServicoBase<Console> {
 		if(console.getVoltagem() == null)
 			console.setVoltagem(Voltagem.V_UNI);
 		
+		console.setStatus(StatusProduto.Disponivel);
+		console.setAtivo(true);
+		
+		
 		_repositorio.adicionar(console);
 		
 		return erros;
