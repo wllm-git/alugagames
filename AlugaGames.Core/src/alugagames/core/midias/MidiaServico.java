@@ -38,9 +38,12 @@ public class MidiaServico extends ServicoBase<Midia> {
 	
 	public List<String> adicionarMidia(Midia midia) {
 		List<String> erros = new MidiaAptaParaCadastro(_repositorio, _jogoServico, _tipoConsoleServico).validar(midia);
-		if(erros.isEmpty())
+		if(erros.isEmpty()){
+			midia.setStatus(StatusProduto.Disponivel);
+			midia.setAtivo(true);
+			
 			_repositorio.adicionar(midia);
-		
+		}
 		return erros;
 	}
 

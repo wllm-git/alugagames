@@ -9,6 +9,9 @@ public class ClientePrecisaSerMaiorDe18Anos implements IRegra<Cliente> {
 
 	@Override
 	public String validar(Cliente obj) {
+		if(obj.getDataNascimento() == null)
+			return "Data de nascimento não informada.";
+		
 		Calendar data = Calendar.getInstance();
 		Calendar d = Calendar.getInstance();
 		

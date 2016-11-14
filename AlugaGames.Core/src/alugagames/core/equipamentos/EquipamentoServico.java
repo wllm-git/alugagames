@@ -37,6 +37,10 @@ public class EquipamentoServico extends ServicoBase<Equipamento>{
 		if(equipamento.getVoltagem() == null)
 			equipamento.setVoltagem(Voltagem.V_UNI);
 		
+		equipamento.setStatus(StatusProduto.Disponivel);
+		equipamento.setAtivo(true);
+		
+		
 		_repositorio.adicionar(equipamento);
 		
 		return erros;
