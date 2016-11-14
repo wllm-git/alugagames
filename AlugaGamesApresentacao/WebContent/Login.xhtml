@@ -14,11 +14,11 @@
 
 		<f:metadata>
 			<f:viewParam name="dummy"/>
-			<!--  f:event listener="#{loginBean.preRender}" type="preRenderView"></f:event>-->
+		<f:event listener="#{loginBean.preRender}" type="preRenderView"></f:event>
 		</f:metadata>
 
 			<div id="login-logo">
-				<h1 style="margin-left: 30px;">Login - AlugaGames</h1>
+				<h1 style="margin-left: 60px;">AlugaGames</h1>
 			</div>
 			<h:form id="frm" prependId="false">
 			
@@ -28,13 +28,13 @@
 			
 				<p:panelGrid columns="2" styleClass="grid-login">
 					<p:outputLabel value="E-mail" for="j_username" />
-					<p:inputText size="30" id="j_username" />
+					<p:inputText size="30" id="j_username" value="#{loginBean.email}" />
 
 					<p:outputLabel value="Senha" for="j_password" />
-					<p:password size="30" />
+					<p:password size="30" id="j_password"/>
 
 				</p:panelGrid>
-				<p:commandButton value="Entrar" style="margin-top: 5px;" action="#{loginBean.login}" ajax="false" />
+				<p:commandButton value="Entrar" style="margin-top: 5px;" action="#{loginBean.login}" ajax="false" update="messages" />
 			</div>
 	</h:form>
 

@@ -36,7 +36,7 @@ public class CriptografiaDES {
 	        
 	        return new String(decrypted);
 		} catch (Exception e) {
-			throw new RuntimeException("Falha ao encriptar." + e.getMessage());
+			throw new RuntimeException("Falha ao decriptar." + e.getMessage());
         }
 	}
 	

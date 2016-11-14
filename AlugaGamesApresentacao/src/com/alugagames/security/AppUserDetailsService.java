@@ -8,7 +8,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import alugagames.aplicacao.ClienteAplicacao;
 import alugagames.aplicacao.FuncionarioAplicacao;
@@ -19,17 +18,16 @@ public class AppUserDetailsService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String email)  {
+		UsuarioSistema user = null;
 		
 		Cliente cliente = new ClienteAplicacao().buscarPorEmail(email);
 		
-		Funcionario funcionario = new FuncionarioAplicacao().buscarPorEmail(email);
-		
-		UsuarioSistema user = null;
-		
-		
 		if(cliente != null){
 			user = new UsuarioSistema(cliente, getGrupos(cliente));
+			return user;
 		}
+		
+		Funcionario funcionario = new FuncionarioAplicacao().buscarPorEmail(email);
 		
 		if(funcionario != null){
 			user = new UsuarioSistema(funcionario, getGrupos(funcionario));
@@ -43,7 +41,6 @@ public class AppUserDetailsService implements UserDetailsService {
 
 	private Collection<? extends GrantedAuthority> getGrupos(Funcionario funcionario) {
 		List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-		authorities.add(new SimpleGrantedAuthority("FUNCIONARIO"));
 		authorities.add(new SimpleGrantedAuthority(funcionario.getFuncao().toString().toUpperCase()));
 		
 		
