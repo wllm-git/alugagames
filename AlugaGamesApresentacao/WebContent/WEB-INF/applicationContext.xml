@@ -39,12 +39,14 @@
 		<custom-filter ref="exceptionTranslationFilter" before="FILTER_SECURITY_INTERCEPTOR" />
 		<intercept-url pattern="/Home.xhtml" access="isAuthenticated()" />
 
-		<intercept-url pattern="/clientes/PesquisaClientes.xhtml"
-			access="hasAnyRole('ATENDENTE','GERENTE')" />
-		<intercept-url pattern="/clientes/CadastroCliente.xhtml"
-			access="hasAnyRole('ATENDENTE','GERENTE','CLIENTE')" />
-
-		<intercept-url pattern="/funcionarios/**" access="hasAnyRole('GERENTE')" />
+	
+			<intercept-url pattern="/clientes/PesquisaClientes.xhtml"
+				access="hasAnyRole('ATENDENTE','GERENTE')" />
+			<intercept-url pattern="/clientes/CadastroCliente.xhtml"
+				access="hasAnyRole('ATENDENTE','GERENTE','CLIENTE')" />
+	
+			<intercept-url pattern="/funcionarios/**" access="hasAnyRole('GERENTE')" />
+		
 
 		<form-login login-page="/Login.xhtml"
 			authentication-failure-url="/Login.xhtml?invalid=true"

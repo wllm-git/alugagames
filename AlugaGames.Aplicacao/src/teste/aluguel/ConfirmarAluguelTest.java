@@ -73,11 +73,11 @@ public class ConfirmarAluguelTest {
 		tc1.setNome("ps4");
 
 		j1 = new Jogo();
-		j1.setAnoLancamento(new Date());
+		j1.setAnoLancamento("2016");
 		j1.setNome("TM4");
 
 		j2 = new Jogo();
-		j2.setAnoLancamento(new Date());
+		j2.setAnoLancamento("2016");
 		j2.setNome("TH2");
 
 		m1 = new Midia();

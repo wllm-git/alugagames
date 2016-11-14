@@ -34,15 +34,11 @@
 				<p:outputLabel value="Nome do Jogo" for="nomeDoJogo" />
 				<p:inputText id="nomeDoJogo" size="30" />
 
-				<p:outputLabel value="Categoria" for="categoria" />
-				<p:selectOneMenu id="categoria">
-					<f:selectItem itemLabel="Aventura" itemValue="aventura" />
-					<f:selectItem itemLabel="Ação" itemValue="acao" />
-					<f:selectItem itemLabel="Esporte" itemValue="esporte" />
-					<f:selectItem itemLabel="Corrida" itemValue="corrida" />
-					<f:selectItem itemLabel="Acarde" itemValue="acarde" />
-					<f:selectItem itemLabel="Estratégia" itemValue="estrategia" />
-					<f:selectItem itemLabel="Guerra" itemValue="guerra" />
+				<p:outputLabel  for="categoria" value="Categoria"/>
+				<p:selectOneMenu id="categoria" value="#{jogoBean.jogo.categoria}" >
+					<f:selectItems value="#{jogoBean.categorias}" var="categoria" 
+						itemValue="#{categoria}" itemLabel="#{categoria}"
+					/>
 				</p:selectOneMenu>
 
 				<p:outputLabel value="Ano" for="ano" />
