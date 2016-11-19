@@ -27,7 +27,5 @@ public class JogoRepositorio extends RepositorioBase<Jogo> implements IJogoRepos
 			return null;
 		}
 	}
-	
-	
 
 }

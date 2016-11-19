@@ -30,7 +30,20 @@ public class ClienteAplicacao extends AplicacaoBase{
 		return erros;
 	}
 	
-
+	public List<String> atualizarCliente(Cliente cliente){
+		
+		beginTransaction();
+		
+		List<String> erros = _clienteServico.atualizarCliente(cliente);
+		if(!erros.isEmpty()){
+			rollback();
+			return erros;
+		}
+		
+		commit();
+		
+		return erros;
+	}
 	
 	public Cliente buscarPorID(UUID id){
 		return _clienteServico.buscarPorID(id);

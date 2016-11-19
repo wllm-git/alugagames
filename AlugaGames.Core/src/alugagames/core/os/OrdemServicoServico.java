@@ -127,7 +127,7 @@ public class OrdemServicoServico extends ServicoBase<OrdemServico>{
 			return erros;
 		
 		ordemServico.setStatus(StatusOS.Processamento);
-		_repositorio.adicionar(ordemServico);
+		_repositorio.alterar(ordemServico);
 		
 		return erros;
 	}
@@ -146,7 +146,7 @@ public class OrdemServicoServico extends ServicoBase<OrdemServico>{
 			return erros;
 		
 		ordemServico.setStatus(StatusOS.Aguardando);
-		_repositorio.adicionar(ordemServico);
+		_repositorio.alterar(ordemServico);
 		
 		return erros;
 	}
@@ -168,7 +168,7 @@ public class OrdemServicoServico extends ServicoBase<OrdemServico>{
 		ordemServico.setStatus(StatusOS.Fechada);
 		ordemServico.setDataFechamento(new Date());
 		
-		_repositorio.adicionar(ordemServico);
+		_repositorio.alterar(ordemServico);
 		
 		return erros;
 	}

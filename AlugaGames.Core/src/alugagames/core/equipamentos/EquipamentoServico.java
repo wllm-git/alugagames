@@ -54,7 +54,7 @@ public class EquipamentoServico extends ServicoBase<Equipamento>{
 		if(equipamento.getVoltagem() == null)
 			equipamento.setVoltagem(Voltagem.V_UNI);
 		
-		_repositorio.adicionar(equipamento);
+		_repositorio.alterar(equipamento);
 		
 		return erros;
 	}
@@ -65,7 +65,7 @@ public class EquipamentoServico extends ServicoBase<Equipamento>{
 			return erros;
 		
 		equipamento.setAtivo(false);
-		_repositorio.adicionar(equipamento);
+		_repositorio.alterar(equipamento);
 		
 		return erros;
 	}
@@ -76,7 +76,7 @@ public class EquipamentoServico extends ServicoBase<Equipamento>{
 			return erros;
 		
 		equipamento.setAtivo(true);
-		_repositorio.adicionar(equipamento);
+		_repositorio.alterar(equipamento);
 		
 		return erros;
 	}

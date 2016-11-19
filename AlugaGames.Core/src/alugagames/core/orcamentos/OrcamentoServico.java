@@ -85,7 +85,7 @@ public class OrcamentoServico extends ServicoBase<Orcamento>{
 			item.setOrcamento(orcamento);
 		}
 		
-		_repositorio.adicionar(orcamento);
+		_repositorio.alterar(orcamento);
 		
 		return erros;
 	}
@@ -97,7 +97,7 @@ public class OrcamentoServico extends ServicoBase<Orcamento>{
 		
 		orcamento.setStatus(StatusOrcamento.Avaliando);
 		
-		_repositorio.adicionar(orcamento);
+		_repositorio.alterar(orcamento);
 		
 		return erros;
 	}
@@ -118,7 +118,7 @@ public class OrcamentoServico extends ServicoBase<Orcamento>{
 			orcamento.setValor(orcamento.getValor() + item.getValor());
 		}
 		
-		_repositorio.adicionar(orcamento);
+		_repositorio.alterar(orcamento);
 		
 		return erros;
 	}
@@ -130,7 +130,7 @@ public class OrcamentoServico extends ServicoBase<Orcamento>{
 		
 		orcamento.setStatus(StatusOrcamento.Aceito);
 		
-		_repositorio.adicionar(orcamento);
+		_repositorio.alterar(orcamento);
 		
 		return erros;
 	}
@@ -142,7 +142,7 @@ public class OrcamentoServico extends ServicoBase<Orcamento>{
 		
 		orcamento.setStatus(StatusOrcamento.Cancelado);
 		
-		_repositorio.adicionar(orcamento);
+		_repositorio.alterar(orcamento);
 		
 		return erros;
 	}
@@ -163,7 +163,7 @@ public class OrcamentoServico extends ServicoBase<Orcamento>{
 		orcamento.getOrcamentoItens().add(item);
 		item.setOrcamento(orcamento);
 		
-		_repositorio.adicionar(orcamento);
+		_repositorio.alterar(orcamento);
 		
 		return erros;
 	}
@@ -183,7 +183,7 @@ public class OrcamentoServico extends ServicoBase<Orcamento>{
 		}
 		
 		if(removido)
-			_repositorio.adicionar(orcamento);
+			_repositorio.alterar(orcamento);
 		
 		return erros;
 	}

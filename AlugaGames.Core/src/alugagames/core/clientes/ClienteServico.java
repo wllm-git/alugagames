@@ -3,6 +3,7 @@ package alugagames.core.clientes;
 import java.util.List;
 
 import alugagames.core.clientes.repositorio.IClienteRepositorio;
+import alugagames.core.clientes.validacoes.ClienteAptoParaAlteracao;
 import alugagames.core.clientes.validacoes.ClienteAptoParaCadastro;
 import alugagames.core.shared.CriptografiaDES;
 import alugagames.core.shared.ServicoBase;
@@ -26,7 +27,15 @@ public class ClienteServico extends ServicoBase<Cliente>{
 		return erros;
 	}
 
-
+	public List<String> atualizarCliente(Cliente cliente) {
+		
+		List<String> erros = new ClienteAptoParaAlteracao(_repositorio).validar(cliente);
+		if(erros.isEmpty())
+			_repositorio.adicionar(cliente);
+		
+		return erros;
+	}
+	
 	public Cliente buscarPorEmail(String email){
 		Cliente cliente = _repositorio.buscarPorEmail(email);
 		return cliente;

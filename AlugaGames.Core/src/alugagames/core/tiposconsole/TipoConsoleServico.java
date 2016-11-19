@@ -45,7 +45,7 @@ public class TipoConsoleServico extends ServicoBase<TipoConsole> {
 			return erros;
 		
 		tipoConsole.setAtivo(false);
-		_repositorio.adicionar(tipoConsole);
+		_repositorio.alterar(tipoConsole);
 		
 		return erros;
 	}
@@ -57,7 +57,7 @@ public class TipoConsoleServico extends ServicoBase<TipoConsole> {
 			return erros;
 		
 		tipoConsole.setAtivo(true);
-		_repositorio.adicionar(tipoConsole);
+		_repositorio.alterar(tipoConsole);
 		
 		return erros;
 	}

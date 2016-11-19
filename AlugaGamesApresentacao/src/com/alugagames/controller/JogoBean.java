@@ -31,6 +31,7 @@ public class JogoBean implements Serializable {
 	private Midia midiaSelecionada;
 	private boolean novoJogo;
 	private List<TipoConsole> consoles;
+	private boolean editando;
 
 	public JogoBean() {
 		
@@ -45,6 +46,8 @@ public class JogoBean implements Serializable {
 	
 	
 	public void verifyMidia(){
+		
+		this.editando = true;
 		
 		if(this.midia.getNumeroSerie() != null){
 			this.jogo = new JogoAplicacao().buscarPorID(this.midia.getJogo().getId());
@@ -63,8 +66,17 @@ public class JogoBean implements Serializable {
 	}
 
 	public void salvarJogo() {
+		
+		List<String> retorno;
+		
+		if(!editando){
+			 retorno = jogoAplicacao.cadastrar(jogo);
+		}
 
-		List<String> retorno = jogoAplicacao.cadastrar(jogo);
+		else{
+			 retorno = jogoAplicacao.atualizar(jogo);
+		}
+		
 
 		if (!retorno.isEmpty()) {
 
@@ -75,9 +87,8 @@ public class JogoBean implements Serializable {
 			return;
 		}
 
-		FacesUtil.addInfoMessage("Jogo cadastrado com sucesso!");
+		FacesUtil.addInfoMessage("Jogo salvo com sucesso!");
 
-		
 		novoJogo = isNovo();
 
 	}
@@ -87,8 +98,14 @@ public class JogoBean implements Serializable {
 		this.midia.setJogo(jogo);
 		this.midia.setStatus(StatusProduto.Disponivel);
 		
-		List<String> retorno = new MidiaAplicacao().cadastrar(this.midia);
+		List<String> retorno;
+		
+		if(editando)
+			retorno = new MidiaAplicacao().atualizar(this.midia);
+		else
+			retorno = new MidiaAplicacao().cadastrar(this.midia);
 
+		
 		if (!retorno.isEmpty()) {
 
 			for (String erro : retorno) {
@@ -100,7 +117,7 @@ public class JogoBean implements Serializable {
 		this.jogo.getMidias().add(this.midia);
 		this.jogoAplicacao.atualizar(jogo);
 
-		FacesUtil.addInfoMessage("Jogo cadastrado com sucesso!");
+		FacesUtil.addInfoMessage("Midia salva com sucesso!");
 		
 		this.midia = new Midia();
 

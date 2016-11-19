@@ -47,15 +47,10 @@ public class MidiaServico extends ServicoBase<Midia> {
 		return erros;
 	}
 
-	public void excluirMidia(Midia midia){
-		
-		_repositorio.excluir(midia);
-	}
-	
 	public List<String> atualizarMidia(Midia midia) {
 		List<String> erros = new MidiaAptaParaAlteracao(_repositorio, _jogoServico, _tipoConsoleServico).validar(midia);
 		if(erros.isEmpty())
-			_repositorio.adicionar(midia);
+			_repositorio.alterar(midia);
 		
 		return erros;
 	}
@@ -67,7 +62,7 @@ public class MidiaServico extends ServicoBase<Midia> {
 			return erros;
 		
 		midia.setAtivo(false);
-		_repositorio.adicionar(midia);
+		_repositorio.alterar(midia);
 		
 		return erros;
 	}
@@ -79,7 +74,7 @@ public class MidiaServico extends ServicoBase<Midia> {
 			return erros;
 		
 		midia.setAtivo(true);
-		_repositorio.adicionar(midia);
+		_repositorio.alterar(midia);
 		
 		return erros;
 	}
@@ -115,5 +110,9 @@ public class MidiaServico extends ServicoBase<Midia> {
 
 	public void atualizarStatus(Midia midia) {
 		_repositorio.atualizarStatusMidia(midia);
+	}
+	
+	public void excluir(Midia midia){
+		_repositorio.excluir(midia);
 	}
 }

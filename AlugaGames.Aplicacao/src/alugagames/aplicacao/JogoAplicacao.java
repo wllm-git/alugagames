@@ -30,6 +30,20 @@ public class JogoAplicacao extends AplicacaoBase{
 		return erros;
 	}
 	
+	public List<String> atualizar(Jogo console){
+		
+		beginTransaction();
+		
+		List<String> erros = _jogoServico.atualizarJogo(console);
+		if(!erros.isEmpty()){
+			rollback();
+			return erros;
+		}
+		
+		commit();
+		
+		return erros;
+	}
 	
 	public Jogo buscarPorID(UUID id){
 		return _jogoServico.buscarPorID(id);
@@ -45,9 +59,6 @@ public class JogoAplicacao extends AplicacaoBase{
 			new MidiaAplicacao().excluir(midia);
 		}
 		
-		beginTransaction();
-		
 		_jogoServico.excluir(jogo);
-		
 	}
 }

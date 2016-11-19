@@ -35,7 +35,7 @@ public class FuncionarioServico extends ServicoBase<Funcionario>{
 
 		List<String> erros = new FuncionarioAptoParaAlteracao(_repositorio).validar(funcionario);
 		if(erros.isEmpty())
-			_repositorio.adicionar(funcionario);
+			_repositorio.alterar(funcionario);
 		
 		return erros;
 	}
@@ -47,7 +47,7 @@ public class FuncionarioServico extends ServicoBase<Funcionario>{
 			return erros;
 		
 		funcionario.setAtivo(false);
-		_repositorio.adicionar(funcionario);
+		_repositorio.alterar(funcionario);
 		
 		return erros;
 	}
@@ -59,7 +59,7 @@ public class FuncionarioServico extends ServicoBase<Funcionario>{
 			return erros;
 		
 		funcionario.setAtivo(true);
-		_repositorio.adicionar(funcionario);
+		_repositorio.alterar(funcionario);
 		
 		return erros;
 	}

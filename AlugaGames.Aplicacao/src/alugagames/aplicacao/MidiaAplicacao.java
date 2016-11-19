@@ -51,14 +51,6 @@ public class MidiaAplicacao extends AplicacaoBase {
 		return erros;
 	}
 	
-	public void excluir(Midia midia){
-		beginTransaction();
-		
-		_midiaServico.excluirMidia(midia);
-		
-		commit();
-	}
-	
 	public List<String> inativarMidia(Midia midia){
 		beginTransaction();
 		
@@ -93,5 +85,9 @@ public class MidiaAplicacao extends AplicacaoBase {
 	
 	public List<Midia> buscarTodos(){
 		return _midiaServico.buscarTodos();
+	}
+	
+	public void excluir(Midia midia){
+		_midiaServico.excluir(midia);
 	}
 }
