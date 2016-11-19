@@ -95,7 +95,7 @@ public class AluguelServico extends ServicoBase<Aluguel>{
 			aluguel.setStatus(StatusAluguel.Reservado);
 			aluguel.setDataReserva(new Date());
 			
-			_repositorio.alterar(aluguel);
+			_repositorio.adicionar(aluguel);
 		}
 		
 		return erros;
@@ -123,7 +123,7 @@ public class AluguelServico extends ServicoBase<Aluguel>{
 		aluguel.setDataConfirmacao(new Date());
 		
 		if(erros.isEmpty())
-			_repositorio.alterar(aluguel);
+			_repositorio.adicionar(aluguel);
 		
 		return erros;
 	}
@@ -181,7 +181,7 @@ public class AluguelServico extends ServicoBase<Aluguel>{
 		aluguel.setStatus(StatusAluguel.Fechado);
 		aluguel.setDataFechamento(new Date());
 		
-		_repositorio.alterar(aluguel);
+		_repositorio.adicionar(aluguel);
 		
 		return erros;
 	}
@@ -207,7 +207,7 @@ public class AluguelServico extends ServicoBase<Aluguel>{
 		aluguel.setStatus(StatusAluguel.Cancelado);
 		aluguel.setDataFechamento(new Date());
 		
-		_repositorio.alterar(aluguel);
+		_repositorio.adicionar(aluguel);
 		
 		return erros;
 	}
@@ -257,7 +257,7 @@ public class AluguelServico extends ServicoBase<Aluguel>{
 			return erros;
 		
 		reserva.getConsoles().addAll(consoles);
-		_repositorio.alterar(reserva);
+		_repositorio.adicionar(reserva);
 		
 		return erros;
 	}
@@ -281,7 +281,7 @@ public class AluguelServico extends ServicoBase<Aluguel>{
 			return erros;
 		
 		reserva.getMidias().addAll(midias);
-		_repositorio.alterar(reserva);
+		_repositorio.adicionar(reserva);
 		
 		return erros;
 	}
@@ -305,7 +305,7 @@ public class AluguelServico extends ServicoBase<Aluguel>{
 			return erros;
 		
 		reserva.getEquipamentos().addAll(equipamentos);
-		_repositorio.alterar(reserva);
+		_repositorio.adicionar(reserva);
 		
 		return erros;
 	}
@@ -336,7 +336,7 @@ public class AluguelServico extends ServicoBase<Aluguel>{
 			}
 		}
 		
-		_repositorio.alterar(reserva);
+		_repositorio.adicionar(reserva);
 		
 		return erros;
 	}
@@ -367,7 +367,7 @@ public class AluguelServico extends ServicoBase<Aluguel>{
 			}
 		}
 		
-		_repositorio.alterar(reserva);
+		_repositorio.adicionar(reserva);
 		
 		return erros;
 	}
@@ -398,7 +398,7 @@ public class AluguelServico extends ServicoBase<Aluguel>{
 			}
 		}
 		
-		_repositorio.alterar(reserva);
+		_repositorio.adicionar(reserva);
 		
 		return erros;
 	}

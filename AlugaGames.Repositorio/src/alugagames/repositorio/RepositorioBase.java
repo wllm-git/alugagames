@@ -19,14 +19,9 @@ public class RepositorioBase<T> implements IRepositorioBase<T>{
 	@Override
 	public void adicionar(T obj) {
 		EntityManager em = ConnectionManager.getEntityManager();
-		em.persist(obj);
+		em.merge(obj);
 	}
 
-	@Override
-	public void alterar(T obj) {
-		EntityManager em = ConnectionManager.getEntityManager();
-		em.persist(obj);
-	}
 
 	@Override
 	public void excluir(T obj) {

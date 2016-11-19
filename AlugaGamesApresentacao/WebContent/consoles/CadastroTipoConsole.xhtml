@@ -1,0 +1,76 @@
+<ui:composition template="/WEB-INF/template/Layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:o="http://omnifaces.org/ui">
+
+
+	<ui:define name="titulo">
+		Cadastro de Console
+		
+	</ui:define>
+	
+
+	<ui:define name="conteudo">
+
+		<f:metadata>
+			<o:viewParam name="cliente" />
+			<!--value="#{cadastroClienteBean.cliente}"-->
+		</f:metadata>
+
+
+
+		<h:form id="frm">
+
+			<p:messages id="messagePrincipal" closable="true" />
+
+			<div class="titulo-cadastros">
+				
+				<h1>
+
+					Cadastro de Console
+					<!--  #{cadastroClienteBean.editando ? 'Editando Cliente' : 'Novo Cliente'} -->
+				</h1>
+				
+				
+			</div>
+			
+			<p:toolbar styleClass="barra-menu">
+				<p:toolbarGroup>
+					<p:button value="Novo" outcome="/consoles/CadastroTipoConsole" />
+
+					<p:commandButton value="Salvar"
+					  action="#{consoleTipoBean.salvarTipoConsole}" process="frm"
+						update="messagePrincipal @form" /> 
+
+				</p:toolbarGroup>
+
+				
+
+			</p:toolbar>
+
+			<p:panelGrid styleClass="grid-cadastros" columns="2" id="panel"
+				columnClasses="rotulo, campo">
+
+
+				<p:outputLabel value="Nome" for="nome" />
+				<p:inputText id="nome" size="20" required="true" value="#{consoleTipoBean.tipoConsole.nome}" />
+				
+				<p:outputLabel value="Situação" for="situacao" />
+				<p:selectOneRadio id="situacao" styleClass="sem-bordas" required="true" 
+					value="#{consoleTipoBean.tipoConsole.ativo}" >
+					<f:selectItem itemLabel="Ativo" itemValue="true"  />
+					<f:selectItem itemLabel="Intivo" itemValue="false" />
+				</p:selectOneRadio>
+
+
+			</p:panelGrid>
+
+		</h:form>
+
+
+	</ui:define>
+
+</ui:composition>

@@ -3,53 +3,197 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:o="http://omnifaces.org/ui">
 
-	<ui:define name="titulo">Cadastrar Jogo</ui:define>
+	<ui:define name="titulo">Cadastrar Jogo
+		<h:outputStylesheet name="jogoMidia.css" library="css" />
+
+	</ui:define>
 
 	<ui:define name="conteudo">
 
+		<f:metadata>
+			<o:viewParam name="jogo" value="#{jogoBean.jogo}" />
+			<o:viewParam name="midia" value="#{jogoBean.midia}" />
+			
+			<f:event listener="#{jogoBean.verifyMidia}"
+			type="preRenderView" />
+		</f:metadata>
+
+
 		<h1>Cadastrar Jogo</h1>
 
-		<h:form id="frm">
+		<div id="main">
+			<p:messages id="messagePrincipal" closable="true" />
+			<h:form id="frm-jogo">
 
-			<p:toolbar styleClass="barra-menu">
-				<p:toolbarGroup>
-					<p:commandButton value="Salvar" />
-				</p:toolbarGroup>
-				<p:toolbarGroup>
-					<p:commandButton value="Pesquisa" />
-				</p:toolbarGroup>
+				<div id="jogo">
+
+					<div class="containerForms">
+						<h2>Jogo</h2>
+
+						<div class="componentsForm">
+							<p:outputLabel value="Nome do Jogo:" for="nomeDoJogo"
+								styleClass="label" />
+							<p:inputText id="nomeDoJogo" size="30" style="margin-left:10px;"
+								disabled="#{!jogoBean.novoJogo}" value="#{jogoBean.jogo.nome}" />
+
+						</div>
+
+						<div class="componentsForm">
+							<p:outputLabel for="categoria" value="Categoria:"
+								styleClass="label" />
+							<p:selectOneMenu id="categoria"
+								value="#{jogoBean.jogo.categoria}" styleClass="comboConsole"
+								disabled="#{!jogoBean.novoJogo}" style="margin-left:44px;">
+								<f:selectItems value="#{jogoBean.categorias}"
+									var="categoriaSelecionada" itemValue="#{categoriaSelecionada}"
+									itemLabel="#{categoriaSelecionada}" />
+							</p:selectOneMenu>
+						</div>
+
+						<div class="componentsForm" style="margin-top: 25px;">
+							<p:outputLabel value="Ano:" for="ano" styleClass="label" />
+							<p:inputText id="ano" size="4" disabled="#{!jogoBean.novoJogo}"
+								value="#{jogoBean.jogo.anoLancamento}" style="margin-left:84px;" />
+						</div>
+
+						<div style="margin-top: 45px;">
+
+							<p:commandButton value="Novo" style="float:left"
+								action="#{jogoBean.limparFormularios}"
+								update="@form messagePrincipal frm-midia" process="frm-jogo" />
+
+							<p:commandButton value="Cancelar"
+								style="float:right; margin-left:5px;"
+								disabled="#{!jogoBean.novoJogo}"
+								action="#{jogoBean.limparFormularios}"
+								update="@form messagePrincipal frm-midia" process="frm-jogo" />
+
+							<p:commandButton value="Salvar" style="float:right"
+								disabled="#{!jogoBean.novoJogo}" action="#{jogoBean.salvarJogo}"
+								update="@form messagePrincipal frm-midia" process="frm-jogo" />
+						</div>
+
+					</div>
+
+				</div>
+
+			</h:form>
+
+			<!-- Inicio Midia -->
+
+			<div id="midia">
+				<h:form id="frm-midia">
+
+					<div class="containerForms">
+						<h2>Midia</h2>
+
+						<div class="componentsForm">
+							<h:outputText value="Número de Série:" styleClass="label" />
+							<p:inputText styleClass="informacao" style="margin-left:10px;"
+								disabled="#{jogoBean.novoJogo}"
+								value="#{jogoBean.midia.numeroSerie}" />
+						</div>
+
+						<div class="componentsForm">
+							<h:outputText value="Console:" styleClass="label" />
+							<p:selectOneMenu styleClass="comboConsole"
+								style="margin-left:70px;" value="#{jogoBean.midia.tipoConsole}"
+								disabled="#{jogoBean.novoJogo}">
+								<f:selectItems value="#{jogoBean.consoles}" var="console"
+									itemLabel="#{console.nome}" itemValue="#{console}" />
+
+							</p:selectOneMenu>
+
+						</div>
+
+						<div class="componentsForm" style="margin-top: 25px;">
+							<h:outputText value="Preço:" styleClass="label" />
+							<p:inputText styleClass="moeda" size="4"
+								disabled="#{jogoBean.novoJogo}" style="margin-left:84px;"
+								value="#{jogoBean.midia.preco}" />
+						</div>
+
+						<div class="componentsForm">
+							<h:outputText value="Jogo:" styleClass="label" />
+							<h:outputText styleClass="informacao"
+								value="#{jogoBean.jogo.nome}" disabled="#{jogoBean.novoJogo}"
+								style="margin-left:90px;" />
+						</div>
+
+						<div style="margin-top: 15px;">
+							<p:commandButton value="Salvar"
+								disabled="#{jogoBean.novoJogo}" action="#{jogoBean.salvarMidia}"
+								update="@form messagePrincipal frm-midia midiasTable"
+								process="frm-midia" />
+						</div>
+
+					</div> <!-- Fim do Box Cinza -->
+					
+				</h:form>
+			</div><!-- Fim da Div Midia -->
+			
+			</div> <!-- Fim da Div Main -->
+			<div id="table">
+				<h2 style="margin-left: 8px;">Midias cadastradas para esse Jogo</h2>
+
+				<p:dataTable styleClass="tabelas-pesquisa"
+					value="#{jogoBean.jogo.midias}" var="midia" rows="5"
+					paginator="true" paginatorAlwaysVisible="false"
+					paginatorPosition="bottom" emptyMessage="Nenhuma mídia encontrada"
+					id="midiasTable">
+
+					<p:column headerText="Número de Série" style="width: 100px;">
+						<h:outputText value="#{midia.numeroSerie}" />
+					</p:column>
+
+					<p:column headerText="Console" style="width: 80px">
+						<h:outputText value="#{midia.tipoConsole.nome}" />
+
+					</p:column>
+
+					<p:column headerText="Preço" style="width: 50px; text-align:center">
+						<h:outputText value="#{midia.preco}">
+							<f:convertNumber currencySymbol="R$" locale="pt_BR" />
+						</h:outputText>
+					</p:column>
+
+					<p:column width="30" style="text-align:center;">
+
+						<p:button outcome="/jogos/CadastroJogo" icon="ui-icon-pencil">
+							<f:param name="midia" value="#{midia.id}" />
+
+						</p:button>
+
+						<p:commandButton icon="ui-icon-trash"
+							oncomplete="confirmarExclusao.show()"
+							update="confirmacaoExclusaoDialog" process="@this">
+							<f:setPropertyActionListener value="#{midia}"
+								target="#{pesquisaMidiaBean.midiaSelecionada}" />
+						</p:commandButton>
+
+					</p:column>
+
+				</p:dataTable>
+
+				<p:confirmDialog header="Exclusão de midia"
+					message="Tem certeza que deseja excluir a midia #{jogoBeann.midiaSelecionada.nome}? para o console 
+	    			#{jogoBeann.midiaSelecionada.tipoConsole.nome}"
+					widgetVar="confirmacaoExclusao" id="confirmacaoExclusaoDialog">
+					<p:button value="Não"
+						onclick="confirmacaoExclusao.hide(); return false;" />
+
+					<p:commandButton value="Sim"
+						oncomplete="confirmacaoExclusao.hide();"
+						action="#{jogoBean.excluirMidia}" process="@this"
+						update="midiasTable" />
+				</p:confirmDialog>
+
+			</div>
 
 
-				<p:toolbarGroup align="right">
-					<p:button value="Novo" outcome="/clientes/CadastroCliente" />
-				</p:toolbarGroup>
-
-			</p:toolbar>
-
-			<p:panelGrid columns="2" columnClasses="rotulo, campo"
-				styleClass="grid-cadastros">
-
-				<p:outputLabel value="Nome do Jogo" for="nomeDoJogo" />
-				<p:inputText id="nomeDoJogo" size="30" />
-
-				<p:outputLabel  for="categoria" value="Categoria"/>
-				<p:selectOneMenu id="categoria" value="#{jogoBean.jogo.categoria}" >
-					<f:selectItems value="#{jogoBean.categorias}" var="categoria" 
-						itemValue="#{categoria}" itemLabel="#{categoria}"
-					/>
-				</p:selectOneMenu>
-
-				<p:outputLabel value="Ano" for="ano" />
-				<p:calendar id="ano" size="8" locale="pt" pattern="yyyy" />
-
-			</p:panelGrid>
-
-
-
-
-		</h:form>
 	</ui:define>
 
 

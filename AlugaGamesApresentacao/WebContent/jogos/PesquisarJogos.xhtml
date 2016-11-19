@@ -1,0 +1,93 @@
+<ui:composition template="/WEB-INF/template/Layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+	<f:metadata>
+		<f:event listener="#{pesquisarJogosBean.inicializar}"
+			type="preRenderView" />
+	</f:metadata>
+
+	<ui:define name="titulo">Pesquisar Jogos</ui:define>
+
+	<ui:define name="conteudo">
+
+		<h1>Pesquisa de jogos</h1>
+
+		<h:form id="frm">
+
+			<p:toolbar styleClass="barra-menu">
+		
+
+				<p:toolbarGroup align="right">
+					<p:button value="Novo" outcome="/jogos/CadastroJogo" />
+				</p:toolbarGroup>
+
+			</p:toolbar>
+
+			<p:panelGrid columns="2" columnClasses="rotulo, campo"
+				styleClass="grid-cadastros">
+
+				<p:outputLabel value="CPF/CNPJ" for="cpfCnpj" />
+				<p:inputText id="cpfCnpj" size="30" value="#{pesquisaClientesBean.filtro.documentoReceitaFederal}" />
+
+				<p:outputLabel value="Nome" for="nome" />
+				<p:inputText id="nome" size="60" value="#{pesquisaClientesBean.filtro.nome}" />
+
+
+			</p:panelGrid>
+
+			<p:dataTable value="#{pesquisarJogosBean.jogosFiltrados}"
+				var="jogo" styleClass="tabelas-pesquisa" rows="10"
+				paginator="true" paginatorAlwaysVisible="false"
+				paginatorPosition="bottom" emptyMessage="Nenhum Jogo Encontrado"
+				id="jogosTable">
+
+				<p:column headerText="Nome">
+					<h:outputText value="#{jogo.nome}" />
+				</p:column>
+
+				<p:column headerText="Categoria" style="width: 80px">
+					<h:outputText value="#{jogo.categoria}" />
+				</p:column>
+
+
+				<p:column headerText="Ano"
+					style="width: 150px; text-align:center">
+					<h:outputText value="#{jogo.anoLancamento}" />
+				</p:column>
+
+				<p:column width="80" style="text-align:center;">
+					<p:button outcome="/jogos/CadastroJogo" icon="ui-icon-pencil" >
+						<f:param name="jogo" value="#{jogo.id}"/>
+					</p:button>
+					<p:commandButton icon="ui-icon-trash" oncomplete="confirmarExclusao.show()" 
+						update=":frm:dialogoConfirmacao" process="@this">
+						<f:setPropertyActionListener value="#{jogo}" target="#{pesquisarJogosBean.jogoSelecionado}" />
+					</p:commandButton>
+
+				</p:column>
+
+
+			</p:dataTable>
+
+			<p:confirmDialog header="Exclusão de cliente"
+				widgetVar="confirmarExclusao"
+				message="Tem certeza que deseja excluir o jogo #{pesquisarJogosBean.jogoSelecionado.nome}?" 
+				id="dialogoConfirmacao">
+			
+				<p:commandButton value="Sim" action="#{pesquisarJogoBean.excluir}" 
+					oncomplete="confirmarExclusao.hide()" update="jogosTable" process="@this"/>
+				<p:commandButton value="Não" oncomplete="confirmarExclusao.hide()" />	
+			
+			</p:confirmDialog>
+
+
+
+		</h:form>
+	</ui:define>
+
+
+</ui:composition>

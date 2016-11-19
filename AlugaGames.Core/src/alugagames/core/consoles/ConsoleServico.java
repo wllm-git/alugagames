@@ -54,7 +54,7 @@ public class ConsoleServico extends ServicoBase<Console> {
 		if(console.getVoltagem() == null)
 			console.setVoltagem(Voltagem.V_UNI);
 		
-		_repositorio.alterar(console);
+		_repositorio.adicionar(console);
 		
 		return erros;
 	}

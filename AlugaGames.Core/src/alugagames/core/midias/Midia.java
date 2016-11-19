@@ -30,6 +30,7 @@ public class Midia extends Produto {
 	
 	public Midia(){
 		id = UUID.randomUUID();
+		tipoConsole = new TipoConsole();
 	}
 
 	public UUID getId() {

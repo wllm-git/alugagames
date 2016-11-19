@@ -1,0 +1,49 @@
+.comboConsole {
+	position: relative !important;
+	top: 7px !important;
+	background-color: blue !important;
+}
+
+#jogo {
+	float: left;
+	margin-left: 30px;
+
+}
+
+#midia {
+	float: left;
+	margin-left: 50px;
+}
+
+.containerForms {
+	background-color: #efefef;
+	padding: 20px;
+	margin-right: 10px;
+	height: 230px;
+	border: 1px solid #bfbfbf;
+}
+
+.containerForms h2{
+	margin:0;
+	text-align: center;
+}
+
+
+.componentsForm{
+	margin-top: 15px;
+}
+
+#main{
+	
+}
+
+#table{
+	display: inline-block;
+	margin: 0;
+	margin-top: 20px;
+	clear:both;
+}
+
+#table h2{
+	margin: 0;
+}
