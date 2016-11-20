@@ -15,6 +15,7 @@ import alugagames.core.clientes.Cliente;
 import alugagames.core.consoles.Console;
 import alugagames.core.funcionarios.Funcao;
 import alugagames.core.funcionarios.Funcionario;
+import alugagames.core.funcionarios.FuncionarioServico;
 import alugagames.core.jogos.Jogo;
 import alugagames.core.midias.Midia;
 import alugagames.core.os.OrdemServico;
@@ -183,8 +184,9 @@ public class AluguelAplicacaoTest {
 				else {
 					os.setTecnico(t1);
 
-					List<String> erros2 = new OrdemServicoServico(
-							new OrdemServicoRepositorio()).processarOS(os);
+					FuncionarioServico atendenteServico = new FuncionarioServico(new FuncionarioRepositorio());
+					
+					List<String> erros2 = new OrdemServicoServico(new OrdemServicoRepositorio(), atendenteServico).processarOS(os);
 
 					if (!erros2.isEmpty())
 						Assert.fail();

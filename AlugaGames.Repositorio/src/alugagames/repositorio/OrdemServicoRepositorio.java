@@ -102,7 +102,7 @@ public class OrdemServicoRepositorio extends RepositorioBase<OrdemServico> imple
 	public Produto buscarProdutoPorNumeroSerie(Class classe, String numeroSerie) {
 		EntityManager em = ConnectionManager.getEntityManager();
 		
-		Query q = em.createQuery("Select p from "+ classe.getName() +" p where p.numeroSerie = :numeroSerie", OrdemServico.class);
+		Query q = em.createQuery("Select p from "+ classe.getName() +" p where p.numeroSerie = :numeroSerie", classe);
 		q.setParameter("numeroSerie", numeroSerie);
 		
 		try{
