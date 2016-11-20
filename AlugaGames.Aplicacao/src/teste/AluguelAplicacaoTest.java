@@ -11,7 +11,6 @@ import org.junit.Test;
 
 import alugagames.aplicacao.AluguelAplicacao;
 import alugagames.core.alugueis.Aluguel;
-import alugagames.core.alugueis.StatusAluguel;
 import alugagames.core.clientes.Cliente;
 import alugagames.core.consoles.Console;
 import alugagames.core.funcionarios.Funcao;
