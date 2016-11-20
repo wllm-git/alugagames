@@ -92,4 +92,28 @@ private FuncionarioServico _funcionarioServico;
 		
 		return funcionario;
 	}
+	
+	public Funcionario buscarPorID(UUID id){
+		return _funcionarioServico.buscarPorID(id);
+	}
+
+	public void excluir(Funcionario funcionarioSelecionado) {
+		
+		beginTransaction();
+		
+		_funcionarioServico.excluir(funcionarioSelecionado);
+		
+		commit();
+		
+	}
+
+	public List<Funcionario> buscarPorNome(String nome) {
+		
+		return _funcionarioServico.buscarPorNome(nome);
+	}
+
+	public Funcionario buscarPorCpf(String cpf) {
+		
+		return _funcionarioServico.bucarPorCpf(cpf);
+	}
 }

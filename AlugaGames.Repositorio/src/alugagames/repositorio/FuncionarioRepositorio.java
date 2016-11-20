@@ -1,5 +1,7 @@
 package alugagames.repositorio;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
@@ -81,6 +83,21 @@ public class FuncionarioRepositorio extends RepositorioBase<Funcionario> impleme
 		q.setParameter("id_tecnico", funcionario.getId());
 		
 		return Math.toIntExact((Long)q.getSingleResult());
+	}
+
+	@Override
+	public List<Funcionario> buscarPorNome(String nome) {
+	
+			EntityManager em = ConnectionManager.getEntityManager();
+			
+			try {
+				return em.createQuery("from Funcionario where upper(nome) like :nome", Funcionario.class)
+											.setParameter("nome", "%" + nome.toUpperCase() + "%").getResultList();
+			} catch (NoResultException e) {
+				return null;
+			
+		
+		}
 	}
 
 }

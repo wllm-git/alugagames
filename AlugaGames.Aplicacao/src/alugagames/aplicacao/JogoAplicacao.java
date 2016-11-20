@@ -55,10 +55,22 @@ public class JogoAplicacao extends AplicacaoBase{
 	
 	public void excluir(Jogo jogo){
 		
+		
 		for (Midia midia : jogo.getMidias()) {
 			new MidiaAplicacao().excluir(midia);
 		}
 		
-		_jogoServico.excluir(jogo);
+		beginTransaction();
+		
+			_jogoServico.excluir(jogo);
+	
+		commit();
 	}
+
+	public List<Jogo> pesquisaPorNome(String nome) {
+		
+		return _jogoServico.pesquisaPorNome(nome);
+	}
+
+
 }

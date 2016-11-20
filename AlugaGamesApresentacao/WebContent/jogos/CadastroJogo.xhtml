@@ -126,7 +126,7 @@
 						<div style="margin-top: 15px;">
 							<p:commandButton value="Salvar"
 								disabled="#{jogoBean.novoJogo}" action="#{jogoBean.salvarMidia}"
-								update="@form messagePrincipal frm-midia midiasTable"
+								update="@form messagePrincipal frm-midia frm:midiasTable"
 								process="frm-midia" />
 						</div>
 
@@ -135,65 +135,59 @@
 				</h:form>
 			</div><!-- Fim da Div Midia -->
 			
-			</div> <!-- Fim da Div Main -->
 			<div id="table">
-				<h2 style="margin-left: 8px;">Midias cadastradas para esse Jogo</h2>
+				<h:form id="frm">
 
-				<p:dataTable styleClass="tabelas-pesquisa"
-					value="#{jogoBean.jogo.midias}" var="midia" rows="5"
-					paginator="true" paginatorAlwaysVisible="false"
-					paginatorPosition="bottom" emptyMessage="Nenhuma mídia encontrada"
-					id="midiasTable">
+					<h2>Mídias deste Jogo</h2>
+					
+					<p:dataTable styleClass="tabelas-pesquisa"
+						value="#{jogoBean.jogo.midias}" var="midia" rows="4"
+						paginator="true" paginatorAlwaysVisible="false" style="margin:0;"
+						paginatorPosition="bottom" emptyMessage="Nenhuma mídia encontrada"
+						id="midiasTable" >
 
-					<p:column headerText="Número de Série" style="width: 100px;">
-						<h:outputText value="#{midia.numeroSerie}" />
-					</p:column>
+						<p:column headerText="Número de Série" style="width: 80px; text-align:center;">
+							<h:outputText value="#{midia.numeroSerie}" />
+						</p:column>
 
-					<p:column headerText="Console" style="width: 80px">
-						<h:outputText value="#{midia.tipoConsole.nome}" />
+						<p:column headerText="Console" style="width: 60px; text-align:center;" >
+							<h:outputText value="#{midia.tipoConsole.nome}" />
 
-					</p:column>
+						</p:column>
 
-					<p:column headerText="Preço" style="width: 50px; text-align:center">
-						<h:outputText value="#{midia.preco}">
-							<f:convertNumber currencySymbol="R$" locale="pt_BR" />
-						</h:outputText>
-					</p:column>
+						<p:column headerText="Preço"
+							style="width: 50px; text-align:center">
+							<h:outputText value="#{midia.preco}">
+								<f:convertNumber currencySymbol="R$" locale="pt_BR" />
+							</h:outputText>
+						</p:column>
 
-					<p:column width="30" style="text-align:center;">
+						<p:column width="30" style="text-align:center;">
 
-						<p:button outcome="/jogos/CadastroJogo" icon="ui-icon-pencil">
-							<f:param name="midia" value="#{midia.id}" />
+							<p:button outcome="/jogos/CadastroJogo" icon="ui-icon-pencil">
+								<f:param name="midia" value="#{midia.id}" />
 
-						</p:button>
+							</p:button>
 
-						<p:commandButton icon="ui-icon-trash"
-							oncomplete="confirmarExclusao.show()"
-							update="confirmacaoExclusaoDialog" process="@this">
-							<f:setPropertyActionListener value="#{midia}"
-								target="#{pesquisaMidiaBean.midiaSelecionada}" />
-						</p:commandButton>
+							<p:commandButton icon="ui-icon-trash"
+								update="midiasTable messagePrincipal" process="@this"
+								action="#{jogoBean.excluirMidia}">
+								<f:setPropertyActionListener value="#{midia}"
+									target="#{jogoBean.midiaSelecionada}" />
+							</p:commandButton>
 
-					</p:column>
+						</p:column>
 
-				</p:dataTable>
+					</p:dataTable>
 
-				<p:confirmDialog header="Exclusão de midia"
-					message="Tem certeza que deseja excluir a midia #{jogoBeann.midiaSelecionada.nome}? para o console 
-	    			#{jogoBeann.midiaSelecionada.tipoConsole.nome}"
-					widgetVar="confirmacaoExclusao" id="confirmacaoExclusaoDialog">
-					<p:button value="Não"
-						onclick="confirmacaoExclusao.hide(); return false;" />
-
-					<p:commandButton value="Sim"
-						oncomplete="confirmacaoExclusao.hide();"
-						action="#{jogoBean.excluirMidia}" process="@this"
-						update="midiasTable" />
-				</p:confirmDialog>
-
-			</div>
-
-
+				</h:form>
+			</div> <!-- Fim da DIV Table -->
+			
+			
+			
+			</div> <!-- Fim da Div Main -->
+			
+			
 	</ui:define>
 
 

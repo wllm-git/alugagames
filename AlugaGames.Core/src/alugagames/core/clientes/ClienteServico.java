@@ -55,4 +55,17 @@ public class ClienteServico extends ServicoBase<Cliente>{
 		
 		return cliente;
 	}
+	
+	public void excluir(Cliente cliente){
+		_repositorio.excluir(cliente);
+	}
+	
+	public List<Cliente> buscarPorNome(String nome){
+		return _repositorio.buscarPorNome(nome);
+	}
+
+	public Cliente buscarPorCpf(String cpf) {
+		
+		return _repositorio.buscarPorCpf(cpf);
+	}
 }

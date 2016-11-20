@@ -1,5 +1,7 @@
 package alugagames.repositorio;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
@@ -24,6 +26,19 @@ public class JogoRepositorio extends RepositorioBase<Jogo> implements IJogoRepos
 		try{
 			return (Jogo)q.getSingleResult();
 		}catch (NoResultException e) {
+			return null;
+		}
+	}
+
+	@Override
+	public List<Jogo> pesquisaPorNome(String nome) {
+
+		EntityManager em = ConnectionManager.getEntityManager();
+		
+		try {
+			return em.createQuery("from Jogo where upper(nome) like :nome", Jogo.class)
+										.setParameter("nome", "%" + nome.toUpperCase() + "%").getResultList();
+		} catch (NoResultException e) {
 			return null;
 		}
 	}

@@ -4,13 +4,15 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-	
+
 	<f:metadata>
 		<f:event listener="#{pesquisarJogosBean.inicializar}"
 			type="preRenderView" />
 	</f:metadata>
 
-	<ui:define name="titulo">Pesquisar Jogos</ui:define>
+	<ui:define name="titulo">Pesquisar Jogos
+		<h:outputStylesheet name="jogoMidia.css" library="css" />
+	</ui:define>
 
 	<ui:define name="conteudo">
 
@@ -18,34 +20,33 @@
 
 		<h:form id="frm">
 
-			<p:toolbar styleClass="barra-menu">
-		
+			<p:messages id="messagePrincipal" closable="true" />
 
-				<p:toolbarGroup align="right">
-					<p:button value="Novo" outcome="/jogos/CadastroJogo" />
-				</p:toolbarGroup>
+			<div>
+				<p:outputLabel value="Nome do Jogo:" for="nome" styleClass="label"
+					style="margin-left:4px;" />
+				<p:inputText id="nome" size="30"
+					value="#{pesquisarJogosBean.filtro.nome}" />
 
-			</p:toolbar>
-
-			<p:panelGrid columns="2" columnClasses="rotulo, campo"
-				styleClass="grid-cadastros">
-
-				<p:outputLabel value="CPF/CNPJ" for="cpfCnpj" />
-				<p:inputText id="cpfCnpj" size="30" value="#{pesquisaClientesBean.filtro.documentoReceitaFederal}" />
-
-				<p:outputLabel value="Nome" for="nome" />
-				<p:inputText id="nome" size="60" value="#{pesquisaClientesBean.filtro.nome}" />
+				<p:commandButton value="Pesquisar" styleClass="botoesTelaPesquisa"
+					style="margin-top: 10px;"
+					action="#{pesquisarJogosBean.pesquisar}" process="@form"
+					update="jogosTable"/>
 
 
-			</p:panelGrid>
+				<p:button value="Novo" outcome="/jogos/CadastroJogo"
+					styleClass="botoesTelaPesquisa" />
 
-			<p:dataTable value="#{pesquisarJogosBean.jogosFiltrados}"
-				var="jogo" styleClass="tabelas-pesquisa" rows="10"
-				paginator="true" paginatorAlwaysVisible="false"
-				paginatorPosition="bottom" emptyMessage="Nenhum Jogo Encontrado"
+			</div>
+
+
+			<p:dataTable value="#{pesquisarJogosBean.jogosFiltrados}" var="jogo"
+				styleClass="tabelas-pesquisa" rows="10" paginator="true"
+				paginatorAlwaysVisible="false" paginatorPosition="bottom"
+				style="width:50%;" emptyMessage="Nenhum Jogo Encontrado"
 				id="jogosTable">
 
-				<p:column headerText="Nome">
+				<p:column headerText="Nome" style="text-align:center">
 					<h:outputText value="#{jogo.nome}" />
 				</p:column>
 
@@ -54,38 +55,27 @@
 				</p:column>
 
 
-				<p:column headerText="Ano"
+				<p:column headerText="Ano de Lançamento"
 					style="width: 150px; text-align:center">
 					<h:outputText value="#{jogo.anoLancamento}" />
 				</p:column>
 
 				<p:column width="80" style="text-align:center;">
-					<p:button outcome="/jogos/CadastroJogo" icon="ui-icon-pencil" >
-						<f:param name="jogo" value="#{jogo.id}"/>
+					<p:button outcome="/jogos/CadastroJogo" icon="ui-icon-pencil">
+						<f:param name="jogo" value="#{jogo.id}" />
 					</p:button>
-					<p:commandButton icon="ui-icon-trash" oncomplete="confirmarExclusao.show()" 
-						update=":frm:dialogoConfirmacao" process="@this">
-						<f:setPropertyActionListener value="#{jogo}" target="#{pesquisarJogosBean.jogoSelecionado}" />
+
+					<p:commandButton icon="ui-icon-trash"
+						update="jogosTable frm:messagePrincipal" process="@this"
+						action="#{pesquisarJogosBean.excluirJogo}">
+						<f:setPropertyActionListener value="#{jogo}"
+							target="#{pesquisarJogosBean.jogoSelecionado}" />
 					</p:commandButton>
 
 				</p:column>
 
 
 			</p:dataTable>
-
-			<p:confirmDialog header="Exclusão de cliente"
-				widgetVar="confirmarExclusao"
-				message="Tem certeza que deseja excluir o jogo #{pesquisarJogosBean.jogoSelecionado.nome}?" 
-				id="dialogoConfirmacao">
-			
-				<p:commandButton value="Sim" action="#{pesquisarJogoBean.excluir}" 
-					oncomplete="confirmarExclusao.hide()" update="jogosTable" process="@this"/>
-				<p:commandButton value="Não" oncomplete="confirmarExclusao.hide()" />	
-			
-			</p:confirmDialog>
-
-
-
 		</h:form>
 	</ui:define>
 

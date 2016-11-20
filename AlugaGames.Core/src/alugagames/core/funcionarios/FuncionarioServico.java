@@ -84,4 +84,20 @@ public class FuncionarioServico extends ServicoBase<Funcionario>{
 		
 		return funcionario;
 	}
+
+	public void excluir(Funcionario funcionarioSelecionado) {
+		
+		_repositorio.excluir(funcionarioSelecionado);
+		
+	}
+
+	public List<Funcionario> buscarPorNome(String nome) {
+		
+		return _repositorio.buscarPorNome(nome);
+	}
+
+	public Funcionario bucarPorCpf(String cpf) {
+		
+		return _repositorio.buscarPorCpf(cpf);
+	}
 }

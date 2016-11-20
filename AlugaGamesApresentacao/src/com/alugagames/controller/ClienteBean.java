@@ -19,14 +19,12 @@ public class ClienteBean implements Serializable {
 
 	private Cliente cliente;
 	private ClienteAplicacao clienteAplicacao;
-	private List<Cliente> clientes;
 
 	public ClienteBean() {
 		cliente = new Cliente();
 
 		clienteAplicacao = new ClienteAplicacao();
 		
-		clientes = new ClienteAplicacao().buscarTodos();
 	}
 
 	public void teste() {
@@ -65,14 +63,6 @@ public class ClienteBean implements Serializable {
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
-	}
-
-	public List<Cliente> getClientes() {
-		return clientes;
-	}
-
-	public void setClientes(List<Cliente> clientes) {
-		this.clientes = clientes;
 	}
 	
 	

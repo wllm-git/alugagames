@@ -26,6 +26,7 @@ public class JogoBean implements Serializable {
 
 	private List<Categoria> categorias;
 	private JogoAplicacao jogoAplicacao;
+	private MidiaAplicacao midiaAplicacao;
 	private Jogo jogo;
 	private Midia midia;
 	private Midia midiaSelecionada;
@@ -62,6 +63,7 @@ public class JogoBean implements Serializable {
 		this.jogoAplicacao = new JogoAplicacao();
 		this.midia = new Midia();
 		this.midiaSelecionada = new Midia();
+		this.midiaAplicacao = new MidiaAplicacao();
 		novoJogo = isNovo();
 	}
 
@@ -95,17 +97,20 @@ public class JogoBean implements Serializable {
 
 	public void salvarMidia() {
 		
-		this.midia.setJogo(jogo);
-		this.midia.setStatus(StatusProduto.Disponivel);
-		
 		List<String> retorno;
 		
-		if(editando)
-			retorno = new MidiaAplicacao().atualizar(this.midia);
-		else
-			retorno = new MidiaAplicacao().cadastrar(this.midia);
+			if(this.midia.getStatus() == null){
+				this.midia.setJogo(jogo);
+				this.jogo.getMidias().add(this.midia);
+				this.jogoAplicacao.atualizar(jogo);
+				this.midia.setStatus(StatusProduto.Disponivel);
+				retorno = this.midiaAplicacao.cadastrar(this.midia);
+				
+			}
+			else{
+				retorno = this.midiaAplicacao.atualizar(this.midia);
+			}
 
-		
 		if (!retorno.isEmpty()) {
 
 			for (String erro : retorno) {
@@ -114,8 +119,6 @@ public class JogoBean implements Serializable {
 			return;
 		}
 
-		this.jogo.getMidias().add(this.midia);
-		this.jogoAplicacao.atualizar(jogo);
 
 		FacesUtil.addInfoMessage("Midia salva com sucesso!");
 		
@@ -124,9 +127,17 @@ public class JogoBean implements Serializable {
 	}
 	
 	public void excluirMidia(){
-		new MidiaAplicacao().excluir(this.midiaSelecionada);
-		FacesUtil.addInfoMessage("Midia Excluida com sucesso!");
+	
+		
+		jogo.getMidias().remove(this.midiaSelecionada);
+		
+		
+		this.midiaAplicacao.excluir(this.midiaSelecionada);
+
+		
+		FacesUtil.addInfoMessage("Midia excluída com sucesso!");
 	}
+	
 
 	public boolean isNovo() {
 		return this.jogo.getNome() == null ? true : false;
@@ -184,6 +195,8 @@ public class JogoBean implements Serializable {
 	public void setMidiaSelecionada(Midia midiaSelecionada) {
 		this.midiaSelecionada = midiaSelecionada;
 	}
+
+
 
 	
 }

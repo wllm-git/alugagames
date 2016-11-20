@@ -40,4 +40,11 @@ public class JogoServico extends ServicoBase<Jogo> {
 		_repositorio.excluir(jogo);
 	}
 
+	public List<Jogo> pesquisaPorNome(String nome) {
+		
+		return _repositorio.pesquisaPorNome(nome);
+	}
+
+
+
 }

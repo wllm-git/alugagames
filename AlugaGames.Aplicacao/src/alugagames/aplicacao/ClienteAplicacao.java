@@ -63,4 +63,22 @@ public class ClienteAplicacao extends AplicacaoBase{
 		
 		return cliente;
 	}
+	
+	public void excluir(Cliente cliente){
+		
+		beginTransaction();
+		
+			_clienteServico.excluir(cliente);
+			
+		commit();
+	}
+	
+	public List<Cliente> buscarPorNome(String nome){
+		return _clienteServico.buscarPorNome(nome);
+	}
+
+	public Cliente buscarPorCpf(String cpf) {
+		
+		return _clienteServico.buscarPorCpf(cpf);
+	}
 }
