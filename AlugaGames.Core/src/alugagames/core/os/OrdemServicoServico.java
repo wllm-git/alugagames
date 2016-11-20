@@ -128,7 +128,7 @@ public class OrdemServicoServico extends ServicoBase<OrdemServico>{
 	}
 	
 	public List<String> processarOS(OrdemServico ordemServico){
-		List<String> erros = new OrdemServicoAptaParaProcessamento().validar(ordemServico);
+		List<String> erros = new OrdemServicoAptaParaProcessamento(_repositorio, _funcionarioServico).validar(ordemServico);
 		
 		if(!erros.isEmpty())
 			return erros;
@@ -140,7 +140,7 @@ public class OrdemServicoServico extends ServicoBase<OrdemServico>{
 	}
 	
 	public List<String> finalizarServico(OrdemServico ordemServico){
-		List<String> erros = new OrdemServicoAptaParaFinalizarServico().validar(ordemServico);
+		List<String> erros = new OrdemServicoAptaParaFinalizarServico(_repositorio).validar(ordemServico);
 		
 		if(!erros.isEmpty())
 			return erros;
@@ -160,7 +160,7 @@ public class OrdemServicoServico extends ServicoBase<OrdemServico>{
 	
 	
 	public List<String> fecharOS(OrdemServico ordemServico){
-		List<String> erros = new OrdemServicoAptaParaSerFechada(_funcionarioServico).validar(ordemServico);
+		List<String> erros = new OrdemServicoAptaParaSerFechada(_repositorio, _funcionarioServico).validar(ordemServico);
 		
 		if(!erros.isEmpty())
 			return erros;

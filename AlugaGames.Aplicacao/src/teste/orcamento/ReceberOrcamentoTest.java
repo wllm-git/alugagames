@@ -90,7 +90,7 @@ public class ReceberOrcamentoTest {
 			o.setCodigo(10);
 			
 			List<String> erros = orcamentoAplicacao.receberOrcamento(o);
-			Assert.assertTrue(erros.contains("O orçameto 10 não existe no sistema."));
+			Assert.assertTrue(erros.contains("O orçamento 10 não existe no sistema."));
 			
 		} catch (Exception e) {
 			Assert.fail();
