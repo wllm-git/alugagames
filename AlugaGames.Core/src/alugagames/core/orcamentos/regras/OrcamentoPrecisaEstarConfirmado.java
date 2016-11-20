@@ -8,8 +8,8 @@ public class OrcamentoPrecisaEstarConfirmado implements IRegra<Orcamento> {
 
 	@Override
 	public String validar(Orcamento obj) {
-		if(obj.getStatus() == StatusOrcamento.Confirmado)
-			return "Orçamento não está confirmado.";
+		if(obj.getStatus() != StatusOrcamento.Confirmado)
+			return "Orçamento " + obj.getCodigo() + " não está confirmado.";
 		
 		return null;
 	}
