@@ -9,6 +9,9 @@ public class OrcamentoPrecisaEstaNoPrazoDe48Horas implements IRegra<Orcamento> {
 
 	@Override
 	public String validar(Orcamento obj) {
+		if(obj.getDataAbertura() == null)
+			return "Data de abertura inválida.";
+		
 		Calendar dataLimite = Calendar.getInstance();
 		
 		dataLimite.setTime(obj.getDataAbertura());

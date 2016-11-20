@@ -57,7 +57,7 @@ public class OrcamentoServico extends ServicoBase<Orcamento>{
 	}
 	
 	public List<String> abrirOrcamento(Orcamento orcamento){
-		List<String> erros = new OrcamentoAptoParaSerAberto().validar(orcamento);
+		List<String> erros = new OrcamentoAptoParaSerAberto(_repositorio).validar(orcamento);
 		
 		for (OrcamentoItem item : orcamento.getOrcamentoItens()) {
 			erros.addAll(new OrcamentoItemAptoParaOrcamento(_tipoConsoleServico).validar(item));
@@ -76,7 +76,7 @@ public class OrcamentoServico extends ServicoBase<Orcamento>{
 	
 	public List<String> receberOrcamento(Orcamento orcamento){
 		
-		List<String> erros = new OrcamentoAptoParaSerRecebido(_funcionarioServico).validar(orcamento);
+		List<String> erros = new OrcamentoAptoParaSerRecebido(_repositorio, _funcionarioServico).validar(orcamento);
 		if(!erros.isEmpty())
 			return erros;
 		
@@ -91,7 +91,7 @@ public class OrcamentoServico extends ServicoBase<Orcamento>{
 	}
 	
 	public List<String> avaliarOrcamento(Orcamento orcamento){
-		List<String> erros = new OrcamentoAptoParaSerAvaliado(_funcionarioServico).validar(orcamento);
+		List<String> erros = new OrcamentoAptoParaSerAvaliado(_repositorio, _funcionarioServico).validar(orcamento);
 		if(!erros.isEmpty())
 			return erros;
 		
@@ -103,7 +103,7 @@ public class OrcamentoServico extends ServicoBase<Orcamento>{
 	}
 	
 	public List<String> confirmarOrcamento(Orcamento orcamento){
-		List<String> erros = new OrcamentoAptoParaSerConfirmado().validar(orcamento);
+		List<String> erros = new OrcamentoAptoParaSerConfirmado(_repositorio).validar(orcamento);
 		
 		for (OrcamentoItem item : orcamento.getOrcamentoItens()) {
 			erros.addAll(new OrcamentoItemAptoParaSerConfirmado().validar(item));
@@ -124,7 +124,7 @@ public class OrcamentoServico extends ServicoBase<Orcamento>{
 	}
 	
 	public List<String> aceitarOrcamento(Orcamento orcamento){
-		List<String> erros = new OrcamentoAptoParaSerAceito().validar(orcamento);
+		List<String> erros = new OrcamentoAptoParaSerAceito(_repositorio).validar(orcamento);
 		if(!erros.isEmpty())
 			return erros;
 		
