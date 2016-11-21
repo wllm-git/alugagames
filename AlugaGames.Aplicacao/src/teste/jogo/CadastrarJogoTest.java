@@ -28,7 +28,7 @@ public class CadastrarJogoTest {
 		
 		jogo = new Jogo();
 		jogo.setNome("Jogo Ninja");
-		jogo.setAnoLancamento(new Date(99, 1, 1));
+		jogo.setAnoLancamento("1999");
 		jogo.setCategoria(Categoria.Aventura);
 		
 		List<String> erros = jogoAplicacao.cadastrar(jogo);
