@@ -39,17 +39,16 @@
 			
 			<p:toolbar styleClass="barra-menu">
 				<p:toolbarGroup>
-					<p:button value="Novo" outcome="/equipamentos/CadastroEquipamento" />
+					<p:button value="Novo" outcome="/consoles/CadastroConsole" />
 
-					<p:commandButton value="Salvar" update="@form, messagePrincipal " />
-					<!--  action="#{cadastroClienteBean.salvar}" process="frm"
-						update="messagePrincipal @form" /> -->
+					<p:commandButton value="Salvar" update="@form, messagePrincipal "
+					action="#{consoleBean.salvarConsole}" process="frm" />
 
 				</p:toolbarGroup>
 
 				<p:toolbarGroup align="right">
 					<p:button value="Pesquisar"
-						outcome="/funcionarios/PesquisaFuncionarios" />
+						outcome="/consoles/PesquisarConsoles" />
 				</p:toolbarGroup>
 
 			</p:toolbar>
@@ -58,11 +57,51 @@
 				columnClasses="rotulo, campo">
 
 
-				<p:outputLabel value="Nome" for="nome" />
-				<p:inputText id="nome" size="20" required="true" />
+			<p:outputLabel value="Número de Série" for="numeroSerie" />
+				<p:inputText id="numeroSerie" size="20" 
+					value="#{consoleBean.console.numeroSerie}" />
+
+				
+					<p:outputLabel value="Modelo de Console" for="modeloConsole" />
+					<p:selectOneMenu id="modeloConsole"  
+						value="#{consoleBean.console.tipoConsole}">
+						<f:selectItems value="#{equipamentoBean.consoles}" var="console"
+						itemValue="#{console}" itemLabel="#{console.nome}"/>
+					</p:selectOneMenu>
+					
+					<p:outputLabel value="Ano" for="ano" />
+				<p:inputText id="ano" size="4" 
+					value="#{consoleBean.console.ano}" />
+
+				<p:outputLabel value="Preço" for="preco" />
+				<p:inputText id="preco" size="4" styleClass="moeda"
+					value="#{consoleBean.console.preco}">
+					<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
+					</p:inputText>
+
+				<p:outputLabel value="Voltagem" for="voltagem" />
+					<p:selectOneMenu id="voltagem"  value="#{consoleBean.console.voltagem}">
+						<f:selectItems value="#{equipamentoBean.voltagens}" var="voltagem"
+						itemValue="#{voltagem}" itemLabel="#{voltagem}"/>
+					</p:selectOneMenu>
+					
+					<p:outputLabel value="Status" for="status" />
+					<p:selectOneMenu id="status"   value="#{consoleBean.console.status}">
+						<f:selectItems value="#{equipamentoBean.status}" var="status"
+						itemValue="#{status}" itemLabel="#{status}"/>
+					</p:selectOneMenu>
+					
+
+				<p:outputLabel value="Situação" for="situacao" />
+				<p:selectOneRadio id="situacao" styleClass="sem-bordas" 
+					value="#{consoleBean.console.ativo}">
+					<f:selectItem itemLabel="Ativo" itemValue="true" />
+					<f:selectItem itemLabel="Inativo" itemValue="false" />
+				</p:selectOneRadio>
 
 
 			</p:panelGrid>
+
 
 		</h:form>
 

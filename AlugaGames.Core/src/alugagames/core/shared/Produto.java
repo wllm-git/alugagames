@@ -1,5 +1,7 @@
 package alugagames.core.shared;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.MappedSuperclass;
@@ -9,6 +11,7 @@ import javax.persistence.MappedSuperclass;
 public abstract class Produto {
 	
 	private String numeroSerie;
+	@Enumerated(EnumType.STRING)
 	private StatusProduto status;
 	private boolean ativo;
 	

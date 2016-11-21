@@ -11,13 +11,13 @@
 		Cadastro de Equipamento
 		
 	</ui:define>
-	
+
 
 	<ui:define name="conteudo">
 
-		<f:metadata>
-			<o:viewParam name="cliente" />
-			<!--value="#{cadastroClienteBean.cliente}"-->
+	<f:metadata>
+			<o:viewParam name="equipamento" 
+			value="#{equipamentoBean.equipamento}"/>
 		</f:metadata>
 
 
@@ -27,23 +27,23 @@
 			<p:messages id="messagePrincipal" closable="true" />
 
 			<div class="titulo-cadastros">
-				
+
 				<h1>
 
 					Cadastro de Equipamento
 					<!--  #{cadastroClienteBean.editando ? 'Editando Cliente' : 'Novo Cliente'} -->
 				</h1>
-				
-				
+
+
 			</div>
-			
+
 			<p:toolbar styleClass="barra-menu">
 				<p:toolbarGroup>
 					<p:button value="Novo" outcome="/equipamentos/CadastroEquipamento" />
 
-					<p:commandButton value="Salvar" update="@form, messagePrincipal " />
-					<!--  action="#{cadastroClienteBean.salvar}" process="frm"
-						update="messagePrincipal @form" /> -->
+					<p:commandButton value="Salvar" update="@form, messagePrincipal" 
+					action="#{equipamentoBean.salvarEquipamento}" process="frm" />
+						
 
 				</p:toolbarGroup>
 
@@ -56,29 +56,51 @@
 			<p:panelGrid styleClass="grid-cadastros" columns="2" id="panel"
 				columnClasses="rotulo, campo">
 				
-				<p:outputLabel value="Tipo" for="tipo" />
-				<p:selectOneMenu id="tipo" required="true" value="#{equipamentoBean.equipamento.tipoEquipamento}">
-					<f:selectItems value="#{equipamentoBean.tiposEquipamento}" var="equipamento"
-						itemLabel="#{equipamento}" itemValue="#{equipamento}"/>
-				</p:selectOneMenu>
+				<p:outputLabel value="Número de Série" for="numeroSerie" />
+				<p:inputText id="numeroSerie" size="20" required="true"
+					value="#{equipamentoBean.equipamento.numeroSerie}" />
 
-				<p:outputLabel value="Valor" for="valor" />
-				<p:inputText id="valor" size="6" required="true" styleClass="moeda" 
-					value="#{equipamentoBean.equipamento.preco}" />
-				
-				<p:outputLabel value="Voltagem" for="voltagem" />
-				<p:selectOneRadio id="voltagem" styleClass="sem-bordas" required="true" 
-					value="#{equipamentoBean.equipamento.voltagem}">
-					<f:selectItems value="#{equipamentoBean.voltagens}" var="voltagem"
-						itemLabel="#{voltagem}" itemValue="#{voltagem}"/>
-				</p:selectOneRadio>
-				
-				<p:outputLabel value="Modelo de Console" for="modeloConsole" />
-				<p:selectOneMenu id="modeloConsole" required="true">
-					<f:selectItem itemLabel="XBox One" itemValue="xboxone" />
-					<f:selectItem itemLabel="PS4" itemValue="ps4" />
-					<f:selectItem itemLabel="Nitendo WI" itemValue="nitendowi" />
+				<p:outputLabel value="Tipo Equipamento" for="tipo" />
+				<p:selectOneMenu id="tipo" required="true"
+					value="#{equipamentoBean.equipamento.tipoEquipamento}">
+					<f:selectItems value="#{equipamentoBean.tiposEquipamento}"
+						var="equipamento" itemLabel="#{equipamento}"
+						itemValue="#{equipamento}" />
+
 				</p:selectOneMenu>
+				
+					<p:outputLabel value="Modelo de Console" for="modeloConsole" />
+					<p:selectOneMenu id="modeloConsole" required="true" 
+						value="#{equipamentoBean.equipamento.tipoConsole}">
+						<f:selectItems value="#{equipamentoBean.consoles}" var="console"
+						itemValue="#{console}" itemLabel="#{console.nome}"/>
+					</p:selectOneMenu>
+
+				<p:outputLabel value="Preço" for="preco" />
+				<p:inputText id="preco" size="4" styleClass="moeda"
+					value="#{equipamentoBean.equipamento.preco}">
+					<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
+					</p:inputText>
+
+				<p:outputLabel value="Voltagem" for="voltagem" />
+					<p:selectOneMenu id="voltagem" required="true" value="#{equipamentoBean.equipamento.voltagem}">
+						<f:selectItems value="#{equipamentoBean.voltagens}" var="voltagem"
+						itemValue="#{voltagem}" itemLabel="#{voltagem}"/>
+					</p:selectOneMenu>
+					
+					<p:outputLabel value="Status" for="status" />
+					<p:selectOneMenu id="status" required="true"  value="#{equipamentoBean.equipamento.status}">
+						<f:selectItems value="#{equipamentoBean.status}" var="status"
+						itemValue="#{status}" itemLabel="#{status}"/>
+					</p:selectOneMenu>
+					
+
+				<p:outputLabel value="Situação" for="situacao" />
+				<p:selectOneRadio id="situacao" styleClass="sem-bordas" required="true"
+					value="#{equipamentoBean.equipamento.ativo}">
+					<f:selectItem itemLabel="Ativo" itemValue="true" />
+					<f:selectItem itemLabel="Inativo" itemValue="false" />
+				</p:selectOneRadio>
 
 
 			</p:panelGrid>

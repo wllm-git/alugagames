@@ -84,7 +84,7 @@
 				<p:inputText id="email" size="40" required="true" value="#{funcionarioBean.funcionario.email}" />
 
 				<p:outputLabel value="Função" for="funcao" />
-				<p:selectOneMenu id="funcao" required="true" value="#{funcionarioBean.funcionario.funcao}">
+				<p:selectOneMenu id="funcao"  value="#{funcionarioBean.funcionario.funcao}">
 					<f:selectItems value="#{funcionarioBean.funcoes}" var="funcao" 
 						itemLabel="#{funcao}" itemValue="#{funcao}"/>
 

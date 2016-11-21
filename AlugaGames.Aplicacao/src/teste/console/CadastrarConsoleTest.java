@@ -37,7 +37,7 @@ public class CadastrarConsoleTest {
 		
 		console = new Console();
 		
-		console.setAno(new Date(106, 1, 1));
+		console.setAno("2016");
 		console.setNumeroSerie("123456");
 		console.setPreco(12.15f);
 		console.setTipoConsole(tipoConsole);

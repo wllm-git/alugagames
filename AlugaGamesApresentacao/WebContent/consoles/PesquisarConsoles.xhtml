@@ -1,0 +1,102 @@
+<ui:composition template="/WEB-INF/template/Layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<f:metadata>
+		<f:event listener="#{pesquisarClientesBean.inicializar}"
+			type="preRenderView" />
+	</f:metadata>
+
+	<ui:define name="titulo">Pesquisar Console</ui:define>
+
+	<ui:define name="conteudo">
+
+		<h1>Pesquisar Console</h1>
+
+		<h:form id="frm">
+
+			<p:messages id="messagePrincipal" closable="true" />
+
+
+			<p:panelGrid columns="2" columnClasses="rotulo, campo"
+				styleClass="grid-cadastros">
+
+
+				<p:outputLabel value="Nome" for="nome" />
+				<p:inputText id="nome" size="30"
+					value="#{pesquisarClientesBean.filtro.nome}" />
+
+
+				<p:outputLabel value="CPF" for="cpf" />
+				<p:inputText id="cpf" size="20"
+					value="#{pesquisarClientesBean.filtro.cpf}" />
+
+
+				<p:outputLabel value="Email" for="email" />
+				<p:inputText id="email" size="30"
+					value="#{pesquisarClientesBean.filtro.email}" />
+
+			</p:panelGrid>
+
+			<p:commandButton value="Pesquisa"
+				action="#{pesquisarClientesBean.pesquisar}" process="@form"
+				update="clientesTable" styleClass="botoesTelaPesquisa"
+				style="margin-top: 10px;" />
+
+			<p:button value="Novo" outcome="/clientes/CadastroCliente"
+				styleClass="botoesTelaPesquisa" style="margin-top: 10px" />
+
+
+
+			<p:dataTable value="#{pesquisarClientesBean.clientesFiltrados}"
+				var="cliente" styleClass="tabelas-pesquisa" rows="5"
+				paginator="true" paginatorAlwaysVisible="false"
+				paginatorPosition="bottom" emptyMessage="Nenhum Cliente Encontrado"
+				id="clientesTable">
+
+				<p:column headerText="Nome" style="width: 150px;">
+					<h:outputText value="#{cliente.nome}" />
+				</p:column>
+
+				<p:column headerText="R.G" style="width: 80px">
+					<h:outputText value="#{cliente.rg}" />
+				</p:column>
+
+				<p:column headerText="CPF" style="width: 150px; text-align:center">
+					<h:outputText value="#{cliente.cpf}">
+					</h:outputText>
+				</p:column>
+
+
+				<p:column headerText="Email" style="width: 150px; text-align:center">
+					<h:outputText value="#{cliente.email}" />
+				</p:column>
+
+				<p:column headerText="Telefone"
+					style="width: 150px; text-align:center">
+					<h:outputText value="#{cliente.telefone}" />
+				</p:column>
+
+				<p:column width="80" style="text-align:center;">
+					<p:button outcome="/clientes/CadastroCliente" icon="ui-icon-pencil">
+						<f:param name="cliente" value="#{cliente.id}" />
+					</p:button>
+					<p:commandButton icon="ui-icon-trash"
+						update="frm:messagePrincipal clientesTable" process="@this"
+						action="#{pesquisarClientesBean.excluirCliente}">
+						<f:setPropertyActionListener value="#{cliente}"
+							target="#{pesquisarClientesBean.clienteSelecionado}" />
+					</p:commandButton>
+
+				</p:column>
+
+			</p:dataTable>
+
+		</h:form>
+	</ui:define>
+
+
+</ui:composition>

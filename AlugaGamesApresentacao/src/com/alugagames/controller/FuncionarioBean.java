@@ -21,7 +21,6 @@ public class FuncionarioBean implements Serializable {
 
 	private Funcionario funcionario;
 	private FuncionarioAplicacao funcionarioAplicacao;
-	private List<Funcionario> funcionarios;
 	private List<Funcao> funcoes;
 
 	public FuncionarioBean() {
@@ -30,7 +29,7 @@ public class FuncionarioBean implements Serializable {
 		funcionarioAplicacao = new FuncionarioAplicacao();
 		getTodasFuncoes();
 		
-		funcionarios = new FuncionarioAplicacao().buscarTodos();
+
 	}
 
 	public void salvarFuncionario() {
@@ -78,17 +77,11 @@ public class FuncionarioBean implements Serializable {
 		this.funcionario = funcionario;
 	}
 
-	public List<Funcionario> getFuncionarios() {
-		return funcionarios;
-	}
-
-	public void setFuncionarios(List<Funcionario> funcionarios) {
-		this.funcionarios = funcionarios;
-	}
-
 	public List<Funcao> getFuncoes() {
 		return funcoes;
 	}
+
+	
 
 	
 	

@@ -9,42 +9,46 @@ import javax.faces.bean.ViewScoped;
 
 import com.alugagames.util.FacesUtil;
 
-import alugagames.aplicacao.ConsoleAplicacao;
+import alugagames.aplicacao.EquipamentoAplicacao;
 import alugagames.aplicacao.TipoConsoleAplicacao;
-import alugagames.core.consoles.Console;
+import alugagames.core.equipamentos.Equipamento;
+import alugagames.core.equipamentos.TipoEquipamento;
 import alugagames.core.shared.StatusProduto;
 import alugagames.core.shared.Voltagem;
 import alugagames.core.tiposconsole.TipoConsole;
 
 @ManagedBean
 @ViewScoped
-public class ConsoleBean implements Serializable{
+public class EquipamentoBean implements Serializable {
+
 
 	private static final long serialVersionUID = 1L;
-
 	
-	private Console console;
-	private ConsoleAplicacao consoleAplicacao;
+	private Equipamento equipamento;
+	private EquipamentoAplicacao equipamentoAplicacao;
+	private List<TipoEquipamento> tiposEquipamento;
 	private List<Voltagem> voltagens;
 	private List<TipoConsole> consoles;
 	private List<StatusProduto> status;
 	
-	public ConsoleBean(){
+	public EquipamentoBean(){
 		
-		this.console = new Console();
-		this.consoleAplicacao = new ConsoleAplicacao();
+		this.equipamento = new Equipamento();
+		this.equipamentoAplicacao = new EquipamentoAplicacao();
+		this.tiposEquipamento = new ArrayList<>();
 		this.voltagens = new ArrayList<>();
 		this.consoles = new ArrayList<>();
 		this.status = new ArrayList<>();
 		
+		getTodosTiposEquipamento();
 		getTodasVoltagens();
 		getTodosConsoles();
 		getTodosStatus();
 	}
 	
 	
-	public void salvarConsole(){
-		List<String> retorno = this.consoleAplicacao.cadastrar(this.console);
+	public void salvarEquipamento(){
+		List<String> retorno = this.equipamentoAplicacao.cadastrar(this.equipamento);
 		
 		if(!retorno.isEmpty()){
 			for (String erro : retorno) {
@@ -53,9 +57,9 @@ public class ConsoleBean implements Serializable{
 			}
 		}
 		
-		FacesUtil.addInfoMessage("Console cadastrado com sucesso");
+		FacesUtil.addInfoMessage("Equipamento cadastrado com sucesso");
 		
-		this.console = new Console();
+		this.equipamento = new Equipamento();
 	}
 	
 	private void getTodosConsoles() {
@@ -73,9 +77,13 @@ public class ConsoleBean implements Serializable{
 		}
 	}
 
-
+	private void getTodosTiposEquipamento(){
 		
-	
+		for (TipoEquipamento tipoEquipamento : TipoEquipamento.values()) {
+			this.tiposEquipamento.add(tipoEquipamento);	
+		}
+		
+	}
 	
 	private void getTodasVoltagens(){
 		
@@ -85,11 +93,14 @@ public class ConsoleBean implements Serializable{
 	}
 	
 	
-	public Console getEquipamento() {
-		return console;
+	public Equipamento getEquipamento() {
+		return equipamento;
 	}
-	public void setEquipamento(Console equipamento) {
-		this.console = equipamento;
+	public void setEquipamento(Equipamento equipamento) {
+		this.equipamento = equipamento;
+	}
+	public List<TipoEquipamento> getTiposEquipamento() {
+		return tiposEquipamento;
 	}
 
 	public List<Voltagem> getVoltagens() {
@@ -102,16 +113,6 @@ public class ConsoleBean implements Serializable{
 
 	public List<StatusProduto> getStatus() {
 		return status;
-	}
-
-
-	public Console getConsole() {
-		return console;
-	}
-
-
-	public void setConsole(Console console) {
-		this.console = console;
 	}
 	
 	
