@@ -17,7 +17,7 @@ public class FuncionarioPrecisaTerCpfUnico implements IRegra<Funcionario> {
 		
 		Funcionario f = _repositorio.buscarPorCpf(obj.getCpf());
 		if(f != null)
-			return "Cpf já está em uso.";
+			return "CPF já está em uso.";
 		
 		return null;
 	}

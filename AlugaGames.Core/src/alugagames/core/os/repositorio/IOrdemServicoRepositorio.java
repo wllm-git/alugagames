@@ -1,6 +1,7 @@
 package alugagames.core.os.repositorio;
 
 import alugagames.core.alugueis.Aluguel;
+import alugagames.core.orcamentos.Orcamento;
 import alugagames.core.os.OrdemServico;
 import alugagames.core.shared.Produto;
 import alugagames.core.shared.StatusProduto;
@@ -10,6 +11,8 @@ public interface IOrdemServicoRepositorio extends IRepositorioBase<OrdemServico>
 	public int getNextCodigo();
 	
 	public OrdemServico buscarPorAluguel(Aluguel aluguel);
+	
+	public OrdemServico buscarPorOrcamento(Orcamento orcamento);
 	
 	public OrdemServico buscarPorCodigo(int codigo);
 

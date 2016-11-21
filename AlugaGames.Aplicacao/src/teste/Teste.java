@@ -1,13 +1,9 @@
 package teste;
-import java.util.Date;
 import java.util.UUID;
 
-import alugagames.core.alugueis.Aluguel;
-import alugagames.core.alugueis.regras.AluguelPrecisaTerDataInicioValida;
 import alugagames.core.consoles.Console;
 import alugagames.core.equipamentos.TipoEquipamento;
 import alugagames.core.shared.FuncoesGerais;
-import alugagames.repositorio.ConsoleRepositorio;
 
 public class Teste {
 

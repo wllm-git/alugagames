@@ -4,6 +4,7 @@ import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import alugagames.core.alugueis.Aluguel;
+import alugagames.core.orcamentos.Orcamento;
 import alugagames.core.os.OrdemServico;
 import alugagames.core.os.repositorio.IOrdemServicoRepositorio;
 import alugagames.core.shared.Produto;
@@ -37,6 +38,20 @@ public class OrdemServicoRepositorio extends RepositorioBase<OrdemServico> imple
 		}
 	}
 
+	@Override
+	public OrdemServico buscarPorOrcamento(Orcamento orcamento) {
+		EntityManager em = ConnectionManager.getEntityManager();
+		
+		Query q = em.createQuery("Select os from OrdemServico os where os.orcamento.id = :orcamento", OrdemServico.class);
+		q.setParameter("orcamento", orcamento.getId());
+		
+		try{
+			return (OrdemServico)q.getSingleResult();
+		}catch (NoResultException e) {
+			return null;
+		}
+	}
+	
 	@Override
 	public OrdemServico buscarPorCodigo(int codigo) {
 		EntityManager em = ConnectionManager.getEntityManager();
@@ -87,7 +102,7 @@ public class OrdemServicoRepositorio extends RepositorioBase<OrdemServico> imple
 	public Produto buscarProdutoPorNumeroSerie(Class classe, String numeroSerie) {
 		EntityManager em = ConnectionManager.getEntityManager();
 		
-		Query q = em.createQuery("Select p from "+ classe.getName() +" p where p.numeroSerie = :numeroSerie", OrdemServico.class);
+		Query q = em.createQuery("Select p from "+ classe.getName() +" p where p.numeroSerie = :numeroSerie", classe);
 		q.setParameter("numeroSerie", numeroSerie);
 		
 		try{

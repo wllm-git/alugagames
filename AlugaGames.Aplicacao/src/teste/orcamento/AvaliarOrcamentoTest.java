@@ -99,7 +99,7 @@ public class AvaliarOrcamentoTest {
 			o.setCodigo(10);
 			
 			List<String> erros = orcamentoAplicacao.avaliarOrcamento(o);
-			Assert.assertTrue(erros.contains("O orçameto 10 não existe no sistema."));
+			Assert.assertTrue(erros.contains("O orçamento 10 não existe no sistema."));
 			
 		} catch (Exception e) {
 			Assert.fail();

@@ -17,7 +17,7 @@ public class OrcamentoPrecisaExistirNoSistema implements IRegra<Orcamento>{
 		Orcamento o = _repositorio.buscarPorID(obj.getId());
 		
 		if(o == null)
-			return "O orçameto " + obj.getCodigo() + " não existe no sistema.";
+			return "O orçamento " + obj.getCodigo() + " não existe no sistema.";
 		
 		return null;
 	}

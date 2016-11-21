@@ -9,6 +9,8 @@ public class FuncionarioPrecisaSerMaiorDe18Anos implements IRegra<Funcionario> {
 
 	@Override
 	public String validar(Funcionario obj) {
+		if(obj.getDataNascimento() == null)
+			return "Data de nascimento não informada.";
 		
 		Calendar data = Calendar.getInstance();
 		Calendar d = Calendar.getInstance();
