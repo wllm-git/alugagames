@@ -28,7 +28,7 @@ public class AluguelAplicacao extends AplicacaoBase{
 		MidiaServico midiaServico = new MidiaServico(new MidiaRepositorio());
 		EquipamentoServico equipamentoServico = new EquipamentoServico(new EquipamentoRepositorio());
 		FuncionarioServico atendenteServico = new FuncionarioServico(new FuncionarioRepositorio());
-		OrdemServicoServico ordemServicoServico = new OrdemServicoServico(new OrdemServicoRepositorio()); 
+		OrdemServicoServico ordemServicoServico = new OrdemServicoServico(new OrdemServicoRepositorio(), atendenteServico); 
 		
 		_aluguelServico = new AluguelServico(new AluguelRepositorio(), 
 													clienteServico, atendenteServico, consoleServico, 

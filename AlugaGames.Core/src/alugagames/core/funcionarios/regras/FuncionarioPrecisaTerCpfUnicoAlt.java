@@ -17,7 +17,7 @@ private IFuncionarioRepositorio _repositorio;
 		
 		Funcionario f = _repositorio.buscarPorCpf(obj.getCpf());
 		if(f != null && !obj.getId().equals(f.getId()))
-			return "Cpf já está em uso.";
+			return "CPF já está em uso.";
 		
 		return null;
 	}

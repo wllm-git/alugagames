@@ -33,7 +33,7 @@ public class CadastrarConsoleTest {
 	}
 	
 	@Test
-	public void cadastrarClienteComDadosValidos() {
+	public void cadastrarConsoleComDadosValidos() {
 		
 		console = new Console();
 		

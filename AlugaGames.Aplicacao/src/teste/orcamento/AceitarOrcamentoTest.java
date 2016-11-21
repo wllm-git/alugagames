@@ -13,9 +13,11 @@ import alugagames.core.funcionarios.Funcao;
 import alugagames.core.funcionarios.Funcionario;
 import alugagames.core.orcamentos.Orcamento;
 import alugagames.core.orcamentos.OrcamentoItem;
-import alugagames.core.orcamentos.StatusOrcamento;
+import alugagames.core.os.OrdemServico;
+import alugagames.core.os.StatusOS;
 import alugagames.repositorio.ClienteRepositorio;
 import alugagames.repositorio.FuncionarioRepositorio;
+import alugagames.repositorio.OrdemServicoRepositorio;
 import alugagames.repositorio.config.ConnectionManager;
 
 public class AceitarOrcamentoTest {
@@ -83,7 +85,17 @@ public class AceitarOrcamentoTest {
 			
 			if(!erros.isEmpty())
 				Assert.fail();
-			
+			else{
+				OrdemServico os = new OrdemServicoRepositorio().buscarPorOrcamento(o);
+				
+				if(os == null)
+					Assert.fail();
+				else{
+					
+					Assert.assertEquals(StatusOS.Aberta, os.getStatus());
+					Assert.assertEquals(o.getId(), os.getOrcamento().getId());
+				}
+			}
 		} catch (RuntimeException e) {
 			Assert.fail();
 		}
@@ -96,7 +108,7 @@ public class AceitarOrcamentoTest {
 			o.setCodigo(10);
 			
 			List<String> erros = orcamentoAplicacao.aceitarOrcamento(o);
-			Assert.assertTrue(erros.contains("O orçameto 10 não existe no sistema."));
+			Assert.assertTrue(erros.contains("O orçamento 10 não existe no sistema."));
 			
 		} catch (Exception e) {
 			Assert.fail();

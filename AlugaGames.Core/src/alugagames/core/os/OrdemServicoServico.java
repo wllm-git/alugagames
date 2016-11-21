@@ -6,11 +6,13 @@ import java.util.List;
 
 import alugagames.core.alugueis.Aluguel;
 import alugagames.core.funcionarios.Funcionario;
+import alugagames.core.funcionarios.FuncionarioServico;
 import alugagames.core.orcamentos.Orcamento;
 import alugagames.core.orcamentos.OrcamentoItem;
 import alugagames.core.os.repositorio.IOrdemServicoRepositorio;
 import alugagames.core.os.validacoes.OrdemServicoAptaParaFinalizarServico;
 import alugagames.core.os.validacoes.OrdemServicoAptaParaProcessamento;
+import alugagames.core.os.validacoes.OrdemServicoAptaParaSerAberta;
 import alugagames.core.os.validacoes.OrdemServicoAptaParaSerFechada;
 import alugagames.core.os.validacoes.OrdemServicoItemAptoParaOSInterna;
 import alugagames.core.os.validacoes.OrdemServicoItemAptoParafinalizarServico;
@@ -19,15 +21,15 @@ import alugagames.core.shared.StatusProduto;
 
 public class OrdemServicoServico extends ServicoBase<OrdemServico>{
 	private IOrdemServicoRepositorio _repositorio;
+	private FuncionarioServico _funcionarioServico;
 	
-	public OrdemServicoServico(IOrdemServicoRepositorio repositorio){
+	public OrdemServicoServico(IOrdemServicoRepositorio repositorio, FuncionarioServico funcionarioServico){
 		super(repositorio);
 		_repositorio = repositorio;
+		_funcionarioServico = funcionarioServico;
 	}
 	
 	public List<String> abrirOSInterna(Funcionario atendente, List<OrdemServicoItem> itens){
-		List<String> erros = new ArrayList<>();
-		
 		OrdemServico os = new OrdemServico();
 		os.setAtendente(atendente);
 		os.setDataAbertura(new Date());
@@ -35,7 +37,12 @@ public class OrdemServicoServico extends ServicoBase<OrdemServico>{
 		os.setStatus(StatusOS.Aberta);
 		os.setDescricao("OS interna");
 		os.setValor(0);
-		os.setCodigo(_repositorio.getNextCodigo());
+		os.setOrdemServicoItens(itens);
+		
+		List<String> erros = new OrdemServicoAptaParaSerAberta(_funcionarioServico).validar(os);
+		
+		if(!erros.isEmpty())
+			return erros;
 		
 		for (OrdemServicoItem item : itens) {
 			erros.addAll(new OrdemServicoItemAptoParaOSInterna(_repositorio).validar(item));
@@ -48,7 +55,7 @@ public class OrdemServicoServico extends ServicoBase<OrdemServico>{
 		if(!erros.isEmpty())
 			return erros;
 		
-		os.setOrdemServicoItens(itens);
+		os.setCodigo(_repositorio.getNextCodigo());
 		_repositorio.adicionar(os);
 		
 		return erros;
@@ -121,7 +128,7 @@ public class OrdemServicoServico extends ServicoBase<OrdemServico>{
 	}
 	
 	public List<String> processarOS(OrdemServico ordemServico){
-		List<String> erros = new OrdemServicoAptaParaProcessamento().validar(ordemServico);
+		List<String> erros = new OrdemServicoAptaParaProcessamento(_repositorio, _funcionarioServico).validar(ordemServico);
 		
 		if(!erros.isEmpty())
 			return erros;
@@ -133,7 +140,7 @@ public class OrdemServicoServico extends ServicoBase<OrdemServico>{
 	}
 	
 	public List<String> finalizarServico(OrdemServico ordemServico){
-		List<String> erros = new OrdemServicoAptaParaFinalizarServico().validar(ordemServico);
+		List<String> erros = new OrdemServicoAptaParaFinalizarServico(_repositorio).validar(ordemServico);
 		
 		if(!erros.isEmpty())
 			return erros;
@@ -153,7 +160,7 @@ public class OrdemServicoServico extends ServicoBase<OrdemServico>{
 	
 	
 	public List<String> fecharOS(OrdemServico ordemServico){
-		List<String> erros = new OrdemServicoAptaParaSerFechada().validar(ordemServico);
+		List<String> erros = new OrdemServicoAptaParaSerFechada(_repositorio, _funcionarioServico).validar(ordemServico);
 		
 		if(!erros.isEmpty())
 			return erros;
