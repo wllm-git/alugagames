@@ -7,7 +7,7 @@ public class JogoPrecisaTerCategoria implements IRegra<Jogo> {
 
 	@Override
 	public String validar(Jogo obj) {
-		if(obj.getCategoria() != null)
+		if(obj.getCategoria() == null)
 			return "Categoria não foi informada.";
 		
 		return null;

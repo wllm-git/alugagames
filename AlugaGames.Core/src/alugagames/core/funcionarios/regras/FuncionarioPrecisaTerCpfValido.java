@@ -10,16 +10,16 @@ public class FuncionarioPrecisaTerCpfValido implements IRegra<Funcionario> {
 	public String validar(Funcionario obj) {
 		
 		if(obj.getCpf() == null || obj.getCpf().isEmpty())
-			return "Cpf não informado.";
+			return "CPF não informado.";
 		
 		try {
 			Long.parseLong(obj.getCpf());
 			
 			if(!FuncoesGerais.cpfValido(obj.getCpf()))
-				return "Cpf inválido.";
+				return "CPF inválido.";
 			
 		} catch (Exception e) {
-			return "Cpf precisa conter apenas números.";
+			return "CPF precisa conter apenas números.";
 		}
 		
 		

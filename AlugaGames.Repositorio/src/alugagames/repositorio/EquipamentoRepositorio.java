@@ -28,7 +28,7 @@ public class EquipamentoRepositorio extends RepositorioBase<Equipamento> impleme
 	public Equipamento buscarPorNumeroSerie(String numeroSerie) {
 		EntityManager em = ConnectionManager.getEntityManager();
 		
-		Query q = em.createQuery("Select e from Equipamento e where e.numeroSerie = :numeroSerie", Midia.class);
+		Query q = em.createQuery("Select e from Equipamento e where e.numeroSerie = :numeroSerie", Equipamento.class);
 		q.setParameter("numeroSerie", numeroSerie);
 		
 		try{

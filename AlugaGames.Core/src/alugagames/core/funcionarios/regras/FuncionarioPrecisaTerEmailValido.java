@@ -9,9 +9,9 @@ public class FuncionarioPrecisaTerEmailValido implements IRegra<Funcionario> {
 	@Override
 	public String validar(Funcionario obj) {
 		if(obj.getEmail() == null || obj.getEmail().isEmpty())
-			return "Email não informado.";
+			return "E-mail não informado.";
 		else if(!FuncoesGerais.emailValido(obj.getEmail()))
-			return "Email inválido.";
+			return "E-mail inválido.";
 		
 		return null;
 	}

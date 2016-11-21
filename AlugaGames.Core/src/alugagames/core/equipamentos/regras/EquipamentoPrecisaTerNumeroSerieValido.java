@@ -10,7 +10,7 @@ public class EquipamentoPrecisaTerNumeroSerieValido implements IRegra<Equipament
 		if(obj.getNumeroSerie() == null || obj.getNumeroSerie().isEmpty())
 			return "Número de série não informado.";
 		else if(obj.getNumeroSerie().length() <= 3)
-			return "Número de série inválido.";
+			return "Número de série deve ter ao menos 4 caracteres.";
 		
 		return null;
 	}
