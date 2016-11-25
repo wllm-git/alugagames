@@ -38,7 +38,7 @@ public class AbrirOSInternaTest {
 		
 		console = new Console();
 		console.setAtivo(true);
-		console.setAno(new Date(106, 1, 1));
+		console.setAno("2006");
 		console.setNumeroSerie("123456");
 		console.setVoltagem(Voltagem.V_UNI);
 		console.setPreco(12.15f);
@@ -47,7 +47,7 @@ public class AbrirOSInternaTest {
 		
 		consoleInativo = new Console();
 		consoleInativo.setAtivo(false);
-		consoleInativo.setAno(new Date(106, 1, 1));
+		consoleInativo.setAno("2006");
 		consoleInativo.setNumeroSerie("123457");
 		consoleInativo.setVoltagem(Voltagem.V_UNI);
 		consoleInativo.setPreco(12.15f);
@@ -56,7 +56,7 @@ public class AbrirOSInternaTest {
 		
 		consoleSemAvaria = new Console();
 		consoleSemAvaria.setAtivo(true);
-		consoleSemAvaria.setAno(new Date(106, 1, 1));
+		consoleSemAvaria.setAno("2006");
 		consoleSemAvaria.setNumeroSerie("123458");
 		consoleSemAvaria.setVoltagem(Voltagem.V_UNI);
 		consoleSemAvaria.setPreco(12.15f);

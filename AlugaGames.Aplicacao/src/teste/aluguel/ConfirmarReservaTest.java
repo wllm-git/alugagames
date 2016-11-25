@@ -82,7 +82,7 @@ public class ConfirmarReservaTest {
 		m2.setPreco(10.0f);
 
 		con1 = new Console();
-		con1.setAno(new Date());
+		con1.setAno("2006");
 		con1.setAtivo(true);
 		con1.setNumeroSerie("321321456");
 		con1.setPreco(25.0f);
