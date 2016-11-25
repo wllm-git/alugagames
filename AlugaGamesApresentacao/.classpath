@@ -15,9 +15,6 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jboss-transaction-api_1.1_spec-1.0.0.Final.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/mysql-connector-java-5.1.21-bin.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/primefaces-6.0.jar"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/AlugaGames.Aplicacao"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/AlugaGames.Core"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/AlugaGames.Repositorio"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-aop-3.0.7.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-asm-3.0.7.RELEASE.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/spring-beans-3.0.7.RELEASE.jar"/>
@@ -42,5 +39,8 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/weld-servlet-1.1.10.Final.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/omnifaces-1.5.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/AlugaGames.Aplicacao"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/AlugaGames.Core"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/AlugaGames.Repositorio"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

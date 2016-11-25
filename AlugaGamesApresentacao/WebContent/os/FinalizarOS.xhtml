@@ -1,0 +1,115 @@
+<ui:composition template="/WEB-INF/template/Layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:o="http://omnifaces.org/ui">
+
+
+	<ui:define name="titulo">
+		Finalizar O.S.
+		<h:outputStylesheet name="orcamento.css" library="css" />
+	</ui:define>
+	<!--  #{cadastroClienteBean.editando ? 'Editando Cliente' : 'Novo Cliente'} -->
+
+	<ui:define name="conteudo">
+
+		<f:metadata>
+			<o:viewParam name="cliente" />
+			<!--value="#{cadastroClienteBean.cliente}"-->
+		</f:metadata>
+
+
+
+		<h:form id="frm">
+
+			<p:messages id="messagePrincipal" closable="true" />
+
+			<div>
+				<h1>
+
+					Finalizar O.S.
+					<!--  #{cadastroClienteBean.editando ? 'Editando Cliente' : 'Novo Cliente'} -->
+				</h1>
+
+			</div>
+
+
+			<div class="telaOrcamentoCliente">
+
+				<!--Informações OS -->
+
+				<div>
+					<div class="container">
+						<h:outputText value="Cliente:" styleClass="label" />
+						<p:outputLabel value="Roldão Wilker Bélo de Araújo"
+							styleClass="informacao" />
+					</div>
+
+					<div class="container">
+						<h:outputText value="Número da O.S:" styleClass="label" />
+						<p:outputLabel value="16627380" styleClass="informacao" />
+					</div>
+
+					<div class="container">
+						<h:outputText value="Status:" styleClass="label" />
+						<p:outputLabel value="Aberto" styleClass="informacao" />
+					</div>
+				</div>
+				<!-- Fim Informações Orçamento -->
+
+				<!-- Inicio Informações Produtos -->
+				<h2>Produtos</h2>
+				
+					<p:dataTable style=" margin:10px 0 5px 0;" emptyMessage="Nenhum Produto Adicionado">
+						
+						<p:column headerText="Sitaução">
+							<p:selectOneMenu styleClass="comboProdutos">
+
+							<f:selectItem itemLabel="Console" itemValue="Console" />
+							<f:selectItem itemLabel="Controle" itemValue="Controle" />
+							<f:selectItem itemLabel="Acessório" itemValue="Acessório" />
+
+						</p:selectOneMenu>
+						</p:column>
+						
+						
+						<p:column headerText="Descrição">
+							<h:outputText value="Alguma descrição Maluca" />
+						</p:column>
+
+						<p:column headerText="Nº Série">
+							<h:outputText value="ADD12323234" />
+						</p:column>
+
+						<p:column headerText="Valor">
+							<h:outputText value="R$ 0,00" />
+						</p:column>
+
+						<p:column headerText="Tem Conserto?">
+							<h:outputText value="X" />
+						</p:column>
+					</p:dataTable>
+					
+					<div class="informacoesProduto">
+						<h:outputText value="Descrição dos problemas:" styleClass="label"/><br/>
+						<p:inputTextarea rows="10" cols="65" style="margin: 3px 0 3px 0;"  />
+					</div>
+					
+					<p:commandButton value="Finalizar O.S"/>
+
+				</div>
+
+				<!-- Fim Informações Produtos -->
+
+			
+			<!-- Fim Tela -->
+
+
+		</h:form>
+
+
+	</ui:define>
+
+</ui:composition>

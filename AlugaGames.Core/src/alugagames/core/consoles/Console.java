@@ -1,13 +1,12 @@
 package alugagames.core.consoles;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -26,7 +25,7 @@ public class Console extends Produto {
 	@Column(length=16)
 	private UUID id;
 	
-	private String ano;
+	private Date ano;
 	@ManyToMany
 	@JoinTable(name = "ConsoleJogo", 
 				joinColumns = @JoinColumn(name = "ConsoleId"), 
@@ -35,8 +34,6 @@ public class Console extends Produto {
 	@OneToOne
 	@JoinColumn(name = "tipoconsole_id")
 	private TipoConsole tipoConsole;
-	
-	@Enumerated(EnumType.STRING)
 	private Voltagem voltagem;
 	private float preco;
 	
@@ -53,11 +50,11 @@ public class Console extends Produto {
 		this.id = id;
 	}
 
-	public String getAno() {
+	public Date getAno() {
 		return ano;
 	}
 
-	public void setAno(String ano) {
+	public void setAno(Date ano) {
 		this.ano = ano;
 	}
 

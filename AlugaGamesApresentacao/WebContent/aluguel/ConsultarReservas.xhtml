@@ -1,0 +1,106 @@
+<ui:composition template="/WEB-INF/template/Layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:o="http://omnifaces.org/ui">
+
+
+	<ui:define name="titulo">
+		Consultar Reservas
+		<h:outputStylesheet name="orcamento.css" library="css" />
+	</ui:define>
+	<!--  #{cadastroClienteBean.editando ? 'Editando Cliente' : 'Novo Cliente'} -->
+
+	<ui:define name="conteudo">
+
+		<f:metadata>
+			<o:viewParam name="cliente" />
+			<!--value="#{cadastroClienteBean.cliente}"-->
+		</f:metadata>
+
+
+
+		<h:form id="frm">
+
+			<p:messages id="messagePrincipal" closable="true" />
+
+			<div>
+				<h1>
+
+					Consultar Reservas
+					<!--  #{cadastroClienteBean.editando ? 'Editando Cliente' : 'Novo Cliente'} -->
+				</h1>
+
+			</div>
+	
+
+			<div class="telaOrcamentoCliente">
+
+
+				<div>
+					
+
+					<div class="informacoesOrcamento">
+						<h:outputText value="Código Reserva" styleClass="label" />
+						<p:inputText id="codigoReserva" />
+					</div>
+					
+					<div class="informacoesOrcamento">
+						<h:outputText value="CPF Cliente:" styleClass="label" />
+						<p:inputText id="cpfCliente" />
+					</div>
+					
+					
+					
+
+					<div class="informacoesOrcamento">
+						<p:commandButton value="Pesquisar"/>
+					</div>
+				</div>
+				<!-- Fim Informações Orçamento -->
+
+				<!-- Inicio Informações Produtos -->
+			
+					<p:dataTable style=" margin:10px 0 5px 0;" emptyMessage="Nenhum Produto Adicionado" >
+						
+						
+						<p:column headerText="Nº Orçamento">
+							<h:outputText value="123456" />
+						</p:column>
+
+						<p:column headerText="Cliente">
+							<h:outputText value="Roldão Wilker Bélo de Araújo" />
+						</p:column>
+
+						<p:column headerText="Data">
+							<h:outputText value="22/10/2016" />
+						</p:column>
+
+						<p:column headerText="Status">
+							<h:outputText value="Recebido" />
+						</p:column>
+						
+						<p:column headerText="Visualizar">
+							<p:commandButton value="Visualizar"/>
+						</p:column>
+					</p:dataTable>
+				</div>
+
+				<!-- Fim Informações Produtos -->
+
+			<!-- Fim Tela -->
+
+
+
+
+
+
+
+		</h:form>
+
+
+	</ui:define>
+
+</ui:composition>

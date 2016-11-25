@@ -45,52 +45,77 @@
 	<div style="float: right; margin-right: 110px; margin-top: 12px;">
 		<span
 			style="float: left; height: 30px; line-height: 30px; margin-right: 60px; margin-top: 2px;">
-		Olá, <strong>#{seguranca.nomeUsuario}!</strong>
+			Olá, <strong>#{seguranca.nomeUsuario}!</strong>
 		</span>
 
 		<h:form style="display: inline-block">
 			<p:menubar styleClass="menu-sistema">
-			
-			<p:submenu label="Serviços">
-			
-				
-				<p:submenu label="Aluguel">
-					<p:menuitem value="Reservar"
-						outcome="/aluguel/ReservarProduto.xhtml" />
-				</p:submenu>
-			
-				<p:submenu label="Orçamento">
-					<p:menuitem value="Fazer"
-						outcome="/orcamentos/FazerOrcamento.xhtml" />
-						
-					<p:menuitem value="Receber"
-						outcome="/orcamentos/ReceberOrcamento.xhtml" />
-						
-						<p:menuitem value="Consultar"
-						outcome="/orcamentos/ConsultarOrcamentos.xhtml" />
-						
-							<p:menuitem value="Processar"
-						outcome="/orcamentos/ProcessarOrcamento.xhtml" />
+
+				<p:submenu label="Serviços">
+
+
+					<p:submenu label="Aluguel">
+						<p:menuitem value="Reservar"
+							outcome="/aluguel/ReservarProduto.xhtml" />
+							
+							<p:menuitem value="Consultar Reserva"
+							outcome="/aluguel/ConsultarReservas.xhtml" />
+							
+							<p:menuitem value="Check-Out"
+							outcome="/aluguel/CheckOutAluguel.xhtml" />
+							
+							<p:menuitem value="Check-In"
+							outcome="/aluguel/CheckInAluguel.xhtml" />
 					</p:submenu>
-				
-					
-					
+
+					<p:submenu label="Orçamento">
+						<p:menuitem value="Fazer"
+							outcome="/orcamentos/FazerOrcamento.xhtml" />
+
+						<p:menuitem value="Receber"
+							outcome="/orcamentos/ReceberOrcamento.xhtml" />
+
+						<p:menuitem value="Pesquisar"
+							outcome="/orcamentos/PesquisarOrcamentos.xhtml" />
+							
+							<p:menuitem value="Consultar"
+							outcome="/orcamentos/ConsultarOrcamento.xhtml" />
+
+						<p:menuitem value="Processar"
+							outcome="/orcamentos/ProcessarOrcamento.xhtml" />
+					</p:submenu>
+
+					<p:submenu label="O.S">
+						<p:menuitem value="Consultar" outcome="/os/InformacoesOS.xhtml" />
+						<p:menuitem value="Pesquisar" outcome="/os/PesquisarOS.xhtml" />
+						<p:menuitem value="Processar" outcome="/os/ProcessarOS.xhtml" />
+						<p:menuitem value="Finalizar" outcome="/os/FinalizarOS.xhtml" />
+						
+					</p:submenu>
+
+
+
 				</p:submenu>
-			
+
 				<p:submenu label="Gerenciar">
-					<p:menuitem value="Clientes" outcome="/clientes/PesquisaClientes.xhtml" />
-					<p:menuitem value="Funcionários" outcome="/funcionarios/PesquisaFuncionarios.xhtml" />
+					<p:menuitem value="Clientes"
+						outcome="/clientes/PesquisaClientes.xhtml" />
+					<p:menuitem value="Funcionários"
+						outcome="/funcionarios/PesquisaFuncionarios.xhtml" />
 					<p:menuitem value="Jogos" outcome="/jogos/PesquisarJogos.xhtml" />
-					<p:menuitem value="Equipamentos" outcome="/equipamentos/CadastroEquipamento.xhtml" />
-					<p:menuitem value="Console" outcome="/consoles/CadastroConsole.xhtml" />
-					<p:menuitem value="Tipo de Console" outcome="/consoles/CadastroTipoConsole.xhtml" />
+					<p:menuitem value="Equipamentos"
+						outcome="/equipamentos/CadastroEquipamento.xhtml" />
+					<p:menuitem value="Console"
+						outcome="/consoles/CadastroConsole.xhtml" />
+					<p:menuitem value="Tipo de Console"
+						outcome="/consoles/CadastroTipoConsole.xhtml" />
 				</p:submenu>
-			
-			
-				
-				
-				
-				<p:menuitem value="Sair" url="/j_spring_security_logout"/>
+
+
+
+
+
+				<p:menuitem value="Sair" url="/j_spring_security_logout" />
 
 			</p:menubar>
 		</h:form>
@@ -106,8 +131,9 @@
 
 	<p:separator style="margin-bottom: 10px; margin-top:10px" />
 
-	<footer style="margin-bottom: 5px; text-align:center;"> Aluga Games |
-	Consoles, Games e Acessórios 2016 - Todos os Direitos Reservados<br />
+	<footer style="margin-bottom: 5px; text-align:center;"> Aluga
+	Games | Consoles, Games e Acessórios 2016 - Todos os Direitos
+	Reservados<br />
 	<br />
 	</footer>
 

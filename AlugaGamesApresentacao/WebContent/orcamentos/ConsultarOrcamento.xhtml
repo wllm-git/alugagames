@@ -1,0 +1,102 @@
+<ui:composition template="/WEB-INF/template/Layout.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:o="http://omnifaces.org/ui">
+
+
+	<ui:define name="titulo">
+		Consultar Orçamento
+		<h:outputStylesheet name="orcamento.css" library="css" />
+	</ui:define>
+	<!--  #{cadastroClienteBean.editando ? 'Editando Cliente' : 'Novo Cliente'} -->
+
+	<ui:define name="conteudo">
+
+		<f:metadata>
+			<o:viewParam name="cliente" />
+			<!--value="#{cadastroClienteBean.cliente}"-->
+		</f:metadata>
+
+
+
+		<h:form id="frm">
+
+			<p:messages id="messagePrincipal" closable="true" />
+
+			<div>
+				<h1>
+
+					Consultar Orçamento
+					<!--  #{cadastroClienteBean.editando ? 'Editando Cliente' : 'Novo Cliente'} -->
+				</h1>
+
+			</div>
+		
+			<div class="telaOrcamentoCliente">
+
+				<!--Informações Orçamento -->
+				<h2>Informações do Orçamento</h2>
+
+				<div>
+					<div class="container">
+						<h:outputText value="Cliente:" styleClass="label" />
+						<p:outputLabel value="Roldão Wilker Bélo de Araújo"
+							styleClass="informacao" />
+					</div>
+
+					<div class="container">
+						<h:outputText value="Número do Orçamento:" styleClass="label" />
+						<p:outputLabel value="16627380" styleClass="informacao" />
+					</div>
+
+					<div class="container">
+						<h:outputText value="Status:" styleClass="label" />
+						<p:outputLabel value="Aberto" styleClass="informacao" />
+					</div>
+				</div>
+				<!-- Fim Informações Orçamento -->
+
+				<!-- Inicio Informações Produtos -->
+				
+					<p:dataTable style=" margin:10px 0 5px 0;" emptyMessage="Nenhum Produto Adicionado">
+						<p:column headerText="Descrição">
+							<h:outputText value="Alguma descrição Maluca" />
+						</p:column>
+
+						<p:column headerText="Nº Série">
+							<h:outputText value="ADD12323234" />
+						</p:column>
+
+						<p:column headerText="Valor">
+							<h:outputText value="R$ 0,00" />
+						</p:column>
+
+						<p:column headerText="Tem Conserto?">
+							<h:outputText value="X" />
+						</p:column>
+					</p:dataTable>
+					
+					<div class="informacoesProduto">
+						<h:outputText value="Descrição dos problemas:" styleClass="label"/><br/>
+						<p:inputTextarea rows="10" cols="65" style="margin: 3px 0 3px 0;"  />
+					</div><br />
+					
+					<p:commandButton value="Aceitar Orçamento"  />
+					<p:commandButton value="Recusar Orçamento" />
+
+				</div>
+
+				<!-- Fim Informações Produtos -->
+
+			<!-- Fim Tela -->
+
+
+		</h:form>
+
+
+	</ui:define>
+
+</ui:composition>
