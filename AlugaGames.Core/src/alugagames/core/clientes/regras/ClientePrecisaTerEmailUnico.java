@@ -17,7 +17,7 @@ public class ClientePrecisaTerEmailUnico implements IRegra<Cliente> {
 		
 		Cliente c = _repositorio.buscarPorEmail(obj.getEmail());
 		if(c != null)
-			return "Email já está em uso.";
+			return "E-mail já está em uso.";
 		
 		return null;
 	}

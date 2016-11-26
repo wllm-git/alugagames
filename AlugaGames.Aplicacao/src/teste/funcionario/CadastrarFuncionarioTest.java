@@ -17,9 +17,20 @@ import alugagames.repositorio.config.ConnectionManager;
 public class CadastrarFuncionarioTest {
 	private static FuncionarioAplicacao funcionarioAplicacao;
 	private static Funcionario funcionario;
+	private static Funcionario funcionarioDup;
 	
 	@BeforeClass
 	public static void inicializar() {
+		funcionarioDup = new Funcionario();
+		funcionarioDup.setCpf("54433712400");
+		funcionarioDup.setEmail("email@email.com.br");
+		
+		
+		ConnectionManager.beginTransaction();
+		FuncionarioRepositorio repositorio = new FuncionarioRepositorio();
+		repositorio.adicionar(funcionarioDup);
+		ConnectionManager.commit();
+		
 		funcionarioAplicacao = new FuncionarioAplicacao();
 	}
 	
@@ -76,6 +87,28 @@ public class CadastrarFuncionarioTest {
 		Assert.assertTrue(erros.contains("Sexo inválido."));
 	}
 	
+	@Test
+	public void cadastrarFuncionarioComEmailDuplicado() {
+		Funcionario f = new Funcionario();
+		
+		f.setEmail("email@email.com.br");
+		
+		List<String> erros = funcionarioAplicacao.cadastrar(f);
+
+		Assert.assertTrue(erros.contains("E-mail já está em uso."));
+	}
+	
+	@Test
+	public void cadastrarFuncionarioComCPFDuplicado() {
+		Funcionario f = new Funcionario();
+		
+		f.setCpf("54433712400");
+		
+		List<String> erros = funcionarioAplicacao.cadastrar(f);
+
+		Assert.assertTrue(erros.contains("CPF já está em uso."));
+	}
+	
 	@AfterClass
 	public static void fecharConexao(){
 		excluirFuncionario();
@@ -86,6 +119,8 @@ public class CadastrarFuncionarioTest {
 		ConnectionManager.beginTransaction();
 		FuncionarioRepositorio repositorio = new FuncionarioRepositorio();
 		Funcionario f = repositorio.buscarPorID(funcionario.getId());
+		repositorio.excluir(f);
+		f = repositorio.buscarPorID(funcionarioDup.getId());
 		repositorio.excluir(f);
 		ConnectionManager.commit();
 	}

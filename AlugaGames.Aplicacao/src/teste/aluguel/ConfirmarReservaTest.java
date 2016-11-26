@@ -194,6 +194,33 @@ public class ConfirmarReservaTest {
 		}
 	}
 	
+	@Test
+	public void confirmarReservaSemCliente() {
+		Aluguel a = aluguelAplicacao.abrirReserva(c1);
+		a.getConsoles().add(con1);
+		a.setDataAluguelInicio(dtInicio);
+		a.setDataAluguelFim(dtFim);
+		
+		a.setCliente(null);
+		List<String> erros = aluguelAplicacao.confirmarReserva(a);
+
+		Assert.assertTrue(erros.contains("Cliente não informado."));
+	}
+	
+	@Test
+	public void confirmarReservaComClienteInvalido() {
+		Aluguel a = aluguelAplicacao.abrirReserva(c1);
+		a.getConsoles().add(con1);
+		a.setDataAluguelInicio(dtInicio);
+		a.setDataAluguelFim(dtFim);
+
+		a.setCliente(new Cliente());
+		List<String> erros = aluguelAplicacao.confirmarReserva(a);
+
+		Assert.assertTrue(erros.contains("Cliente informado não existe."));
+		
+	}
+	
 	private void reservarProdutos(){
 		ConnectionManager.beginTransaction();
 		con1.setStatus(StatusProduto.Reservado);

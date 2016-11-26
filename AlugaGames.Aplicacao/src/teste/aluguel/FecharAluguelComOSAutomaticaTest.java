@@ -43,6 +43,7 @@ public class FecharAluguelComOSAutomaticaTest {
 	private static Midia m1;
 	private static Midia m2;
 	private static Console con1;
+	private static Console con2;
 	private static Date dtInicio;
 	private static Date dtFim;
 
@@ -108,12 +109,24 @@ public class FecharAluguelComOSAutomaticaTest {
 		con1.setStatus(StatusProduto.Disponivel);
 		con1.getJogos().add(j1);
 		con1.getJogos().add(j2);
+		
+		con2 = new Console();
+		con2.setAno("2007");
+		con2.setAtivo(true);
+		con2.setNumeroSerie("9958865");
+		con2.setPreco(25.0f);
+		con2.setTipoConsole(tc1);
+		con2.setVoltagem(Voltagem.V_110);
+		con2.setStatus(StatusProduto.Disponivel);
+		con2.getJogos().add(j1);
+		con2.getJogos().add(j2);
 
 		ConnectionManager.beginTransaction();
 		new TipoConsoleRepositorio().adicionar(tc1);
 		new JogoRepositorio().adicionar(j1);
 		new JogoRepositorio().adicionar(j2);
 		new ConsoleRepositorio().adicionar(con1);
+		new ConsoleRepositorio().adicionar(con2);
 		new ClienteRepositorio().adicionar(c1);
 		new FuncionarioRepositorio().adicionar(a1);
 		new MidiaRepositorio().adicionar(m1);
@@ -130,9 +143,11 @@ public class FecharAluguelComOSAutomaticaTest {
 		ConnectionManager.beginTransaction();
 
 		con1.setStatus(StatusProduto.Disponivel);
+		con2.setStatus(StatusProduto.Disponivel);
 		m1.setStatus(StatusProduto.Disponivel);
 		m2.setStatus(StatusProduto.Disponivel);
 		new ConsoleRepositorio().atualizarStatusConsole(con1);
+		new ConsoleRepositorio().atualizarStatusConsole(con2);
 		new MidiaRepositorio().atualizarStatusMidia(m1);
 		new MidiaRepositorio().atualizarStatusMidia(m1);
 
@@ -163,6 +178,7 @@ public class FecharAluguelComOSAutomaticaTest {
 		new ConsoleRepositorio().atualizarStatusConsole(c);
 		ConnectionManager.commit();
 
+		a3.setAtendenteFechamento(a1);
 		List<String> erros = aluguelAplicacao.finalizarAluguel(a3);
 
 		if (!erros.isEmpty())
@@ -185,6 +201,28 @@ public class FecharAluguelComOSAutomaticaTest {
 		}
 	}
 
+	@Test
+	public void fecharAluguelSemAtendente() {
+		Aluguel a = aluguelAplicacao.abrirReserva(c1);
+		a.getConsoles().add(con2);
+		a.setDataAluguelInicio(dtInicio);
+		a.setDataAluguelFim(dtFim);
+
+		aluguelAplicacao.confirmarReserva(a);
+
+		Aluguel a2 = aluguelAplicacao.buscarReservaPorCodigo(a.getCodigo());
+
+		a2.setAtendenteConfirmacao(a1);
+		aluguelAplicacao.confirmarAluguel(a2);
+
+		Aluguel a3 = aluguelAplicacao.buscarAluguelPorCodigo(a.getCodigo());
+
+		List<String> erros = aluguelAplicacao.finalizarAluguel(a3);
+
+		Assert.assertTrue(erros.contains("atendente não informado."));
+		
+	}
+	
 	@AfterClass
 	public static void fecharConexao(){
 		ConnectionManager.dispose();

@@ -57,6 +57,7 @@ public class FinalizarServicoTest {
 		
 		os = new OrdemServico();
 		os.setCliente(cliente);
+		os.setTecnico(tecnicoAtivo);
 		os.setDataAbertura(new Date());
 		os.setInterna(false);
 		os.setOrcamento(null);
@@ -85,12 +86,7 @@ public class FinalizarServicoTest {
 		
 		ordemServicoAplicacao = new OrdemServicoAplicacao();
 	}
-	
-	@Before
-	public void removerTecnicoOS() {
-		os.setTecnico(null);
-	}
-	
+		
 	@Test
 	public void finalizarServicoOK() {
 		try {
@@ -210,6 +206,37 @@ public class FinalizarServicoTest {
 		} catch (RuntimeException e) {
 			Assert.fail();
 		}
+	}
+	
+	@Test
+	public void finalizarServicoSemTecnico() {
+		try {
+			OrdemServico os = new OrdemServico(); 
+			os.setCodigo(25);
+			
+			List<String> erros = ordemServicoAplicacao.finalizarServico(os);
+
+			Assert.assertTrue(erros.contains("Técnico não informado."));
+		} catch (RuntimeException e) {
+			Assert.fail();
+		}
+
+	}
+	
+	@Test
+	public void finalizarServicoComTecnicoInativo() {
+		try {
+			OrdemServico os = new OrdemServico(); 
+			os.setTecnico(new Funcionario());
+			os.setCodigo(25);
+			
+			List<String> erros = ordemServicoAplicacao.finalizarServico(os);
+
+			Assert.assertTrue(erros.contains("Técnico informado não cadastrado no sistema."));
+		} catch (RuntimeException e) {
+			Assert.fail();
+		}
+
 	}
 	
 	@AfterClass

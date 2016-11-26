@@ -223,6 +223,30 @@ public class FecharOSTest {
 		}
 	}
 	
+	@Test
+	public void processarOSSemTecnico() {
+		try {
+			os.setTecnico(null);
+			List<String> erros = ordemServicoAplicacao.fecharOS(os);
+
+			Assert.assertTrue(erros.contains("Técnico não informado."));
+		} catch (RuntimeException e) {
+			Assert.fail();
+		}
+	}
+	
+	@Test
+	public void processarOSComTecnicoNaoCadastrado() {
+		try {
+			os.setTecnico(new Funcionario());
+			List<String> erros = ordemServicoAplicacao.fecharOS(os);
+
+			Assert.assertTrue(erros.contains("Técnico informado não cadastrado no sistema."));
+		} catch (RuntimeException e) {
+			Assert.fail();
+		}
+	}
+	
 	@AfterClass
 	public static void fecharConexao(){
 		ConnectionManager.dispose();

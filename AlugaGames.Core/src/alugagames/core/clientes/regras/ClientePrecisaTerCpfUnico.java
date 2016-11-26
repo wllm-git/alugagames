@@ -17,7 +17,7 @@ public class ClientePrecisaTerCpfUnico implements IRegra<Cliente> {
 		
 		Cliente c = _repositorio.buscarPorCpf(obj.getCpf());
 		if(c != null)
-			return "Cpf já está em uso.";
+			return "CPF já está em uso.";
 		
 		return null;
 	}

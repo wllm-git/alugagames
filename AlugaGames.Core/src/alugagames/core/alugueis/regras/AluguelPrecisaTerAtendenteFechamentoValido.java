@@ -15,10 +15,10 @@ public class AluguelPrecisaTerAtendenteFechamentoValido implements IRegra<Alugue
 	
 	@Override
 	public String validar(Aluguel obj) {
-		if(obj.getAtendenteConfirmacao() == null)
+		if(obj.getAtendenteFechamento() == null)
 			return "atendente não informado.";
 		
-		Funcionario a = _atendenteServico.buscarPorID(obj.getAtendenteConfirmacao().getId());
+		Funcionario a = _atendenteServico.buscarPorID(obj.getAtendenteFechamento().getId());
 		
 		if(a == null)
 			return "atendente não existe no sistema.";

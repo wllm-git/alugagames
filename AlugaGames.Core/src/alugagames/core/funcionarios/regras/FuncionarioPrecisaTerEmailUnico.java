@@ -17,7 +17,7 @@ public class FuncionarioPrecisaTerEmailUnico implements IRegra<Funcionario> {
 		
 		Funcionario f = _repositorio.buscarPorEmail(obj.getEmail());
 		if(f != null)
-			return "Email já está em uso.";
+			return "E-mail já está em uso.";
 		
 		return null;
 	}

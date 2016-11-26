@@ -103,7 +103,7 @@ public class OrcamentoServico extends ServicoBase<Orcamento>{
 	}
 	
 	public List<String> confirmarOrcamento(Orcamento orcamento){
-		List<String> erros = new OrcamentoAptoParaSerConfirmado(_repositorio).validar(orcamento);
+		List<String> erros = new OrcamentoAptoParaSerConfirmado(_repositorio, _funcionarioServico).validar(orcamento);
 		
 		for (OrcamentoItem item : orcamento.getOrcamentoItens()) {
 			erros.addAll(new OrcamentoItemAptoParaSerConfirmado().validar(item));
@@ -124,7 +124,7 @@ public class OrcamentoServico extends ServicoBase<Orcamento>{
 	}
 	
 	public List<String> aceitarOrcamento(Orcamento orcamento){
-		List<String> erros = new OrcamentoAptoParaSerAceito(_repositorio).validar(orcamento);
+		List<String> erros = new OrcamentoAptoParaSerAceito(_repositorio, _clienteServico).validar(orcamento);
 		if(!erros.isEmpty())
 			return erros;
 		

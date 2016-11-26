@@ -128,6 +128,32 @@ public class AceitarOrcamentoTest {
 		}
 	}
 	
+	@Test
+	public void aceitarOrcamentoSemCliente() {
+		try {
+			Orcamento o = orcamentoAplicacao.iniciarOrcamento(c1);
+			o.setCliente(null);
+			List<String> erros = orcamentoAplicacao.aceitarOrcamento(o);
+			Assert.assertTrue(erros.contains("Cliente não informado."));
+			
+		} catch (Exception e) {
+			Assert.fail();
+		}
+	}
+	
+	@Test
+	public void aceitarOrcamentoComClienteInvalido() {
+		try {
+			Orcamento o = orcamentoAplicacao.iniciarOrcamento(c1);
+			o.setCliente(new Cliente());
+			List<String> erros = orcamentoAplicacao.aceitarOrcamento(o);
+			Assert.assertTrue(erros.contains("Cliente informado não existe."));
+			
+		} catch (Exception e) {
+			Assert.fail();
+		}
+	}
+	
 	@AfterClass
 	public static void fecharConexao(){
 		ConnectionManager.dispose();

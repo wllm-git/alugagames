@@ -145,7 +145,21 @@ public class ConfirmarOrcamentoTest {
 			Assert.fail();
 		}
 	}
+	
+	@Test
+	public void confirmarOrcamentoSemTecnico() {
+		try {
+			Orcamento o = new Orcamento();
+			o.setCodigo(10);
 			
+			List<String> erros = orcamentoAplicacao.confirmarOrcamento(o);
+			Assert.assertTrue(erros.contains("Técnico não informado."));
+			
+		} catch (Exception e) {
+			Assert.fail();
+		}
+	}
+	
 	@AfterClass
 	public static void fecharConexao(){
 		ConnectionManager.dispose();
