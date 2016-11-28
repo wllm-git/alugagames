@@ -1,0 +1,59 @@
+.containerForms {
+	background-color: #efefef;
+	padding: 20px;
+	height: 385px;
+	border: 1px solid #bfbfbf;
+}
+
+.containerForms h2 {
+	margin: 0;
+	text-align: center;
+}
+
+.componentsForm {
+	margin-top: 15px;
+}
+
+#main {
+	display: inline-block;
+}
+
+.comboConsole {
+	position: relative !important;
+	top: 7px !important;
+}
+
+.botoesConsole {
+	margin-top: 10px;
+}
+
+#console {
+	float: left;
+	display: inline-block;
+	width:30%;
+}
+
+#jogos {
+	float:left;
+	width:520px;
+	width:35%;
+	margin-left: 8px;
+}
+
+
+#jogosConsole {
+	
+	height: 427px;
+	float: left;
+	width:30%;
+	background-color: #efefef;
+	padding: 0 20px;
+	margin-left: 8px;
+	border: 1px solid #bfbfbf;
+
+}
+
+#jogosConsole h2{
+	text-align: center;
+	
+}

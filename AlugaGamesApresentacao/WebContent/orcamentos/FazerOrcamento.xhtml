@@ -8,7 +8,7 @@
 
 
 	<ui:define name="titulo">
-		Check-in Aluguel
+		Fazer Orçamento
 		<h:outputStylesheet name="orcamento.css" library="css" />
 	</ui:define>
 	<!--  #{cadastroClienteBean.editando ? 'Editando Cliente' : 'Novo Cliente'} -->
@@ -29,16 +29,33 @@
 			<div>
 				<h1>
 
-					Check-in Aluguel
+					Fazer Orçamento
 					<!--  #{cadastroClienteBean.editando ? 'Editando Cliente' : 'Novo Cliente'} -->
 				</h1>
 
 			</div>
+			<!-- 
+			<p:toolbar styleClass="barra-menu">
+				<p:toolbarGroup>
 
+					<p:commandButton value="Salvar" update="@form, messagePrincipal " />
+					 action="#{cadastroClienteBean.salvar}" process="frm"
+						update="messagePrincipal @form" /> 
+
+				</p:toolbarGroup>
+
+				<p:toolbarGroup align="right">
+					<p:button value="Pesquisar"
+						outcome="/funcionarios/PesquisaFuncionarios" />
+				</p:toolbarGroup>
+
+			</p:toolbar>
+			 -->
 
 			<div class="telaOrcamentoCliente">
 
-				<!--Informações OS -->
+				<!--Informações Orçamento -->
+				<h2>Informações do Orçamento</h2>
 
 				<div>
 					<div class="container">
@@ -48,7 +65,7 @@
 					</div>
 
 					<div class="container">
-						<h:outputText value="Número da O.S:" styleClass="label" />
+						<h:outputText value="Número do Orçamento:" styleClass="label" />
 						<p:outputLabel value="16627380" styleClass="informacao" />
 					</div>
 
@@ -61,11 +78,14 @@
 
 				<!-- Inicio Informações Produtos -->
 				<h2>Produtos</h2>
+				<div>
 
-				<p:dataTable style=" margin:10px 0 5px 0;"
-					emptyMessage="Nenhum Produto Adicionado">
-
-					<p:column headerText="Sitaução">
+					<div class="container">
+						<h:outputText value="Número de Série:" styleClass="label" />
+						<p:inputText styleClass="informacao" />
+					</div>
+					
+					<div class="container">
 						<p:selectOneMenu styleClass="comboProdutos">
 
 							<f:selectItem itemLabel="Console" itemValue="Console" />
@@ -73,35 +93,42 @@
 							<f:selectItem itemLabel="Acessório" itemValue="Acessório" />
 
 						</p:selectOneMenu>
-					</p:column>
+					
+					</div>
+					
+					
+					<p:commandButton value="Incluir" style="clear:both" />
 
+					<p:dataTable style=" margin:10px 0 5px 0;" emptyMessage="Nenhum Produto Adicionado">
+						<p:column headerText="Descrição">
+							<h:outputText value="Alguma descrição Maluca" />
+						</p:column>
 
-					<p:column headerText="Descrição">
-						<h:outputText value="Alguma descrição Maluca" />
-					</p:column>
+						<p:column headerText="Nº Série">
+							<h:outputText value="ADD12323234" />
+						</p:column>
 
-					<p:column headerText="Nº Série">
-						<h:outputText value="ADD12323234" />
-					</p:column>
+						<p:column headerText="Valor">
+							<h:outputText value="R$ 0,00" />
+						</p:column>
 
-					<p:column headerText="Valor">
-						<h:outputText value="R$ 0,00" />
-					</p:column>
+						<p:column headerText="Tem Conserto?">
+							<h:outputText value="X" />
+						</p:column>
+					</p:dataTable>
+					
+					<div class="informacoesProduto">
+						<h:outputText value="Descrição dos problemas:" styleClass="label"/><br/>
+						<p:inputTextarea rows="10" cols="65" style="margin: 3px 0 3px 0;"  />
+					</div><br />
+					
+					<p:commandButton value="Enviar Orçamento" style="clear:both" />
 
-					<p:column headerText="Tem Conserto?">
-						<h:outputText value="X" />
-					</p:column>
-				</p:dataTable>
-
-				<div style="position:relative; position: right;">
-					TOTAL: R$ 10,00 <br/>
-					<p:commandButton value="Finalizar" />
 				</div>
+
+				<!-- Fim Informações Produtos -->
+
 			</div>
-
-			<!-- Fim Informações Produtos -->
-
-
 			<!-- Fim Tela -->
 
 

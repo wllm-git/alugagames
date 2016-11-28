@@ -9,9 +9,10 @@
 
 	<ui:define name="titulo">
 		Cadastro de Console
-		
+		<h:outputStylesheet name="console.css" library="css" />
+
 	</ui:define>
-	
+
 
 	<ui:define name="conteudo">
 
@@ -20,90 +21,235 @@
 			<!--value="#{cadastroClienteBean.cliente}"-->
 		</f:metadata>
 
+		<div class="titulo-cadastros">
 
+			<h1>Cadastro de Console</h1>
 
-		<h:form id="frm">
+		</div>
+
+		<div id="main">
+
 
 			<p:messages id="messagePrincipal" closable="true" />
 
-			<div class="titulo-cadastros">
-				
-				<h1>
 
-					Cadastro de Console
-					<!--  #{cadastroClienteBean.editando ? 'Editando Cliente' : 'Novo Cliente'} -->
-				</h1>
-				
-				
+			<div id="console">
+				<h:form id="frm-console">
+
+					<div class="containerForms">
+
+						<h2>Console</h2>
+
+						<div class="componentsForm">
+							<p:outputLabel value="Número de Série:" for="numeroSerie"
+								styleClass="label" />
+
+							<p:inputText id="numeroSerie" size="20"
+								value="#{consoleBean.console.numeroSerie}" />
+
+						</div>
+
+						<div class="componentsForm">
+
+							<p:outputLabel value="Modelo de Console:" for="modeloConsole"
+								styleClass="label" />
+
+							<p:selectOneMenu id="modeloConsole"
+								value="#{consoleBean.console.tipoConsole}"
+								styleClass="comboConsole">
+								<f:selectItems value="#{equipamentoBean.consoles}" var="console"
+									itemValue="#{console}" itemLabel="#{console.nome}" />
+							</p:selectOneMenu>
+
+						</div>
+
+						<div class="componentsForm">
+							<p:outputLabel value="Ano:" for="ano" styleClass="label" />
+							<p:inputText id="ano" size="4" value="#{consoleBean.console.ano}" />
+						</div>
+
+						<div class="componentsForm">
+							<p:outputLabel value="Preço:" for="preco" styleClass="label" />
+							<p:inputText id="preco" size="4" styleClass="moeda"
+								value="#{consoleBean.console.preco}">
+								<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
+							</p:inputText>
+						</div>
+
+						<div class="componentsForm">
+							<p:outputLabel value="Voltagem:" for="voltagem"
+								styleClass="label" />
+							<p:selectOneMenu id="voltagem" styleClass="comboConsole"
+								value="#{consoleBean.console.voltagem}">
+								<f:selectItems value="#{equipamentoBean.voltagens}"
+									var="voltagem" itemValue="#{voltagem}" itemLabel="#{voltagem}" />
+							</p:selectOneMenu>
+						</div>
+
+						<div class="componentsForm">
+							<p:outputLabel value="Status:" for="status" styleClass="label" />
+							<p:selectOneMenu id="status" styleClass="comboConsole"
+								value="#{consoleBean.console.status}">
+								<f:selectItems value="#{equipamentoBean.status}" var="status"
+									itemValue="#{status}" itemLabel="#{status}" />
+							</p:selectOneMenu>
+
+						</div>
+
+						<div class="componentsForm">
+							<p:outputLabel value="Situação:" for="situacao"
+								styleClass="label" />
+							<p:selectOneRadio id="situacao" styleClass="sem-bordas"
+								value="#{consoleBean.console.ativo}">
+								<f:selectItem itemLabel="Ativo" itemValue="true" />
+								<f:selectItem itemLabel="Inativo" itemValue="false" />
+							</p:selectOneRadio>
+						</div>
+
+						<div class="botoesConsole">
+							<p:button value="Novo" outcome="/consoles/CadastroConsole" />
+
+							<p:commandButton value="Salvar" update="@form, messagePrincipal "
+								action="#{consoleBean.salvarConsole}" process="frm-console" />
+
+							<p:button value="Cancelar" outcome="/consoles/CadastroConsole" />
+						</div>
+
+
+					</div>
+					<!-- Fim da Div ContainerForms -->
+
+				</h:form>
+
 			</div>
-			
-			<p:toolbar styleClass="barra-menu">
-				<p:toolbarGroup>
-					<p:button value="Novo" outcome="/consoles/CadastroConsole" />
-
-					<p:commandButton value="Salvar" update="@form, messagePrincipal "
-					action="#{consoleBean.salvarConsole}" process="frm" />
-
-				</p:toolbarGroup>
-
-				<p:toolbarGroup align="right">
-					<p:button value="Pesquisar"
-						outcome="/consoles/PesquisarConsoles" />
-				</p:toolbarGroup>
-
-			</p:toolbar>
-
-			<p:panelGrid styleClass="grid-cadastros" columns="2" id="panel"
-				columnClasses="rotulo, campo">
+			<!-- Fim da Div console -->
 
 
-			<p:outputLabel value="Número de Série" for="numeroSerie" />
-				<p:inputText id="numeroSerie" size="20" 
-					value="#{consoleBean.console.numeroSerie}" />
 
-				
-					<p:outputLabel value="Modelo de Console" for="modeloConsole" />
-					<p:selectOneMenu id="modeloConsole"  
-						value="#{consoleBean.console.tipoConsole}">
-						<f:selectItems value="#{equipamentoBean.consoles}" var="console"
-						itemValue="#{console}" itemLabel="#{console.nome}"/>
-					</p:selectOneMenu>
-					
-					<p:outputLabel value="Ano" for="ano" />
-				<p:inputText id="ano" size="4" 
-					value="#{consoleBean.console.ano}" />
+			<div id="jogos">
 
-				<p:outputLabel value="Preço" for="preco" />
-				<p:inputText id="preco" size="4" styleClass="moeda"
-					value="#{consoleBean.console.preco}">
-					<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
-					</p:inputText>
+				<h:form id="frm-jogos">
+					<div class="containerForms">
 
-				<p:outputLabel value="Voltagem" for="voltagem" />
-					<p:selectOneMenu id="voltagem"  value="#{consoleBean.console.voltagem}">
-						<f:selectItems value="#{equipamentoBean.voltagens}" var="voltagem"
-						itemValue="#{voltagem}" itemLabel="#{voltagem}"/>
-					</p:selectOneMenu>
-					
-					<p:outputLabel value="Status" for="status" />
-					<p:selectOneMenu id="status"   value="#{consoleBean.console.status}">
-						<f:selectItems value="#{equipamentoBean.status}" var="status"
-						itemValue="#{status}" itemLabel="#{status}"/>
-					</p:selectOneMenu>
-					
-
-				<p:outputLabel value="Situação" for="situacao" />
-				<p:selectOneRadio id="situacao" styleClass="sem-bordas" 
-					value="#{consoleBean.console.ativo}">
-					<f:selectItem itemLabel="Ativo" itemValue="true" />
-					<f:selectItem itemLabel="Inativo" itemValue="false" />
-				</p:selectOneRadio>
+						<h2>Jogos</h2>
 
 
-			</p:panelGrid>
+						<p:outputLabel value="Nome do Jogo:" for="nome" styleClass="label"
+							style="margin-left:4px;" />
+						<p:inputText id="nome" size="20"
+							value="#{pesquisarJogosBean.filtro.nome}" />
 
 
-		</h:form>
+
+						<p:commandButton value="Pesquisar" styleClass="botoesTelaPesquisa"
+							style="margin-top: 10px;"
+							action="#{pesquisarJogosBean.pesquisar}" process="frm-jogos"
+							update="jogosTable" />
+
+
+						<p:dataTable value="#{pesquisarJogosBean.jogosFiltrados}"
+							var="jogo" styleClass="tabelas-pesquisa" rows="10"
+							paginator="true" paginatorAlwaysVisible="false"
+							paginatorPosition="bottom" style="width:100%;"
+							emptyMessage="Nenhum Jogo Encontrado" id="jogosTable">
+
+							<p:column headerText="Nome"
+								style="text-align:center; width:150px;">
+								<h:outputText value="#{jogo.nome}" />
+							</p:column>
+
+							<p:column headerText="Categoria" style="width: 80px">
+								<h:outputText value="#{jogo.categoria}" />
+							</p:column>
+
+
+							<p:column headerText="Ano" style="width: 60px; text-align:center">
+								<h:outputText value="#{jogo.anoLancamento}" />
+							</p:column>
+
+							<p:column width="40" style="text-align:center;">
+								<p:button outcome="/jogos/CadastroJogo" icon="ui-icon-pencil">
+									<f:param name="jogo" value="#{jogo.id}" />
+								</p:button>
+
+								<p:commandButton icon="ui-icon-trash"
+									update="jogosTable messagePrincipal" process="@this"
+									action="#{pesquisarJogosBean.excluirJogo}">
+									<f:setPropertyActionListener value="#{jogo}"
+										target="#{pesquisarJogosBean.jogoSelecionado}" />
+								</p:commandButton>
+
+							</p:column>
+
+
+						</p:dataTable>
+
+					</div>
+					<!-- Fim da Div containerForms -->
+
+				</h:form>
+
+			</div>
+
+
+			<!-- Fim da Div jogos -->
+
+			<div id="jogosConsole">
+
+					<h2>Jogos deste Console</h2>
+
+					<p:dataTable styleClass="tabelas-pesquisa"
+						value="#{jogoBean.jogo.midias}" var="midia" rows="4"
+						paginator="true" paginatorAlwaysVisible="false" style="margin:0;"
+						paginatorPosition="bottom" emptyMessage="Nenhuma mídia encontrada"
+						id="midiasTable">
+
+						<p:column headerText="Número de Série"
+							style="width: 80px; text-align:center;">
+							<h:outputText value="#{midia.numeroSerie}" />
+						</p:column>
+
+						<p:column headerText="Console"
+							style="width: 60px; text-align:center;">
+							<h:outputText value="#{midia.tipoConsole.nome}" />
+
+						</p:column>
+
+						<p:column headerText="Ano"
+							style="width: 50px; text-align:center">
+							<h:outputText value="#{midia.preco}">
+								<f:convertNumber currencySymbol="R$" locale="pt_BR" />
+							</h:outputText>
+						</p:column>
+
+						<p:column width="30" style="text-align:center;">
+
+							<p:button outcome="/jogos/CadastroJogo" icon="ui-icon-pencil">
+								<f:param name="midia" value="#{midia.id}" />
+
+							</p:button>
+
+							<p:commandButton icon="ui-icon-trash"
+								update="midiasTable messagePrincipal" process="@this"
+								action="#{jogoBean.excluirMidia}">
+								<f:setPropertyActionListener value="#{midia}"
+									target="#{jogoBean.midiaSelecionada}" />
+							</p:commandButton>
+
+						</p:column>
+
+					</p:dataTable>
+
+			</div>
+			<!-- Fim da DIV Table -->
+
+
+		</div>
+		<!-- Fim da div Main -->
+
+
+		<!--*********************************************************************************************************  -->
+
 
 
 	</ui:define>
