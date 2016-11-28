@@ -140,7 +140,7 @@ public class OrdemServicoServico extends ServicoBase<OrdemServico>{
 	}
 	
 	public List<String> finalizarServico(OrdemServico ordemServico){
-		List<String> erros = new OrdemServicoAptaParaFinalizarServico(_repositorio).validar(ordemServico);
+		List<String> erros = new OrdemServicoAptaParaFinalizarServico(_repositorio, _funcionarioServico).validar(ordemServico);
 		
 		if(!erros.isEmpty())
 			return erros;

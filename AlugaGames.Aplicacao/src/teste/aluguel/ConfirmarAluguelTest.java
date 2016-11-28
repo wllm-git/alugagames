@@ -41,6 +41,7 @@ public class ConfirmarAluguelTest {
 	private static Midia m1;
 	private static Midia m2;
 	private static Console con1;
+	private static Console con2;
 	private static Date dtInicio;
 	private static Date dtFim;
 
@@ -97,7 +98,7 @@ public class ConfirmarAluguelTest {
 		m2.setPreco(10.0f);
 
 		con1 = new Console();
-		con1.setAno(new Date());
+		con1.setAno("2006");
 		con1.setAtivo(true);
 		con1.setNumeroSerie("321321456");
 		con1.setPreco(25.0f);
@@ -107,11 +108,23 @@ public class ConfirmarAluguelTest {
 		con1.getJogos().add(j1);
 		con1.getJogos().add(j2);
 
+		con2 = new Console();
+		con2.setAno("2006");
+		con2.setAtivo(true);
+		con2.setNumeroSerie("99887454");
+		con2.setPreco(25.0f);
+		con2.setTipoConsole(tc1);
+		con2.setVoltagem(Voltagem.V_110);
+		con2.setStatus(StatusProduto.Disponivel);
+		con2.getJogos().add(j1);
+		con2.getJogos().add(j2);
+		
 		ConnectionManager.beginTransaction();
 		new TipoConsoleRepositorio().adicionar(tc1);
 		new JogoRepositorio().adicionar(j1);
 		new JogoRepositorio().adicionar(j2);
 		new ConsoleRepositorio().adicionar(con1);
+		new ConsoleRepositorio().adicionar(con2);
 		new ClienteRepositorio().adicionar(c1);
 		new FuncionarioRepositorio().adicionar(a1);
 		new MidiaRepositorio().adicionar(m1);
@@ -165,6 +178,44 @@ public class ConfirmarAluguelTest {
 			}
 
 		}
+	}
+	
+	@Test
+	public void confirmarAluguelSemCliente() {
+		Aluguel a = aluguelAplicacao.abrirReserva(c1);
+		a.getConsoles().add(con1);
+		a.setDataAluguelInicio(dtInicio);
+		a.setDataAluguelFim(dtFim);
+		
+		aluguelAplicacao.confirmarReserva(a);
+
+		Aluguel a2 = aluguelAplicacao.buscarReservaPorCodigo(a.getCodigo());
+
+		a2.setAtendenteConfirmacao(a1);
+		a2.setCliente(null);
+		List<String> erros = aluguelAplicacao.confirmarAluguel(a2);
+
+		Assert.assertTrue(erros.contains("Cliente não informado."));
+	}
+	
+	@Test
+	public void confirmarAluguelComClienteInvalido() {
+		Aluguel a = aluguelAplicacao.abrirReserva(c1);
+		a.getConsoles().add(con2);
+		a.setDataAluguelInicio(dtInicio);
+		a.setDataAluguelFim(dtFim);
+		
+		aluguelAplicacao.confirmarReserva(a);
+
+		Aluguel a2 = aluguelAplicacao.buscarReservaPorCodigo(a.getCodigo());
+
+		a2.setAtendenteConfirmacao(a1);
+		
+		a2.setCliente(new Cliente());
+		List<String> erros = aluguelAplicacao.confirmarAluguel(a2);
+
+		Assert.assertTrue(erros.contains("Cliente informado não existe."));
+		
 	}
 	
 	@AfterClass

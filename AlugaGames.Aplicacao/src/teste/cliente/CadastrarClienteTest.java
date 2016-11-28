@@ -16,9 +16,21 @@ import alugagames.repositorio.config.ConnectionManager;
 public class CadastrarClienteTest {
 	private static ClienteAplicacao clienteAplicacao;
 	private static Cliente cliente;
+	private static Cliente clienteDup;
 	
 	@BeforeClass
 	public static void inicializar() {
+		clienteDup = new Cliente();
+		clienteDup.setCpf("54433712400");
+		clienteDup.setEmail("email@email.com.br");
+		
+		
+		ConnectionManager.beginTransaction();
+		ClienteRepositorio repositorio = new ClienteRepositorio();
+		repositorio.adicionar(clienteDup);
+		ConnectionManager.commit();
+		
+		
 		clienteAplicacao = new ClienteAplicacao();
 	}
 	
@@ -79,6 +91,28 @@ public class CadastrarClienteTest {
 		Assert.assertTrue(erros.contains("UF não informada."));
 	}
 	
+	@Test
+	public void cadastrarClienteComEmailDuplicado() {
+		Cliente c = new Cliente();
+		
+		c.setEmail("email@email.com.br");
+		
+		List<String> erros = clienteAplicacao.adicionarCliente(c);
+
+		Assert.assertTrue(erros.contains("E-mail já está em uso."));
+	}
+	
+	@Test
+	public void cadastrarClienteComCPFDuplicado() {
+		Cliente c = new Cliente();
+		
+		c.setCpf("54433712400");
+		
+		List<String> erros = clienteAplicacao.adicionarCliente(c);
+
+		Assert.assertTrue(erros.contains("CPF já está em uso."));
+	}
+	
 	@AfterClass
 	public static void fecharConexao(){
 		excluirCliente();
@@ -89,6 +123,8 @@ public class CadastrarClienteTest {
 		ConnectionManager.beginTransaction();
 		ClienteRepositorio repositorio = new ClienteRepositorio();
 		Cliente c = repositorio.buscarPorID(cliente.getId());
+		repositorio.excluir(c);
+		c = repositorio.buscarPorID(clienteDup.getId());
 		repositorio.excluir(c);
 		ConnectionManager.commit();
 	}

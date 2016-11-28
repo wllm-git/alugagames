@@ -74,7 +74,7 @@ public class AluguelServico extends ServicoBase<Aluguel>{
 	
 	public List<String> confirmarReserva(Aluguel aluguel){
 		
-		List<String> erros = new ReservaAptaParaSerConfirmada().validar(aluguel);
+		List<String> erros = new ReservaAptaParaSerConfirmada(_clienteServico).validar(aluguel);
 		if(!erros.isEmpty())
 			return erros;
 				
@@ -102,7 +102,7 @@ public class AluguelServico extends ServicoBase<Aluguel>{
 	}
 	
 	public List<String> confirmarAluguel(Aluguel aluguel){
-		List<String> erros = new AluguelAptoParaSerConfirmado(_repositorio, _atendenteServico).validar(aluguel);
+		List<String> erros = new AluguelAptoParaSerConfirmado(_repositorio, _clienteServico, _atendenteServico).validar(aluguel);
 		
 		if(!erros.isEmpty())
 			return erros;

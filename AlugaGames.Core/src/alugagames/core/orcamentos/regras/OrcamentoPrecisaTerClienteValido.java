@@ -20,7 +20,7 @@ public class OrcamentoPrecisaTerClienteValido implements IRegra<Orcamento> {
 		
 		Cliente c = _clienteServico.buscarPorID(obj.getCliente().getId());
 		if(c == null)
-			return "Cliente não cadastrado.";
+			return "Cliente informado não existe.";
 		
 		return null;
 	}

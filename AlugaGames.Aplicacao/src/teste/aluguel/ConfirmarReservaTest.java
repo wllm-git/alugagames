@@ -82,7 +82,7 @@ public class ConfirmarReservaTest {
 		m2.setPreco(10.0f);
 
 		con1 = new Console();
-		con1.setAno(new Date());
+		con1.setAno("2006");
 		con1.setAtivo(true);
 		con1.setNumeroSerie("321321456");
 		con1.setPreco(25.0f);
@@ -192,6 +192,33 @@ public class ConfirmarReservaTest {
 				Assert.assertEquals(StatusAluguel.Aberto, a2.getStatus());
 			}
 		}
+	}
+	
+	@Test
+	public void confirmarReservaSemCliente() {
+		Aluguel a = aluguelAplicacao.abrirReserva(c1);
+		a.getConsoles().add(con1);
+		a.setDataAluguelInicio(dtInicio);
+		a.setDataAluguelFim(dtFim);
+		
+		a.setCliente(null);
+		List<String> erros = aluguelAplicacao.confirmarReserva(a);
+
+		Assert.assertTrue(erros.contains("Cliente não informado."));
+	}
+	
+	@Test
+	public void confirmarReservaComClienteInvalido() {
+		Aluguel a = aluguelAplicacao.abrirReserva(c1);
+		a.getConsoles().add(con1);
+		a.setDataAluguelInicio(dtInicio);
+		a.setDataAluguelFim(dtFim);
+
+		a.setCliente(new Cliente());
+		List<String> erros = aluguelAplicacao.confirmarReserva(a);
+
+		Assert.assertTrue(erros.contains("Cliente informado não existe."));
+		
 	}
 	
 	private void reservarProdutos(){
