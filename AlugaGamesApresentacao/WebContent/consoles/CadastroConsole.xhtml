@@ -5,6 +5,12 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:o="http://omnifaces.org/ui">
+	
+	<f:metadata>
+		<f:event listener="#{pesquisarJogosConsoleBean.inicializar}"
+			type="preRenderView" />
+	</f:metadata>
+	
 
 
 	<ui:define name="titulo">
@@ -137,18 +143,18 @@
 						<p:outputLabel value="Nome do Jogo:" for="nome" styleClass="label"
 							style="margin-left:4px;" />
 						<p:inputText id="nome" size="20"
-							value="#{pesquisarJogosBean.filtro.nome}" />
+							value="#{pesquisarJogosConsoleBean.filtro.nome}" />
 
 
 
 						<p:commandButton value="Pesquisar" styleClass="botoesTelaPesquisa"
 							style="margin-top: 10px;"
-							action="#{pesquisarJogosBean.pesquisar}" process="frm-jogos"
+							action="#{pesquisarJogosConsoleBean.pesquisar}" process="frm-jogos"
 							update="jogosTable" />
 
 
-						<p:dataTable value="#{pesquisarJogosBean.jogosFiltrados}"
-							var="jogo" styleClass="tabelas-pesquisa" rows="10"
+						<p:dataTable value="#{pesquisarJogosConsoleBean.jogosFiltrados}"
+							var="jogo" styleClass="tabelas-pesquisa" rows="7"
 							paginator="true" paginatorAlwaysVisible="false"
 							paginatorPosition="bottom" style="width:100%;"
 							emptyMessage="Nenhum Jogo Encontrado" id="jogosTable">
@@ -172,12 +178,6 @@
 									<f:param name="jogo" value="#{jogo.id}" />
 								</p:button>
 
-								<p:commandButton icon="ui-icon-trash"
-									update="jogosTable messagePrincipal" process="@this"
-									action="#{pesquisarJogosBean.excluirJogo}">
-									<f:setPropertyActionListener value="#{jogo}"
-										target="#{pesquisarJogosBean.jogoSelecionado}" />
-								</p:commandButton>
 
 							</p:column>
 

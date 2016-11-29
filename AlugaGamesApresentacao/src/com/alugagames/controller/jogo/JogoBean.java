@@ -1,4 +1,4 @@
-package com.alugagames.controller;
+package com.alugagames.controller.jogo;
 
 import java.io.Serializable;
 import java.util.ArrayList;

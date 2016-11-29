@@ -1,4 +1,4 @@
-package com.alugagames.controller;
+package com.alugagames.controller.console;
 
 import java.io.Serializable;
 import java.util.List;
@@ -7,14 +7,13 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
 import com.alugagames.filter.JogoFilter;
-import com.alugagames.util.FacesUtil;
 
 import alugagames.aplicacao.JogoAplicacao;
 import alugagames.core.jogos.Jogo;
 
 @ManagedBean
 @ViewScoped
-public class PesquisarJogosBean implements Serializable {
+public class PesquisarJogosConsoleBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -23,52 +22,40 @@ public class PesquisarJogosBean implements Serializable {
 	private JogoFilter filtro;
 	private boolean isPesquisa;
 
-	public PesquisarJogosBean() {
+	public PesquisarJogosConsoleBean() {
 		this.isPesquisa = false;
 	}
 
 	public void inicializar() {
 		this.jogoSelecionado = new Jogo();
-		
-		if(!this.isPesquisa)
+
+		if (!this.isPesquisa)
 			this.jogosFiltrados = new JogoAplicacao().buscarTodos();
-		
+
 		this.filtro = new JogoFilter();
-		
+
 	}
 
-	public void excluirJogo() {
 
-		new JogoAplicacao().excluir(jogoSelecionado);
 
-		jogosFiltrados.clear();
+	public void pesquisar() {
 
-		inicializar();
-
-		FacesUtil.addInfoMessage("Jogo excluído com sucesso!");
-	}
-	
-public void pesquisar(){
-		
 		this.jogosFiltrados.clear();
-		
-		if(!"".equals(this.filtro.getNome())){
-			
+
+		if (!"".equals(this.filtro.getNome())) {
+
 			this.jogosFiltrados = new JogoAplicacao().pesquisaPorNome(this.filtro.getNome());
 		}
-		
-		else{
+
+		else {
 			inicializar();
 			this.isPesquisa = false;
 			return;
 		}
-		
+
 		this.isPesquisa = true;
-		
+
 	}
-	
-	
-	
 
 	public Jogo getJogoSelecionado() {
 		return jogoSelecionado;
