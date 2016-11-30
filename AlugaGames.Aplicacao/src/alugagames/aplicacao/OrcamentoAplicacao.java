@@ -1,14 +1,17 @@
 package alugagames.aplicacao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import alugagames.core.clientes.Cliente;
 import alugagames.core.clientes.ClienteServico;
+import alugagames.core.equipamentos.TipoEquipamento;
 import alugagames.core.funcionarios.FuncionarioServico;
 import alugagames.core.orcamentos.Orcamento;
 import alugagames.core.orcamentos.OrcamentoItem;
 import alugagames.core.orcamentos.OrcamentoServico;
 import alugagames.core.os.OrdemServicoServico;
+import alugagames.core.tiposconsole.TipoConsole;
 import alugagames.core.tiposconsole.TipoConsoleServico;
 import alugagames.repositorio.ClienteRepositorio;
 import alugagames.repositorio.FuncionarioRepositorio;
@@ -146,5 +149,9 @@ public class OrcamentoAplicacao extends AplicacaoBase{
 			commit();
 			
 		return erros;
+	}
+	
+	public List<String> buscarTiposDeProduto(){
+		return _orcamentoServico.tiposDeProduto();
 	}
 }
