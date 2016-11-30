@@ -1,10 +1,12 @@
 package alugagames.core.orcamentos;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import alugagames.core.clientes.Cliente;
 import alugagames.core.clientes.ClienteServico;
+import alugagames.core.equipamentos.TipoEquipamento;
 import alugagames.core.funcionarios.FuncionarioServico;
 import alugagames.core.orcamentos.repositorio.IOrcamentoRepositorio;
 import alugagames.core.orcamentos.validacoes.OrcamentoAptoParaAdicionarItens;
@@ -19,6 +21,7 @@ import alugagames.core.orcamentos.validacoes.OrcamentoAptoParaSerRecebido;
 import alugagames.core.orcamentos.validacoes.OrcamentoItemAptoParaOrcamento;
 import alugagames.core.orcamentos.validacoes.OrcamentoItemAptoParaSerConfirmado;
 import alugagames.core.shared.ServicoBase;
+import alugagames.core.tiposconsole.TipoConsole;
 import alugagames.core.tiposconsole.TipoConsoleServico;
 
 public class OrcamentoServico extends ServicoBase<Orcamento>{
@@ -186,6 +189,22 @@ public class OrcamentoServico extends ServicoBase<Orcamento>{
 			_repositorio.alterar(orcamento);
 		
 		return erros;
+	}
+	
+	public List<String> tiposDeProduto(){
+		List<String> tiposDeProduto = new ArrayList<>();
+		
+		for (TipoEquipamento tipoEquip : TipoEquipamento.values()) {
+			tiposDeProduto.add(tipoEquip.toString());
+		}
+		
+		List<TipoConsole> tiposConsole = _tipoConsoleServico.buscarTodos();
+		for (TipoConsole tipoConsole : tiposConsole) {
+			if(tipoConsole.isAtivo())
+				tiposDeProduto.add(tipoConsole.getNome());
+		}
+		
+		return tiposDeProduto;
 	}
 	
 }
