@@ -55,5 +55,15 @@ public class ConsoleAplicacao extends AplicacaoBase {
 	public List<Console> buscarTodos(){
 		return _consoleServico.buscarTodos();
 	}
+
+	public Console buscarPorNumeroSerie(String numeroSerie) {
+		return _consoleServico.buscarPorNumeroSerie(numeroSerie);
+	}
+
+	public void excluir(Console consoleSelecionado) {
+		
+		
+		 _consoleServico.excluir(consoleSelecionado);
+	}
 	
 }

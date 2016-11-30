@@ -42,22 +42,28 @@
 
 			<h:panelGrid styleClass="grid-cadastros" columns="2" id="panel"
 				columnClasses="rotulo, campo" rowClasses="one">
-
+			
+				
+				<p:outputLabel value="Núemro da Reserva"/>
+				<p:outputLabel value="#{aluguelReservaBean.aluguel.codigo}"/>
+				
+				<p:outputLabel value="Cliente"/>
+				<p:outputLabel value="#{aluguelReservaBean.aluguel.cliente.nome}"/>
 
 				<p:outputLabel value="Data Inicial" for="dataInicial" />
 				<p:calendar id="dataInicial" pattern="dd/MM/yyyy" locale="pt" 
-					required="true" size="8"/>
+					required="true" size="8" value="#{aluguelReservaBean.aluguel.dataAluguelInicio}"/>
 					
 				<p:outputLabel value="Data Final" for="dataFinal" />
 				<p:calendar id="dataFinal" pattern="dd/MM/yyyy" locale="pt" 
-					required="true" size="8" />
+					required="true" size="8" value="#{aluguelReservaBean.aluguel.dataAluguelFim}"/>
 
 				
 			</h:panelGrid>
 		
 			<div class="botoesReservar">
-				<p:commandButton value="Confimar Reserva"/>
-				<p:commandButton value="Cancelar" disabled="true" />
+				<p:commandButton value="Reservar"/>
+				<p:commandButton value="Cancelar Reserva" disabled="true" />
 			</div>
 			
 			<h2>Seus Itens</h2>

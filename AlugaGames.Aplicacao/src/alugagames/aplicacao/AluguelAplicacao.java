@@ -6,6 +6,7 @@ import alugagames.core.alugueis.Aluguel;
 import alugagames.core.alugueis.AluguelServico;
 import alugagames.core.clientes.Cliente;
 import alugagames.core.clientes.ClienteServico;
+import alugagames.core.consoles.Console;
 import alugagames.core.consoles.ConsoleServico;
 import alugagames.core.equipamentos.EquipamentoServico;
 import alugagames.core.funcionarios.FuncionarioServico;
@@ -91,5 +92,22 @@ public class AluguelAplicacao extends AplicacaoBase{
 	
 	public Aluguel buscarAluguelPorCodigo(int codigo){
 		return _aluguelServico.buscarAluguelPorCodigo(codigo);
+	}
+	
+	public List<String> adicionarConsoles(Aluguel reserva, List<Console> consoles){
+beginTransaction();
+		
+		List<String> erros = _aluguelServico.adicionarConsoles(reserva, consoles);
+		if(!erros.isEmpty())
+			rollback();
+		else
+			commit();
+		
+		return erros;
+	}
+
+	public Aluguel buscarPorCliente(Cliente cliente) {
+		
+		return _aluguelServico.buscarPorCliente(cliente);
 	}
 }

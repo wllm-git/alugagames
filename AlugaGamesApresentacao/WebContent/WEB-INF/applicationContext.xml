@@ -51,6 +51,8 @@
 				access="hasAnyRole('ATENDENTE','GERENTE','CLIENTE')" />
 	
 			<intercept-url pattern="/funcionarios/**" access="hasAnyRole('GERENTE')" />
+			
+			<intercept-url pattern="/aluguel/ReservarProduto.xhtml" access="hasAnyRole('CLIENTE')" />
 		
 
 		<form-login login-page="/Login.xhtml"

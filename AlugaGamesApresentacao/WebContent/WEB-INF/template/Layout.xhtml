@@ -55,7 +55,8 @@
 
 
 					<p:submenu label="Aluguel">
-						<p:menuitem value="Reservar"
+						<p:menuitem value="Reservar" 
+						rendered="#{seguranca.cliente}"
 							outcome="/aluguel/ReservarProduto.xhtml" />
 							
 							<p:menuitem value="Consultar Reserva"
@@ -99,15 +100,16 @@
 
 				<p:submenu label="Gerenciar">
 					<p:menuitem value="Clientes"
-						outcome="/clientes/PesquisaClientes.xhtml" />
+						outcome="#{seguranca.cliente ? 
+						'/clientes/CadastroCliente.xhtml' : '/clientes/PesquisaClientes.xhtml'}"/>
 					<p:menuitem value="Funcionários"
 						outcome="/funcionarios/PesquisaFuncionarios.xhtml" />
 					<p:menuitem value="Jogos" outcome="/jogos/PesquisarJogos.xhtml" />
 					<p:menuitem value="Equipamentos"
 						outcome="/equipamentos/CadastroEquipamento.xhtml" />
-					<p:menuitem value="Console"
-						outcome="/consoles/CadastroConsole.xhtml" />
-					<p:menuitem value="Tipo de Console"
+					<p:menuitem value="Consoles"
+						outcome="/consoles/PesquisarConsoles.xhtml" />
+					<p:menuitem value="Tipos de Console"
 						outcome="/consoles/CadastroTipoConsole.xhtml" />
 				</p:submenu>
 

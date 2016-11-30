@@ -9,6 +9,13 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 @ManagedBean
 @RequestScoped
 public class Seguranca {
+	
+	private boolean cliente;
+	
+	public Seguranca(){
+		this.cliente = getUsuarioLogado().getCliente() != null ? true : false;
+	}
+
 
 	public String getNomeUsuario() {
 		String nome = null;
@@ -28,7 +35,7 @@ public class Seguranca {
 	}
 
 	// Retorna o usuário logado no sistema
-	private UsuarioSistema getUsuarioLogado() {
+	public UsuarioSistema getUsuarioLogado() {
 		UsuarioSistema usuario = null;
 
 		UsernamePasswordAuthenticationToken auth = (UsernamePasswordAuthenticationToken) FacesContext
@@ -38,7 +45,22 @@ public class Seguranca {
 			usuario = (UsuarioSistema) auth.getPrincipal();
 		}
 
+		
 		return usuario;
+		
+	
 	}
+
+	public boolean isCliente() {
+		return cliente;
+	}
+
+	public void setCliente(boolean cliente) {
+		this.cliente = cliente;
+	}
+
+
+	
+	
 
 }

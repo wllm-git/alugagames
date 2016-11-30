@@ -402,4 +402,9 @@ public class AluguelServico extends ServicoBase<Aluguel>{
 		
 		return erros;
 	}
+
+	public Aluguel buscarPorCliente(Cliente cliente) {
+		
+		return _repositorio.buscarPorCliente(cliente);
+	}
 }

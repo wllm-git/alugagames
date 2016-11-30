@@ -6,10 +6,6 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:o="http://omnifaces.org/ui">
 	
-	<f:metadata>
-		<f:event listener="#{pesquisarJogosConsoleBean.inicializar}"
-			type="preRenderView" />
-	</f:metadata>
 	
 
 
@@ -23,8 +19,11 @@
 	<ui:define name="conteudo">
 
 		<f:metadata>
-			<o:viewParam name="cliente" />
-			<!--value="#{cadastroClienteBean.cliente}"-->
+			<o:viewParam name="console" value="#{consoleBean.console}" />
+			
+			<f:event listener="#{consoleBean.inicializar}"
+			type="preRenderView" />
+			
 		</f:metadata>
 
 		<div class="titulo-cadastros">
@@ -76,9 +75,9 @@
 
 						<div class="componentsForm">
 							<p:outputLabel value="Preço:" for="preco" styleClass="label" />
-							<p:inputText id="preco" size="4" styleClass="moeda"
+							<p:inputText id="preco" size="4"
 								value="#{consoleBean.console.preco}">
-								<f:convertNumber maxFractionDigits="2" minFractionDigits="2" />
+								<f:convertNumber maxFractionDigits="2" minFractionDigits="2" locale="pt_BR"/>
 							</p:inputText>
 						</div>
 
@@ -115,7 +114,8 @@
 						<div class="botoesConsole">
 							<p:button value="Novo" outcome="/consoles/CadastroConsole" />
 
-							<p:commandButton value="Salvar" update="@form, messagePrincipal "
+							<p:commandButton value="Salvar" 
+								update="@form, messagePrincipal frm-jogos :frm-jogosConsole:jogosConsoleTable"
 								action="#{consoleBean.salvarConsole}" process="frm-console" />
 
 							<p:button value="Cancelar" outcome="/consoles/CadastroConsole" />
@@ -143,17 +143,17 @@
 						<p:outputLabel value="Nome do Jogo:" for="nome" styleClass="label"
 							style="margin-left:4px;" />
 						<p:inputText id="nome" size="20"
-							value="#{pesquisarJogosConsoleBean.filtro.nome}" />
+							value="#{consoleBean.filtro.nome}" disabled="#{consoleBean.novo}"/>
 
 
 
 						<p:commandButton value="Pesquisar" styleClass="botoesTelaPesquisa"
-							style="margin-top: 10px;"
-							action="#{pesquisarJogosConsoleBean.pesquisar}" process="frm-jogos"
+							style="margin-top: 10px;" disabled="#{consoleBean.novo}"
+							action="#{consoleBean.pesquisar}" process="frm-jogos"
 							update="jogosTable" />
 
 
-						<p:dataTable value="#{pesquisarJogosConsoleBean.jogosFiltrados}"
+						<p:dataTable value="#{consoleBean.jogosFiltrados}"
 							var="jogo" styleClass="tabelas-pesquisa" rows="7"
 							paginator="true" paginatorAlwaysVisible="false"
 							paginatorPosition="bottom" style="width:100%;"
@@ -174,9 +174,12 @@
 							</p:column>
 
 							<p:column width="40" style="text-align:center;">
-								<p:button outcome="/jogos/CadastroJogo" icon="ui-icon-pencil">
-									<f:param name="jogo" value="#{jogo.id}" />
-								</p:button>
+								<p:commandButton icon="ui-icon-plus" update="frm-jogos :frm-jogosConsole:jogosConsoleTable messagePrincipal" 
+								process="@this" action="#{consoleBean.salvarJogoConsole}" disabled="#{consoleBean.novo}">
+									<f:setPropertyActionListener value="#{jogo}"
+										target="#{consoleBean.jogo}" />
+								</p:commandButton>
+								
 
 
 							</p:column>
@@ -194,54 +197,51 @@
 
 			<!-- Fim da Div jogos -->
 
+			<h:form id="frm-jogosConsole">
+			
 			<div id="jogosConsole">
 
 					<h2>Jogos deste Console</h2>
 
 					<p:dataTable styleClass="tabelas-pesquisa"
-						value="#{jogoBean.jogo.midias}" var="midia" rows="4"
+						value="#{consoleBean.console.jogos}" var="jogo" rows="8"
 						paginator="true" paginatorAlwaysVisible="false" style="margin:0;"
 						paginatorPosition="bottom" emptyMessage="Nenhuma mídia encontrada"
-						id="midiasTable">
+						id="jogosConsoleTable">
 
-						<p:column headerText="Número de Série"
+						<p:column headerText="Nome"
 							style="width: 80px; text-align:center;">
-							<h:outputText value="#{midia.numeroSerie}" />
+							<h:outputText value="#{jogo.nome}" />
 						</p:column>
 
-						<p:column headerText="Console"
+						<p:column headerText="Categoria"
 							style="width: 60px; text-align:center;">
-							<h:outputText value="#{midia.tipoConsole.nome}" />
+							<h:outputText value="#{jogo.categoria}" />
 
 						</p:column>
 
 						<p:column headerText="Ano"
 							style="width: 50px; text-align:center">
-							<h:outputText value="#{midia.preco}">
-								<f:convertNumber currencySymbol="R$" locale="pt_BR" />
-							</h:outputText>
+							<h:outputText value="#{jogo.anoLancamento}"/>
 						</p:column>
 
 						<p:column width="30" style="text-align:center;">
 
-							<p:button outcome="/jogos/CadastroJogo" icon="ui-icon-pencil">
-								<f:param name="midia" value="#{midia.id}" />
-
-							</p:button>
-
-							<p:commandButton icon="ui-icon-trash"
-								update="midiasTable messagePrincipal" process="@this"
-								action="#{jogoBean.excluirMidia}">
-								<f:setPropertyActionListener value="#{midia}"
-									target="#{jogoBean.midiaSelecionada}" />
+							<p:commandButton icon="ui-icon-minus"
+								update="messagePrincipal jogosConsoleTable frm-jogos" process="@this"
+								action="#{consoleBean.excluirJogoConsole}">
+								<f:setPropertyActionListener value="#{jogo}"
+									target="#{consoleBean.jogoSelecionado}" />
 							</p:commandButton>
 
 						</p:column>
 
 					</p:dataTable>
 
-			</div>
-			<!-- Fim da DIV Table -->
+			</div><!-- Fim da DIV JogosConsole -->
+			
+			</h:form>
+			
 
 
 		</div>

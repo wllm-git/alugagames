@@ -6,95 +6,76 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 	<f:metadata>
-		<f:event listener="#{pesquisarClientesBean.inicializar}"
+		<f:event listener="#{pesquisarConsoleBean.inicializar}"
 			type="preRenderView" />
 	</f:metadata>
 
-	<ui:define name="titulo">Pesquisar Console</ui:define>
+	<ui:define name="titulo">Pesquisar Consoles
+		<h:outputStylesheet name="jogoMidia.css" library="css" />
+	</ui:define>
 
 	<ui:define name="conteudo">
 
-		<h1>Pesquisar Console</h1>
+		<h1>Pesquisa de consoles</h1>
 
 		<h:form id="frm">
 
 			<p:messages id="messagePrincipal" closable="true" />
 
+			<div>
+				<p:outputLabel value="Número de Série:" for="numeroSerie" styleClass="label"
+					style="margin-left:4px;" />
+				<p:inputText id="numeroSerie" size="30"
+					value="#{pesquisarConsoleBean.filtro.numeroSerie}" />
 
-			<p:panelGrid columns="2" columnClasses="rotulo, campo"
-				styleClass="grid-cadastros">
-
-
-				<p:outputLabel value="Nome" for="nome" />
-				<p:inputText id="nome" size="30"
-					value="#{pesquisarClientesBean.filtro.nome}" />
-
-
-				<p:outputLabel value="CPF" for="cpf" />
-				<p:inputText id="cpf" size="20"
-					value="#{pesquisarClientesBean.filtro.cpf}" />
+				<p:commandButton value="Pesquisar" styleClass="botoesTelaPesquisa"
+					style="margin-top: 10px;"
+					action="#{pesquisarConsoleBean.pesquisar}" process="@form"
+					update="consolesTable"/>
 
 
-				<p:outputLabel value="Email" for="email" />
-				<p:inputText id="email" size="30"
-					value="#{pesquisarClientesBean.filtro.email}" />
+				<p:button value="Novo" outcome="/consoles/CadastroConsole"
+					styleClass="botoesTelaPesquisa" />
 
-			</p:panelGrid>
-
-			<p:commandButton value="Pesquisa"
-				action="#{pesquisarClientesBean.pesquisar}" process="@form"
-				update="clientesTable" styleClass="botoesTelaPesquisa"
-				style="margin-top: 10px;" />
-
-			<p:button value="Novo" outcome="/clientes/CadastroCliente"
-				styleClass="botoesTelaPesquisa" style="margin-top: 10px" />
+			</div>
 
 
+			<p:dataTable value="#{pesquisarConsoleBean.consolesFiltrados}" var="console"
+				styleClass="tabelas-pesquisa" rows="10" paginator="true"
+				paginatorAlwaysVisible="false" paginatorPosition="bottom"
+				style="width:50%;" emptyMessage="Nenhum Jogo Encontrado"
+				id="consolesTable">
 
-			<p:dataTable value="#{pesquisarClientesBean.clientesFiltrados}"
-				var="cliente" styleClass="tabelas-pesquisa" rows="5"
-				paginator="true" paginatorAlwaysVisible="false"
-				paginatorPosition="bottom" emptyMessage="Nenhum Cliente Encontrado"
-				id="clientesTable">
-
-				<p:column headerText="Nome" style="width: 150px;">
-					<h:outputText value="#{cliente.nome}" />
+				<p:column headerText="Número Série" style="text-align:center;width: 80px">
+					<h:outputText value="#{console.numeroSerie}"/>
 				</p:column>
 
-				<p:column headerText="R.G" style="width: 80px">
-					<h:outputText value="#{cliente.rg}" />
-				</p:column>
-
-				<p:column headerText="CPF" style="width: 150px; text-align:center">
-					<h:outputText value="#{cliente.cpf}">
-					</h:outputText>
+				<p:column headerText="Console" style="width: 60px;text-align:center;">
+					<h:outputText value="#{console.tipoConsole.nome}" />
 				</p:column>
 
 
-				<p:column headerText="Email" style="width: 150px; text-align:center">
-					<h:outputText value="#{cliente.email}" />
-				</p:column>
-
-				<p:column headerText="Telefone"
-					style="width: 150px; text-align:center">
-					<h:outputText value="#{cliente.telefone}" />
+				<p:column headerText="Ano"
+					style="width: 80px; text-align:center">
+					<h:outputText value="#{console.ano}" />
 				</p:column>
 
 				<p:column width="80" style="text-align:center;">
-					<p:button outcome="/clientes/CadastroCliente" icon="ui-icon-pencil">
-						<f:param name="cliente" value="#{cliente.id}" />
+					<p:button outcome="/consoles/CadastroConsole" icon="ui-icon-pencil">
+						<f:param name="console" value="#{console.id}" />
 					</p:button>
+
 					<p:commandButton icon="ui-icon-trash"
-						update="frm:messagePrincipal clientesTable" process="@this"
-						action="#{pesquisarClientesBean.excluirCliente}">
-						<f:setPropertyActionListener value="#{cliente}"
-							target="#{pesquisarClientesBean.clienteSelecionado}" />
+						update="consolesTable frm:messagePrincipal" process="@this"
+						action="#{pesquisarConsoleBean.excluirConsole}">
+						<f:setPropertyActionListener value="#{console}"
+							target="#{pesquisarConsoleBean.consoleSelecionado}" />
 					</p:commandButton>
 
 				</p:column>
 
-			</p:dataTable>
 
+			</p:dataTable>
 		</h:form>
 	</ui:define>
 

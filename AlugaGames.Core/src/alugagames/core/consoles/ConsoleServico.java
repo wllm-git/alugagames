@@ -91,4 +91,12 @@ public class ConsoleServico extends ServicoBase<Console> {
 	public void atualizarStatus(Console console) {
 		_repositorio.atualizarStatusConsole(console);
 	}
+
+	public Console buscarPorNumeroSerie(String numeroSerie) {
+		return _repositorio.buscarPorNumeroSerie(numeroSerie);
+	}
+
+	public void excluir(Console consoleSelecionado) {
+		_repositorio.excluir(consoleSelecionado);
+	}
 }
