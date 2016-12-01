@@ -22,7 +22,7 @@ public class OrdemServicoPrecisaTerAtendenteValido implements IRegra<OrdemServic
 		 
 		if(f == null)
 			 return "Atendente informado não cadastrado no sistema.";
-		else if(f.getFuncao() != Funcao.Atendente || !f.isAtivo())
+		else if(f.getFuncao() != Funcao.Atendente && f.getFuncao() != Funcao.Gerente || !f.isAtivo())
 			return "Atendente inválido.";
 		
 		return null;
