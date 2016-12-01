@@ -16,6 +16,10 @@ public class AluguelCheckInBean {
 	private Aluguel aluguel;
 	private AluguelAplicacao aluguelAplicacao;
 	
+	public AluguelCheckInBean(){
+		
+	}
+	
 	public AluguelCheckInBean(Aluguel aluguel){
 		this.aluguel = aluguel;
 		
