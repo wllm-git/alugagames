@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
-import alugagames.core.equipamentos.Equipamento;
 import alugagames.core.jogos.JogoServico;
 import alugagames.core.midias.repositorio.IMidiaRepositorio;
 import alugagames.core.midias.validacoes.MidiaAptaParaAlteracao;

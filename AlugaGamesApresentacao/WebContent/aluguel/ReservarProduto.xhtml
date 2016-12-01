@@ -19,7 +19,10 @@
 		<f:metadata>
 			<o:viewParam name="cliente" />
 			<!--value="#{cadastroClienteBean.cliente}"-->
+			<f:event listener="#{aluguelReservaBean.inicializar}"
+			type="preRenderView" />
 		</f:metadata>
+		
 
 
 
@@ -121,38 +124,37 @@
 							<h2>Consoles</h2>
 
 								<div class="filtro">
-									<p:outputLabel value="Filtrar por:"
+									<p:outputLabel value="Filtro:"
 										style="font-weight: bold; margin-bottom: 5px;" />
 									<br />
-									<p:selectOneMenu>
-										<f:selectItem itemLabel="Consoles" itemValue="console" />
-										<f:selectItem itemLabel="Controles" itemValue="controle" />
-										<f:selectItem itemLabel="Acessórios" itemValue="acessorio" />
-										<f:selectItem itemLabel="Jogos" itemValue="jogos" />
+									<p:selectOneMenu value="#{aluguelReservaBean.tipoConsole}">
+										<f:selectItem itemLabel="Todos" itemValue="null"/>
+										<f:selectItems value="#{aluguelReservaBean.tiposConsole}" var="tipoConsole"
+										 itemValue="#{tipoConsole}" itemLabel="#{tipoConsole.nome}"/>
 									</p:selectOneMenu>
 								</div>
 								<br />
 
 								<p:dataTable styleClass="tabelas-pesquisa"
-									value="#{jogoBean.jogo.midias}" var="midia" rows="4"
+									value="#{aluguelResevaBean.consoles}" var="console" rows="4"
 									paginator="true" paginatorAlwaysVisible="false"
 									style="margin:0;" paginatorPosition="bottom"
 									emptyMessage="Nenhuma mídia encontrada" id="midiasTable">
 
 									<p:column headerText="Número de Série"
 										style="width: 80px; text-align:center;">
-										<h:outputText value="#{midia.numeroSerie}" />
+										<h:outputText value="#{console.numeroSerie}" />
 									</p:column>
 
 									<p:column headerText="Console"
 										style="width: 60px; text-align:center;">
-										<h:outputText value="#{midia.tipoConsole.nome}" />
+										<h:outputText value="#{console.tipoConsole.nome}" />
 
 									</p:column>
 
 									<p:column headerText="Preço"
 										style="width: 50px; text-align:center">
-										<h:outputText value="#{midia.preco}">
+										<h:outputText value="#{console.preco}">
 											<f:convertNumber currencySymbol="R$" locale="pt_BR" />
 										</h:outputText>
 									</p:column>
@@ -199,38 +201,37 @@
 								<h2>Equipamentos</h2>
 
 								<div class="filtro">
-									<p:outputLabel value="Filtrar por:"
+									<p:outputLabel value="Filtro:"
 										style="font-weight: bold; margin-bottom: 5px;" />
 									<br />
-									<p:selectOneMenu>
-										<f:selectItem itemLabel="Consoles" itemValue="console" />
-										<f:selectItem itemLabel="Controles" itemValue="controle" />
-										<f:selectItem itemLabel="Acessórios" itemValue="acessorio" />
-										<f:selectItem itemLabel="Jogos" itemValue="jogos" />
+									<p:selectOneMenu value="#{aluguelReservaBean.tipoConsoleEquipamento}">
+										<f:selectItem itemLabel="Todos" itemValue="null"/>
+										<f:selectItems value="#{aluguelReservaBean.tiposConsole}" var="tipoConsole"
+										 itemValue="#{tipoConsole}" itemLabel="#{tipoConsole.nome}"/>
 									</p:selectOneMenu>
 								</div>
 								<br />
 
 								<p:dataTable styleClass="tabelas-pesquisa"
-									value="#{jogoBean.jogo.midias}" var="midia" rows="4"
+									value="#{aluguelReservaBean.equipamentos}" var="equipamento" rows="4"
 									paginator="true" paginatorAlwaysVisible="false"
 									style="margin:0;" paginatorPosition="bottom"
 									emptyMessage="Nenhuma mídia encontrada" id="midiasTable">
 
 									<p:column headerText="Número de Série"
 										style="width: 80px; text-align:center;">
-										<h:outputText value="#{midia.numeroSerie}" />
+										<h:outputText value="#{equipamento.numeroSerie}" />
 									</p:column>
 
 									<p:column headerText="Console"
 										style="width: 60px; text-align:center;">
-										<h:outputText value="#{midia.tipoConsole.nome}" />
+										<h:outputText value="#{equipamento.tipoConsole.nome}" />
 
 									</p:column>
 
 									<p:column headerText="Preço"
 										style="width: 50px; text-align:center">
-										<h:outputText value="#{midia.preco}">
+										<h:outputText value="#{equipamento.preco}">
 											<f:convertNumber currencySymbol="R$" locale="pt_BR" />
 										</h:outputText>
 									</p:column>
@@ -276,14 +277,13 @@
 								<h2>Jogos</h2>
 
 								<div class="filtro">
-									<p:outputLabel value="Filtrar por:"
+									<p:outputLabel value="Filtro:"
 										style="font-weight: bold; margin-bottom: 5px;" />
 									<br />
-									<p:selectOneMenu>
-										<f:selectItem itemLabel="Consoles" itemValue="console" />
-										<f:selectItem itemLabel="Controles" itemValue="controle" />
-										<f:selectItem itemLabel="Acessórios" itemValue="acessorio" />
-										<f:selectItem itemLabel="Jogos" itemValue="jogos" />
+									<p:selectOneMenu value="#{aluguelReservaBean.tipoConsoleJogo}">
+										<f:selectItem itemLabel="Todos" itemValue="null"/>
+										<f:selectItems value="#{aluguelReservaBean.tiposConsole}" var="tipoConsole"
+										 itemValue="#{tipoConsole}" itemLabel="#{tipoConsole.nome}"/>
 									</p:selectOneMenu>
 								</div>
 								<br />

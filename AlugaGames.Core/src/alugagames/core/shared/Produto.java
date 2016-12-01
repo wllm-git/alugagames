@@ -11,6 +11,7 @@ import javax.persistence.MappedSuperclass;
 public abstract class Produto {
 	
 	private String numeroSerie;
+	
 	@Enumerated(EnumType.STRING)
 	private StatusProduto status;
 	private boolean ativo;
