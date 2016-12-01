@@ -9,8 +9,8 @@
 
 	<ui:define name="titulo">
 		Reservar Produto
-		<h:outputStylesheet name="reservar.css" library="css" />
-		
+		<h:outputStylesheet name="jogoMidia.css" library="css" />
+
 	</ui:define>
 	<!--  #{cadastroClienteBean.editando ? 'Editando Cliente' : 'Novo Cliente'} -->
 
@@ -27,129 +27,322 @@
 
 			<p:messages id="messagePrincipal" closable="true" />
 
-				<div class="titulo-cadastros">
-			
-				<h1>
+			<div class="titulo-cadastros">
+
+				<h1 style="margin:0; padding: 0; margin-bottom: 10px;">
 
 					Reservar Produto
 					<!--  #{cadastroClienteBean.editando ? 'Editando Cliente' : 'Novo Cliente'} -->
 				</h1>
-				
-			
+
+
 			</div>
 
-	
-
-			<h:panelGrid styleClass="grid-cadastros" columns="2" id="panel"
-				columnClasses="rotulo, campo" rowClasses="one">
-			
-				
-				<p:outputLabel value="Núemro da Reserva"/>
-				<p:outputLabel value="#{aluguelReservaBean.aluguel.codigo}"/>
-				
-				<p:outputLabel value="Cliente"/>
-				<p:outputLabel value="#{aluguelReservaBean.aluguel.cliente.nome}"/>
-
-				<p:outputLabel value="Data Inicial" for="dataInicial" />
-				<p:calendar id="dataInicial" pattern="dd/MM/yyyy" locale="pt" 
-					required="true" size="8" value="#{aluguelReservaBean.aluguel.dataAluguelInicio}"/>
-					
-				<p:outputLabel value="Data Final" for="dataFinal" />
-				<p:calendar id="dataFinal" pattern="dd/MM/yyyy" locale="pt" 
-					required="true" size="8" value="#{aluguelReservaBean.aluguel.dataAluguelFim}"/>
-
-				
-			</h:panelGrid>
-		
-			<div class="botoesReservar">
-				<p:commandButton value="Reservar"/>
-				<p:commandButton value="Cancelar Reserva" disabled="true" />
-			</div>
-			
-			<h2>Seus Itens</h2>
-			
-			<p:dataTable styleClass="tabelas-pesquisa" rows="10"
-				paginator="true" paginatorAlwaysVisible="false"
-				paginatorPosition="bottom" emptyMessage="Nenhum Item Adicionado"
-				id="seuItensTable">
-
-				<p:column headerText="Produto">
-					<h:outputText value="Xbox One" />
-				</p:column>
-
-				<p:column headerText="Tipo" style="width: 80px">
-					<h:outputText value="Console" />
-				</p:column>
+			<div id="informacoesReserva" class="tableAluguel">
+				<h:panelGrid styleClass="grid-cadastros" columns="2" id="panel"
+					columnClasses="rotulo, campo" rowClasses="one">
 
 
-				<p:column headerText="Preço"
-					style="width: 150px; text-align:center">
-					<h:outputText value="R$ 50,00" />
-				</p:column>
+					<p:outputLabel value="Núemro da Reserva" />
+					<p:outputLabel value="#{aluguelReservaBean.aluguel.codigo}" />
 
-				<p:column width="80" style="text-align:center;">
-					<p:button outcome="/clientes/CadastroCliente" icon="ui-icon-pencil" >
-						<f:param name="cliente" value="#{cliente.id}"/>
-					</p:button>
-					<p:commandButton icon="ui-icon-trash" oncomplete="PF('confirmarExclusao').show()" 
-						update=":frm:dialogoConfirmacao" process="@this">
-						<f:setPropertyActionListener value="#{cliente}" target="#{pesquisaClientesBean.clienteSelecionado}" />
-					</p:commandButton>
+					<p:outputLabel value="Cliente" />
+					<p:outputLabel value="#{aluguelReservaBean.aluguel.cliente.nome}" />
 
-				</p:column>
+					<p:outputLabel value="Data Inicial" for="dataInicial" />
+					<p:calendar id="dataInicial" pattern="dd/MM/yyyy" locale="pt"
+						required="true" size="8"
+						value="#{aluguelReservaBean.aluguel.dataAluguelInicio}" />
 
-			</p:dataTable>
-			
-			<div class="itensDisponiveis">
-				<h2>Itens Disponiveis</h2>
-				
-				<div id="filtro">
-					<p:outputLabel value="Filtrar por:" style="font-weight: bold; margin-bottom: 5px;"/><br/>
-					<p:selectOneMenu>
-						<f:selectItem itemLabel="Consoles" itemValue="console" />
-						<f:selectItem itemLabel="Controles" itemValue="controle" />
-						<f:selectItem itemLabel="Acessórios" itemValue="acessorio" />
-						<f:selectItem itemLabel="Jogos" itemValue="jogos" />
-					</p:selectOneMenu>
+					<p:outputLabel value="Data Final" for="dataFinal" />
+					<p:calendar id="dataFinal" pattern="dd/MM/yyyy" locale="pt"
+						required="true" size="8"
+						value="#{aluguelReservaBean.aluguel.dataAluguelFim}" />
+
+
+				</h:panelGrid>
+
+				<div class="botoesReservar">
+					<p:commandButton value="Reservar" />
+					<p:commandButton value="Cancelar Reserva" disabled="true" />
 				</div>
+
 			</div>
 			
-			<div id="itensDisponiveis">
-			
-			<p:dataTable styleClass="tabelas-pesquisa" rows="10"
+			<div id="seusItensContainer" class="tableAluguel" style="width: 70%; margin-left: 10px;">
+				<h2>Seus Itens</h2>
+
+				<p:dataTable styleClass="tabelas-pesquisa" rows="10"
 					paginator="true" paginatorAlwaysVisible="false"
-					paginatorPosition="bottom" emptyMessage="Nenhum Item Encontrado"
-					id="itensDisponiveisTable">
-	
+					paginatorPosition="bottom" emptyMessage="Nenhum Item Adicionado"
+					id="seuItensTable">
+
 					<p:column headerText="Produto">
 						<h:outputText value="Xbox One" />
 					</p:column>
-	
+
 					<p:column headerText="Tipo" style="width: 80px">
 						<h:outputText value="Console" />
 					</p:column>
-	
-	
+
+
 					<p:column headerText="Preço"
 						style="width: 150px; text-align:center">
 						<h:outputText value="R$ 50,00" />
 					</p:column>
-	
+
 					<p:column width="80" style="text-align:center;">
-						<p:button outcome="/clientes/CadastroCliente" icon="ui-icon-pencil" >
-							<f:param name="cliente" value="#{cliente.id}"/>
+						<p:button outcome="/clientes/CadastroCliente"
+							icon="ui-icon-pencil">
+							<f:param name="cliente" value="#{cliente.id}" />
 						</p:button>
-						<p:commandButton icon="ui-icon-trash" oncomplete="PF('confirmarExclusao').show()" 
+						<p:commandButton icon="ui-icon-trash"
+							oncomplete="PF('confirmarExclusao').show()"
 							update=":frm:dialogoConfirmacao" process="@this">
-							<f:setPropertyActionListener value="#{cliente}" target="#{pesquisaClientesBean.clienteSelecionado}" />
+							<f:setPropertyActionListener value="#{cliente}"
+								target="#{pesquisaClientesBean.clienteSelecionado}" />
 						</p:commandButton>
-	
+
 					</p:column>
-	
+
 				</p:dataTable>
+			</div><!-- Fim Div SeusItensContainer -->
 			
+
+			
+			<div id="listasContainer">
+			<h2  >Itens Disponiveis</h2>
+				<div class="listas">
+					<div id="itensDisponiveis" style="display: inline-block;">
+
+						<div class="tableAluguel">
+							<h:form id="frm-consoles">
+							
+							<h2>Consoles</h2>
+
+								<div class="filtro">
+									<p:outputLabel value="Filtrar por:"
+										style="font-weight: bold; margin-bottom: 5px;" />
+									<br />
+									<p:selectOneMenu>
+										<f:selectItem itemLabel="Consoles" itemValue="console" />
+										<f:selectItem itemLabel="Controles" itemValue="controle" />
+										<f:selectItem itemLabel="Acessórios" itemValue="acessorio" />
+										<f:selectItem itemLabel="Jogos" itemValue="jogos" />
+									</p:selectOneMenu>
+								</div>
+								<br />
+
+								<p:dataTable styleClass="tabelas-pesquisa"
+									value="#{jogoBean.jogo.midias}" var="midia" rows="4"
+									paginator="true" paginatorAlwaysVisible="false"
+									style="margin:0;" paginatorPosition="bottom"
+									emptyMessage="Nenhuma mídia encontrada" id="midiasTable">
+
+									<p:column headerText="Número de Série"
+										style="width: 80px; text-align:center;">
+										<h:outputText value="#{midia.numeroSerie}" />
+									</p:column>
+
+									<p:column headerText="Console"
+										style="width: 60px; text-align:center;">
+										<h:outputText value="#{midia.tipoConsole.nome}" />
+
+									</p:column>
+
+									<p:column headerText="Preço"
+										style="width: 50px; text-align:center">
+										<h:outputText value="#{midia.preco}">
+											<f:convertNumber currencySymbol="R$" locale="pt_BR" />
+										</h:outputText>
+									</p:column>
+
+									<p:column width="30" style="text-align:center;">
+
+										<p:button outcome="/jogos/CadastroJogo" icon="ui-icon-pencil">
+											<f:param name="midia" value="#{midia.id}" />
+
+										</p:button>
+
+										<p:commandButton icon="ui-icon-trash"
+											update="midiasTable messagePrincipal" process="@this"
+											action="#{jogoBean.excluirMidia}">
+											<f:setPropertyActionListener value="#{midia}"
+												target="#{jogoBean.midiaSelecionada}" />
+										</p:commandButton>
+
+									</p:column>
+
+								</p:dataTable>
+
+							</h:form>
+						</div>
+						<!-- Fim da DIV Table -->
+
+
+					</div>
+					<!-- Fim Div Itens Disponiveis -->
+
+				</div>
+				<!-- Fim div Listas -->
+
+				<div class="listas">
+
+
+
+
+					<div id="itensDisponiveis" style="display: inline-block;">
+
+						<div class="tableAluguel">
+							<h:form id="frm-Equipamentos">
+
+								<h2>Equipamentos</h2>
+
+								<div class="filtro">
+									<p:outputLabel value="Filtrar por:"
+										style="font-weight: bold; margin-bottom: 5px;" />
+									<br />
+									<p:selectOneMenu>
+										<f:selectItem itemLabel="Consoles" itemValue="console" />
+										<f:selectItem itemLabel="Controles" itemValue="controle" />
+										<f:selectItem itemLabel="Acessórios" itemValue="acessorio" />
+										<f:selectItem itemLabel="Jogos" itemValue="jogos" />
+									</p:selectOneMenu>
+								</div>
+								<br />
+
+								<p:dataTable styleClass="tabelas-pesquisa"
+									value="#{jogoBean.jogo.midias}" var="midia" rows="4"
+									paginator="true" paginatorAlwaysVisible="false"
+									style="margin:0;" paginatorPosition="bottom"
+									emptyMessage="Nenhuma mídia encontrada" id="midiasTable">
+
+									<p:column headerText="Número de Série"
+										style="width: 80px; text-align:center;">
+										<h:outputText value="#{midia.numeroSerie}" />
+									</p:column>
+
+									<p:column headerText="Console"
+										style="width: 60px; text-align:center;">
+										<h:outputText value="#{midia.tipoConsole.nome}" />
+
+									</p:column>
+
+									<p:column headerText="Preço"
+										style="width: 50px; text-align:center">
+										<h:outputText value="#{midia.preco}">
+											<f:convertNumber currencySymbol="R$" locale="pt_BR" />
+										</h:outputText>
+									</p:column>
+
+									<p:column width="30" style="text-align:center;">
+
+										<p:button outcome="/jogos/CadastroJogo" icon="ui-icon-pencil">
+											<f:param name="midia" value="#{midia.id}" />
+
+										</p:button>
+
+										<p:commandButton icon="ui-icon-trash"
+											update="midiasTable messagePrincipal" process="@this"
+											action="#{jogoBean.excluirMidia}">
+											<f:setPropertyActionListener value="#{midia}"
+												target="#{jogoBean.midiaSelecionada}" />
+										</p:commandButton>
+
+									</p:column>
+
+								</p:dataTable>
+
+							</h:form>
+						</div>
+						<!-- Fim da DIV Table -->
+
+
+					</div>
+					<!-- Fim Div Itens Disponiveis -->
+
+				</div>
+				<!-- Fim div Listas -->
+
+				<div class="listas">
+
+
+
+					<div id="itensDisponiveis" style="display: inline-block;">
+
+						<div class="tableAluguel">
+							<h:form id="frm-jogos">
+
+								<h2>Jogos</h2>
+
+								<div class="filtro">
+									<p:outputLabel value="Filtrar por:"
+										style="font-weight: bold; margin-bottom: 5px;" />
+									<br />
+									<p:selectOneMenu>
+										<f:selectItem itemLabel="Consoles" itemValue="console" />
+										<f:selectItem itemLabel="Controles" itemValue="controle" />
+										<f:selectItem itemLabel="Acessórios" itemValue="acessorio" />
+										<f:selectItem itemLabel="Jogos" itemValue="jogos" />
+									</p:selectOneMenu>
+								</div>
+								<br />
+
+								<p:dataTable styleClass="tabelas-pesquisa"
+									value="#{jogoBean.jogo.midias}" var="midia" rows="4"
+									paginator="true" paginatorAlwaysVisible="false"
+									style="margin:0;" paginatorPosition="bottom"
+									emptyMessage="Nenhuma mídia encontrada" id="midiasTable">
+
+									<p:column headerText="Número de Série"
+										style="width: 80px; text-align:center;">
+										<h:outputText value="#{midia.numeroSerie}" />
+									</p:column>
+
+									<p:column headerText="Console"
+										style="width: 60px; text-align:center;">
+										<h:outputText value="#{midia.tipoConsole.nome}" />
+
+									</p:column>
+
+									<p:column headerText="Preço"
+										style="width: 50px; text-align:center">
+										<h:outputText value="#{midia.preco}">
+											<f:convertNumber currencySymbol="R$" locale="pt_BR" />
+										</h:outputText>
+									</p:column>
+
+									<p:column width="30" style="text-align:center;">
+
+										<p:button outcome="/jogos/CadastroJogo" icon="ui-icon-pencil">
+											<f:param name="midia" value="#{midia.id}" />
+
+										</p:button>
+
+										<p:commandButton icon="ui-icon-trash"
+											update="midiasTable messagePrincipal" process="@this"
+											action="#{jogoBean.excluirMidia}">
+											<f:setPropertyActionListener value="#{midia}"
+												target="#{jogoBean.midiaSelecionada}" />
+										</p:commandButton>
+
+									</p:column>
+
+								</p:dataTable>
+
+							</h:form>
+						</div>
+						<!-- Fim da DIV Table -->
+
+
+					</div>
+					<!-- Fim Div Itens Disponiveis -->
+
+				</div>
+				<!-- Fim div Listas -->
 			</div>
-			
+
+
 		</h:form>
 
 

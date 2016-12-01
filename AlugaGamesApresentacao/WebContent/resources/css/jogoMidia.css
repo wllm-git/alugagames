@@ -59,3 +59,45 @@
 
 
 /*---------------------------------------------- */
+.tableAluguel{
+	margin: 0;
+	padding: 10px;
+	padding-top: 20px;	
+	float: left;
+	background-color: #efefef;
+	border: 1px solid #bfbfbf;
+}
+
+.tableAluguel h2{
+	margin: 0;
+	padding: 0;
+	margin-bottom: 12px;
+	text-align: center
+}
+
+.listas{
+	float:left;
+	width: 32%;
+	padding: 5px;
+	
+}
+
+#listasContainer{
+	margin-top: 5px;
+	clear: both;
+	display: inline-block;
+}
+
+.filtro{
+	margin:0;
+	padding: 0;
+}
+
+#seusItensContainer{
+	height: 180px;
+}
+
+#informacoesReserva{
+	height: 190px;
+	padding: 10px;
+}
