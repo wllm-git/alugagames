@@ -1,7 +1,10 @@
 package alugagames.core.equipamentos;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
+import alugagames.core.consoles.Console;
 import alugagames.core.equipamentos.repositorio.IEquipamentoRepositorio;
 import alugagames.core.equipamentos.validacoes.EquipamentoAptoParaAlteracao;
 import alugagames.core.equipamentos.validacoes.EquipamentoAptoParaAlugar;
@@ -12,6 +15,7 @@ import alugagames.core.equipamentos.validacoes.EquipamentoAptoParaSerInativado;
 import alugagames.core.shared.ServicoBase;
 import alugagames.core.shared.StatusProduto;
 import alugagames.core.shared.Voltagem;
+import alugagames.core.tiposconsole.TipoConsole;
 import alugagames.core.tiposconsole.TipoConsoleServico;
 
 public class EquipamentoServico extends ServicoBase<Equipamento>{
@@ -112,5 +116,25 @@ public class EquipamentoServico extends ServicoBase<Equipamento>{
 
 	public void atualizarStatus(Equipamento equipamento) {
 		_repositorio.atualizarStatusEquipamento(equipamento);
+	}
+	
+	public List<Equipamento> buscarPorTipoConsole(TipoConsole tipoConsole){
+		List<Equipamento> equipamentosDisponiveis = new ArrayList<Equipamento>();
+		
+		UUID id = null;
+		if(tipoConsole != null)
+			id = tipoConsole.getId();
+		
+		List<Equipamento> equipamentos = this.buscarTodos();
+		for(Equipamento equipamento : equipamentos){
+			if(equipamento.isAtivo() && 
+					equipamento.getStatus().equals(StatusProduto.Disponivel) &&
+					(id == null || equipamento.getTipoConsole().getId().equals(id))
+					){
+				equipamentosDisponiveis.add(equipamento);
+			}
+		}
+		
+		return equipamentosDisponiveis;
 	}
 }

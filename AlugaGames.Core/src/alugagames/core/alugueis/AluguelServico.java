@@ -404,7 +404,14 @@ public class AluguelServico extends ServicoBase<Aluguel>{
 	}
 
 	public Aluguel buscarPorCliente(Cliente cliente) {
+		List<Aluguel> alugueis = _repositorio.buscarPorCliente(cliente); 
 		
-		return _repositorio.buscarPorCliente(cliente);
+		for(Aluguel aluguel : alugueis){
+			if(!aluguel.getStatus().equals(StatusAluguel.Cancelado) && !aluguel.getStatus().equals(StatusAluguel.Fechado)){
+				return aluguel;
+			}
+		}
+		
+		return null;
 	}
 }
