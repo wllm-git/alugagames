@@ -69,6 +69,18 @@ public class AluguelReservaBean {
 		this.equipamentos = new EquipamentoAplicacao().buscarPorTipoConsole(null);
 		
 	}
+	
+	public void adicionarConsoles(){
+		aluguelAplicacao.adicionarConsoles(this.aluguel, consoles);
+		
+	}
+	public void adicionarEquipamentos(){
+		
+	}
+	
+	public void adicionarJogos(){
+		
+	}
 
 	public Aluguel getAluguel() {
 		return aluguel;

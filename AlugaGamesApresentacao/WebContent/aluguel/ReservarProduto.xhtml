@@ -41,11 +41,12 @@
 
 			</div>
 
-			<div id="informacoesReserva" class="tableAluguel">
+			<div id="informacoesReserva" class="tableAluguel" style="width: 30.8%;">
+				<h3>Informações da Reserva</h3>
 				<h:panelGrid styleClass="grid-cadastros" columns="2" id="panel"
 					columnClasses="rotulo, campo" rowClasses="one">
-
-
+				
+					
 					<p:outputLabel value="Núemro da Reserva" />
 					<p:outputLabel value="#{aluguelReservaBean.aluguel.codigo}" />
 
@@ -72,7 +73,7 @@
 
 			</div>
 			
-			<div id="seusItensContainer" class="tableAluguel" style="width: 70%; margin-left: 10px;">
+			<div id="seusItensContainer" class="tableAluguel" style="width: 62.9%; margin-left: 10px;">
 				<h2>Seus Itens</h2>
 
 				<p:dataTable styleClass="tabelas-pesquisa" rows="10"
@@ -95,11 +96,8 @@
 					</p:column>
 
 					<p:column width="80" style="text-align:center;">
-						<p:button outcome="/clientes/CadastroCliente"
-							icon="ui-icon-pencil">
-							<f:param name="cliente" value="#{cliente.id}" />
-						</p:button>
-						<p:commandButton icon="ui-icon-trash"
+						
+						<p:commandButton icon="ui-icon-minus"
 							oncomplete="PF('confirmarExclusao').show()"
 							update=":frm:dialogoConfirmacao" process="@this">
 							<f:setPropertyActionListener value="#{cliente}"
@@ -114,7 +112,6 @@
 
 			
 			<div id="listasContainer">
-			<h2  >Itens Disponiveis</h2>
 				<div class="listas">
 					<div id="itensDisponiveis" style="display: inline-block;">
 
@@ -124,10 +121,10 @@
 							<h2>Consoles</h2>
 
 								<div class="filtro">
-									<p:outputLabel value="Filtro:"
+									<p:outputLabel value="Filtro:" styleClass="label"
 										style="font-weight: bold; margin-bottom: 5px;" />
-									<br />
-									<p:selectOneMenu value="#{aluguelReservaBean.tipoConsole}">
+									
+									<p:selectOneMenu value="#{aluguelReservaBean.tipoConsole}" styleClass="comboConsole">
 										<f:selectItem itemLabel="Todos" itemValue="null"/>
 										<f:selectItems value="#{aluguelReservaBean.tiposConsole}" var="tipoConsole"
 										 itemValue="#{tipoConsole}" itemLabel="#{tipoConsole.nome}"/>
@@ -136,10 +133,10 @@
 								<br />
 
 								<p:dataTable styleClass="tabelas-pesquisa"
-									value="#{aluguelResevaBean.consoles}" var="console" rows="4"
+									value="#{aluguelReservaBean.consoles}" var="console" rows="3"
 									paginator="true" paginatorAlwaysVisible="false"
 									style="margin:0;" paginatorPosition="bottom"
-									emptyMessage="Nenhuma mídia encontrada" id="midiasTable">
+									emptyMessage="Nenhuma mídia encontrada" id="consolesTable">
 
 									<p:column headerText="Número de Série"
 										style="width: 80px; text-align:center;">
@@ -161,17 +158,11 @@
 
 									<p:column width="30" style="text-align:center;">
 
-										<p:button outcome="/jogos/CadastroJogo" icon="ui-icon-pencil">
+										<p:button outcome="/jogos/CadastroJogo" icon="ui-icon-plus">
 											<f:param name="midia" value="#{midia.id}" />
 
 										</p:button>
 
-										<p:commandButton icon="ui-icon-trash"
-											update="midiasTable messagePrincipal" process="@this"
-											action="#{jogoBean.excluirMidia}">
-											<f:setPropertyActionListener value="#{midia}"
-												target="#{jogoBean.midiaSelecionada}" />
-										</p:commandButton>
 
 									</p:column>
 
@@ -201,10 +192,11 @@
 								<h2>Equipamentos</h2>
 
 								<div class="filtro">
-									<p:outputLabel value="Filtro:"
+									<p:outputLabel value="Filtro:" styleClass="label"
 										style="font-weight: bold; margin-bottom: 5px;" />
-									<br />
-									<p:selectOneMenu value="#{aluguelReservaBean.tipoConsoleEquipamento}">
+								
+									<p:selectOneMenu value="#{aluguelReservaBean.tipoConsoleEquipamento}" 
+										styleClass="comboConsole">
 										<f:selectItem itemLabel="Todos" itemValue="null"/>
 										<f:selectItems value="#{aluguelReservaBean.tiposConsole}" var="tipoConsole"
 										 itemValue="#{tipoConsole}" itemLabel="#{tipoConsole.nome}"/>
@@ -213,10 +205,10 @@
 								<br />
 
 								<p:dataTable styleClass="tabelas-pesquisa"
-									value="#{aluguelReservaBean.equipamentos}" var="equipamento" rows="4"
+									value="#{aluguelReservaBean.equipamentos}" var="equipamento" rows="3"
 									paginator="true" paginatorAlwaysVisible="false"
 									style="margin:0;" paginatorPosition="bottom"
-									emptyMessage="Nenhuma mídia encontrada" id="midiasTable">
+									emptyMessage="Nenhuma mídia encontrada" id="equipamentosTable">
 
 									<p:column headerText="Número de Série"
 										style="width: 80px; text-align:center;">
@@ -238,17 +230,11 @@
 
 									<p:column width="30" style="text-align:center;">
 
-										<p:button outcome="/jogos/CadastroJogo" icon="ui-icon-pencil">
+										<p:button outcome="/jogos/CadastroJogo" icon="ui-icon-plus">
 											<f:param name="midia" value="#{midia.id}" />
 
 										</p:button>
 
-										<p:commandButton icon="ui-icon-trash"
-											update="midiasTable messagePrincipal" process="@this"
-											action="#{jogoBean.excluirMidia}">
-											<f:setPropertyActionListener value="#{midia}"
-												target="#{jogoBean.midiaSelecionada}" />
-										</p:commandButton>
 
 									</p:column>
 
@@ -277,10 +263,11 @@
 								<h2>Jogos</h2>
 
 								<div class="filtro">
-									<p:outputLabel value="Filtro:"
+									<p:outputLabel value="Filtro:" styleClass="label"
 										style="font-weight: bold; margin-bottom: 5px;" />
-									<br />
-									<p:selectOneMenu value="#{aluguelReservaBean.tipoConsoleJogo}">
+								
+									<p:selectOneMenu value="#{aluguelReservaBean.tipoConsoleJogo}"
+										styleClass="comboConsole">
 										<f:selectItem itemLabel="Todos" itemValue="null"/>
 										<f:selectItems value="#{aluguelReservaBean.tiposConsole}" var="tipoConsole"
 										 itemValue="#{tipoConsole}" itemLabel="#{tipoConsole.nome}"/>
@@ -289,42 +276,35 @@
 								<br />
 
 								<p:dataTable styleClass="tabelas-pesquisa"
-									value="#{jogoBean.jogo.midias}" var="midia" rows="4"
+									value="#{aluguelReservaBean.jogos}" var="jogo" rows="3"
 									paginator="true" paginatorAlwaysVisible="false"
 									style="margin:0;" paginatorPosition="bottom"
-									emptyMessage="Nenhuma mídia encontrada" id="midiasTable">
+									emptyMessage="Nenhuma mídia encontrada" id="jogosTable">
 
 									<p:column headerText="Número de Série"
 										style="width: 80px; text-align:center;">
-										<h:outputText value="#{midia.numeroSerie}" />
+										<h:outputText value="#{jogo.numeroSerie}" />
 									</p:column>
 
 									<p:column headerText="Console"
 										style="width: 60px; text-align:center;">
-										<h:outputText value="#{midia.tipoConsole.nome}" />
+										<h:outputText value="#{jogo.tipoConsole.nome}" />
 
 									</p:column>
 
 									<p:column headerText="Preço"
 										style="width: 50px; text-align:center">
-										<h:outputText value="#{midia.preco}">
+										<h:outputText value="#{jogo.preco}">
 											<f:convertNumber currencySymbol="R$" locale="pt_BR" />
 										</h:outputText>
 									</p:column>
 
 									<p:column width="30" style="text-align:center;">
 
-										<p:button outcome="/jogos/CadastroJogo" icon="ui-icon-pencil">
+										<p:button outcome="/jogos/CadastroJogo" icon="ui-icon-plus">
 											<f:param name="midia" value="#{midia.id}" />
 
 										</p:button>
-
-										<p:commandButton icon="ui-icon-trash"
-											update="midiasTable messagePrincipal" process="@this"
-											action="#{jogoBean.excluirMidia}">
-											<f:setPropertyActionListener value="#{midia}"
-												target="#{jogoBean.midiaSelecionada}" />
-										</p:commandButton>
 
 									</p:column>
 
