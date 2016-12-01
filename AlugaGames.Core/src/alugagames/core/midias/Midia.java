@@ -56,21 +56,6 @@ public class Midia extends Produto {
 		this.tipoConsole = tipoConsole;
 	}
 
-	@Override
-	public String getNumeroSerie() {
-		return super.getNumeroSerie();
-	}
-
-	@Override
-	public StatusProduto getStatus() {
-		return super.getStatus();
-	}
-
-	@Override
-	public boolean isAtivo() {
-		return super.isAtivo();
-	}
-
 	public float getPreco() {
 		return preco;
 	}

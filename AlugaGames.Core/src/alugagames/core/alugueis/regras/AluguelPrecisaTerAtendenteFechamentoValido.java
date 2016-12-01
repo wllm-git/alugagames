@@ -1,6 +1,7 @@
 package alugagames.core.alugueis.regras;
 
 import alugagames.core.alugueis.Aluguel;
+import alugagames.core.funcionarios.Funcao;
 import alugagames.core.funcionarios.Funcionario;
 import alugagames.core.funcionarios.FuncionarioServico;
 import alugagames.core.shared.validacoesregras.IRegra;
@@ -22,6 +23,8 @@ public class AluguelPrecisaTerAtendenteFechamentoValido implements IRegra<Alugue
 		
 		if(a == null)
 			return "atendente não existe no sistema.";
+		else if(a.getFuncao() != Funcao.Atendente && a.getFuncao() != Funcao.Gerente || !a.isAtivo())
+			return "Atendente inválido.";
 		
 		return null;
 	}

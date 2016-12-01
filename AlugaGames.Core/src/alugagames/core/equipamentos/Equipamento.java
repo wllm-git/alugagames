@@ -50,21 +50,6 @@ public class Equipamento extends Produto implements Serializable{
 		this.tipoEquipamento = tipoEquipamento;
 	}
 
-	@Override
-	public String getNumeroSerie() {
-		return super.getNumeroSerie();
-	}
-
-	@Override
-	public StatusProduto getStatus() {
-		return super.getStatus();
-	}
-
-	@Override
-	public boolean isAtivo() {
-		return super.isAtivo();
-	}
-
 	public float getPreco() {
 		return preco;
 	}
