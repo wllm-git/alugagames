@@ -10,7 +10,6 @@ import com.alugagames.security.UsuarioSistema;
 
 import alugagames.aplicacao.AluguelAplicacao;
 import alugagames.core.alugueis.Aluguel;
-import alugagames.core.alugueis.StatusAluguel;
 
 @ManagedBean
 @ViewScoped
@@ -22,9 +21,16 @@ public class AluguelReservaBean {
 	public AluguelReservaBean() throws IOException {
 
 		UsuarioSistema usuario = new Seguranca().getUsuarioLogado();
+
 		this.aluguelAplicacao = new AluguelAplicacao();
-		
-		this.aluguel = aluguelAplicacao.abrirReserva(usuario.getCliente());
+
+		Aluguel aluguel = this.aluguelAplicacao.buscarPorCliente(usuario.getCliente());
+
+		if (aluguel != null ) {
+			this.aluguel = aluguel;
+		} else {
+			this.aluguel = aluguelAplicacao.abrirReserva(usuario.getCliente());
+		}
 
 	}
 

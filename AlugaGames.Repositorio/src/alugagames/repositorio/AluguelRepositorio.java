@@ -40,8 +40,8 @@ public class AluguelRepositorio extends RepositorioBase<Aluguel> implements IAlu
 	public Aluguel buscarPorCliente(Cliente cliente) {
 		EntityManager em = ConnectionManager.getEntityManager();
 		
-		Query q  = em.createQuery("Select a from Aluguel a where a.cliente = :cliente", Aluguel.class);
-		q.setParameter("cliente", cliente);
+		Query q  = em.createQuery("Select a from Aluguel a where a.cliente.id = :id", Aluguel.class);
+		q.setParameter("id", cliente.getId());
 		try{
 			return (Aluguel)q.getSingleResult();
 		}catch (NoResultException e) {
