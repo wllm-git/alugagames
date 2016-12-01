@@ -38,26 +38,23 @@
 
 			<div class="telaOrcamentoCliente">
 
-				<!--Informações OS -->
-
 				<div>
 					<div class="container">
 						<h:outputText value="Cliente:" styleClass="label" />
-						<p:outputLabel value="Roldão Wilker Bélo de Araújo"
+						<p:outputLabel value="#{aluguel.cliente.nome}"
 							styleClass="informacao" />
 					</div>
 
 					<div class="container">
-						<h:outputText value="Número da O.S:" styleClass="label" />
-						<p:outputLabel value="16627380" styleClass="informacao" />
+						<h:outputText value="Número do Aluguel:" styleClass="label" />
+						<p:outputLabel value="#{aluguel.codigo}" styleClass="informacao" />
 					</div>
 
 					<div class="container">
 						<h:outputText value="Status:" styleClass="label" />
-						<p:outputLabel value="Aberto" styleClass="informacao" />
+						<p:outputLabel value="#{aluguel.status}" styleClass="informacao" />
 					</div>
 				</div>
-				<!-- Fim Informações Orçamento -->
 
 				<!-- Inicio Informações Produtos -->
 				<h2>Produtos</h2>
@@ -95,7 +92,9 @@
 
 				<div style="position:relative; position: right;">
 					TOTAL: R$ 10,00 <br/>
-					<p:commandButton value="Finalizar" />
+					<p:commandButton value="Finalizar" 
+						action="#{aluguelCheckInBean.finalizarAluguel}" process="frm"
+						update="messagePrincipal @form" />
 				</div>
 			</div>
 
