@@ -1,6 +1,8 @@
 package alugagames.core.consoles;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import alugagames.core.consoles.repositorio.IConsoleRepositorio;
 import alugagames.core.consoles.validacoes.ConsoleAptoParaAlteracao;
@@ -10,6 +12,7 @@ import alugagames.core.consoles.validacoes.ConsoleAptoParaReserva;
 import alugagames.core.shared.ServicoBase;
 import alugagames.core.shared.StatusProduto;
 import alugagames.core.shared.Voltagem;
+import alugagames.core.tiposconsole.TipoConsole;
 import alugagames.core.tiposconsole.TipoConsoleServico;
 
 public class ConsoleServico extends ServicoBase<Console> {
@@ -98,5 +101,25 @@ public class ConsoleServico extends ServicoBase<Console> {
 
 	public void excluir(Console consoleSelecionado) {
 		_repositorio.excluir(consoleSelecionado);
+	}
+	
+	public List<Console> buscarPorTipoConsole(TipoConsole tipoConsole){
+		List<Console> consolesDisponiveis = new ArrayList<Console>();
+		
+		UUID id = null;
+		if(tipoConsole != null)
+			id = tipoConsole.getId();
+		
+		List<Console> consoles = this.buscarTodos();
+		for(Console console : consoles){
+			if(console.isAtivo() && 
+					console.getStatus().equals(StatusProduto.Disponivel) &&
+					(id == null || console.getTipoConsole().getId().equals(id))
+					){
+				consolesDisponiveis.add(console);
+			}
+		}
+		
+		return consolesDisponiveis;
 	}
 }

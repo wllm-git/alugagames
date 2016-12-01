@@ -1,5 +1,7 @@
 package alugagames.repositorio;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
@@ -37,15 +39,12 @@ public class AluguelRepositorio extends RepositorioBase<Aluguel> implements IAlu
 	}
 
 	@Override
-	public Aluguel buscarPorCliente(Cliente cliente) {
+	public List<Aluguel> buscarPorCliente(Cliente cliente) {
 		EntityManager em = ConnectionManager.getEntityManager();
 		
 		Query q  = em.createQuery("Select a from Aluguel a where a.cliente.id = :id", Aluguel.class);
 		q.setParameter("id", cliente.getId());
-		try{
-			return (Aluguel)q.getSingleResult();
-		}catch (NoResultException e) {
-			return null;
-		}
+		
+		return q.getResultList();
 	}
 }

@@ -5,6 +5,8 @@ import java.util.UUID;
 
 import alugagames.core.consoles.Console;
 import alugagames.core.consoles.ConsoleServico;
+import alugagames.core.midias.Midia;
+import alugagames.core.tiposconsole.TipoConsole;
 import alugagames.core.tiposconsole.TipoConsoleServico;
 import alugagames.repositorio.ConsoleRepositorio;
 import alugagames.repositorio.TipoConsoleRepositorio;
@@ -61,9 +63,10 @@ public class ConsoleAplicacao extends AplicacaoBase {
 	}
 
 	public void excluir(Console consoleSelecionado) {
-		
-		
 		 _consoleServico.excluir(consoleSelecionado);
 	}
 	
+	public List<Console> buscarPorTipoConsole(TipoConsole tipoConsole){
+		return _consoleServico.buscarPorTipoConsole(tipoConsole);
+	}
 }

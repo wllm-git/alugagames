@@ -3,8 +3,10 @@ package alugagames.aplicacao;
 import java.util.List;
 import java.util.UUID;
 
+import alugagames.core.consoles.Console;
 import alugagames.core.equipamentos.Equipamento;
 import alugagames.core.equipamentos.EquipamentoServico;
+import alugagames.core.tiposconsole.TipoConsole;
 import alugagames.core.tiposconsole.TipoConsoleServico;
 import alugagames.repositorio.EquipamentoRepositorio;
 import alugagames.repositorio.TipoConsoleRepositorio;
@@ -83,4 +85,7 @@ public class EquipamentoAplicacao extends AplicacaoBase{
 		return _equipamentoServico.buscarTodos();
 	}
 
+	public List<Equipamento> buscarPorTipoConsole(TipoConsole tipoConsole){
+		return _equipamentoServico.buscarPorTipoConsole(tipoConsole);
+	}
 }

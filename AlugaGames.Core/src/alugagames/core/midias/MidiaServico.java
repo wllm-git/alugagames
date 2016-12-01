@@ -1,8 +1,11 @@
 package alugagames.core.midias;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
+import alugagames.core.equipamentos.Equipamento;
 import alugagames.core.jogos.JogoServico;
 import alugagames.core.midias.repositorio.IMidiaRepositorio;
 import alugagames.core.midias.validacoes.MidiaAptaParaAlteracao;
@@ -13,6 +16,7 @@ import alugagames.core.midias.validacoes.MidiaAptaParaSerAtivada;
 import alugagames.core.midias.validacoes.MidiaAptaParaSerInativada;
 import alugagames.core.shared.ServicoBase;
 import alugagames.core.shared.StatusProduto;
+import alugagames.core.tiposconsole.TipoConsole;
 import alugagames.core.tiposconsole.TipoConsoleServico;
 
 public class MidiaServico extends ServicoBase<Midia> {
@@ -114,5 +118,25 @@ public class MidiaServico extends ServicoBase<Midia> {
 	
 	public void excluir(Midia midia){
 		_repositorio.excluir(midia);
+	}
+	
+	public List<Midia> buscarPorTipoConsole(TipoConsole tipoConsole){
+		List<Midia> midiasDisponiveis = new ArrayList<Midia>();
+		
+		UUID id = null;
+		if(tipoConsole != null)
+			id = tipoConsole.getId();
+		
+		List<Midia> midias = this.buscarTodos();
+		for(Midia midia : midias){
+			if(midia.isAtivo() && 
+					midia.getStatus().equals(StatusProduto.Disponivel) &&
+					(id == null || midia.getTipoConsole().getId().equals(id))
+					){
+				midiasDisponiveis.add(midia);
+			}
+		}
+		
+		return midiasDisponiveis;
 	}
 }
