@@ -86,6 +86,18 @@ public class AluguelAplicacao extends AplicacaoBase{
 		return erros;
 	}
 	
+	public List<String> cancelar(Aluguel aluguel){
+		beginTransaction();
+		
+		List<String> erros = _aluguelServico.cancelar(aluguel);
+		if(!erros.isEmpty())
+			rollback();
+		else
+			commit();
+		
+		return erros;
+	}
+	
 	public Aluguel buscarReservaPorCodigo(int codigo){
 		return _aluguelServico.buscarReservaPorCodigo(codigo);
 	}
@@ -95,7 +107,7 @@ public class AluguelAplicacao extends AplicacaoBase{
 	}
 	
 	public List<String> adicionarConsoles(Aluguel reserva, List<Console> consoles){
-beginTransaction();
+		beginTransaction();
 		
 		List<String> erros = _aluguelServico.adicionarConsoles(reserva, consoles);
 		if(!erros.isEmpty())

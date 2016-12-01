@@ -40,7 +40,7 @@ public class AluguelCheckInBean {
 			return;
 		}
 
-		FacesUtil.addInfoMessage("Cliente cadastrado com sucesso!");
+		FacesUtil.addInfoMessage("Aluguel finalizado com sucesso!");
 		
 		//TODO falta redirecionar para outra tela.
 	}

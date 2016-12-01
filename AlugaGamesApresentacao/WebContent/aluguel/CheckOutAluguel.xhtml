@@ -39,16 +39,18 @@
 				<div>
 					<div class="container">
 						<h:outputText value="Cliente:" styleClass="label" />
-						<p:outputLabel value="Roldão Wilker Bélo de Araújo"
+						<p:outputLabel value="#{aluguel.cliente.nome}"
 							styleClass="informacao" />
 					</div>
 
 					<div class="container">
 						<h:outputText value="Número da Reserva" styleClass="label" />
-						<p:outputLabel value="16627380" styleClass="informacao" />
+						<p:outputLabel value="#{aluguel.codigo}" styleClass="informacao" />
 					</div>
 					
-					<p:commandButton value="Cancelar Reserva"/>
+					<p:commandButton value="Cancelar Reserva"
+						action="#{aluguelCheckInBean.cancelarAluguel}" process="frm"
+						update="messagePrincipal @form" />
 
 				</div>
 
@@ -93,7 +95,9 @@
 				
 						<div style="float: right; display: inline-block ; clear: both; ">
 				Total: R$ 10,00 <br />
-				<p:commandButton value="Confirmar Aluguel" />
+				<p:commandButton value="Confirmar Aluguel" 
+						action="#{aluguelCheckInBean.confirmarAluguel}" process="frm"
+						update="messagePrincipal @form" />
 
 			</div>
 
